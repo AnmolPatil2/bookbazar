@@ -13,8 +13,12 @@
     "firebase": "^5.10.1",
     "jquery": "^3.4.0",
     "popper.js": "^1.15.0",
+    "sweetalert": "^2.1.2",
+    "sweetalert2": "^8.8.7",
     "vue": "^2.6.10",
-    "vue-router": "^3.0.3"
+    "vue-firestore": "^0.3.21",
+    "vue-router": "^3.0.3",
+    "vue2-editor": "^2.6.6"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.6.0",

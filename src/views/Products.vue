@@ -6,6 +6,7 @@
             <div class="row h-100 justify-content-center align-items-center">
               <div class="col-md-6">
                     <h3>Products Page</h3>
+                    
                  <p>
                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Unde, ducimus.
                  </p>
@@ -18,23 +19,11 @@
 
           <hr>
 
-          <h3>Basic CRUD (create/read/update/delete) in Firebase and Vue</h3>
-
           <div class="product-test">
-            <div class="form-group">
-               <input type="text" placeholder="Product Name" v-model="product.name" class="form-control">
-            </div>
 
-            <div class="form-group">
-              <input type="text" placeholder="Price" v-model="product.price" class="form-control">
-            </div>
 
-            <div class="form-group">
-                <button @click="saveData" class="btn btn-primary">Save Data</button>
-            </div>
-            <hr>
-
-            <h3>Products list</h3>
+            <h3 class="d-inline-block">Products list</h3>
+            <button @click="addNew" class="btn btn-primary float-right">Add Product</button>
 
             <div class="table-responsive">
               
@@ -48,15 +37,22 @@
                   </thead>
 
                   <tbody>
+                      <tr v-for="product in products">
+                        <td>
+                          {{product.name}}
+                        </td>
 
-                    <tr v-for="product in products">
-                      <td> {{product.data().name}} </td>
-                      <td> {{product.data().price}} </td>
-                      <td>
-                        <button @click="editProduct(product)" class="btn btn-primary">Edit</button>
-                        <button @click="deleteProduct(product.id)" class="btn btn-danger">Delete</button>
-                      </td>
-                    </tr>
+                        <td>
+                          {{product.price}}
+                        </td>
+
+                        <td>
+
+                          <button class="btn btn-primary" @click="editProduct(product)">Edit</button>
+                          <button class="btn btn-danger" @click="deleteProduct(product)">Delete</button>
+                        </td>
+
+                      </tr>
 
 
                   </tbody>
@@ -67,8 +63,8 @@
       </div>
 
       <!-- Modal -->
-      <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="editLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+      <div class="modal fade" id="product" tabindex="-1" role="dialog" aria-labelledby="editLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="editLabel">Edit Product</h5>
@@ -78,18 +74,52 @@
             </div>
             <div class="modal-body">
 
-                <div class="form-group">
-                  <input type="text" placeholder="Product Name" v-model="product.name" class="form-control">
+                <div class="row">
+                  <!-- main product -->
+                  <div class="col-md-8">
+                    <div class="form-group">
+                      <input type="text" placeholder="Product Name" v-model="product.name" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                      <textarea name="description" class="form-control" placeholder="Product description" v-model='product.description' cols="30" rows="10"></textarea>
+                    </div>
+                  </div>
+                  <!-- product sidebar -->
+                  <div class="col-md-4">
+                    <h4 class="display-6">Product Details</h4>
+                    <hr>
+
+                    <div class="form-group">
+                      <input type="text" placeholder="Product price" v-model="product.price" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                      <input type="text" placeholder="Product tags" v-model="product.tag" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="product_image">Product Images</label>
+                      <input type="file" @change="uploadImage" class="form-control">
+                    </div>
+                     <div class="p-1" v-for="(image, index) in product.images">
+                          <div class="img-wrapp">
+                              <img :src="image" alt="" width="80px">
+                              <span class="delete-img" @click="deleteImage(image,index)">X</span>
+                          </div>
+                     </div>
+
+                  </div>
                 </div>
 
-                <div class="form-group">
-                  <input type="text" placeholder="Price" v-model="product.price" class="form-control">
-                </div>
+
+
 
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button @click="updateProduct()" type="button" class="btn btn-primary">Save changes</button>
+              <button @click="addProduct()" type="button" class="btn btn-primary" v-if="modal == 'new'">Save changes</button>
+              <button @click="updateProduct()" type="button" class="btn btn-primary" v-if="modal == 'edit'">Apply changes</button>
             </div>
           </div>
         </div>
@@ -112,76 +142,127 @@ export default {
         products: [],
         product: {
           name:null,
-          price:null
+          description:null,
+          price:null,
+          tag:null,
+          images:[]
         },
-        activeItem:null
+        activeItem:null,
+        modal: null
     }
+  },
+  firestore(){
+      return {
+        products: db.collection('products'),
+      }
   },
   methods:{
-    watcher(){
-        db.collection("products").onSnapshot((querySnapshot) => {
-              this.products = [];
-              querySnapshot.forEach((doc) => {
-                  this.products.push(doc);
-              });
+    deleteImage(img,index){
+      let image = fb.storage().refFromURL(img);
+      this.product.images.splice(index,1);
+      image.delete().then(function() {
+        console.log('image deleted');
+      }).catch(function(error) {
+        // Uh-oh, an error occurred!
+        console.log('an error occurred');
+      });
+    },
+   uploadImage(e){
+      if(e.target.files[0]){
+        
+          let file = e.target.files[0];
+    
+          var storageRef = fb.storage().ref('products/'+ file.name);
+    
+          let uploadTask  = storageRef.put(file);
+    
+          uploadTask.on('state_changed', (snapshot) => {
+            
+          }, (error) => {
+            // Handle unsuccessful uploads
+          }, () => {
+            // Handle successful uploads on complete
+            // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+            uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+              this.product.images.push(downloadURL);
+              console.log('File available at', downloadURL);
+            });
           });
+          
+      }
+       },
+    addNew(){
+        this.modal = 'new';
+        $('#product').modal('show');
     },
     updateProduct(){
-      db.collection("products").doc(this.activeItem).update(this.product)
-        .then(() => {
-          $('#edit').modal('hide');
-          this.watcher();
-          console.log("Document successfully updated!");
-        })
-        .catch(function(error) {
-            // The document probably doesn't exist.
-            console.error("Error updating document: ", error);
-        });
+        this.$firestore.products.doc(this.product.id).update(this.product);
+          Toast.fire({
+            type: 'success',
+            title: 'Updated  successfully'
+          })
+           $('#product').modal('hide');
     },
     editProduct(product){
-        $('#edit').modal('show');
-        this.product = product.data();
-        this.activeItem = product.id;
+      this.modal = 'edit';
+      this.product = product;
+      $('#product').modal('show');
     },
     deleteProduct(doc){
-        if(confirm('Are you sure ? ')){
-          db.collection("products").doc(doc).delete().then(function() {
-              console.log("Document successfully deleted!");
-          }).catch(function(error) {
-              console.error("Error removing document: ", error);
-          });
-        }else{
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.value) {
+          this.$firestore.products.doc(doc['.key']).delete()
+          Toast.fire({
+            type: 'success',
+            title: 'Deleted  successfully'
+          })
+        
         }
+      })
+        
     },
     readData(){
-          db.collection("products").get().then((querySnapshot) => {
-          // this.products = querySnapshot;
-          querySnapshot.forEach((doc) => {
-              // doc.data() is never undefined for query doc snapshots
-              this.products.push(doc);
-          });
-      });
+      
+     
     },
-    saveData(){
-      db.collection("products").add(this.product)
-      .then((docRef) => {
-          console.log("Document written with ID: ", docRef.id);
-          this.readData();
-      })
-      .catch(function(error) {
-          console.error("Error adding document: ", error);
-      });
-    },
-    reset(){
-      // Object.assign(this.$data, this.$options.data.apply(this));
+    addProduct(){
+      
+      this.$firestore.products.add(this.product);
+      
+          Toast.fire({
+            type: 'success',
+            title: 'Product created successfully'
+          })
+      $('#product').modal('hide');
     }
+  
   },
   created(){
-    this.readData();
+  
   }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+
+.img-wrapp{
+  position: relative;
+}
+.img-wrapp span.delete-img{
+    position: absolute;
+    top: -14px;
+    left: -2px;
+}
+.img-wrapp span.delete-img:hover{
+  cursor: pointer;
+}
 </style>
