@@ -22,7 +22,7 @@
                         <span class="user-name">Jhon
                             <strong>Smith</strong>
                         </span>
-                        <span class="user-role">Administrator</span>
+                        <span class="user-role"> {{email}} </span>
                         <span class="user-status">
                             <i class="fa fa-circle"></i>
                             <span>Online</span>
@@ -62,18 +62,18 @@
                             </router-link>
                         </li>
                         <li>
-                            <router-link to="/admin/profile">
-                                <i class="fa fa-user"></i>
-                                <span>Profile</span>
-                            </router-link>
-                        </li>
-                        <li>
                             <router-link to="/admin/orders">
                                 <i class="fa fa-shopping-cart"></i>
                                 <span>Orders</span>
                             </router-link>
                         </li>
 
+                        <li>
+                            <router-link to="/admin/profile">
+                                <i class="fa fa-user"></i>
+                                <span>Profile</span>
+                            </router-link>
+                        </li>
                         <li>
                             <a href="#" @click="logout()">
                                 <i class="fa fa-power-off"></i>
@@ -106,6 +106,12 @@ import Hero from "@/components/Hero.vue";
 import {fb} from '../firebase';
 export default {
   name: "admin",
+  data(){
+      return{
+          name:null,
+          email:null,
+      }
+  },
   components: {
     Hero
   },
@@ -122,6 +128,10 @@ export default {
               console.log(err);
           });
       }
+  },
+  created(){
+      let user = fb.auth().currentUser;
+      this.email = user.email;
   }
 };
 </script>
