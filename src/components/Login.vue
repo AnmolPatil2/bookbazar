@@ -22,6 +22,7 @@
                       <button class="invert" id="signIn" @click="signUp = !signUp">Login</button>
                     </div>
                     <div class="overlay-right">
+                      <button @click="signInWithGoogle() ">sign up</button>
                       <h2>New Here?</h2>
                       <p>Sign up here for the bookoo exerience and get books at your ease</p>
                       <button class="invert" id="signUp" @click="signUp = !signUp">Sign Up</button>
@@ -34,7 +35,7 @@
                   <input type="text" v-model="name" placeholder="Name">
                   <input type="email" v-model="email" placeholder="E-mail">
                   <input type="password" v-model="password" placeholder="Password">
-                  <button @click="register">sign up</button>
+                  <button @click="signInWithGoogle() ">sign up</button>
                 </form>
                 <form class="sign-in" action="#">
                   <h2>login here</h2>
@@ -87,6 +88,13 @@ export default {
           }
           console.log(error);
         });
+    },
+    signInWithGoogle() {
+      const provider = new fb.auth().GoogleAuthProvider();
+      fb.auth()
+        .signInWithPopup(provider)
+        .catch(error => alert("🤕" + error.message))
+        .then(data => console.log(data.user, data.credential.accessToken));
     },
     register() {
       fb.auth()
