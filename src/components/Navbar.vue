@@ -19,14 +19,14 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <router-link to="/home" class="nav-link">Donate</router-link>
+              <a data-toggle="modal" data-target="#login" class="nav-link" herf="#">Donate</a>
             </li>
             <li class="nav-item">
-              <router-link to="/products" class="nav-link" href="#">Sell</router-link>
+              <a data-toggle="modal" data-target="#login" class="nav-link" href="#">Sell</a>
             </li>
 
             <li class="nav-item">
-              <router-link to="/about" class="nav-link" href="#">About</router-link>
+              <a data-toggle="modal" data-target="#login" class="nav-link" href="#">About</a>
             </li>
           </ul>
           <form class="form-inline my-2 my-lg-0">

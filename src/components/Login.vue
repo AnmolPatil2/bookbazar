@@ -22,7 +22,6 @@
                       <button class="invert" id="signIn" @click="signUp = !signUp">Login</button>
                     </div>
                     <div class="overlay-right">
-                      <button @click="signInWithGoogle() ">sign up</button>
                       <h2>New Here?</h2>
                       <p>Sign up here for the bookoo exerience and get books at your ease</p>
                       <button class="invert" id="signUp" @click="signUp = !signUp">Sign Up</button>
@@ -30,16 +29,19 @@
                   </div>
                 </div>
                 <form class="sign-up" action="#">
-                  <h2>sign up here</h2>
-                  <div>da da da da</div>
+                  <h2>Sign-up Here</h2>
+                  <div>
+                    Let's get you booked with us and
+                    <br>bookooing begins
+                  </div>
                   <input type="text" v-model="name" placeholder="Name">
                   <input type="email" v-model="email" placeholder="E-mail">
                   <input type="password" v-model="password" placeholder="Password">
-                  <button @click="signInWithGoogle() ">sign up</button>
+                  <button @click="register() ">sign up</button>
                 </form>
                 <form class="sign-in" action="#">
-                  <h2>login here</h2>
-                  <div>bhal bhal ...</div>
+                  <h2>Login Here</h2>
+                  <div>Already Booked with us?</div>
                   <input type="email" v-model="email" placeholder="E-mail">
                   <input type="password" v-model="password" placeholder="Password">
                   <a href="#">forgot password</a>
@@ -71,6 +73,7 @@ export default {
   },
   methods: {
     login() {
+      alert("Wrong password.");
       fb.auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then(() => {
@@ -90,10 +93,11 @@ export default {
         });
     },
     signInWithGoogle() {
+      alert("Wrong password.");
       const provider = new fb.auth().GoogleAuthProvider();
       fb.auth()
         .signInWithPopup(provider)
-        .catch(error => alert("🤕" + error.message))
+        .catch(error => alert(error.message))
         .then(data => console.log(data.user, data.credential.accessToken));
     },
     register() {

@@ -1,78 +1,78 @@
 <template>
-  <div>
-    <h2>SignUp</h2>+91
-    <input type="number" v-model="phNo" placeholder="Phone Number">
-    <button id="sign-in-button" @click="recap()">Get OTP</button>
-    <div id="recaptcha-container"></div>
-    <br>
-    <input type="number" v-model="otp" placeholder="OTP">
-    <button @click="verifyOtp">Verify</button>
-    <br>
-    <button @click="sendOtp()">Resend OTP</button>
+  <div class="products" id="products">
+    <div class="container">
+      <h1 class="text-center p-5">Available books</h1>
+      <div class="row">
+        <div class="col-md-4" v-for="product in products">
+          <div class="card product-item">
+            <div class="card-body">
+              <carousel :perPage="1">
+                <slide v-for="(img,index) in product.images">
+                  <img :src="img" class="card-img-top" alt="...." max-width="250px">
+                </slide>
+              </carousel>
+
+              <h5 class="card-title">{{product.name}}</h5>
+              <h5 class="card-text">{{product.description}}</h5>
+              <p class="card-text">{{product.price}}</p>
+
+              <add-to-cart :product-id="product.id" :price="product.price" :name="product.name"></add-to-cart>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { fb } from "../firebase";
-
+import { fb, db } from "../firebase";
+import { Carousel, Slide } from "vue-carousel";
 export default {
+  name: "Products-list",
+  props: {
+    msg: String
+  },
+  components: {
+    Carousel,
+    Slide
+  },
   data() {
     return {
-      phNo: "",
-      appVerifier: "",
-      otp: ""
+      products: [],
+
+      activeItem: null,
+      modal: null
     };
   },
   methods: {
-    recap() {
-      window.recaptchaVerifier = new fb.auth().RecaptchaVerifier(
-        "recaptcha-container",
-        {
-          size: "invisible",
-          callback: response => {
-            // reCAPTCHA solved, allow signInWithPhoneNumber.
-            // ...
-            sendOtp();
-            alert("SMS sent");
-          },
-          "expired-callback": () => {
-            // Response expired. Ask user to solve reCAPTCHA again.
-            // ...
-          }
-        }
-      );
-      recaptchaVerifier.render().then(widgetId => {
-        window.recaptchaWidgetId = widgetId;
-      });
-    },
-
-    sendOtp() {
-      alert("SMS sent");
-      //
-      let countryCode = "+91"; //india
-      let phoneNumber = countryCode + this.phNo;
-      //
-      var appVerifier = window.recaptchaVerifier;
-      //
-      fb.auth()
-        .signInWithPhoneNumber(phoneNumber, appVerifier)
-        .then(confirmationResult => {
-          // SMS sent. Prompt user to type the code from the message, then sign the
-          // user in with confirmationResult.confirm(code).
-          window.confirmationResult = confirmationResult;
-          //
-          alert("SMS sent");
-        })
-        .catch(function(error) {
-          // Error; SMS not sent
-          // ...
-          alert("Error ! SMS not sent");
-        });
-    },
-    //
-    verifyOtp() {},
-    initReCaptcha() {}
+    getImage(images) {
+      return images[0];
+    }
   },
-  created() {}
+
+  firestore() {
+    return {
+      products: db.collection("products")
+    };
+  }
 };
 </script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped lang="scss">
+.products {
+  margin-top: 7rem;
+  background: #f2f2f2;
+  padding-bottom: 3rem;
+}
+.card-text1 {
+  color: black;
+}
+.img-responsive img-rounded {
+  width: 10px;
+  height: 10px;
+}
+.card-body {
+}
+</style>
