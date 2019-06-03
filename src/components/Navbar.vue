@@ -1,60 +1,79 @@
 <template>
-  <div class="hello">
-    <nav class="navbar custom-nav fixed-top navbar-expand-lg navbar-light bg-light">
-      <div class="container">
-        <img src="/img/svg/logo.jpeg" alt width="60">
-        <router-link class="navbar-brand" to="/">BookBazar</router-link>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
+  <nav>
+    <v-toolbar flat app color="#232f3e" class="white--text">
+      <v-toolbar-side-icon @click="drawer = !drawer" class="grey--text hidden-md-and-up"></v-toolbar-side-icon>
+      <v-toolbar-title class="text-uppercase white--text">
+        <span class="font-weight-light">Book</span>
+        <span>Bazar</span>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a data-toggle="modal" data-target="#login" class="nav-link" herf="#">Donate</a>
-            </li>
-            <li class="nav-item">
-              <a data-toggle="modal" data-target="#login" class="nav-link" href="#">Sell</a>
-            </li>
+      <!-- dropdown menu -->
+      <v-menu offset-y>
+        <v-btn flat slot="activator" color="grey">
+          <v-icon left>expand_more</v-icon>
+          <span>Menu</span>
+        </v-btn>
+        <v-list>
+          <v-list-tile>
+            <v-list-tile-title></v-list-tile-title>
+          </v-list-tile>
+        </v-list>
+      </v-menu>
 
-            <li class="nav-item">
-              <a data-toggle="modal" data-target="#login" class="nav-link" href="#">About</a>
-            </li>
-          </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <input
-              class="form-control mr-sm-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            >
-            <a
-              class="btn btn-outline-success my-2 my-sm-0"
-              data-toggle="modal"
-              data-target="#login"
-            >Get Start</a>
-          </form>
-        </div>
-      </div>
-    </nav>
-  </div>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <a
+          class="btn btn-outline-success my-2 my-sm-0"
+          data-toggle="modal"
+          data-target="#login"
+        >Get Start</a>
+      </form>
+    </v-toolbar>
+
+    <v-navigation-drawer
+      app
+      v-model="drawer"
+      class="hidden-md-and-up"
+      temporary
+      width="300"
+      id="drawer"
+    >
+      <v-layout column align-center>
+        <v-flex class="mt-5">
+          <v-avatar size="100">
+            <img class="text-lg-center" src="/avatar-1.png">
+          </v-avatar>
+          <p class="white--text subheading mt-1">The Net Ninja</p>
+        </v-flex>
+        <v-flex class="mt-4 mb-3"></v-flex>
+      </v-layout>
+      <v-list>
+        <v-list-tile>
+          <v-list-tile-action>
+            <v-icon class="white--text"></v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title class="white--text"></v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+    </v-navigation-drawer>
+  </nav>
 </template>
 
 <script>
+import Popup from "./Popup";
 export default {
   name: "Navbar",
-  props: {
-    msg: String
+  props: {},
+  data() {
+    return {
+      drawer: null
+    };
   },
-  components: {}
+
+  components: { Popup }
 };
 </script>
 
