@@ -6,9 +6,7 @@
 
     <div class="container h-100 inline-block">
       <div class="row p-5 h-100 justify-content-center align-items-center">
-        <div class="col-md-6">
-          <img src="/img/svg/product.svg" alt width="400">
-        </div>
+        <div class="col-md-6"></div>
         <div class="col-md-6">
           <h3>Learn More About us</h3>
           <p>contact uss sagiukvjb asdv ckxjs s</p>

@@ -1,11 +1,17 @@
 <template>
-  <v-carousel cycle class="col-ma-5" height="400" hide-delimiter-background show-arrows-on-hover>
+  <v-carousel
+    cycle
+    class="col-mt-5"
+    height="400"
+    hide-delimiter-background="hideDelimiters"
+    show-arrows-on-hover
+  >
     <v-carousel-item v-for="(slide, i) in slides" :key="i">
       <div class="container h-100">
         <div class="row h-100 justify-content-center align-items-center">
           <div class="col">
             <div class="hero-content">
-              <h1 class="hero-title">BookBazar</h1>
+              <h1 class="hero-title pt-5">BookBazar</h1>
               <p>Best place to buy and sel books</p>
               <div class="hero-btn mt-5">
                 <button class="btn custom-btn btn-info mr-4">Buy</button>

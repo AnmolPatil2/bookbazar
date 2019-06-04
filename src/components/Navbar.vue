@@ -8,6 +8,10 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
 
+      <v-list-tile v-for="link in links" :key="link.text" router :to="link.route">
+        <v-list-tile-title>{{ link.text }}</v-list-tile-title>
+      </v-list-tile>
+
       <!-- dropdown menu -->
       <v-menu offset-y>
         <v-btn flat slot="activator" color="grey">
@@ -69,7 +73,12 @@ export default {
   props: {},
   data() {
     return {
-      drawer: null
+      drawer: null,
+      links: [
+        { icon: "dashboard", text: "Buy", route: "/select" },
+        { icon: "folder", text: "Sell", route: "/select" },
+        { icon: "person", text: "Donate", route: "/select" }
+      ]
     };
   },
 

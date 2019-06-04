@@ -8,6 +8,8 @@ import { fb } from "./firebase";
 import VueFirestore from "vue-firestore";
 import store from './store.js';
 import Vuetify from 'vuetify'
+import VueScrollReveal from 'vue-scroll-reveal';
+ 
 
 Vue.use(VueFirestore, {
   key: "id", // the name of the property. Default is '.key'.
@@ -23,7 +25,8 @@ import "bootstrap";
 import "./assets/app.scss";
 import Swal from "sweetalert2";
 window.Swal = Swal;
-
+// Using ScrollReveal's default configuration
+Vue.use(VueScrollReveal);
 const Toast = Swal.mixin({
   toast: true,
   position: "top-end",

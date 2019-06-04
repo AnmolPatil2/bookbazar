@@ -5,12 +5,13 @@ import Admin from "./views/Admin.vue";
 import Overview from "./views/Overview.vue";
 import Products from "./views/Products.vue";
 import Orders from "./views/Orders.vue";
-import {fb} from './firebase';
+import { fb } from './firebase';
 import Profile from "./views/Profile.vue";
+import Select from "./views/Select.vue";
 
 Vue.use(Router);
 
-const router =  new Router({
+const router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
@@ -20,11 +21,16 @@ const router =  new Router({
       component: Home
     },
     {
+      path: "/select",
+      name: "select",
+      component: Select
+    },
+    {
       path: "/admin",
       name: "admin",
       component: Admin,
       meta: { requiresAuth: true },
-      children:[
+      children: [
         {
           path: "overview",
           name: "overview",
@@ -65,11 +71,11 @@ router.beforeEach((to, from, next) => {
   const currentUser = fb.auth().currentUser
 
   if (requiresAuth && !currentUser) {
-      next('/')
+    next('/')
   } else if (requiresAuth && currentUser) {
-      next()
+    next()
   } else {
-      next()
+    next()
   }
 })
 
