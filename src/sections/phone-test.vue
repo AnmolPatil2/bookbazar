@@ -2,7 +2,7 @@
   <div>
     <h2>SignUp</h2>+91
     <input type="number" v-model="phNo" placeholder="Phone Number">
-    <button id="sign-in-button" @click="recap()">Get OTP</button>
+    <button id="sign-in-button" @click="sendOtp()">Get OTP</button>
     <div id="recaptcha-container"></div>
     <br>
     <input type="number" v-model="otp" placeholder="OTP">
@@ -14,6 +14,7 @@
 
 <script>
 import { fb } from "../firebase";
+import firebase1 from "@firebase/app";
 
 export default {
   data() {
@@ -25,7 +26,7 @@ export default {
   },
   methods: {
     recap() {
-      window.recaptchaVerifier = new fb.auth().RecaptchaVerifier(
+      window.recaptchaVerifier = new firebase1.auth.RecaptchaVerifier(
         "recaptcha-container",
         {
           size: "invisible",
@@ -47,19 +48,23 @@ export default {
     },
 
     sendOtp() {
-      alert("SMS sent");
-      //
+      firebase1.auth().settings.appVerificationDisabledForTesting = true;
       let countryCode = "+91"; //india
-      let phoneNumber = countryCode + this.phNo;
+      var testVerificationCode = "123456";
+      let phoneNumber = "7996573530";
       //
-      var appVerifier = window.recaptchaVerifier;
+      var appVerifier = new firebase1.auth.RecaptchaVerifier(
+        "recaptcha-container"
+      );
       //
-      fb.auth()
+
+      firebase1
+        .auth()
         .signInWithPhoneNumber(phoneNumber, appVerifier)
         .then(confirmationResult => {
           // SMS sent. Prompt user to type the code from the message, then sign the
           // user in with confirmationResult.confirm(code).
-          window.confirmationResult = confirmationResult;
+          return confirmationResult.confirm(testVerificationCode);
           //
           alert("SMS sent");
         })

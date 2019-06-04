@@ -45,7 +45,7 @@
                   <input type="email" v-model="email" placeholder="E-mail">
                   <input type="password" v-model="password" placeholder="Password">
                   <a href="#">forgot password</a>
-                  <button @click="login">login</button>
+                  <button @click="signInWithGoogle()">login</button>
                 </form>
               </div>
             </article>
@@ -58,6 +58,7 @@
 
 <script>
 import { fb, db } from "../firebase";
+import firebase1 from "@firebase/app";
 export default {
   name: "Login",
   props: {
@@ -93,12 +94,9 @@ export default {
         });
     },
     signInWithGoogle() {
-      alert("Wrong password.");
-      const provider = new fb.auth().GoogleAuthProvider();
-      fb.auth()
-        .signInWithPopup(provider)
-        .catch(error => alert(error.message))
-        .then(data => console.log(data.user, data.credential.accessToken));
+      const provider = new firebase1.auth.GoogleAuthProvider();
+
+      firebase1.auth().signInWithPopup(provider);
     },
     register() {
       fb.auth()

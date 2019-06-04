@@ -47,7 +47,7 @@
             <v-responsive class>
               <v-container>
                 <carousel :perPage="1">
-                  <slide v-for="(img,index) in product.images">
+                  <slide v-for="(img,index) in product.images" :key="index">
                     <img :src="img" class="card-img-top" alt="....">
                   </slide>
                 </carousel>

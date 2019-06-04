@@ -1,5 +1,5 @@
 <template>
-  <div class="admin">
+  <div class="admin grey lighten-4">
     <div class="page-wrapper default-theme sidebar-bg bg1 toggled">
       <a id="show-sidebar" @click="closeMenu" class="btn btn-sm btn-dark" href="#">
         <i class="fas fa-bars"></i>
@@ -56,26 +56,21 @@
               </li>
 
               <li>
-                <router-link to="/admin/overview">
+                <router-link to="/accounts/overview1">
                   <i class="fa fa-chart-line"></i>
                   <span>Overview</span>
                 </router-link>
               </li>
+
               <li>
-                <router-link to="/admin/products">
-                  <i class="fab fa-amazon"></i>
-                  <span>Products</span>
-                </router-link>
-              </li>
-              <li>
-                <router-link to="/admin/orders">
+                <router-link to="/accounts/orders1">
                   <i class="fa fa-shopping-cart"></i>
                   <span>Orders</span>
                 </router-link>
               </li>
 
               <li>
-                <router-link to="/admin/profile">
+                <router-link to="/accounts/profile1">
                   <i class="fa fa-user"></i>
                   <span>Profile</span>
                 </router-link>
@@ -84,6 +79,12 @@
                 <a href="#" @click="logout()">
                   <i class="fa fa-power-off"></i>
                   <span>Logout</span>
+                </a>
+              </li>
+              <li>
+                <a href="#" @click="fire()">
+                  <i class="fa fa-power-off"></i>
+                  <span>ut</span>
                 </a>
               </li>
             </ul>
@@ -104,7 +105,8 @@
 <script>
 // @ is an alias to /src
 import Hero from "@/components/Hero.vue";
-import { fb, db } from "../firebase";
+import { fb, db } from "../../firebase";
+import firebase from "@firebase/app";
 export default {
   name: "admin",
   data() {
@@ -117,6 +119,7 @@ export default {
   components: {
     Hero
   },
+
   firestore() {
     return {
       profil: db.collection("profiles")
@@ -125,6 +128,17 @@ export default {
   methods: {
     closeMenu() {
       $(".page-wrapper").toggleClass("toggled");
+    },
+
+    fire() {
+      var refe = firebase
+        .database()
+        .ref()
+        .child("book");
+
+      refe.set({
+        ss: "ss"
+      });
     },
     logout() {
       fb.auth()

@@ -1,14 +1,18 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
-import Admin from "./views/Admin.vue";
-import Overview from "./views/Overview.vue";
-import Products from "./views/Products.vue";
-import Orders from "./views/Orders.vue";
+import signup from "@/components/signup.vue";
+import Admin from "./views/Admin/Admin.vue";
+import Overview from "./views/Admin/Overview.vue";
+import Products from "./views/Admin/Products.vue";
+import Orders from "./views/Admin/Orders.vue";
 import { fb } from './firebase';
-import Profile from "./views/Profile.vue";
+import Profile from "./views/Admin/Profile.vue";
 import Select from "./views/Select.vue";
-
+import Accounts from "./views/Accounts/Accounts.vue";
+import Overview1 from "./views/Accounts/Overview1.vue";
+import Profile1 from "./views/Accounts/Profile1.vue";
+import Orders1 from "./views/Accounts/Orders1.vue";
 Vue.use(Router);
 
 const router = new Router({
@@ -19,6 +23,11 @@ const router = new Router({
       path: "/",
       name: "home",
       component: Home
+    },
+    {
+      path: "/signup",
+      name: "signup",
+      component: signup
     },
     {
       path: "/select",
@@ -50,6 +59,29 @@ const router = new Router({
           path: "orders",
           name: "orders",
           component: Orders
+        }
+      ]
+    }, {
+      path: "/accounts",
+      name: "accounts",
+      component: Accounts,
+      meta: { requiresAuth: true },
+      children: [
+        {
+          path: "overview1",
+          name: "overview1",
+          component: Overview1
+        },
+        {
+          path: "profile1",
+          name: "profile1",
+          component: Profile1
+        },
+
+        {
+          path: "orders1",
+          name: "orders1",
+          component: Orders1
         }
       ]
     },

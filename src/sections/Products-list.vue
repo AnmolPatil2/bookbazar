@@ -33,6 +33,7 @@
 
 <script>
 import { fb, db } from "../firebase";
+
 import { Carousel, Slide } from "vue-carousel";
 export default {
   name: "Products-list",
