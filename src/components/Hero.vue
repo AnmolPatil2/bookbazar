@@ -1,11 +1,5 @@
 <template>
-  <v-carousel
-    cycle
-    class="col-mt-5"
-    height="400"
-    hide-delimiter-background="hideDelimiters"
-    show-arrows-on-hover
-  >
+  <v-carousel flat dark transition="fade" cycle class="col-mt-5" height="400" hide-delimiters>
     <v-carousel-item v-for="(slide, i) in slides" :key="i">
       <div class="container h-100">
         <div class="row h-100 justify-content-center align-items-center">

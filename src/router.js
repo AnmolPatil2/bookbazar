@@ -1,18 +1,22 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
-import signup from "@/components/signup.vue";
+
 import Admin from "./views/Admin/Admin.vue";
 import Overview from "./views/Admin/Overview.vue";
 import Products from "./views/Admin/Products.vue";
 import Orders from "./views/Admin/Orders.vue";
+import Ordersbuy from "./views/Admin/Ordersbuy.vue";
 import { fb } from './firebase';
 import Profile from "./views/Admin/Profile.vue";
-import Select from "./views/Select.vue";
+
 import Accounts from "./views/Accounts/Accounts.vue";
 import Overview1 from "./views/Accounts/Overview1.vue";
 import Profile1 from "./views/Accounts/Profile1.vue";
 import Orders1 from "./views/Accounts/Orders1.vue";
+import signup from "@/components/signup.vue";
+import Select from "./views/Select.vue";
+import Sell from "./views/Sell.vue";
 Vue.use(Router);
 
 const router = new Router({
@@ -35,6 +39,11 @@ const router = new Router({
       component: Select
     },
     {
+      path: "/sell",
+      name: "sell",
+      component: Sell
+    },
+    {
       path: "/admin",
       name: "admin",
       component: Admin,
@@ -54,7 +63,12 @@ const router = new Router({
           path: "products",
           name: "products",
           component: Products
+        },{
+          path: "ordersbuy",
+          name: "ordersbuy",
+          component: Ordersbuy
         },
+        
         {
           path: "orders",
           name: "orders",

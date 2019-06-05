@@ -48,7 +48,7 @@
           <v-avatar size="100">
             <img class="text-lg-center" src="/avatar-1.png">
           </v-avatar>
-          <p class="white--text subheading mt-1">The Net Ninja</p>
+          <p class="white--text subheading mt-1"></p>
         </v-flex>
         <v-flex class="mt-4 mb-3"></v-flex>
       </v-layout>
@@ -76,7 +76,7 @@ export default {
       drawer: null,
       links: [
         { icon: "dashboard", text: "Buy", route: "/select" },
-        { icon: "folder", text: "Sell", route: "/select" },
+        { icon: "folder", text: "Sell", route: "/sell" },
         { icon: "person", text: "Donate", route: "/select" }
       ]
     };

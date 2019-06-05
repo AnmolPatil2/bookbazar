@@ -61,6 +61,7 @@
               <v-btn flat color="grey">
                 <add-to-cart :product-id="product.id" :price="product.price" :name="product.name"></add-to-cart>
               </v-btn>
+              <v-btn @click="buy(product)" class="success">buy</v-btn>
             </v-card-actions>
           </v-card>
         </v-flex>
@@ -72,6 +73,7 @@
 <script>
 import { fb, db } from "../firebase";
 import { Carousel, Slide } from "vue-carousel";
+import firebase1 from "@firebase/app";
 export default {
   name: "Products-list",
   props: {
@@ -128,6 +130,17 @@ export default {
             console.log(this.sum);
           });
         });
+    },
+    buy(product) {
+      var user = firebase1.auth().currentUser;
+
+      db.collection("sellorders").add({
+        bookid: product.id,
+        price: product.price,
+        status: "ongoing",
+        buyer: user.uid,
+        date: Date.now()
+      });
     }
   },
 

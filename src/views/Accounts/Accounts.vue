@@ -1,5 +1,5 @@
 <template>
-  <div class="admin grey lighten-4">
+  <div class="admin">
     <div class="page-wrapper default-theme sidebar-bg bg1 toggled">
       <a id="show-sidebar" @click="closeMenu" class="btn btn-sm btn-dark" href="#">
         <i class="fas fa-bars"></i>
@@ -81,12 +81,6 @@
                   <span>Logout</span>
                 </a>
               </li>
-              <li>
-                <a href="#" @click="fire()">
-                  <i class="fa fa-power-off"></i>
-                  <span>ut</span>
-                </a>
-              </li>
             </ul>
           </div>
           <!-- sidebar-menu  -->
@@ -130,16 +124,6 @@ export default {
       $(".page-wrapper").toggleClass("toggled");
     },
 
-    fire() {
-      var refe = firebase
-        .database()
-        .ref()
-        .child("book");
-
-      refe.set({
-        ss: "ss"
-      });
-    },
     logout() {
       fb.auth()
         .signOut()

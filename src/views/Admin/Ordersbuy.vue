@@ -2,10 +2,10 @@
   <div class="dashboard mx-5">
     <h1 class="subheading grey--text">Dashboard</h1>
 
-    <v-container class="my-5">
+    <v-container color="grey lighten-4" class="my-5">
       <v-layout row justify-start class="mb-3">
         <v-tooltip top>
-          <v-btn small flat color="grey" @click="sortBy('title')" slot="activator">
+          <v-btn small flat color="grey" @click="readData()" slot="activator">
             <v-icon small left>folder</v-icon>
             <span class="caption text-lowercase">By project name</span>
           </v-btn>
@@ -36,7 +36,11 @@
           </v-flex>
           <v-flex xs2 sm4 md2>
             <div class="right">
-              <v-chip small :class="`${order.status} white--text  caption`">{{ order.status }}</v-chip>
+              <v-chip
+                @click="completed(order,index)"
+                small
+                :class="`${order.status} white--text  caption`"
+              >{{ order.status }}</v-chip>
             </div>
           </v-flex>
         </v-layout>
@@ -46,52 +50,78 @@
   </div>
 </template>
 
+
 <script>
-import firebase1 from "@firebase/app";
+import { VueEditor } from "vue2-editor";
 import { fb, db } from "../../firebase";
 export default {
+  name: "Products",
+  components: {
+    VueEditor
+  },
+  props: {},
   data() {
     return {
       orders: []
     };
   },
-  created() {
-    var user = firebase1.auth().currentUser;
-    db.collection("sellorders")
 
-      .where("buyer", "==", user.uid)
-      .get()
-      .then(snapshot => {
-        snapshot.forEach(doc => {
-          this.orders.push(doc.data());
+  methods: {
+    readData() {
+      //
+    },
+    completed(order, key) {
+      db.collection("buyorders")
+        .doc(order.id)
+        .update({
+          status: "completed"
+        })
+        .then(() => {
+          this.orders[key].status = "completed";
+        });
+    },
+    addProduct() {
+      this.$firestore.products.add(this.product);
+
+      Toast.fire({
+        type: "success",
+        title: "Product created successfully"
+      });
+      $("#product").modal("hide");
+    }
+  },
+  created() {
+    db.collection("buyorders")
+      .orderBy("date")
+      .onSnapshot(snapshot => {
+        snapshot.docChanges().forEach(change => {
+          if (change.type == "added") {
+            let doc = change.doc;
+            this.orders.push({
+              id: doc.id,
+              date: doc.data().date,
+              buyer: doc.data().buyer,
+              status: doc.data().status
+            });
+            console.log(this.orders);
+          }
         });
       });
-  },
-  methods: {
-    sortBy(prop) {
-      this.projects.sort((a, b) => (a[prop] < b[prop] ? -1 : 1));
-    }
   }
 };
 </script>
 
-<style>
-.project.complete {
-  border-left: 4px solid #3cd1c2;
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped lang="scss">
+.img-wrapp {
+  position: relative;
 }
-.project.ongoing {
-  border-left: 4px solid #ffaa2c;
+.img-wrapp span.delete-img {
+  position: absolute;
+  top: -14px;
+  left: -2px;
 }
-.project.overdue {
-  border-left: 4px solid #f83e70;
-}
-.v-chip.complete {
-  background: #3cd1c2;
-}
-.v-chip.ongoing {
-  background: #ffaa2c;
-}
-.v-chip.overdue {
-  background: #f83e70;
+.img-wrapp span.delete-img:hover {
+  cursor: pointer;
 }
 </style>

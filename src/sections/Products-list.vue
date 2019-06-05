@@ -7,9 +7,9 @@
         <v-flex xs12 sm6 md4 lg3 v-for="(product,index) in products" :key="index">
           <v-card flat class="text-xs-center mx-3">
             <v-responsive class>
-              <v-container>
+              <v-container hide-delimiters class="ma-0 pa-0">
                 <carousel :perPage="1">
-                  <slide v-for="(img,index) in product.images">
+                  <slide v-for="(img,index) in product.images " :key="index">
                     <img :src="img" class="card-img-top" alt="....">
                   </slide>
                 </carousel>

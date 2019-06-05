@@ -24,7 +24,7 @@
 
           <v-spacer></v-spacer>
 
-          <v-btn flat @click="submit" class="btn btn-success mx-0 mt-3">Add Project</v-btn>
+          <v-btn flat @click="submit" class="success mx-0 mt-3">Add Project</v-btn>
         </v-form>
       </v-card-text>
     </v-card>

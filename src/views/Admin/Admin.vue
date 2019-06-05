@@ -73,6 +73,12 @@
                   <span>Orders</span>
                 </router-link>
               </li>
+              <li>
+                <router-link to="/admin/ordersbuy">
+                  <i class="fa fa-shopping-cart"></i>
+                  <span>Ordersbuy</span>
+                </router-link>
+              </li>
 
               <li>
                 <router-link to="/admin/profile">
