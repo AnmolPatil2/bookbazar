@@ -68,7 +68,7 @@ export default {
             var user = result.user;
             // ...
             //route to set password !
-            vm.$router.push({ path: "/setPassword" });
+            vm.$router.push({ name: "accounts" });
           })
           .catch(function(error) {
             // User couldn't sign in (bad verification code?)

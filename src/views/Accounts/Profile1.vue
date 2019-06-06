@@ -186,7 +186,6 @@
                       value="Reset password email"
                       class="btn btn-success w-100"
                     >
-                    <Popup/>
                   </div>
                 </div>
               </div>
@@ -201,12 +200,12 @@
 <script>
 import { VueEditor } from "vue2-editor";
 import { fb, db } from "../../firebase";
-import Popup from "../../components/Popup";
+import firebase1 from "@firebase/app";
+
 export default {
   name: "profile",
   components: {
-    VueEditor,
-    Popup
+    VueEditor
   },
   props: {
     msg: String
@@ -231,14 +230,14 @@ export default {
     };
   },
   firestore() {
-    const user = fb.auth().currentUser;
+    const user = firebase1.auth().currentUser;
     return {
       profile: db.collection("profiles").doc(user.uid)
     };
   },
   methods: {
     resetPassword() {
-      const auth = fb.auth();
+      const auth = firebase1.auth();
       auth
         .sendPasswordResetEmail(auth.currentUser.email)
         .then(() => {

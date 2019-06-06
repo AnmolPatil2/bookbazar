@@ -9,44 +9,54 @@
       aria-labelledby="loginTitle"
       aria-hidden="true"
     >
-      <div class="modal-dialog modal-dialog-centered modal-lg" role="document" style="width:100%;">
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document" style="width:0px">
         <div class="modal-content">
           <div class="modal-body">
             <article>
-              <div class="container" :class="{'sign-up-active' : signUp}">
-                <div class="overlay-container">
-                  <div class="overlay">
-                    <div class="overlay-left">
-                      <h2>Login</h2>
-                      <p>Already have a account</p>
-                      <button class="invert" id="signIn" @click="signUp = !signUp">Login</button>
+              <div class="form-collection">
+                <div class="card elevation-3 limit-width log-in-card below turned">
+                  <div class="card-body">
+                    <div class="input-group email">
+                      <input type="text" v-model="email" placeholder="Email">
                     </div>
-                    <div class="overlay-right">
-                      <h2>New Here?</h2>
-                      <p>Sign up here for the bookoo exerience and get books at your ease</p>
-                      <button class="invert" id="signUp" @click="signUp = !signUp">Sign Up</button>
+                    <div class="input-group password">
+                      <input type="password" v-model="password" placeholder="Password">
                     </div>
+                    <div class="btn white darken-4 col s10 m4">
+                      <v-btn @click=" signInWithGoogle()" style="text-transform:none">
+                        <div class="left">
+                          <img
+                            width="20px"
+                            alt="Google  Logo"
+                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"
+                          >
+                        </div>Login with Google
+                      </v-btn>
+                      <v-btn @click="changerouter()" class="zocial call icon">phone auth</v-btn>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <button type="submit" @click="login()" class="login-btn">Log in</button>
                   </div>
                 </div>
-                <form class="sign-up" action="#">
-                  <h2>Sign-up Here</h2>
-                  <div>
-                    Let's get you booked with us and
-                    <br>bookooing begins
+
+                <div class="card elevation-2 limit-width sign-up-card above">
+                  <div class="card-body">
+                    <div class="input-group fullname">
+                      <input type="text" v-model="name" placeholder="Full Name">
+                    </div>
+                    <div class="input-group email">
+                      <input type="email" v-model="email" placeholder="Email">
+                    </div>
+                    <div class="input-group password">
+                      <input type="password" v-model="password" placeholder="Password">
+                    </div>
+                    <p class="red--text">{{feedback}}</p>
                   </div>
-                  <input type="text" v-model="name" placeholder="Name">
-                  <input type="email" v-model="email" placeholder="E-mail">
-                  <input type="password" v-model="password" placeholder="Password">
-                  <button @click="register() ">sign up</button>
-                </form>
-                <form class="sign-in" action="#">
-                  <h2>Login Here</h2>
-                  <div>Already Booked with us?</div>
-                  <input type="email" v-model="email" placeholder="E-mail">
-                  <input type="password" v-model="password" placeholder="Password">
-                  <a href="#">forgot password</a>
-                  <button @click="signInWithGoogle()">login</button>
-                </form>
+                  <div class="card-footer">
+                    <button type="submit" @click="register()" class="signup-btn">Sign Up</button>
+                  </div>
+                </div>
               </div>
             </article>
           </div>
@@ -58,6 +68,8 @@
 
 <script>
 import { fb, db } from "../firebase";
+import slugify from "slugify";
+import * as mykey from "./login.js";
 import firebase1 from "@firebase/app";
 export default {
   name: "Login",
@@ -69,29 +81,43 @@ export default {
       name: null,
       email: null,
       password: null,
-      signUp: false
+
+      feedback: null,
+      slug: null
     };
   },
   methods: {
+    changerouter() {
+      $("#login").modal("hide");
+      this.$router.replace("signup");
+    },
     login() {
-      alert("Wrong password.");
-      fb.auth()
-        .signInWithEmailAndPassword(this.email, this.password)
-        .then(() => {
-          $("#login").modal("hide");
-          this.$router.replace("admin");
-        })
-        .catch(function(error) {
-          // Handle Errors here.
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          if (errorCode === "auth/wrong-password") {
-            alert("Wrong password.");
-          } else {
-            alert(errorMessage);
-          }
-          console.log(error);
-        });
+      if (this.email != null) {
+        fb.auth()
+          .signInWithEmailAndPassword(this.email, this.password)
+          .then(() => {
+            $("#login").modal("hide");
+            if (
+              this.email == "nikimiki007@admin.com" ||
+              this.email == "kruthikajos007@admin.com"
+            ) {
+              this.$router.replace("admin");
+            } else {
+              this.$router.replace("accounts");
+            }
+          })
+          .catch(function(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            if (errorCode === "auth/wrong-password") {
+              alert("Wrong password.");
+            } else {
+              alert(errorMessage);
+            }
+            console.log(error);
+          });
+      }
     },
     signInWithGoogle() {
       const provider = new firebase1.auth.GoogleAuthProvider();
@@ -99,245 +125,322 @@ export default {
       firebase1.auth().signInWithPopup(provider);
     },
     register() {
-      fb.auth()
-        .createUserWithEmailAndPassword(this.email, this.password)
-        .then(user => {
-          $("#login").modal("hide");
-
-          db.collection("profiles")
-            .doc(user.user.uid)
-            .set({
-              name: this.name
-            })
-            .then(function() {
-              console.log("Document successfully written!");
-            })
-            .catch(function(error) {
-              console.error("Error writing document: ", error);
-            });
-          this.$router.replace("admin");
-        })
-        .catch(function(error) {
-          // Handle Errors here.
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          if (errorCode == "auth/weak-password") {
-            alert("The password is too weak.");
-          } else {
-            alert(errorMessage);
-          }
-          console.log(error);
+      if (this.name) {
+        this.slug = slugify(this.name, {
+          replacement: "-",
+          remove: /[!@#$%^&*()]/g,
+          lower: true
         });
+        let ref = db.collection("profiles").doc(this.slug);
+        ref.get().then(doc => {
+          if (doc.exists) {
+            this.feedback = "This name is already taken";
+          } else {
+            fb.auth()
+              .createUserWithEmailAndPassword(this.email, this.password)
+              .then(cred => {
+                ref.set({
+                  name: this.name,
+
+                  user_id: cred.user.uid
+                });
+              })
+              .then(() => {
+                $("#login").modal("hide");
+                this.$router.push({ name: "account" });
+              })
+              .catch(error => {
+                // Handle Errors here.
+                this.feedback = null;
+                this.feedback = error.message;
+                // ...
+              });
+          }
+        });
+      } else {
+        this.feedback = "Enter a Name";
+      }
     }
   }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
+<style scoped>
+html {
+  margin: 0;
+  height: 100%;
+}
+
 body {
   margin: 0;
-  padding: 0;
-}
-
-article {
-  font-family: Tahoma;
-  font-size: 1.2rem;
-  color: #222;
-  background-color: #092525;
-  height: 60vh;
-  width: 120vh;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  display: -webkit-flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
-  align-items: center;
-}
-.container {
-  position: relative;
-  width: 900px;
-  height: 500px;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2), 0 10px 10px rgba(0, 0, 0, 0.2);
-  background: linear-gradient(to bottom, #efefef, #ccc);
-
-  .overlay-container {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: 50%;
-    height: 100%;
-    overflow: hidden;
-    transition: transform 0.5s ease-in-out;
-    z-index: 100;
-  }
-
-  .overlay {
-    position: relative;
-    left: -100%;
-    height: 100%;
-    width: 200%;
-    background: linear-gradient(to bottom right, #7fd625, #009345);
-    color: #fff;
-    transform: translateX(0);
-    transition: transform 0.5s ease-in-out;
-  }
-
-  @mixin overlays($property) {
-    position: absolute;
-    top: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    flex-direction: column;
-    padding: 70px 40px;
-    width: calc(50% - 80px);
-    height: calc(100% - 140px);
-    text-align: center;
-    transform: translateX($property);
-    transition: transform 0.5s ease-in-out;
-  }
-
-  .overlay-left {
-    @include overlays(-20%);
-  }
-
-  .overlay-right {
-    @include overlays(0);
-    right: 0;
-  }
+  background: #2196f3;
 }
 
-h2 {
-  margin: 0;
+.form-collection {
+  width: 350px;
+  height: 350px;
 }
 
-p {
-  margin: 20px 0 30px;
+.limit-width {
+  width: 300px;
 }
 
-a {
-  color: #222;
-  text-decoration: none;
-  margin: 15px 0;
-  font-size: 1rem;
-}
-
-button {
-  border-radius: 20px;
-  border: 1px solid #009345;
-  background-color: #009345;
-  color: #fff;
-  font-size: 1rem;
-  font-weight: bold;
-  padding: 10px 40px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  transition: transform 0.1s ease-in;
-
-  &:active {
-    transform: scale(0.9);
-  }
-
-  &:focus {
-    outline: none;
-  }
-}
-
-button.invert {
-  background-color: transparent;
-  border-color: #fff;
-}
-
-form {
-  position: absolute;
-  top: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  flex-direction: column;
-  padding: 20px 40px;
-  width: calc(50%);
-  height: calc(100%);
-  text-align: center;
-  background: linear-gradient(to bottom, #efefef, #ccc);
-  transition: all 0.5s ease-in-out;
-
-  div {
-    font-size: 1rem;
-  }
-
-  input {
-    background-color: #eee;
-    border: none;
-    padding: 8px 15px;
-    margin: 6px 0;
-    width: calc(100% - 30px);
-    border-radius: 15px;
-    border-bottom: 1px solid #ddd;
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4), 0 -1px 1px #fff,
-      0 1px 0 #fff;
-    overflow: hidden;
-
-    &:focus {
-      outline: none;
-      background-color: #fff;
-    }
-  }
-}
-
-.sign-in {
+.absolute-footer {
+  bottom: 0;
   left: 0;
+  position: absolute;
+  z-index: 1;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 27.2px;
+  font-size: 1.7rem;
+  font-weight: 300;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+}
+
+.form-collection {
   z-index: 2;
 }
 
-.sign-up {
+/*Styling Card */
+.card {
+  font-family: "Open Sans", sans-serif;
+  background: #fff;
+  position: absolute;
+  -webkit-transition: 0.3s ease all;
+  transition: 0.3s ease all;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.box-btn {
+  text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+  display: block;
+  padding: 15px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #444;
+  background: rgba(0, 0, 0, 0);
+  -webkit-transition: 0.2s ease all;
+  transition: 0.2s ease all;
+  border-radius: 3px;
+}
+
+.box-btn:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.box-btn:active {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.input-group {
+  border: 2px solid #eee;
+  position: relative;
+  background: #eee;
+  margin: 25px 0;
+  border-radius: 2px;
+  overflow: hidden;
+  padding: 10px;
+}
+
+.input-group input {
+  border: none;
+  background: transparent;
+  width: 100%;
+  outline: none;
+  font-weight: 500;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+}
+
+.input-group label {
+  position: absolute;
+  top: 10px;
   left: 0;
-  padding-right: 30px;
+  padding-left: 10px;
+  font-weight: 500;
+  color: #aaa;
+}
+
+.card-footer button {
+  width: 100%;
+  padding: 25px;
+  font-size: 24px;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  background: #4caf50;
+  border: none;
+  color: #fff;
+  box-shadow: none;
+  outline: none;
+  cursor: pointer;
+}
+
+/*Animation Classes And Prerequisits */
+.above {
   z-index: 1;
-  opacity: 0;
 }
 
-.sign-up-active {
-  .sign-in {
-    transform: translateX(100%);
-  }
-
-  .sign-up {
-    transform: translateX(100%);
-    opacity: 1;
-    z-index: 5;
-    animation: show 0.5s;
-  }
-
-  .overlay-container {
-    transform: translateX(-100%);
-  }
-
-  .overlay {
-    transform: translateX(50%);
-  }
-
-  .overlay-left {
-    transform: translateX(0);
-  }
-
-  .overlay-right {
-    transform: translateX(20%);
-  }
+.below {
+  z-index: 0;
 }
 
-@keyframes show {
-  0% {
-    opacity: 0;
-    z-index: 1;
-  }
-  49% {
-    opacity: 0;
-    z-index: 1;
-  }
-  50% {
-    opacity: 1;
-    z-index: 10;
-  }
+.turned {
+  opacity: 0.8;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+}
+
+.sign-up-card,
+.log-in-card {
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+
+.sign-up-card.turned {
+  filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="0.8" /></filter></svg>#filter');
+  -webkit-filter: blur(0.8px);
+  filter: blur(0.8px);
+  webkit-filter: blur(0.8px);
+  -webkit-transform: rotateZ(-90deg) translate3d(0, 100px, 0) scale(0.7);
+  transform: rotateZ(-90deg) translate3d(0, 100px, 0) scale(0.7);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.log-in-card.turned {
+  filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="1" /></filter></svg>#filter');
+  -webkit-filter: blur(1px);
+  filter: blur(1px);
+  webkit-filter: blur(1px);
+  -webkit-transform: rotateZ(-90deg) translateX(0px) translateY(100px)
+    scale(0.7);
+  transform: rotateZ(-90deg) translateX(0px) translateY(100px) scale(0.7);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.animation-state-1 .sign-up-card.below {
+  -webkit-transform: rotateZ(-7deg) translateY(150px) scale(0.78);
+  transform: rotateZ(-7deg) translateY(150px) scale(0.78);
+  opacity: 1;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="0.4" /></filter></svg>#filter');
+  -webkit-filter: blur(0.4px);
+  filter: blur(0.4px);
+  webkit-filter: blur(0.4px);
+}
+
+.animation-state-1 .log-in-card.above {
+  -webkit-transform: rotateZ(-83deg) translateY(-180px) translateX(100px)
+    scale(0.78);
+  transform: rotateZ(-83deg) translateY(-180px) translateX(100px) scale(0.78);
+  opacity: 1;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="0.5" /></filter></svg>#filter');
+  -webkit-filter: blur(0.5px);
+  filter: blur(0.5px);
+  webkit-filter: blur(0.5px);
+}
+
+.animation-state-finish .sign-up-card.above {
+  -webkit-transform-origin: left top;
+  transform-origin: left top;
+  -webkit-transform: rotateZ(5deg) translateY(0px) scale(1);
+  transform: rotateZ(5deg) translateY(0px) scale(1);
+  opacity: 1;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="0" /></filter></svg>#filter');
+  -webkit-filter: blur(0);
+  filter: blur(0);
+  webkit-filter: blur(0);
+}
+
+.animation-state-finish .log-in-card.below {
+  -webkit-transform: rotateZ(-90deg) translateX(0px) translateY(100px)
+    scale(0.7);
+  transform: rotateZ(-90deg) translateX(0px) translateY(100px) scale(0.7);
+  opacity: 0.8;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+  filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="1" /></filter></svg>#filter');
+  -webkit-filter: blur(1px);
+  filter: blur(1px);
+  webkit-filter: blur(1px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.animation-state-1 .log-in-card.below {
+  -webkit-transform: rotateZ(-10deg) translateY(180px) scale(0.78);
+  transform: rotateZ(-10deg) translateY(180px) scale(0.78);
+  opacity: 1;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="0.5" /></filter></svg>#filter');
+  -webkit-filter: blur(0.5px);
+  filter: blur(0.5px);
+  webkit-filter: blur(0.5px);
+}
+
+.animation-state-1 .sign-up-card.above {
+  -webkit-transform: rotateZ(-80deg) translateY(-170px) translateX(100px)
+    scale(0.78);
+  transform: rotateZ(-80deg) translateY(-170px) translateX(100px) scale(0.78);
+  opacity: 1;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="0.4" /></filter></svg>#filter');
+  -webkit-filter: blur(0.4px);
+  filter: blur(0.4px);
+  webkit-filter: blur(0.4px);
+}
+
+.animation-state-finish .log-in-card.above {
+  -webkit-transform-origin: left top;
+  transform-origin: left top;
+  -webkit-transform: rotateZ(5deg) translateY(0px) scale(1);
+  transform: rotateZ(5deg) translateY(0px) scale(1);
+  opacity: 1;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="0" /></filter></svg>#filter');
+  -webkit-filter: blur(0);
+  filter: blur(0);
+  webkit-filter: blur(0);
+}
+
+.animation-state-finish .sign-up-card.below {
+  filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="0.4" /></filter></svg>#filter');
+  -webkit-filter: blur(0.4px);
+  filter: blur(0.4px);
+  webkit-filter: blur(0.4px);
+  -webkit-transform: rotateZ(-90deg) translate3d(0, 100px, 0) scale(0.7);
+  transform: rotateZ(-90deg) translate3d(0, 100px, 0) scale(0.7);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  opacity: 0.7;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
 }
 </style>

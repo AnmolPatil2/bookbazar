@@ -9,6 +9,7 @@
               <p>Best place to buy and sel books</p>
               <div class="hero-btn mt-5">
                 <button class="btn custom-btn btn-info mr-4">Buy</button>
+
                 <button class="btn custom-btn btn-outline-secondary">Sell</button>
               </div>
             </div>

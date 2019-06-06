@@ -9,7 +9,7 @@ import VueFirestore from "vue-firestore";
 import store from './store.js';
 import Vuetify from 'vuetify'
 import VueScrollReveal from 'vue-scroll-reveal';
- 
+
 
 Vue.use(VueFirestore, {
   key: "id", // the name of the property. Default is '.key'.
@@ -17,7 +17,7 @@ Vue.use(VueFirestore, {
 });
 
 Vue.use(VueFirestore);
-Vue.use(Vuetify); 
+Vue.use(Vuetify);
 window.$ = window.jQuery = jQuery;
 
 import "popper.js";
@@ -36,6 +36,7 @@ const Toast = Swal.mixin({
 window.Toast = Toast;
 Vue.component("Products-list", require("./sections/Products-list").default);
 Vue.component('add-to-cart', require('./components/AddToCart.vue').default);
+Vue.component('Popup', require('./components/Popup.vue').default);
 
 import VueCarousel from 'vue-carousel';
 Vue.use(VueCarousel);
