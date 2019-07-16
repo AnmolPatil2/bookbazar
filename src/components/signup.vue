@@ -86,7 +86,6 @@ export default {
             callback: function(response) {
               // reCAPTCHA solved, allow signInWithPhoneNumber.
               // ...
-              console.log("ss");
             },
             "expired-callback": function() {
               // Response expired. Ask user to solve reCAPTCHA again.

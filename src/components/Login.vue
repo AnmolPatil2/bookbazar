@@ -146,8 +146,16 @@ export default {
                 });
               })
               .then(() => {
+                var user = firebase1.auth().currentUser;
+
+                user
+                  .sendEmailVerification()
+                  .then(() => {})
+                  .catch(error => {
+                    // An error happened.
+                  });
                 $("#login").modal("hide");
-                this.$router.push({ name: "account" });
+                this.$router.push({ name: "accounts" });
               })
               .catch(error => {
                 // Handle Errors here.

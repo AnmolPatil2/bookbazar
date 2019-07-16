@@ -141,6 +141,10 @@ export default {
         buyer: user.uid,
         date: Date.now()
       });
+      Toast.fire({
+        type: "success",
+        title: "Product created successfully"
+      });
     }
   },
 

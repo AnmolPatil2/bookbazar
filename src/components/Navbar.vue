@@ -58,20 +58,12 @@
           <v-list-tile-content>
             <v-list-tile-title class="white--text">{{ link.text }}</v-list-tile-title>
           </v-list-tile-content>
-          <form class="form-inline my-2 my-lg-0 hidden-sm-and-down">
-            <input
-              class="form-control mr-sm-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            >
-            <a
-              class="btn btn-outline-success my-2 my-sm-0"
-              data-toggle="modal"
-              data-target="#login"
-            >Get Start</a>
-          </form>
         </v-list-tile>
+        <a
+          class="btn btn-outline-success my-2 my-sm-0"
+          data-toggle="modal"
+          data-target="#login"
+        >Get Start</a>
       </v-list>
     </v-navigation-drawer>
   </nav>

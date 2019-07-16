@@ -63,12 +63,12 @@ const router = new Router({
           path: "products",
           name: "products",
           component: Products
-        },{
+        }, {
           path: "ordersbuy",
           name: "ordersbuy",
           component: Ordersbuy
         },
-        
+
         {
           path: "orders",
           name: "orders",
