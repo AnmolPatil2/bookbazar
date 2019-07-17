@@ -10,7 +10,7 @@
               <v-container hide-delimiters class="ma-0 pa-0">
                 <carousel :perPage="1">
                   <slide v-for="(img,index) in product.images " :key="index">
-                    <img :src="img" class="card-img-top" alt="....">
+                    <img :src="img" class="card-img-top" alt="...." />
                   </slide>
                 </carousel>
               </v-container>
@@ -21,7 +21,12 @@
             </v-card-text>
             <v-card-actions>
               <v-btn flat color="grey">
-                <add-to-cart :product-id="product.id" :price="product.price" :name="product.name"></add-to-cart>
+                <add-to-cart
+                  :image="getImage(product.images)"
+                  :p-id="product.id"
+                  :price="product.price"
+                  :name="product.name"
+                ></add-to-cart>
               </v-btn>
             </v-card-actions>
           </v-card>

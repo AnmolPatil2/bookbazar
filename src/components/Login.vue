@@ -9,7 +9,7 @@
       aria-labelledby="loginTitle"
       aria-hidden="true"
     >
-      <div class="modal-dialog modal-dialog-centered modal-lg" role="document" style="width:0px">
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document" style="width:250px">
         <div class="modal-content">
           <div class="modal-body">
             <article>
@@ -17,10 +17,10 @@
                 <div class="card elevation-3 limit-width log-in-card below turned">
                   <div class="card-body">
                     <div class="input-group email">
-                      <input type="text" v-model="email" placeholder="Email">
+                      <input type="text" v-model="email" placeholder="Email" />
                     </div>
                     <div class="input-group password">
-                      <input type="password" v-model="password" placeholder="Password">
+                      <input type="password" v-model="password" placeholder="Password" />
                     </div>
                     <div class="btn white darken-4 col s10 m4">
                       <v-btn @click=" signInWithGoogle()" style="text-transform:none">
@@ -29,7 +29,7 @@
                             width="20px"
                             alt="Google  Logo"
                             src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"
-                          >
+                          />
                         </div>Login with Google
                       </v-btn>
                       <v-btn @click="changerouter()" class="zocial call icon">phone auth</v-btn>
@@ -43,13 +43,13 @@
                 <div class="card elevation-2 limit-width sign-up-card above">
                   <div class="card-body">
                     <div class="input-group fullname">
-                      <input type="text" v-model="name" placeholder="Full Name">
+                      <input type="text" v-model="name" placeholder="Full Name" />
                     </div>
                     <div class="input-group email">
-                      <input type="email" v-model="email" placeholder="Email">
+                      <input type="email" v-model="email" placeholder="Email" />
                     </div>
                     <div class="input-group password">
-                      <input type="password" v-model="password" placeholder="Password">
+                      <input type="password" v-model="password" placeholder="Password" />
                     </div>
                     <p class="red--text">{{feedback}}</p>
                   </div>
@@ -69,10 +69,12 @@
 <script>
 import { fb, db } from "../firebase";
 import slugify from "slugify";
+import Popup from "./Popup";
 import * as mykey from "./login.js";
 import firebase1 from "@firebase/app";
 export default {
   name: "Login",
+
   props: {
     msg: String
   },

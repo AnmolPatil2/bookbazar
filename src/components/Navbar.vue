@@ -32,12 +32,21 @@
       </v-menu>
 
       <form class="form-inline my-2 my-lg-0 hidden-sm-and-down">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
         <a
           class="btn btn-outline-success my-2 my-sm-0"
           data-toggle="modal"
           data-target="#login"
         >Get Start</a>
+        <a class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#login">
+          <Popup />
+        </a>
+
+        <a
+          class="btn btn-outline-success my-2 my-sm-0"
+          data-toggle="modal"
+          data-target="#miniCart"
+        >Cart</a>
       </form>
     </v-toolbar>
 
@@ -73,6 +82,7 @@
 import Popup from "./Popup";
 export default {
   name: "Navbar",
+
   props: {},
   data() {
     return {
