@@ -15,7 +15,8 @@ export default {
   name: "home",
   components: {
     Navbar,
-    Compholder
+    Compholder,
+    MiniCart
   }
 };
 </script>
