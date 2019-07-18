@@ -1,5 +1,5 @@
 <template>
-  <v-carousel flat dark transition="fade" cycle class="col-mt-5" height="400" hide-delimiters>
+  <v-carousel flat dark transition="fade" cycle class="col-mt-5 hero" hide-delimiters>
     <v-carousel-item v-for="(slide, i) in slides" :key="i">
       <div class="container h-100">
         <div class="row h-100 justify-content-center align-items-center">
@@ -16,7 +16,7 @@
           </div>
           <div class="col-md-7">
             <div class="graphic">
-              <img src="/img/svg/graphic.svg" alt>
+              <img src="/img/svg/graphic.svg" alt />
             </div>
           </div>
         </div>
@@ -40,3 +40,14 @@ export default {
   }
 };
 </script>
+<style>
+@media only screen and (max-width: 600px) {
+  .hero {
+    max-height: 300px;
+  }
+}
+
+.hero {
+  max-height: 350px;
+}
+</style>

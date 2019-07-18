@@ -1,98 +1,172 @@
 <template>
-  <v-app>
+  <nav>
+    <v-toolbar flat app color="#232f3e" class="white--text">
+      <div class="grey--text hidden-md-and-up" id="bigscreen">
+        <v-toolbar-side-icon @click="drawer = !drawer"></v-toolbar-side-icon>
+        <v-toolbar-title class="text-uppercase white--text">
+          <span class="font-weight-light">Book</span>
+          <span>Bazar</span>
+        </v-toolbar-title>
+        <div class="navbar" :class="{ 'navbar--hidden': !showNavbar }"></div>
+        <v-spacer></v-spacer>
+      </div>
+      <div class="hidden-sm-and-down ma-0 pa-0">
+        <v-toolbar-title class="text-uppercase white--text">
+          <span class="font-weight-light">Book</span>
+          <span>Bazar</span>
+        </v-toolbar-title>
+      </div>
+      <v-spacer></v-spacer>
+
+      <v-list-tile
+        class="hidden-sm-and-down"
+        v-for="link in links"
+        :key="link.text"
+        router
+        :to="link.route"
+      >
+        <v-list-tile-title>{{ link.text }}</v-list-tile-title>
+      </v-list-tile>
+
+      <!-- dropdown menu -->
+      <v-menu offset-y class="hidden-sm-and-down">
+        <v-btn flat slot="activator" color="grey">
+          <v-icon left>expand_more</v-icon>
+          <span>Menu</span>
+        </v-btn>
+        <v-list>
+          <v-list-tile>
+            <v-list-tile-title></v-list-tile-title>
+          </v-list-tile>
+        </v-list>
+      </v-menu>
+
+      <form class="form-inline my-2 my-lg-0 hidden-sm-and-down">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+        <a
+          class="btn btn-outline-success my-2 my-sm-0"
+          data-toggle="modal"
+          data-target="#login"
+        >Get Start</a>
+
+        <a
+          class="btn btn-outline-success my-2 my-sm-0"
+          data-toggle="modal"
+          data-target="#miniCart"
+        >Cart</a>
+      </form>
+    </v-toolbar>
+
     <v-navigation-drawer
-      class="hidden-md-and-up"
-      persistent
-      :mini-variant="miniVariant"
-      :clipped="clipped"
-      v-model="drawer"
-      enable-resize-watcher
-      fixed
       app
+      v-model="drawer"
+      class="hidden-md-and-up"
+      temporary
+      width="300"
+      id="drawer"
     >
       <v-list>
-        <v-list-tile value="true" v-for="(item, i) in items" :key="i">
+        <v-flex class="mt-4 mb-3"></v-flex>
+        <v-list-tile v-for="link in links" :key="link.text" router :to="link.route">
           <v-list-tile-action>
-            <v-icon v-html="item.icon"></v-icon>
+            <v-icon class="white--text">{{ link.icon }}</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title v-text="item.title"></v-list-tile-title>
+            <v-list-tile-title class="white--text">{{ link.text }}</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+        <a
+          class="btn btn-outline-success my-2 my-sm-0"
+          data-toggle="modal"
+          data-target="#login"
+        >Get Start</a>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar app :clipped-left="clipped">
-      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-btn icon @click.stop="miniVariant = !miniVariant">
-        <v-icon v-html="miniVariant ? 'chevron_right' : 'chevron_left'"></v-icon>
-      </v-btn>
-      <v-btn icon @click.stop="clipped = !clipped">
-        <v-icon>web</v-icon>
-      </v-btn>
-      <v-btn icon @click.stop="fixed = !fixed">
-        <v-icon>remove</v-icon>
-      </v-btn>
-      <v-toolbar-title v-text="title"></v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn icon @click.stop="rightDrawer = !rightDrawer">
-        <v-icon>menu</v-icon>
-      </v-btn>
-    </v-toolbar>
-    <v-content>
-      <router-view/>
-    </v-content>
-    <v-navigation-drawer temporary :right="right" v-model="rightDrawer" fixed app>
-      <v-list>
-        <v-list-tile @click="right = !right">
-          <v-list-tile-action>
-            <v-icon>compare_arrows</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title>Switch drawer (click me)</v-list-tile-title>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
-    <v-footer :fixed="fixed" app>
-      <span>&copy; 2017</span>
-    </v-footer>
-  </v-app>
+  </nav>
 </template>
 
-
 <script>
+import Popup from "./Popup";
 export default {
   name: "Navbar",
-  props: {
-    msg: String
-  },
+
+  props: {},
   data() {
     return {
-      clipped: false,
-      drawer: true,
-      fixed: false,
-      items: [
-        {
-          icon: "bubble_chart",
-          title: "Inspire"
-        }
-      ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: "Vuetify.js"
+      showNavbar: true,
+      lastScrollPosition: 0,
+      drawer: null,
+      links: [
+        { icon: "dashboard", text: "Buy", route: "/select" },
+        { icon: "folder", text: "Sell", route: "/sell" },
+        { icon: "person", text: "Donate", route: "/select" }
+      ]
     };
   },
 
-  components: {}
+  components: { Popup },
+  mounted() {
+    window.addEventListener("scroll", this.onScroll);
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.onScroll);
+  },
+  methods: {
+    onScroll() {
+      const currentScrollPosition =
+        window.pageYOffset || document.documentElement.scrollTop;
+      if (currentScrollPosition < 0) {
+        return;
+      }
+      // Stop executing this function if the difference between
+      // current scroll position and last scroll position is less than some offset
+      if (Math.abs(currentScrollPosition - this.lastScrollPosition) < 60) {
+        return;
+      }
+      this.showNavbar = currentScrollPosition < this.lastScrollPosition;
+      this.lastScrollPosition = currentScrollPosition;
+    }
+  }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+#bigscreen {
+}
 @media (min-width: 992px) {
   .navbar.custom-nav {
     padding-top: 16px;
     padding-bottom: 16px;
-    background-color: #fff !important;
+    background-color: #9652ff;
   }
+}
+#drawer {
+  background-color: #9652ff;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  padding: 0;
+  margin: 0;
+}
+.app {
+  width: 100vw;
+  height: 500vh;
+  background: hsl(200, 50%, 90%);
+}
+.navbar {
+  height: 60px;
+  width: 100vw;
+  background: hsl(200, 50%, 50%);
+  position: fixed;
+  box-shadow: 0 2px 15px rgba(71, 120, 120, 0.5);
+  transform: translate3d(0, 0, 0);
+  transition: 0.1s all ease-out;
+}
+.navbar.navbar--hidden {
+  box-shadow: none;
+  transform: translate3d(0, -100%, 0);
 }
 </style>

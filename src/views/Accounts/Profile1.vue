@@ -1,5 +1,5 @@
 <template>
-  <div class="products">
+  <div class="products grey lighten-4">
     <div class="container">
       <div class="intro h-100">
         <div class="row h-100 align-items-center">
@@ -9,7 +9,7 @@
             <p>Change your profile settings here</p>
           </div>
           <div class="col-md-5">
-            <img src="/img/svg/profile.svg" width="300" alt class="img-fluid">
+            <img src="/img/svg/profile.svg" width="300" alt class="img-fluid" />
           </div>
         </div>
       </div>
@@ -58,7 +58,7 @@
                       v-model="profile.name"
                       placeholder="Full name"
                       class="form-control"
-                    >
+                    />
                   </div>
                 </div>
 
@@ -69,7 +69,7 @@
                       v-model="profile.phone"
                       placeholder="Phone"
                       class="form-control"
-                    >
+                    />
                   </div>
                 </div>
 
@@ -80,7 +80,7 @@
                       v-model="profile.address"
                       placeholder="Address"
                       class="form-control"
-                    >
+                    />
                   </div>
                 </div>
 
@@ -91,7 +91,7 @@
                       v-model="profile.postCode"
                       placeholder="Postcode"
                       class="form-control"
-                    >
+                    />
                   </div>
                 </div>
 
@@ -102,7 +102,7 @@
                       @click="updateProfile"
                       value="Save Changes"
                       class="btn btn-primary w-100"
-                    >
+                    />
                   </div>
                 </div>
               </div>
@@ -129,7 +129,7 @@
                       v-model="account.name"
                       placeholder="User name"
                       class="form-control"
-                    >
+                    />
                   </div>
                 </div>
 
@@ -140,7 +140,7 @@
                       v-model="account.email"
                       placeholder="Email address"
                       class="form-control"
-                    >
+                    />
                   </div>
                 </div>
 
@@ -151,7 +151,7 @@
                       v-model="account.password"
                       placeholder="New password"
                       class="form-control"
-                    >
+                    />
                   </div>
                 </div>
 
@@ -162,19 +162,19 @@
                       v-model="account.confirmPassword"
                       placeholder="Confirm password"
                       class="form-control"
-                    >
+                    />
                   </div>
                 </div>
 
                 <div class="col-md-4">
                   <div class="form-group">
-                    <input type="file" @change="uploadImage" class="form-control">
+                    <input type="file" @change="uploadImage" class="form-control" />
                   </div>
                 </div>
 
                 <div class="col-md-4">
                   <div class="form-group">
-                    <input type="submit" value="Save Changes" class="btn btn-primary w-100">
+                    <input type="submit" value="Save Changes" class="btn btn-primary w-100" />
                   </div>
                 </div>
 
@@ -185,7 +185,7 @@
                       @click="resetPassword"
                       value="Reset password email"
                       class="btn btn-success w-100"
-                    >
+                    />
                   </div>
                 </div>
               </div>
@@ -261,4 +261,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+.products {
+}
 </style>

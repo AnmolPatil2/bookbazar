@@ -8,7 +8,7 @@
           <v-card flat class="text-xs-center mx-3">
             <v-responsive class>
               <v-container>
-                <img :src="year.img" class="card-img-top" alt="....">
+                <img :src="year.img" class="card-img-top" alt="...." />
               </v-container>
             </v-responsive>
             <v-card-text>
@@ -27,7 +27,7 @@
           <v-card flat class="text-xs-center mx-3">
             <v-responsive class>
               <v-container>
-                <img :src="department.img" class="card-img-top" alt="....">
+                <img :src="department.img" class="card-img-top" alt="...." />
               </v-container>
             </v-responsive>
             <v-card-text>
@@ -48,7 +48,7 @@
               <v-container>
                 <carousel :perPage="1">
                   <slide v-for="(img,index) in product.images" :key="index">
-                    <img :src="img" class="card-img-top" alt="....">
+                    <img :src="img" class="card-img-top" alt="...." />
                   </slide>
                 </carousel>
               </v-container>
@@ -94,7 +94,7 @@
                     placeholder="Product Name"
                     v-model="product.name"
                     class="form-control"
-                  >
+                  />
                 </div>
               </div>
               <!-- product sidebar -->
@@ -103,13 +103,13 @@
 
                 <div class="form-group">
                   <label for="product_image">Product Images</label>
-                  <input type="file" @change="uploadImage()" class="form-control">
+                  <input type="file" @change="uploadImage()" class="form-control" />
                 </div>
 
                 <div class="form-group d-flex">
                   <div class="p-1" v-for="(image, index) in product.images">
                     <div class="img-wrapp">
-                      <img :src="image" alt width="80px">
+                      <img :src="image" alt width="80px" />
                       <span class="delete-img" @click="deleteImage(image,index)">X</span>
                     </div>
                   </div>

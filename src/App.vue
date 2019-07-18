@@ -1,6 +1,6 @@
 <template>
-  <div class="grey lighten-4" id="app">
-    <router-view/>
+  <div class="grey lighten-4 min-height=100%" id="app">
+    <router-view />
   </div>
 </template>
 <script>
@@ -14,9 +14,10 @@ export default {
   font-family: "Nunito", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 1000px !important;
   // text-align: center;
-  color: #2c3e50;
 }
+
 #nav {
   padding: 30px;
   a {

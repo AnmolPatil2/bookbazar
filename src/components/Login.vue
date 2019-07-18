@@ -9,7 +9,7 @@
       aria-labelledby="loginTitle"
       aria-hidden="true"
     >
-      <div class="modal-dialog modal-dialog-centered modal-lg" role="document" style="width:250px">
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document" style="width:300px">
         <div class="modal-content">
           <div class="modal-body">
             <article>
@@ -177,12 +177,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-html {
+.modal-content {
   margin: 0;
   height: 100%;
 }
 
-body {
+.modal-body {
   margin: 0;
   height: 100%;
   display: -webkit-box;

@@ -38,9 +38,6 @@
           data-toggle="modal"
           data-target="#login"
         >Get Start</a>
-        <a class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#login">
-          <Popup />
-        </a>
 
         <a
           class="btn btn-outline-success my-2 my-sm-0"
@@ -82,7 +79,6 @@
 import Popup from "./Popup";
 export default {
   name: "Navbar",
-
   props: {},
   data() {
     return {

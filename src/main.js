@@ -40,7 +40,12 @@ Vue.component('mini-cart', require('./components/MiniCart.vue').default);
 Vue.component('Popup', require('./components/Popup.vue').default);
 
 import VueCarousel from 'vue-carousel';
+import VueAwesomeSwiper from 'vue-awesome-swiper';
+import VueMaterial from 'vue-material';
+import 'vue-material/dist/vue-material.min.css'
+Vue.use(VueAwesomeSwiper);
 Vue.use(VueCarousel);
+Vue.use(VueMaterial);
 
 Vue.config.productionTip = false;
 
