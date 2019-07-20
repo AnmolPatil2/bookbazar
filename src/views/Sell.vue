@@ -35,7 +35,7 @@
         <v-flex xs6 sm6 md4 lg3 v-for="(department,index) in departments" :key="index">
           <v-card flat class="text-xs-center YD p-0">
             <v-responsive class="p-2">
-              <img :src="department.img" class="card-img-top" alt="...." />
+              <img :src="department.img" class="card-img-top bookimages" alt="...." />
             </v-responsive>
             <v-card-text>
               <v-btn @click="departmentselected(index)">
@@ -78,6 +78,7 @@
               <v-btn flat color="grey">
                 <add-to-cart :product-id="product.id" :price="product.price" :name="product.name"></add-to-cart>
               </v-btn>
+              <PopUp />
               <v-btn @click="addNew(index,product)" class="success">sell</v-btn>
             </v-card-actions>
           </v-card>
@@ -149,6 +150,7 @@ import { fb, db } from "../firebase";
 import { VueEditor } from "vue2-editor";
 import { Carousel, Slide } from "vue-carousel";
 import Navbar from "@/components/Navbar.vue";
+import PopUp from "@/components/Popup.vue";
 import firebase1 from "@firebase/app";
 export default {
   name: "Sell",
@@ -159,6 +161,7 @@ export default {
     Carousel,
     Slide,
     Navbar,
+    PopUp,
     VueEditor
   },
   data() {
@@ -174,10 +177,10 @@ export default {
         { img: "/img/svg/4th.jpg", name: "Fouth" }
       ],
       departments: [
-        { img: "/img/svg/firstyear.png", name: "cs" },
-        { img: "/img/svg/firstyear.png", name: "is" },
-        { img: "/img/svg/firstyear.png", name: "ec" },
-        { img: "/img/svg/firstyear.png", name: "tc" }
+        { img: "/img/svg/cs.jpg", name: "cs" },
+        { img: "/img/svg/ec.jpg", name: "ec" },
+        { img: "/img/svg/me.jpg", name: "me" },
+        { img: "/img/svg/civil.jpg", name: "civil" }
       ],
       year: 0,
       display: null,

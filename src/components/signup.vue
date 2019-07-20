@@ -1,13 +1,13 @@
 <template>
   <div>
-    <h2>SignUp</h2>+91
-    <input type="number" v-model="phNo" placeholder="Phone Number">
+    <h2>SignUp Using Phone Number</h2>+91
+    <input type="number" v-model="phNo" placeholder="Phone Number" />
     <button id="sign-in-button" @click="sendOtp">Get OTP</button>
     <div id="recaptcha-container"></div>
-    <br>
-    <input type="number" v-model="otp" placeholder="OTP">
+    <br />
+    <input type="number" v-model="otp" placeholder="OTP" />
     <button @click="verifyOtp">Verify</button>
-    <br>
+    <br />
     <button @click="sendOtp()">Resend OTP</button>
   </div>
 </template>

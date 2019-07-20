@@ -77,6 +77,7 @@
             <v-card-actions>
               <v-btn flat color="grey">
                 <i class="fa fa-shopping-cart"></i>
+
                 <add-to-cart
                   :image="getImage(product.images)"
                   :p-id="product.id"
@@ -90,6 +91,7 @@
         </v-flex>
       </v-layout>
     </v-container>
+    <mini-cart />
   </div>
 </template>
 
@@ -107,8 +109,8 @@ export default {
   components: {
     Carousel,
     Navbar,
-    Slide,
-    MiniCart
+    MiniCart,
+    Slide
   },
   data() {
     return {
@@ -217,8 +219,8 @@ export default {
   margin: 250px 50%;
 }
 .bookimages {
-  height: 167px;
-  width: 157px;
+  height: 257px;
+  width: 247px;
 }
 .card-body {
 }

@@ -16,6 +16,7 @@ import Profile1 from "./views/Accounts/Profile1.vue";
 import Orders1 from "./views/Accounts/Orders1.vue";
 import signup from "@/components/signup.vue";
 import Select from "./views/Select.vue";
+import tp from "./views/testingproduct.vue";
 import Sell from "./views/Sell.vue";
 Vue.use(Router);
 
@@ -42,6 +43,11 @@ const router = new Router({
       path: "/sell",
       name: "sell",
       component: Sell
+    },
+    {
+      path: "/tp",
+      name: "tp",
+      component: tp
     },
     {
       path: "/admin",

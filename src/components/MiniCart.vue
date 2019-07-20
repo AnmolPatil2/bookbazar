@@ -24,10 +24,12 @@
                 <div class="media-body">
                   <h5 class="mt-0">
                     {{item.productName}}
-                    <span
-                      class="float-right"
+                    <v-chip
+                      close
+                      color="red float-right"
+                      text-color="white"
                       @click="$store.commit('removeFromCart',item)"
-                    >X</span>
+                    >Remove</v-chip>
                   </h5>
                   <p class="mt-0">{{item.productPrice }}</p>
                   <p class="mt-0">Quantity : {{item.productQuantity }}</p>

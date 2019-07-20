@@ -9,7 +9,7 @@
       aria-labelledby="loginTitle"
       aria-hidden="true"
     >
-      <div class="modal-dialog modal-dialog-centered modal-lg" role="document" style="width:300px">
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document" style="width:00px ">
         <div class="modal-content">
           <div class="modal-body">
             <article>
@@ -22,10 +22,11 @@
                     <div class="input-group password">
                       <input type="password" v-model="password" placeholder="Password" />
                     </div>
-                    <div class="btn white darken-4 col s10 m4">
-                      <v-btn @click=" signInWithGoogle()" style="text-transform:none">
+                    <div class="btn white darken-4 col s10 m4" id="extra">
+                      <v-btn id="extra" @click=" signInWithGoogle()" style="text-transform:none">
                         <div class="left">
                           <img
+                            id="extra"
                             width="20px"
                             alt="Google  Logo"
                             src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"
@@ -168,7 +169,6 @@ export default {
           }
         });
       } else {
-        this.feedback = "Enter a Name";
       }
     }
   }
@@ -182,34 +182,92 @@ export default {
   height: 100%;
 }
 
-.modal-body {
-  margin: 0;
-  height: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  display: -webkit-flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  background: #2196f3;
-}
-
 .form-collection {
   width: 350px;
   height: 350px;
 }
+@media only screen and (max-width: 600px) {
+  .limit-width {
+    width: 250px;
+    margin-left: 5px;
+  }
+  .card-body {
+    padding: 5px;
+  }
 
-.limit-width {
-  width: 300px;
+  .modal-body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    display: -webkit-flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: left;
+    -webkit-align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: left;
+    background: #2196f3;
+  }
+  #extra {
+    margin: 0;
+    padding: 0;
+  }
+  .input-group {
+    border: 2px solid #eee;
+    position: relative;
+    background: #eee;
+    margin: 1px 0;
+    border-radius: 2px;
+    overflow: hidden;
+    padding: 10px;
+  }
+}
+@media only screen and (min-width: 600px) {
+  .limit-width {
+    width: 300px;
+  }
+  .card-body {
+    padding: 20px;
+  }
+
+  .modal-body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    display: -webkit-flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    background: #2196f3;
+  }
+  .input-group {
+    border: 2px solid #eee;
+    position: relative;
+    background: #eee;
+    margin: 25px 0;
+    border-radius: 2px;
+    overflow: hidden;
+    padding: 10px;
+  }
 }
 
 .absolute-footer {
@@ -222,7 +280,7 @@ export default {
   font-size: 27.2px;
   font-size: 1.7rem;
   font-weight: 300;
-  padding: 15px;
+  padding: 0px;
   background: rgba(0, 0, 0, 0.4);
   color: #fff;
 }
@@ -238,10 +296,6 @@ export default {
   position: absolute;
   -webkit-transition: 0.3s ease all;
   transition: 0.3s ease all;
-}
-
-.card-body {
-  padding: 20px;
 }
 
 .box-btn {
@@ -265,16 +319,6 @@ export default {
 
 .box-btn:active {
   background: rgba(0, 0, 0, 0.1);
-}
-
-.input-group {
-  border: 2px solid #eee;
-  position: relative;
-  background: #eee;
-  margin: 25px 0;
-  border-radius: 2px;
-  overflow: hidden;
-  padding: 10px;
 }
 
 .input-group input {
