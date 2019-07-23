@@ -2,40 +2,100 @@
 <template>
   <div class="chekout">
     <Navbar></Navbar>
+    <div class="col-md-5 order-details mt-4">
+      <div class="section-title text-center">
+        <h3 class="title">Your Order</h3>
+      </div>
+      <div class="order-summary">
+        <div class="order-col">
+          <div>
+            <strong>PRODUCT</strong>
+          </div>
+          <div>
+            <strong>TOTAL</strong>
+          </div>
+        </div>
 
-    <div class="container mt-5 pt-5">
-      <div class="row">
-        <div class="col-md-8">
-          <h4 class="py-4">Checkout page</h4>
-          <ul>
-            <li v-for="item in this.$store.state.cart" class="media">
-              <img :src="item.productImage" width="80px" class="align-self-center mr-3" alt />
-              <div class="media-body">
-                <h5 class="mt-0">
-                  {{item.productName}}
+        <div class="order-products">
+          <div class="order-col">
+            <ul>
+              <li v-for="item in this.$store.state.cart" class="media">
+                <img :src="item.productImage" width="80px" class="align-self-center mr-3" alt />
+                <div class="media-body">
+                  <h5 class="mt-0">{{item.productName}}</h5>
+
+                  <h5 class="mt-0 right">{{item.productPrice }}</h5>
                   <v-chip
+                    small
                     close
+                    class="chips"
                     color="red float-right"
                     text-color="white"
                     @click="$store.commit('removeFromCart',item)"
-                  >Remove</v-chip>
-                </h5>
-                <p class="mt-0">{{item.productPrice }}</p>
-                <p class="mt-0">Quantity : {{item.productQuantity }}</p>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <div class="col-md-4">
-          <p>Total Price : {{ this.$store.getters.totalPrice }}</p>
+                  >delete</v-chip>
 
-          <button
-            class="btn btn-primary mt-4"
-            @click="pay"
-            :disabled="!complete"
-          >Pay with credit card</button>
+                  <p class="mt-0">Quantity : {{item.productQuantity }}</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="order-col">
+          <div>Shiping</div>
+          <div>
+            <strong>FREE</strong>
+          </div>
+        </div>
+        <div class="order-col">
+          <div>
+            <strong>TOTAL</strong>
+          </div>
+          <div>
+            <strong class="order-total">Rs: {{this.sum}}</strong>
+          </div>
         </div>
       </div>
+      <div class="payment-method">
+        <div class="input-radio">
+          <input type="radio" name="payment" id="payment-1" />
+          <label for="payment-1">
+            <span></span>
+            Direct Bank Transfer
+          </label>
+          <div class="caption">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          </div>
+        </div>
+        <div class="input-radio">
+          <input type="radio" name="payment" id="payment-2" />
+          <label for="payment-2">
+            <span></span>
+            Cheque Payment
+          </label>
+          <div class="caption">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          </div>
+        </div>
+        <div class="input-radio">
+          <input type="radio" name="payment" id="payment-3" />
+          <label for="payment-3">
+            <span></span>
+            Paypal System
+          </label>
+          <div class="caption">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          </div>
+        </div>
+      </div>
+      <div class="input-checkbox">
+        <input type="checkbox" id="terms" />
+        <label for="terms">
+          <span></span>
+          I've read and accept the
+          <a href="#">terms & conditions</a>
+        </label>
+      </div>
+      <a href="#" class="primary-btn order-submit">Place order</a>
     </div>
   </div>
 </template>
@@ -46,7 +106,7 @@ export default {
   data() {
     return {
       complete: false,
-
+      sum: 0,
       stripeOptions: {
         // see https://stripe.com/docs/stripe.js#element-options for details
       }
@@ -62,6 +122,14 @@ export default {
       // More general https://stripe.com/docs/stripe.js#stripe-create-token.
       createToken().then(data => console.log(data.token));
     }
+  },
+  created() {
+    this.$store.state.cart.forEach(element => {
+      element.productPrice = parseInt(element.productPrice);
+      console.log(element.productPrice);
+      this.sum = element.productPrice + this.sum;
+      console.log(element.productName);
+    });
   }
 };
 </script>
@@ -92,5 +160,14 @@ export default {
 }
 .StripeElement--webkit-autofill {
   background-color: #fefde5 !important;
+}
+.chekout {
+  margin-top: 100px;
+}
+.chips {
+  align-content: right;
+}
+.order-details {
+  background: white;
 }
 </style>

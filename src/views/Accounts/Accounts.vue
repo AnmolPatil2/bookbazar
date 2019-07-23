@@ -8,7 +8,8 @@
         <div class="sidebar-content">
           <!-- sidebar-brand  -->
           <div class="sidebar-item sidebar-brand">
-            <img src="/img/svg/logo.jpeg" alt width="30">
+            <img src="/img/svg/logo.jpeg" alt width="30" />
+
             <a href="/">BookBazar</a>
             <div id="close-sidebar" @click="closeMenu">
               <i class="fas fa-times"></i>
@@ -21,7 +22,7 @@
                 class="img-responsive img-rounded"
                 src="/img/svg/user-profile.png"
                 alt="User picture"
-              >
+              />
             </div>
             <div class="user-info">
               <span class="user-name">
@@ -39,7 +40,7 @@
           <div class="sidebar-item sidebar-search">
             <div>
               <div class="input-group">
-                <input type="text" class="form-control search-menu" placeholder="Search...">
+                <input type="text" class="form-control search-menu" placeholder="Search..." />
                 <div class="input-group-append">
                   <span class="input-group-text">
                     <i class="fa fa-search" aria-hidden="true"></i>
@@ -88,7 +89,7 @@
       </nav>
       <!-- sidebar-content  -->
       <main class="page-content">
-        <router-view/>
+        <router-view />
       </main>
       <!-- page-content" -->
     </div>

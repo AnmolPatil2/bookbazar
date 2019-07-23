@@ -2,7 +2,7 @@
   <div class="hello">
     <nav class="navbar custom-nav fixed-top navbar-expand-lg navbar-light bg-light">
       <div class="container">
-        <img src="/img/svg/logo.jpeg" alt width="60">
+        <img src="/img/svg/logo.jpeg" alt width="60" />
         <router-link class="navbar-brand" to="/">BookBazar</router-link>
         <button
           class="navbar-toggler"
@@ -35,7 +35,7 @@
               type="search"
               placeholder="Search"
               aria-label="Search"
-            >
+            />
             <a
               class="btn btn-outline-success my-2 my-sm-0"
               data-toggle="modal"

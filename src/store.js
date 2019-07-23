@@ -22,6 +22,8 @@ export default new Vuex.Store({
             window.localStorage.setItem('cart', JSON.stringify(state.cart))
         },
         removeFromCart(state, item) {
+            item.productQuantity = 0;
+
             let index = state.cart.indexOf(item);
             state.cart.splice(index, 1);
             this.commit('saveData');

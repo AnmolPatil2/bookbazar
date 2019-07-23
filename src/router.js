@@ -16,6 +16,8 @@ import Profile1 from "./views/Accounts/Profile1.vue";
 import Orders1 from "./views/Accounts/Orders1.vue";
 import signup from "@/components/signup.vue";
 import Select from "./views/Select.vue";
+import ProductDisplay from "./views/ProductDisplay.vue";
+import productCompholder from "./views/productdisplay/productCompholder.vue";
 import tp from "./views/testingproduct.vue";
 import Sell from "./views/Sell.vue";
 Vue.use(Router);
@@ -35,9 +37,22 @@ const router = new Router({
       component: signup
     },
     {
+      path: "/productcompholder/:id",
+      name: "productCompholder",
+      component: productCompholder,
+
+    },
+    {
+      path: "/ProductDisplay",
+      name: "ProductDisplay",
+      component: ProductDisplay,
+
+    },
+    {
       path: "/select",
       name: "select",
-      component: Select
+      component: Select,
+
     },
     {
       path: "/sell",

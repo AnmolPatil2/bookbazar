@@ -31,7 +31,7 @@
                       @click="$store.commit('removeFromCart',item)"
                     >Remove</v-chip>
                   </h5>
-                  <p class="mt-0">{{item.productPrice }}</p>
+                  <p class="mt-0">RS: {{item.productPrice }}</p>
                   <p class="mt-0">Quantity : {{item.productQuantity }}</p>
                 </div>
               </li>
@@ -58,6 +58,9 @@ export default {
       $("#miniCart").modal("hide");
       this.$router.push("/checkout");
     }
+  },
+  created() {
+    console.log(this.$store.state.cart);
   }
 };
 </script>

@@ -18,7 +18,7 @@ Vue.use(VueFirestore, {
 
 Vue.use(VueFirestore);
 Vue.use(Vuetify);
-window.$ = window.jQuery = jQuery;
+window.$ = window.jQuery = require('jquery');
 
 import "popper.js";
 import "bootstrap";

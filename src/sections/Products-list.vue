@@ -66,7 +66,7 @@
                 <add-to-cart
                   :image="getImage(product.images)"
                   :p-id="product.id"
-                  :price="product.price"
+                  :price="priceconvet(product.sale)"
                   :name="product.name"
                 ></add-to-cart>
               </v-btn>
@@ -154,9 +154,17 @@ export default {
     getImage(images) {
       return images[0];
     },
+    priceconvet(productsale) {
+      let sale = productsale.toString();
+      console.log(this.sale);
+      return productsale.toString();
+    },
+
     product_select(product) {
-      // your logic ...
-      console.log("selected=>", product);
+      this.$router.push({
+        name: "productCompholder",
+        params: { id: product.id }
+      });
     },
     product_to_cart(product) {
       // your logic ...

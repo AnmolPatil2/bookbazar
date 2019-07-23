@@ -1,11 +1,13 @@
 <template>
   <v-container grid-list-md text-xs-center>
+    <!--test-->
+
     <v-layout row wrap class="grey lighten-4">
-      <v-flex xs12>
-        <v-card v-for="(product,index) in products" :key="index">
+      <v-flex xs12 sm6 md4 lg3 v-for="(product,index) in products" :key="index">
+        <v-card class>
           <div class="cardh">
             <div class="imageh">
-              <img :src="product.images" class="card-img-top bbb" alt="...." />
+              <img :src="product.images" class="card-img-top" alt="...." />
             </div>
             <div class="detailsh">
               <div class="centerh">
@@ -15,7 +17,6 @@
                   <span>{{product.author}}</span>
                 </h1>
                 <p>Lorem ipsum is simple dummy text on the printing and typesetting industry.</p>
-                <v-button>Add to cart</v-button>
               </div>
             </div>
           </div>
@@ -23,7 +24,7 @@
       </v-flex>
     </v-layout>
 
-    <!-- swiper  -->
+    <!-- swiper  
     <swiper :options="swiperOption" class="swipers">
       <swiper-slide>
         <v-responsive class>
@@ -53,6 +54,7 @@
       <div class="swiper-button-prev" slot="button-prev"></div>
       <div class="swiper-button-next" slot="button-next"></div>
     </swiper>
+    -->
     <div class="wrapper">
       <div class="card" v-for="(product,index) in products" :key="index">
         <img :src="product.images" class="card-img-top bbb" alt="...." />
@@ -207,11 +209,6 @@ body {
 }
 
 .cardh {
-  display: inline-block;
-  position: relative;
-  top: 10%;
-  left: 10%;
-  transform: translate(-50%, -50%);
   width: 300px;
   height: 400px;
   background: #000;
