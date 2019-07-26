@@ -15,9 +15,11 @@ import Overview1 from "./views/Accounts/Overview1.vue";
 import Profile1 from "./views/Accounts/Profile1.vue";
 import Orders1 from "./views/Accounts/Orders1.vue";
 import signup from "@/components/signup.vue";
+import forgotPassword from "@/components/forgotPassword.vue";
 import Select from "./views/Select.vue";
 import ProductDisplay from "./views/ProductDisplay.vue";
-import productCompholder from "./views/productdisplay/productCompholder.vue";
+import productCompholder from "./views/productdisplay/productCompholder.vue"
+
 import tp from "./views/testingproduct.vue";
 import Sell from "./views/Sell.vue";
 Vue.use(Router);
@@ -32,10 +34,17 @@ const router = new Router({
       component: Home
     },
     {
+      path: "/forgotPassword",
+      name: "forgotPassword",
+      component: forgotPassword
+    },
+
+    {
       path: "/signup",
       name: "signup",
       component: signup
     },
+
     {
       path: "/productcompholder/:id",
       name: "productCompholder",

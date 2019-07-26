@@ -186,6 +186,7 @@
                       value="Reset password email"
                       class="btn btn-success w-100"
                     />
+                    <v-btn @click="confirmmail()">Confirm mail</v-btn>
                   </div>
                 </div>
               </div>
@@ -236,6 +237,18 @@ export default {
     };
   },
   methods: {
+    confirmmail() {
+      var user = firebase1.auth().currentUser;
+
+      user
+        .sendEmailVerification()
+        .then(function() {
+          // Email sent.
+        })
+        .catch(function(error) {
+          // An error happened.
+        });
+    },
     resetPassword() {
       const auth = firebase1.auth();
       auth

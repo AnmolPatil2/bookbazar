@@ -76,10 +76,11 @@
             </v-card-text>
             <v-card-actions>
               <v-btn flat color="grey">
-                <add-to-cart :product-id="product.id" :price="product.price" :name="product.name"></add-to-cart>
+                <button class="add-to-cart-btn">
+                  <i class="fa fa-shopping-cart"></i> add to cart
+                </button>
               </v-btn>
               <PopUp />
-              <v-btn @click="addNew(index,product)" class="success">sell</v-btn>
             </v-card-actions>
           </v-card>
         </v-flex>
@@ -146,6 +147,8 @@
 </template>
 
 <script>
+import { BreedingRhombusSpinner } from "epic-spinners";
+import { AtomSpinner } from "epic-spinners";
 import { fb, db } from "../firebase";
 import { VueEditor } from "vue2-editor";
 import { Carousel, Slide } from "vue-carousel";
@@ -161,12 +164,14 @@ export default {
     Carousel,
     Slide,
     Navbar,
+    AtomSpinner,
     PopUp,
     VueEditor
   },
   data() {
     return {
       displayl: [],
+      loading: true,
 
       activeItem: null,
       modal: null,

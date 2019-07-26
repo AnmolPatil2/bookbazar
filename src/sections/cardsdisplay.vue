@@ -3,7 +3,7 @@
     <!--test-->
 
     <v-layout row wrap class="grey lighten-4">
-      <v-flex xs12 sm6 md4 lg3 v-for="(product,index) in products" :key="index">
+      <v-flex xs6 sm6 md4 lg3 v-for="(product,index) in products" :key="index">
         <v-card class>
           <div class="cardh">
             <div class="imageh">
@@ -55,16 +55,20 @@
       <div class="swiper-button-next" slot="button-next"></div>
     </swiper>
     -->
-    <div class="wrapper">
-      <div class="card" v-for="(product,index) in products" :key="index">
-        <img :src="product.images" class="card-img-top bbb" alt="...." />
-        <div class="info">
-          <h1>{{product.name}}</h1>
-          <p>{{product.author}}</p>
-          <button>Add to cart</button>
-        </div>
-      </div>
-    </div>
+    <v-container grid-list-md text-xs-center>
+      <v-layout row wrap class="wrapper">
+        <v-flex xs6 sm6 md4 lg3 v-for="(product,index) in products" :key="index">
+          <v-card class="card">
+            <img :src="product.images" class="card-img-top bbb" alt="...." />
+            <div class="info">
+              <p>{{product.name}}</p>
+              <p>{{product.author}}</p>
+              <button>Add to cart</button>
+            </div>
+          </v-card>
+        </v-flex>
+      </v-layout>
+    </v-container>
   </v-container>
 </template>
 <script>
@@ -106,32 +110,40 @@ export default {
 <style scoped >
 body,
 html {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: orange;
 }
 
 .wrapper {
-  display: flex;
   width: 90%;
-  justify-content: space-around;
+}
+@media only screen and (max-width: 600px) {
+  .card {
+    width: 150px;
+    height: 200px;
+    border-radius: 15px;
+    padding: 1.5rem;
+    background: white;
+
+    display: inline-block;
+    align-items: flex-end;
+    transition: 0.4s ease-out;
+    box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.5);
+  }
+}
+@media only screen and (min-width: 600px) {
+  .card {
+    min-width: 300px;
+    min-height: 400px;
+    border-radius: 15px;
+    padding: 1.5rem;
+    background: white;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    transition: 0.4s ease-out;
+    box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.5);
+  }
 }
 
-.card {
-  width: 280px;
-  height: 360px;
-  border-radius: 15px;
-  padding: 1.5rem;
-  background: white;
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  transition: 0.4s ease-out;
-  box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.5);
-}
 .card:hover {
   -webkit-transform: translateY(20px);
   transform: translateY(20px);
@@ -150,8 +162,7 @@ html {
   top: 0;
   left: 0;
   display: block;
-  width: 100%;
-  height: 100%;
+
   border-radius: 15px;
   background: rgba(0, 0, 0, 0.6);
   z-index: 2;
@@ -161,8 +172,7 @@ html {
 .card img {
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-  object-fit: cover;
+
   position: absolute;
   top: 0;
   left: 0;
@@ -173,8 +183,7 @@ html {
   z-index: 3;
   color: white;
   opacity: 0;
-  -webkit-transform: translateY(30px);
-  transform: translateY(30px);
+
   transition: 0.5s;
 }
 .card .info h1 {
@@ -209,13 +218,9 @@ body {
 }
 
 .cardh {
-  width: 300px;
-  height: 400px;
   background: #000;
 }
 .cardh .imageh {
-  max-width: 300px;
-  max-height: 400px;
   overflow: hidden;
 }
 .cardh .imageh img {

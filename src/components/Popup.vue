@@ -1,10 +1,11 @@
 <template>
-  <v-dialog max-width="300px">
+  <v-dialog max-width="800px" min-height="600px">
     <v-btn flat slot="activator" class="green">Previwe</v-btn>
     <v-card>
       <v-card-title>
-        <h2>Add a New Project</h2>
+        <h2>Proganganda</h2>
       </v-card-title>
+
       <v-card-text>
         <v-form class="px-3" ref="form">
           <v-text-field v-model="title" label="Title" prepend-icon="folder" :rules="inputRules"></v-text-field>

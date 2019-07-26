@@ -20,7 +20,13 @@
                       <input type="text" v-model="email" placeholder="Email" />
                     </div>
                     <div class="input-group password">
-                      <input type="password" v-model="password" placeholder="Password" />
+                      <input
+                        type="password"
+                        class="login_password"
+                        v-model="password"
+                        placeholder="Password"
+                      />
+                      <a href @click="forgotPassword()">forgot</a>
                     </div>
                     <div class="btn white darken-4 col s10 m4" id="extra">
                       <v-btn id="extra" @click=" signInWithGoogle()" style="text-transform:none">
@@ -90,6 +96,10 @@ export default {
     };
   },
   methods: {
+    forgotPassword() {
+      this.$router.push({ name: "forgotPassword" });
+    },
+
     changerouter() {
       $("#login").modal("hide");
       this.$router.replace("signup");
@@ -177,6 +187,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.login_password {
+  display: inline;
+}
 .modal-content {
   margin: 0;
   height: 100%;

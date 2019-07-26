@@ -37,8 +37,9 @@
           class="btn btn-outline-success my-2 my-sm-0"
           data-toggle="modal"
           data-target="#login"
+          v-if="!user"
         >Get Start</a>
-
+        {{this.name }}
         <a
           class="btn btn-outline-success my-2 my-sm-0"
           data-toggle="modal"
@@ -77,12 +78,15 @@
 
 <script>
 import Popup from "./Popup";
+import firebase1 from "@firebase/app";
 export default {
   name: "Navbar",
   props: {},
   data() {
     return {
       drawer: null,
+      user: null,
+      name: null,
       links: [
         { icon: "dashboard", text: "Buy", route: "/select" },
         { icon: "folder", text: "Sell", route: "/sell" },
@@ -91,7 +95,14 @@ export default {
     };
   },
 
-  components: { Popup }
+  components: { Popup },
+  mounted() {
+    this.user = firebase1.auth().currentUser;
+    if (this.user != null) {
+      this.name = this.user.displayName;
+      console.log(this.name);
+    }
+  }
 };
 </script>
 

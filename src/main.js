@@ -43,6 +43,10 @@ import VueCarousel from 'vue-carousel';
 import VueAwesomeSwiper from 'vue-awesome-swiper';
 import VueMaterial from 'vue-material';
 import 'vue-material/dist/vue-material.min.css'
+//import Buefy from 'buefy'
+//import 'buefy/dist/buefy.css'
+//for search bar
+//Vue.use(Buefy)
 Vue.use(VueAwesomeSwiper);
 Vue.use(VueCarousel);
 Vue.use(VueMaterial);
