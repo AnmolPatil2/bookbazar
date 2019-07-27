@@ -75,7 +75,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .project.complete {
   border-left: 4px solid #3cd1c2;
 }

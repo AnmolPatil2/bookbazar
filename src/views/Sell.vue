@@ -2,7 +2,8 @@
   <div class="products" id="products">
     <!-- Element-specific configuration options can be passed like this -->
     <Navbar />
-
+    <rules />
+    <!--
     <v-container class="whole-cont" v-if="display==null">
       <v-layout>
         <v-flex>
@@ -62,13 +63,9 @@
       </v-layout>
       <v-layout row wrap>
         <v-flex xs6 sm6 md4 lg3 v-for="(product,index) in displayl" :key="index">
-          <v-card flat class="text-xs-center p-0 YD">
+          <v-card flat class="text-xs-center p-0 YD" @click="product_select(product)">
             <v-responsive class>
-              <carousel :perPage="1">
-                <slide v-for="(img,index) in product.images" :key="index">
-                  <img :src="img" class="card-img-top bookimages" alt="...." />
-                </slide>
-              </carousel>
+              <img :src="product.images" class="card-img-top bookimages" alt="...." />
             </v-responsive>
             <v-card-text>
               <div class="subheading">{{product.name}}</div>
@@ -80,13 +77,12 @@
                   <i class="fa fa-shopping-cart"></i> add to cart
                 </button>
               </v-btn>
-              <PopUp />
             </v-card-actions>
           </v-card>
         </v-flex>
       </v-layout>
     </v-container>
-    <!-- Modal -->
+    <!-- Modal-->
     <div
       class="modal fade"
       id="product"
@@ -153,6 +149,7 @@ import { fb, db } from "../firebase";
 import { VueEditor } from "vue2-editor";
 import { Carousel, Slide } from "vue-carousel";
 import Navbar from "@/components/Navbar.vue";
+import rules from "./rules.vue";
 import PopUp from "@/components/Popup.vue";
 import firebase1 from "@firebase/app";
 export default {
@@ -164,6 +161,7 @@ export default {
     Carousel,
     Slide,
     Navbar,
+    rules,
     AtomSpinner,
     PopUp,
     VueEditor
@@ -199,6 +197,12 @@ export default {
   },
 
   methods: {
+    product_select(product) {
+      this.$router.push({
+        name: "productCompholder",
+        params: { id: product.id }
+      });
+    },
     getImage(images) {
       return images[0];
     },
@@ -332,8 +336,10 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .products {
+  max-height: 300px;
   margin-top: 0rem;
   background: #f2f2f2;
+
   padding-bottom: 0rem;
 }
 .card-text1 {

@@ -283,7 +283,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .phoneauth {
   max-height: 500px;
 }

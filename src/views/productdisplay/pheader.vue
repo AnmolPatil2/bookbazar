@@ -240,7 +240,7 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
 #top-header {
   max-height: 50px;
 }

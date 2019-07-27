@@ -40,7 +40,7 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
 @media only screen and (max-width: 600px) {
   .hero {
     max-height: 300px;

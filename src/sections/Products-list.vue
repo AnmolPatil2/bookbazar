@@ -1,18 +1,5 @@
 <template>
   <div class="products" id="products">
-    <!-- Element-specific configuration options can be passed like this -->
-    <v-container fluid grid-list-md>
-      <v-layout row wrap>
-        <v-flex d-flex xs12 sm6 md4 v-for="(product,index) in offers" :key="index">
-          <v-card color="purple" dark height="200px">
-            <v-card-title primary class="title">{{product.id}}</v-card-title>
-            <v-flex class="ma-0 pa-0">
-              <v-card-text>{{product.discription}}</v-card-text>
-            </v-flex>
-          </v-card>
-        </v-flex>
-      </v-layout>
-    </v-container>
     <!--best seller-->
     <md-card class="long-show">
       <div class="md-title" id="multi-title">best sell</div>
@@ -22,7 +9,7 @@
       <!-- swiper  -->
       <swiper :options="swiperOption" class="swipers">
         <swiper-slide v-for="(product,index) in products" :key="index">
-          <v-responsive class>
+          <v-responsive class @click="product_select(product)">
             <v-container hide-delimiters class>
               <img :src="product.images" class="card-img-top bbb" alt="...." />
             </v-container>
@@ -50,7 +37,7 @@
       <v-layout row wrap>
         <v-flex xs6 sm6 md4 lg3 v-for="(product,index) in products" :key="index">
           <v-card flat class="text-xs-center mx-3">
-            <v-responsive class>
+            <v-responsive class @click="product_select(product)">
               <v-container hide-delimiters class="ma-0 pa-0">
                 <carousel :perPage="1">
                   <slide v-for="(img,index) in product.images " :key="index">
@@ -157,6 +144,12 @@ export default {
     this.loading = false;
   },
   methods: {
+    product_select(product) {
+      this.$router.push({
+        name: "productCompholder",
+        params: { id: product.id }
+      });
+    },
     getImage(images) {
       return images[0];
     },
@@ -204,7 +197,17 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
+<style scoped >
+@media screen and (min-width: 600px) {
+  #products {
+    margin-top: 500px;
+  }
+}
+@media screen and (max-width: 600px) {
+  #products {
+    margin-top: 800px;
+  }
+}
 #multi-title {
   align-content: left;
   padding: 0;

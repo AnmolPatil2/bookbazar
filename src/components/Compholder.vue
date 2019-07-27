@@ -3,6 +3,7 @@
   <div class="home">
     <div>
       <Hero />
+      <combo />
 
       <Products-list></Products-list>
 
@@ -24,6 +25,7 @@
 <script>
 // @ is an alias to /src
 import Hero from "@/components/Hero.vue";
+import combo from "@/components/combooffers.vue";
 import Products from "@/sections/Products.vue";
 import { AtomSpinner } from "epic-spinners";
 import Login from "@/components/Login.vue";
@@ -34,6 +36,7 @@ export default {
     Hero,
     AtomSpinner,
     Products,
+    combo,
     Login
   },
   data() {
