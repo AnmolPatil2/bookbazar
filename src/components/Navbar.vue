@@ -88,9 +88,9 @@ export default {
       user: null,
       name: null,
       links: [
-        { icon: "dashboard", text: "Buy", route: "/select" },
-        { icon: "folder", text: "Sell", route: "/sell" },
-        { icon: "person", text: "Donate", route: "/select" }
+        { icon: "dashboard", text: "Buy", route: "/rules" },
+        { icon: "folder", text: "Sell", route: "/rules" },
+        { icon: "person", text: "Donate", route: "/rules" }
       ]
     };
   },

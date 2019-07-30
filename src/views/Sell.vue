@@ -1,9 +1,8 @@
 <template>
-  <div class="products" id="products">
+  <div class="products white" id="products">
     <!-- Element-specific configuration options can be passed like this -->
     <Navbar />
-    <rules />
-    <!--
+
     <v-container class="whole-cont" v-if="display==null">
       <v-layout>
         <v-flex>
@@ -149,7 +148,7 @@ import { fb, db } from "../firebase";
 import { VueEditor } from "vue2-editor";
 import { Carousel, Slide } from "vue-carousel";
 import Navbar from "@/components/Navbar.vue";
-import rules from "./rules.vue";
+
 import PopUp from "@/components/Popup.vue";
 import firebase1 from "@firebase/app";
 export default {
@@ -161,7 +160,7 @@ export default {
     Carousel,
     Slide,
     Navbar,
-    rules,
+
     AtomSpinner,
     PopUp,
     VueEditor

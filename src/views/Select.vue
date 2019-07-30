@@ -1,5 +1,5 @@
 <template>
-  <div class="products" id="products">
+  <div class="products white" id="products">
     <!-- Element-specific configuration options can be passed like this -->
     <Navbar />
 
@@ -190,9 +190,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-.products {
+#products {
   margin-top: 0rem;
-  background: #f2f2f2;
+  background: grey;
+
   padding-bottom: 0rem;
 }
 .card-text1 {

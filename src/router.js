@@ -17,6 +17,7 @@ import Orders1 from "./views/Accounts/Orders1.vue";
 import signup from "@/components/signup.vue";
 import forgotPassword from "@/components/forgotPassword.vue";
 import Select from "./views/Select.vue";
+import rules from "./views/rules.vue";
 import ProductDisplay from "./views/ProductDisplay.vue";
 import productCompholder from "./views/productdisplay/productCompholder.vue"
 
@@ -32,6 +33,11 @@ const router = new Router({
       path: "/",
       name: "home",
       component: Home
+    },
+    {
+      path: "/rules",
+      name: "rules",
+      component: rules
     },
     {
       path: "/forgotPassword",

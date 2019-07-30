@@ -5,30 +5,30 @@
     -->
 
     <div class="container">
-      <div class="card-column column-0">
-        <div class="card card-color-0">
+      <div class="cardsoffer-column column-0">
+        <div class="cardsoffer cardsoffer-color-0">
           <div class="border"></div>
           <img src="/img/svg/books1.jpeg" />
           <h1>P-Cycle books at one click</h1>
           <v-btn @click="ComboOrder()">Plcae order</v-btn>
         </div>
         <!--
-        <div class="card card-color-2">
+        <div class="cardsoffer cardsoffer-color-2">
           <div class="border"></div>
           <img src="/img/svg/books2.jpeg" />
           <h1>c-cycle at one click</h1>
         </div>
         -->
       </div>
-      <div class="card-column column-1">
-        <div class="card card-color-1">
+      <div class="cardsoffer-column column-1">
+        <div class="cardsoffer cardsoffer-color-1">
           <div class="border"></div>
           <img src="/img/svg/books2.jpeg" />
           <h1>C-cycle</h1>
           <p>At Rs 999</p>
         </div>
         <!--
-        <div class="card card-color-3">
+        <div class="cardsoffer cardsoffer-color-3">
           <div class="border"></div>
           <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/53148/deathtostock-03.jpg" />
           <h1>Get the show on, get paid</h1>
@@ -70,8 +70,8 @@ export default {
   },
   mounted() {
     // listing vars here so they're in the global scope
-    var cards,
-      nCards,
+    var cardsoffers,
+      ncardsoffers,
       cover,
       openContent,
       openContentText,
@@ -80,7 +80,7 @@ export default {
       closeContent,
       windowWidth,
       windowHeight,
-      currentCard;
+      currentcardsoffer;
 
     // initiate the process
     init();
@@ -93,8 +93,8 @@ export default {
 
     // select all the elements in the DOM that are going to be used
     function selectElements() {
-      (cards = document.getElementsByClassName("card")),
-        (nCards = cards.length),
+      (cardsoffers = document.getElementsByClassName("cardsoffer")),
+        (ncardsoffers = cardsoffers.length),
         (cover = document.getElementById("cover")),
         (openContent = document.getElementById("open-content")),
         (openContentText = document.getElementById("open-content-text")),
@@ -103,62 +103,62 @@ export default {
     }
 
     /* Attaching three event listeners here:
-  - a click event listener for each card
+  - a click event listener for each cardsoffer
   - a click event listener to the close button
   - a resize event listener on the window
 */
     function attachListeners() {
-      for (var i = 0; i < nCards; i++) {
-        attachListenerToCard(i);
+      for (var i = 0; i < ncardsoffers; i++) {
+        attachListenerTocardsoffer(i);
       }
       closeContent.addEventListener("click", onCloseClick);
       window.addEventListener("resize", resize);
     }
 
-    function attachListenerToCard(i) {
-      cards[i].addEventListener("click", function(e) {
-        var card = getCardElement(e.target);
-        onCardClick(card, i);
+    function attachListenerTocardsoffer(i) {
+      cardsoffers[i].addEventListener("click", function(e) {
+        var cardsoffer = getcardsofferElement(e.target);
+        oncardsofferClick(cardsoffer, i);
       });
     }
 
-    /* When a card is clicked */
-    function onCardClick(card, i) {
-      // set the current card
-      currentCard = card;
-      // add the 'clicked' class to the card, so it animates out
-      currentCard.className += " clicked";
-      // animate the card 'cover' after a 500ms delay
+    /* When a cardsoffer is clicked */
+    function oncardsofferClick(cardsoffer, i) {
+      // set the current cardsoffer
+      currentcardsoffer = cardsoffer;
+      // add the 'clicked' class to the cardsoffer, so it animates out
+      currentcardsoffer.className += " clicked";
+      // animate the cardsoffer 'cover' after a 500ms delay
       setTimeout(function() {
-        animateCoverUp(currentCard);
+        animateCoverUp(currentcardsoffer);
       }, 500);
-      // animate out the other cards
-      animateOtherCards(currentCard, true);
+      // animate out the other cardsoffers
+      animateOthercardsoffers(currentcardsoffer, true);
       // add the open class to the page content
       openContent.className += " open";
     }
 
     /*
      * This effect is created by taking a separate 'cover' div, placing
-     * it in the same position as the clicked card, and animating it to
+     * it in the same position as the clicked cardsoffer, and animating it to
      * become the background of the opened 'page'.
-     * It looks like the card itself is animating in to the background,
+     * It looks like the cardsoffer itself is animating in to the background,
      * but doing it this way is more performant (because the cover div is
      * absolutely positioned and has no children), and there's just less
-     * having to deal with z-index and other elements in the card
+     * having to deal with z-index and other elements in the cardsoffer
      */
-    function animateCoverUp(card) {
-      // get the position of the clicked card
-      var cardPosition = card.getBoundingClientRect();
-      // get the style of the clicked card
-      var cardStyle = getComputedStyle(card);
-      setCoverPosition(cardPosition);
-      setCoverColor(cardStyle);
-      scaleCoverToFillWindow(cardPosition);
+    function animateCoverUp(cardsoffer) {
+      // get the position of the clicked cardsoffer
+      var cardsofferPosition = cardsoffer.getBoundingClientRect();
+      // get the style of the clicked cardsoffer
+      var cardsofferStyle = getComputedStyle(cardsoffer);
+      setCoverPosition(cardsofferPosition);
+      setCoverColor(cardsofferStyle);
+      scaleCoverToFillWindow(cardsofferPosition);
       // update the content of the opened page
       openContentText.innerHTML =
-        "<h1>" + card.children[2].textContent + "</h1>" + paragraphText;
-      openContentImage.src = card.children[1].src;
+        "<h1>" + cardsoffer.children[2].textContent + "</h1>" + paragraphText;
+      openContentImage.src = cardsoffer.children[1].src;
       setTimeout(function() {
         // update the scroll position to 0 (so it is at the top of the 'opened' page)
         window.scroll(0, 0);
@@ -167,12 +167,12 @@ export default {
       }, 300);
     }
 
-    function animateCoverBack(card) {
-      var cardPosition = card.getBoundingClientRect();
-      // the original card may be in a different position, because of scrolling, so the cover position needs to be reset before scaling back down
-      setCoverPosition(cardPosition);
-      scaleCoverToFillWindow(cardPosition);
-      // animate scale back to the card size and position
+    function animateCoverBack(cardsoffer) {
+      var cardsofferPosition = cardsoffer.getBoundingClientRect();
+      // the original cardsoffer may be in a different position, because of scrolling, so the cover position needs to be reset before scaling back down
+      setCoverPosition(cardsofferPosition);
+      scaleCoverToFillWindow(cardsofferPosition);
+      // animate scale back to the cardsoffer size and position
       cover.style.transform =
         "scaleX(" +
         1 +
@@ -191,32 +191,40 @@ export default {
         cover.style.width = "0px";
         cover.style.height = "0px";
         pageIsOpen = false;
-        // remove the clicked class so the card animates back in
-        currentCard.className = currentCard.className.replace(" clicked", "");
+        // remove the clicked class so the cardsoffer animates back in
+        currentcardsoffer.className = currentcardsoffer.className.replace(
+          " clicked",
+          ""
+        );
       }, 301);
     }
 
-    function setCoverPosition(cardPosition) {
-      // style the cover so it is in exactly the same position as the card
-      cover.style.left = cardPosition.left + "px";
-      cover.style.top = cardPosition.top + "px";
-      cover.style.width = cardPosition.width + "px";
-      cover.style.height = cardPosition.height + "px";
+    function setCoverPosition(cardsofferPosition) {
+      // style the cover so it is in exactly the same position as the cardsoffer
+      cover.style.left = cardsofferPosition.left + "px";
+      cover.style.top = cardsofferPosition.top + "px";
+      cover.style.width = cardsofferPosition.width + "px";
+      cover.style.height = cardsofferPosition.height + "px";
     }
 
-    function setCoverColor(cardStyle) {
-      // style the cover to be the same color as the card
-      cover.style.backgroundColor = cardStyle.backgroundColor;
+    function setCoverColor(cardsofferStyle) {
+      // style the cover to be the same color as the cardsoffer
+      cover.style.backgroundColor = cardsofferStyle.backgroundColor;
     }
 
-    function scaleCoverToFillWindow(cardPosition) {
-      // calculate the scale and position for the card to fill the page,
-      var scaleX = windowWidth / cardPosition.width;
-      var scaleY = windowHeight / cardPosition.height;
+    function scaleCoverToFillWindow(cardsofferPosition) {
+      // calculate the scale and position for the cardsoffer to fill the page,
+      var scaleX = windowWidth / cardsofferPosition.width;
+      var scaleY = windowHeight / cardsofferPosition.height;
       var offsetX =
-        (windowWidth / 2 - cardPosition.width / 2 - cardPosition.left) / scaleX;
+        (windowWidth / 2 -
+          cardsofferPosition.width / 2 -
+          cardsofferPosition.left) /
+        scaleX;
       var offsetY =
-        (windowHeight / 2 - cardPosition.height / 2 - cardPosition.top) /
+        (windowHeight / 2 -
+          cardsofferPosition.height / 2 -
+          cardsofferPosition.top) /
         scaleY;
       // set the transform on the cover - it will animate because of the transition set on it in the CSS
       cover.style.transform =
@@ -235,49 +243,49 @@ export default {
     function onCloseClick() {
       // remove the open class so the page content animates out
       openContent.className = openContent.className.replace(" open", "");
-      // animate the cover back to the original position card and size
-      animateCoverBack(currentCard);
-      // animate in other cards
-      animateOtherCards(currentCard, false);
+      // animate the cover back to the original position cardsoffer and size
+      animateCoverBack(currentcardsoffer);
+      // animate in other cardsoffers
+      animateOthercardsoffers(currentcardsoffer, false);
     }
 
-    function animateOtherCards(card, out) {
+    function animateOthercardsoffers(cardsoffer, out) {
       var delay = 100;
-      for (var i = 0; i < nCards; i++) {
-        // animate cards on a stagger, 1 each 100ms
-        if (cards[i] === card) continue;
-        if (out) animateOutCard(cards[i], delay);
-        else animateInCard(cards[i], delay);
+      for (var i = 0; i < ncardsoffers; i++) {
+        // animate cardsoffers on a stagger, 1 each 100ms
+        if (cardsoffers[i] === cardsoffer) continue;
+        if (out) animateOutcardsoffer(cardsoffers[i], delay);
+        else animateIncardsoffer(cardsoffers[i], delay);
         delay += 100;
       }
     }
 
-    // animations on individual cards (by adding/removing card names)
-    function animateOutCard(card, delay) {
+    // animations on individual cardsoffers (by adding/removing cardsoffer names)
+    function animateOutcardsoffer(cardsoffer, delay) {
       setTimeout(function() {
-        card.className += " out";
+        cardsoffer.className += " out";
       }, delay);
     }
 
-    function animateInCard(card, delay) {
+    function animateIncardsoffer(cardsoffer, delay) {
       setTimeout(function() {
-        card.className = card.className.replace(" out", "");
+        cardsoffer.className = cardsoffer.className.replace(" out", "");
       }, delay);
     }
 
-    // this function searches up the DOM tree until it reaches the card element that has been clicked
-    function getCardElement(el) {
-      if (el.className.indexOf("card ") > -1) return el;
-      else return getCardElement(el.parentElement);
+    // this function searches up the DOM tree until it reaches the cardsoffer element that has been clicked
+    function getcardsofferElement(el) {
+      if (el.className.indexOf("cardsoffer ") > -1) return el;
+      else return getcardsofferElement(el.parentElement);
     }
 
     // resize function - records the window width and height
     function resize() {
       if (pageIsOpen) {
         // update position of cover
-        var cardPosition = currentCard.getBoundingClientRect();
-        setCoverPosition(cardPosition);
-        scaleCoverToFillWindow(cardPosition);
+        var cardsofferPosition = currentcardsoffer.getBoundingClientRect();
+        setCoverPosition(cardsofferPosition);
+        scaleCoverToFillWindow(cardsofferPosition);
       }
       windowWidth = window.innerWidth;
       windowHeight = window.innerHeight;
@@ -311,8 +319,8 @@ p {
   margin: 0 auto;
 }
 
-/* Cards */
-.card-column {
+/* cardsoffers */
+.cardsoffer-column {
   width: 50%;
   float: left;
   padding: 4%;
@@ -323,7 +331,7 @@ p {
   padding-top: 100px;
 }
 
-.card {
+.cardsoffer {
   width: 92%;
   max-width: 340px;
   margin-left: auto;
@@ -346,13 +354,13 @@ p {
   top: -6px;
 }
 
-.card h1 {
+.cardsoffer h1 {
   position: relative;
   padding: 190px 0px 10px 10px;
   width: 90%;
 }
 
-.card > img {
+.cardsoffer > img {
   max-height: 200px;
   width: 90%;
   position: absolute;
@@ -360,19 +368,19 @@ p {
   left: -6%;
 }
 
-.card-color-0 {
+.cardsoffer-color-0 {
   background-color: #eb5160;
 }
 
-.card-color-1 {
+.cardsoffer-color-1 {
   background-color: #8f3985;
 }
 
-.card-color-2 {
+.cardsoffer-color-2 {
   background-color: #8daa91;
 }
 
-.card-color-3 {
+.cardsoffer-color-3 {
   background-color: #888da7;
 }
 
@@ -448,7 +456,7 @@ p {
 ** Transitions
 */
 
-.card {
+.cardsoffer {
   transition: opacity 200ms linear 320ms, transform 200ms ease-out 320ms;
 }
 
@@ -456,34 +464,34 @@ p {
   transition: opacity 200ms linear, transform 200ms ease-out;
 }
 
-.card img {
+.cardsoffer img {
   transition: opacity 200ms linear 0ms, transform 200ms ease-in 0ms;
 }
 
-.card h1 {
+.cardsoffer h1 {
   transform: translate3d(20%, 0px, 0px);
   transition: opacity 200ms linear 120ms, transform 200ms ease-in 120ms;
 }
 
-/* Clicked card */
-.card.clicked img {
+/* Clicked cardsoffer */
+.cardsoffer.clicked img {
   transform: translate3d(0px, -40px, 0px);
   opacity: 0;
 }
 
-.card.clicked .border {
+.cardsoffer.clicked .border {
   opacity: 0;
   transform: scale(1.3);
 }
 
-.card.out,
-.card.out img {
+.cardsoffer.out,
+.cardsoffer.out img {
   transform: translate3d(0px, -40px, 0px);
   opacity: 0;
 }
 
-.card.out h1,
-.card.clicked h1 {
+.cardsoffer.out h1,
+.cardsoffer.clicked h1 {
   transform: translate3d(20%, -40px, 0px);
   opacity: 0;
 }
@@ -507,7 +515,7 @@ p {
 */
 
 @media screen and (max-width: 600px) {
-  .card-column {
+  .cardsoffer-column {
     width: 90%;
   }
 

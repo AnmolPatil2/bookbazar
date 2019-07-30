@@ -78,12 +78,9 @@
                   class="skw-page__link"
                   href="https://codepen.io/suez/pens/public/"
                   target="_blank"
-                >my other pens</a> and follow me on
-                <a
-                  class="skw-page__link"
-                  href="https://twitter.com/NikolayTalanov"
-                  target="_blank"
-                >Twitter</a>
+                >my other pens</a>
+                and follow me on
+                <v-btn @click="changetosell()">Something good from jos to buy</v-btn>
               </p>
             </div>
           </div>
@@ -95,6 +92,11 @@
 <script>
 export default {
   name: "rules",
+  methods: {
+    changetosell() {
+      this.$router.push({ name: "sell" });
+    }
+  },
   mounted() {
     $(document).ready(function() {
       var curPage = 1;
@@ -151,7 +153,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style scoped lang="scss" >
 *,
 *:before,
 *:after {
@@ -160,15 +162,27 @@ export default {
   padding: 0;
 }
 
-.rules {
+body {
   background: #15181a;
   font-family: "Open Sans", Helvetica, Arial, sans-serif;
 }
-
+@media screen and (max-width: 600px) {
+  .skw-pages {
+    overflow: hidden;
+    position: relative;
+    min-height: 100vh;
+    width: 400px;
+    padding: 0;
+    margin: 0px;
+  }
+}
 .skw-pages {
   overflow: hidden;
   position: relative;
   height: 100vh;
+
+  padding: 0;
+  margin: 0px;
 }
 
 .skw-page {
