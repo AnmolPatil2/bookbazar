@@ -2,8 +2,10 @@
   <nav>
     <v-toolbar flat app color="#232f3e" class="white--text">
       <v-toolbar-side-icon @click="drawer = !drawer" class="grey--text hidden-md-and-up"></v-toolbar-side-icon>
+
       <v-toolbar-title class="text-uppercase white--text">
         <span class="font-weight-light">Book</span>
+
         <span>Bazar</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
@@ -58,6 +60,7 @@
     >
       <v-list>
         <v-flex class="mt-4 mb-3"></v-flex>
+        <navmenu />
         <v-list-tile v-for="link in links" :key="link.text" router :to="link.route">
           <v-list-tile-action>
             <v-icon class="white--text">{{ link.icon }}</v-icon>
@@ -79,6 +82,7 @@
 <script>
 import Popup from "./Popup";
 import firebase1 from "@firebase/app";
+import navmenu from "./navmenu";
 export default {
   name: "Navbar",
   props: {},
@@ -95,7 +99,7 @@ export default {
     };
   },
 
-  components: { Popup },
+  components: { Popup, navmenu },
   mounted() {
     this.user = firebase1.auth().currentUser;
     if (this.user != null) {
