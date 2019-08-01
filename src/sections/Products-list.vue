@@ -22,6 +22,7 @@
     </md-card>
     <!--folds-->
     <cardsdisplay />
+    <numbers />
     <div id="itemdisplay">
       <product-card
         :items="items"
@@ -70,6 +71,7 @@
 <script>
 import { fb, db } from "../firebase";
 import "swiper/dist/css/swiper.css";
+import numbers from "@/components/numbershow.vue";
 import ProductCard from "@/components/product.grid.vue";
 import cardsdisplay from "./cardsdisplay.vue";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
@@ -80,6 +82,7 @@ export default {
   components: {
     Carousel,
     Slide,
+    numbers,
     swiper,
     swiperSlide,
     cardsdisplay,

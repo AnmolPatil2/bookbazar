@@ -26,6 +26,7 @@
 // @ is an alias to /src
 import Hero from "@/components/Hero.vue";
 import combo from "@/components/combooffers.vue";
+import iconmenu from "@/components/iconmenu.vue";
 import Products from "@/sections/Products.vue";
 import { AtomSpinner } from "epic-spinners";
 import Login from "@/components/Login.vue";
@@ -36,6 +37,7 @@ export default {
     Hero,
     AtomSpinner,
     Products,
+    iconmenu,
     combo,
     Login
   },

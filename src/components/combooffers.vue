@@ -1,53 +1,69 @@
 <template>
-  <div class="combo">
-    <!--
+  <header>
+    <div class="combo">
+      <!--
   Please note: this code is in no way ready to be used as is in production on your website. It will need to be adapted to be cross browser compliant & accessible. I just wanted to share how one might go about this effect with CSS & JS and no other dependencies
-    -->
+      -->
 
-    <div class="container">
-      <div class="cardsoffer-column column-0">
-        <div class="cardsoffer cardsoffer-color-0">
-          <div class="border"></div>
-          <img src="/img/svg/books1.jpeg" />
-          <h1>P-Cycle books at one click</h1>
-          <v-btn @click="ComboOrder()">Plcae order</v-btn>
-        </div>
-        <!--
+      <div class="container">
+        <h1 class="writting text-center">Purchase The Most recomended at the Cheapest Price</h1>
+        <p class="somelines text-center">All are most prefered books</p>
+        <div class="cardsoffer-column column-0">
+          <div class="cardsoffer cardsoffer-color-0">
+            <div class="border"></div>
+            <img src="/img/svg/books1.jpeg" />
+            <h1 class="white--text">P-Cycle</h1>
+            <div class="pricing text-center">
+              <v-btn
+                @click="ComboOrder()"
+                color="black"
+                class="px-5 py-2 mb-5 white--text"
+              >Purchase Now</v-btn>
+            </div>
+          </div>
+          <!--
         <div class="cardsoffer cardsoffer-color-2">
           <div class="border"></div>
           <img src="/img/svg/books2.jpeg" />
           <h1>c-cycle at one click</h1>
         </div>
-        -->
-      </div>
-      <div class="cardsoffer-column column-1">
-        <div class="cardsoffer cardsoffer-color-1">
-          <div class="border"></div>
-          <img src="/img/svg/books2.jpeg" />
-          <h1>C-cycle</h1>
-          <p>At Rs 999</p>
+          -->
         </div>
-        <!--
+        <div class="cardsoffer-column column-1">
+          <div class="cardsoffer cardsoffer-color-1">
+            <div class="border"></div>
+            <img src="/img/svg/books2.jpeg" />
+            <h1 class="white--text">C-Cycle</h1>
+            <div class="pricing text-center">
+              <v-btn
+                @click="ComboOrder()"
+                color="black"
+                class="px-5 py-2 mb-5 white--text"
+              >Purchase Now</v-btn>
+            </div>
+          </div>
+          <!--
         <div class="cardsoffer cardsoffer-color-3">
           <div class="border"></div>
           <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/53148/deathtostock-03.jpg" />
           <h1>Get the show on, get paid</h1>
         </div>
-        -->
+          -->
+        </div>
+      </div>
+
+      <div id="cover" class="cover"></div>
+
+      <div id="open-content" class="open-content">
+        <a href="#" id="close-content" class="close-content">
+          <span class="x-1"></span>
+          <span class="x-2"></span>
+        </a>
+        <img id="open-content-image" src />
+        <div class="text" id="open-content-text"></div>
       </div>
     </div>
-
-    <div id="cover" class="cover"></div>
-
-    <div id="open-content" class="open-content">
-      <a href="#" id="close-content" class="close-content">
-        <span class="x-1"></span>
-        <span class="x-2"></span>
-      </a>
-      <img id="open-content-image" src />
-      <div class="text" id="open-content-text"></div>
-    </div>
-  </div>
+  </header>
 </template>
 <script>
 import { fb, db } from "../firebase";
@@ -306,19 +322,34 @@ body {
   font-size: 18px;
   display: block;
 }
-.combo {
-  margin-top: 30px;
+
+.somelines {
+  color: #2e2c2caf;
+  font-size: 3vmin;
+  padding-bottom: 10vmin;
 }
 
 p {
   line-height: 1.5;
 }
-
+.writting {
+  padding-top: 5vmin;
+  padding-bottom: 0.1em;
+  font-family: "lobster", cursive;
+}
 .container {
   max-width: 1000px;
   margin: 0 auto;
 }
-
+.pricing {
+  background: rgba(208, 241, 241, 0.199);
+  border-top-right-radius: 170px;
+  border-top-left-radius: 170px;
+}
+.pricing > h1 {
+  font-size: 10vmin;
+  padding: 1em 0.5em;
+}
 /* cardsoffers */
 .cardsoffer-column {
   width: 50%;
