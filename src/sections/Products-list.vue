@@ -1,17 +1,15 @@
 <template>
-  <div class="products" id="products">
+  <div class="products white" id="products">
     <!--best seller-->
-    <md-card class="long-show">
-      <div class="md-title" id="multi-title">best sell</div>
-
-      <md-card-actions></md-card-actions>
+    <md-card class>
+      <h1 class="writting text-left">Best Seller so Far</h1>
 
       <!-- swiper  -->
-      <swiper :options="swiperOption" class="swipers">
+      <swiper :options="swiperOption" class>
         <swiper-slide v-for="(product,index) in products" :key="index">
           <v-responsive class @click="product_select(product)">
             <v-container hide-delimiters class>
-              <img :src="product.images" class="card-img-top bbb" alt="...." />
+              <img :src="product.images" class="card-img-top imagesD" alt="...." />
             </v-container>
           </v-responsive>
         </swiper-slide>
@@ -95,6 +93,7 @@ export default {
       offers: [],
       items: [],
       activeItem: null,
+      numberofslides: 11,
       modal: null,
       swiperOption: {
         slidesPerView: 5,
@@ -145,6 +144,15 @@ export default {
   },
   mounted() {
     this.loading = false;
+
+    var x = window.matchMedia("(max-width: 700px)");
+
+    if (x) {
+      // If media query matches
+      this.numberofslides = 2;
+    } else {
+      this.numberofslides = 5;
+    }
   },
   methods: {
     product_select(product) {
@@ -216,6 +224,11 @@ export default {
   padding: 0;
   margin: 0;
 }
+.writting {
+  padding-top: 5vmin;
+  padding-bottom: 0.1em;
+  font-family: "lobster", cursive;
+}
 .append-buttons {
   text-align: center;
   margin-top: 20px;
@@ -238,6 +251,14 @@ export default {
 }
 .card-text1 {
   color: black;
+}
+
+.imagesD {
+  height: auto;
+  width: auto;
+  max-width: 270px;
+  max-height: 200px;
+  margin: 0;
 }
 .img-responsive img-rounded {
   width: 10px;

@@ -1,29 +1,74 @@
 <template>
-  <v-container grid-list-md text-xs-center>
+  <div>
     <!--test-->
-
-    <v-layout row wrap class="grey lighten-4">
-      <v-flex xs6 sm6 md4 lg3 v-for="(product,index) in products" :key="index">
-        <v-card class>
-          <div class="cardh">
+    <h1 class="writting text-left">Best Seller so Far</h1>
+    <v-container>
+      <v-layout row wrap class>
+        <v-flex xs6 sm6 md4 lg3 v-for="(product,index) in products" :key="index">
+          <v-card class="cardh">
             <div class="imageh">
-              <img :src="product.images" class="card-img-top" alt="...." />
+              <img :src="product.images" class="card-img-top imagesD" alt="...." />
             </div>
             <div class="detailsh">
               <div class="centerh">
-                <h1>
-                  {{product.name}}
-                  <br />
-                  <span>{{product.author}}</span>
-                </h1>
-                <p>Lorem ipsum is simple dummy text on the printing and typesetting industry.</p>
+                <h1>{{product.name}}</h1>
+
+                <v-chip>
+                  <v-icon left color="red">mdi-account</v-icon>
+                  {{product.author}}
+                </v-chip>
+                <div class="flipbut pt-3">
+                  <button class="quick-view left px-2">
+                    <i class="fa fa-eye"></i>
+                    <span class="tooltipp"></span>
+                  </button>
+                  <button class="add-to-cart-btn right px-2 cartb">
+                    <i class="fa fa-shopping-cart"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </v-card>
+        </v-flex>
+      </v-layout>
+    </v-container>
+    <!--community-->
+    <section class="section-3 container-fluid p-0 text-center">
+      <div class="row">
+        <div class="col-md-12 col-sm-12">
+          <h1>About our Community</h1>
+          <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum exercitationem alias perspiciatis omnis quod possimus odit
+            voluptatum! Sunt ea quasi praesentium, tenetur doloribus animi obcaecati, sint nemo quae laudantium iusto unde
+            eaque nostrum nobis voluptatum
+          </p>
+        </div>
+      </div>
+      <div class="platform row">
+        <div class="col-md-6 col-sm-12 text-right">
+          <div class="desktop shadow-lg">
+            <div class="d-flex flex-row justify-content-center">
+              <i class="fa fa-whatsapp-alt fa-3x py-2 pr-3"></i>
+              <div class="text text-left">
+                <h3 class="pt-1 m-0">Telegram</h3>
+                <p class="p-0 m-0">On whatsapp</p>
               </div>
             </div>
           </div>
-        </v-card>
-      </v-flex>
-    </v-layout>
-
+        </div>
+        <div class="col-md-6 col-sm-12 text-left">
+          <div class="desktop shadow-lg">
+            <div class="d-flex flex-row justify-content-center">
+              <i class="fas fa-mobile-alt fa-3x py-2 pr-3"></i>
+              <div class="text text-left">
+                <h3 class="pt-1 m-0">Join Now</h3>
+                <p class="p-0 m-0">On whatsapp</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
     <!-- swiper  
     <swiper :options="swiperOption" class="swipers">
       <swiper-slide>
@@ -55,11 +100,12 @@
       <div class="swiper-button-next" slot="button-next"></div>
     </swiper>
     -->
-    <v-container grid-list-md text-xs-center>
-      <v-layout row wrap class="wrapper">
+    <h1 class="writting text-left mx-3">Best Seller so Far</h1>
+    <v-container>
+      <v-layout class="wrapper">
         <v-flex xs6 sm6 md4 lg3 v-for="(product,index) in products" :key="index">
           <v-card class="card">
-            <img :src="product.images" class="card-img-top bbb" alt="...." />
+            <img :src="product.images" class="card-img-top imagesD" alt="...." />
             <div class="info">
               <p>{{product.name}}</p>
               <p>{{product.author}}</p>
@@ -69,7 +115,7 @@
         </v-flex>
       </v-layout>
     </v-container>
-  </v-container>
+  </div>
 </template>
 <script>
 import { fb, db } from "../firebase";
@@ -108,117 +154,33 @@ export default {
 </script>
 
 <style scoped >
-body,
-html {
+.writting {
+  padding-top: 5vmin;
+  padding-bottom: 0.1em;
+  font-family: "lobster", cursive;
 }
-
-.wrapper {
-  width: 90%;
+.imagesD {
+  height: auto;
+  width: auto;
+  max-width: 270px;
+  max-height: 270px;
+  margin: 0;
 }
 @media only screen and (max-width: 600px) {
-  .card {
-    width: 150px;
-    height: 200px;
-    border-radius: 15px;
-    padding: 1.5rem;
-    background: white;
-
-    display: inline-block;
-    align-items: flex-end;
-    transition: 0.4s ease-out;
-    box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.5);
+  .cardh {
+    margin: 5px;
   }
 }
 @media only screen and (min-width: 600px) {
-  .card {
-    min-width: 300px;
-    min-height: 400px;
-    border-radius: 15px;
-    padding: 1.5rem;
-    background: white;
-    position: relative;
-    display: flex;
-    align-items: flex-end;
-    transition: 0.4s ease-out;
-    box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.5);
+  .cardh {
+    margin-right: 30px;
   }
 }
-
-.card:hover {
-  -webkit-transform: translateY(20px);
-  transform: translateY(20px);
+.cartb {
+  font-size: 30px;
 }
-.card:hover:before {
-  opacity: 1;
-}
-.card:hover .info {
-  opacity: 1;
-  -webkit-transform: translateY(0px);
-  transform: translateY(0px);
-}
-.card:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: block;
-
-  border-radius: 15px;
-  background: rgba(0, 0, 0, 0.6);
-  z-index: 2;
-  transition: 0.5s;
-  opacity: 0;
-}
-.card img {
-  width: 100%;
-  height: 100%;
-
-  position: absolute;
-  top: 0;
-  left: 0;
-  border-radius: 15px;
-}
-.card .info {
-  position: relative;
-  z-index: 3;
-  color: white;
-  opacity: 0;
-
-  transition: 0.5s;
-}
-.card .info h1 {
-  margin: 0px;
-}
-.card .info p {
-  letter-spacing: 1px;
-  font-size: 15px;
-  margin-top: 8px;
-}
-.card .info button {
-  padding: 0.6rem;
-  outline: none;
-  border: none;
-  border-radius: 3px;
-  background: white;
-  color: black;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.4s ease;
-}
-.card .info button:hover {
-  background: dodgerblue;
-  color: white;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  background: #250008;
-  font-family: sans-serif;
-}
-
-.cardh {
-  background: #000;
+.quick-view {
+  font-size: 30px;
 }
 .cardh .imageh {
   overflow: hidden;
@@ -291,5 +253,152 @@ body {
 }
 .cardh .detailsh .centerh ul li a:hover {
   background: #ff3636;
+}
+
+.wrapper {
+  width: 90%;
+}
+@media only screen and (max-width: 600px) {
+  .card {
+    width: 150px;
+    height: 200px;
+    border-radius: 15px;
+    padding: 1.5rem;
+    background: white;
+
+    display: inline-block;
+    align-items: flex-end;
+    transition: 0.4s ease-out;
+    box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.5);
+  }
+}
+@media only screen and (min-width: 600px) {
+  .card {
+    width: 270px;
+    height: 270px;
+    border-radius: 15px;
+    padding: 0;
+    background: white;
+    position: relative;
+    display: block;
+    align-items: flex-end;
+    transition: 0.4s ease-out;
+    box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.5);
+  }
+}
+
+.card:hover {
+  -webkit-transform: translateY(20px);
+  transform: translateY(20px);
+}
+.card:hover:before {
+  opacity: 1;
+}
+.card:hover .info {
+  opacity: 1;
+  -webkit-transform: translateY(0px);
+  transform: translateY(0px);
+}
+.card:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+
+  border-radius: 15px;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 2;
+  transition: 0.5s;
+  opacity: 0;
+}
+.card img {
+  width: 100%;
+  height: 100%;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 15px;
+}
+.card .info {
+  position: relative;
+  z-index: 3;
+  color: white;
+  opacity: 0;
+
+  transition: 0.5s;
+}
+.card .info h1 {
+  margin: 0px;
+}
+.card .info p {
+  letter-spacing: 1px;
+  font-size: 15px;
+  margin-top: 8px;
+}
+.card .info button {
+  padding: 0.6rem;
+  outline: none;
+  border: none;
+  border-radius: 3px;
+  background: white;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.4s ease;
+}
+.card .info button:hover {
+  background: dodgerblue;
+  color: white;
+}
+.section-3 {
+  height: 70vmin;
+  margin-top: 15vmin;
+  background: linear-gradient(to bottom, #dd2476, #ff512f);
+}
+
+.section-3 .col-md-12 > h1 {
+  padding: 2em 0 0.5em 0;
+  color: whitesmoke;
+  font-size: 6vmin;
+}
+
+.section-3 .col-md-12 > p {
+  padding: 0 4em;
+  padding-bottom: 2em;
+  color: rgba(255, 255, 255, 0.877);
+  font-size: 3vmin;
+}
+
+.section-3 .desktop {
+  background: white;
+  display: inline-block;
+  border-radius: 3em;
+  padding: 2vmin 4.5vmin;
+  margin: 1em;
+}
+
+.section-3 .desktop h3 {
+  font-size: 4vmin;
+}
+
+.section-3 .desktop p {
+  font-size: 2vmin;
+}
+@media only screen and (max-width: 768px) {
+  .section-3 {
+    height: inherit;
+    padding: 10vmin !important;
+  }
+  .section-3 .row h1 {
+    padding: 6vmin 4vmin;
+  }
+  .section-3 .platform .col-md-6 {
+    text-align: center !important;
+  }
+  .section-3 .desktop i {
+    font-size: 8vmin;
+  }
 }
 </style>

@@ -8,8 +8,7 @@
             class="text-muted"
           >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum maxime ea similique illum corrupti</p>
           <p class="pt-4 text-muted">
-            Copyright ©2019 All rights reserved | This template is made with by
-            <span>Daily Tuition</span>
+            <span>Anmol Patil</span>
           </p>
         </div>
         <div class="col-md-5 col-sm-12">
@@ -39,29 +38,55 @@
           <div class="column text-light">
             <i class="fab fa-facebook-f"></i>
             <i class="fab fa-instagram"></i>
-            <i class="fab fa-twitter"></i>
-            <i class="fab fa-youtube"></i>
           </div>
         </div>
       </div>
     </div>
   </footer>
 </template>
-
 <script>
 export default {
-  name: "Products",
-  props: {
-    msg: String
-  }
+  name: "footer"
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-.products {
-  margin-top: 7rem;
-  background: #f2f2f2;
-  padding-bottom: 3rem;
+<style scoped>
+footer {
+  background: rgba(0, 0, 0, 0.815);
+  overflow-x: hidden;
+  padding: 14vmin 18vmin;
+}
+
+footer p > span {
+  color: #ff512f;
+}
+
+footer input {
+  border: none !important;
+}
+
+footer input::placeholder {
+  color: white !important;
+}
+
+footer .input-group .input-group-text {
+  background: linear-gradient(to bottom, #dd2476, #ff512f);
+  border: none;
+}
+
+footer .column i {
+  color: #dd2476;
+}
+
+/* It is Adjacent sibling combinator 
+ */
+
+footer .column i + i {
+  padding: 0 0.5em;
+}
+@media only screen and (max-width: 768px) {
+  footer .row .col-md-2 {
+    margin-top: 8vmin;
+  }
 }
 </style>
