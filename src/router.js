@@ -15,8 +15,10 @@ import Overview1 from "./views/Accounts/Overview1.vue";
 import Profile1 from "./views/Accounts/Profile1.vue";
 import Orders1 from "./views/Accounts/Orders1.vue";
 import signup from "@/components/signup.vue";
+import searchresults from "./views/searchresults.vue";
 import forgotPassword from "@/components/forgotPassword.vue";
 import Select from "./views/Select.vue";
+
 import rules from "./views/rules.vue";
 import testing from "./views/allsinglepagetesting.vue";
 import ProductDisplay from "./views/ProductDisplay.vue";
@@ -34,6 +36,11 @@ const router = new Router({
       path: "/",
       name: "home",
       component: Home
+    },
+    {
+      path: "/searchresults",
+      name: "searchresults",
+      component: searchresults
     },
     {
       path: "/testing",

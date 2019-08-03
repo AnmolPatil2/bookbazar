@@ -168,7 +168,7 @@ export default {
                     // An error happened.
                   });
                 $("#login").modal("hide");
-                this.$router.push({ name: "accounts" });
+                this.$router.push({ name: "accounts/profiles1" });
               })
               .catch(error => {
                 // Handle Errors here.

@@ -162,21 +162,6 @@ export default {
         .then(() => {
           this.display = "displaybooks";
         });
-    },
-    buy(product) {
-      var user = firebase1.auth().currentUser;
-
-      db.collection("sellorders").add({
-        bookid: product.id,
-        price: product.price,
-        status: "ongoing",
-        buyer: user.uid,
-        date: Date.now()
-      });
-      Toast.fire({
-        type: "success",
-        title: "Product created successfully"
-      });
     }
   },
 
@@ -222,10 +207,6 @@ export default {
 .bookimages {
   height: 257px;
   width: 247px;
-}
-.card-body {
-}
-section {
 }
 </style>
 

@@ -37,7 +37,13 @@
       </v-menu>
 
       <form class="form-inline my-2 my-lg-0 hidden-sm-and-down">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+        <input
+          class="form-control mr-sm-2"
+          @click="routersearch()"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        />
         <a
           class="btn btn-outline-success my-2 my-sm-0"
           data-toggle="modal"
@@ -45,12 +51,12 @@
           v-if="!user"
         >Get Start</a>
         {{this.name }}
-        <i class="fa fa-cart" aria-hidden="true"></i>
-        <a
-          class="btn btn-outline-success my-2 my-sm-0"
+        <i
           data-toggle="modal"
           data-target="#miniCart"
-        >Cart</a>
+          class="fa fa-shopping-cart px-3"
+          aria-hidden="true"
+        ></i>
       </form>
     </v-toolbar>
 
@@ -93,6 +99,13 @@ export default {
   },
 
   components: { Popup, navmenu, iconmenu },
+  methods: {
+    routersearch() {
+      this.$router.push({
+        name: "searchresults"
+      });
+    }
+  },
   mounted() {
     this.user = firebase1.auth().currentUser;
     if (this.user != null) {

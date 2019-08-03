@@ -73,28 +73,17 @@
                   </div>
                 </div>
 
-                <div class="col-md-12">
+                <div class="col-md-6">
                   <div class="form-group">
                     <input
                       type="text"
-                      v-model="profile.address"
-                      placeholder="Address"
+                      v-model="profile.email"
+                      placeholder="Email"
                       class="form-control"
                     />
                   </div>
                 </div>
-
-                <div class="col-md-8">
-                  <div class="form-group">
-                    <input
-                      type="text"
-                      v-model="profile.postCode"
-                      placeholder="Postcode"
-                      class="form-control"
-                    />
-                  </div>
-                </div>
-
+                <v-btn @click="confirmmail()">Confirm mail</v-btn>
                 <div class="col-md-4">
                   <div class="form-group">
                     <input
@@ -120,7 +109,7 @@
                 <div class="col-md-">
                   <div
                     class="alert alert-info"
-                  >Please use the Reset password email button for reseting the password. The form doens't work currently</div>
+                  >Please use the Reset password email button for reseting the password.</div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
@@ -144,40 +133,6 @@
                   </div>
                 </div>
 
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <input
-                      type="text"
-                      v-model="account.password"
-                      placeholder="New password"
-                      class="form-control"
-                    />
-                  </div>
-                </div>
-
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <input
-                      type="text"
-                      v-model="account.confirmPassword"
-                      placeholder="Confirm password"
-                      class="form-control"
-                    />
-                  </div>
-                </div>
-
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <input type="file" @change="uploadImage" class="form-control" />
-                  </div>
-                </div>
-
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <input type="submit" value="Save Changes" class="btn btn-primary w-100" />
-                  </div>
-                </div>
-
                 <div class="col-md-4">
                   <div class="form-group">
                     <input
@@ -186,7 +141,6 @@
                       value="Reset password email"
                       class="btn btn-success w-100"
                     />
-                    <v-btn @click="confirmmail()">Confirm mail</v-btn>
                   </div>
                 </div>
               </div>

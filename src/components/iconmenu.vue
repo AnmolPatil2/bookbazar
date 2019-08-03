@@ -10,10 +10,10 @@ export default {
   data() {
     return {
       count: 4,
-      icons: ["fa fa-home", "fa fa-comment", "fa fa-code", "fa fa-envelope"],
+      icons: ["fa fa-home", "fa fa-search", "fa fa-code", "fa fa-envelope"],
       list: [
         { isLink: true, url: "/" },
-        { isLink: false },
+        { isLink: true, url: "/searchresults" },
         { isLink: false },
         { isLink: false }
       ],

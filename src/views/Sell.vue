@@ -62,8 +62,8 @@
       </v-layout>
       <v-layout row wrap>
         <v-flex xs6 sm6 md4 lg3 v-for="(product,index) in displayl" :key="index">
-          <v-card flat class="text-xs-center p-0 YD" @click="product_select(product)">
-            <v-responsive class>
+          <v-card flat class="text-xs-center p-0 YD">
+            <v-responsive class @click="product_select(product)">
               <img :src="product.images" class="card-img-top bookimages" alt="...." />
             </v-responsive>
             <v-card-text>
@@ -72,9 +72,13 @@
             </v-card-text>
             <v-card-actions>
               <v-btn flat color="grey">
-                <button class="add-to-cart-btn">
-                  <i class="fa fa-shopping-cart"></i> add to cart
-                </button>
+                <i class="fa fa-shopping-cart"></i> add to cart
+                <add-to-cart
+                  :image="getImage(product.images)"
+                  :p-id="product.id"
+                  :price="priceconvet(product.sale)"
+                  :name="product.name"
+                ></add-to-cart>
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -138,6 +142,7 @@
         </div>
       </div>
     </div>
+    <MiniCart />
   </div>
 </template>
 
@@ -148,7 +153,7 @@ import { fb, db } from "../firebase";
 import { VueEditor } from "vue2-editor";
 import { Carousel, Slide } from "vue-carousel";
 import Navbar from "@/components/Navbar.vue";
-
+import MiniCart from "@/components/MiniCart.vue";
 import PopUp from "@/components/Popup.vue";
 import firebase1 from "@firebase/app";
 export default {
@@ -160,7 +165,7 @@ export default {
     Carousel,
     Slide,
     Navbar,
-
+    MiniCart,
     AtomSpinner,
     PopUp,
     VueEditor
@@ -201,6 +206,11 @@ export default {
         name: "productCompholder",
         params: { id: product.id }
       });
+    },
+    priceconvet(productsale) {
+      let sale = productsale.toString();
+      console.log(this.sale);
+      return productsale.toString();
     },
     getImage(images) {
       return images[0];
@@ -245,9 +255,7 @@ export default {
       this.product.images.splice(index, 1);
       image
         .delete()
-        .then(function() {
-          console.log("image deleted");
-        })
+        .then(function() {})
         .catch(function(error) {
           // Uh-oh, an error occurred!
           console.log("an error occurred");

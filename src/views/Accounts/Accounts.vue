@@ -38,16 +38,7 @@
           </div>
           <!-- sidebar-search  -->
           <div class="sidebar-item sidebar-search">
-            <div>
-              <div class="input-group">
-                <input type="text" class="form-control search-menu" placeholder="Search..." />
-                <div class="input-group-append">
-                  <span class="input-group-text">
-                    <i class="fa fa-search" aria-hidden="true"></i>
-                  </span>
-                </div>
-              </div>
-            </div>
+            <div></div>
           </div>
           <!-- sidebar-menu  -->
           <div class="sidebar-item sidebar-menu">
@@ -108,7 +99,7 @@ export default {
     return {
       name: null,
       email: null,
-      profil: []
+      profile: []
     };
   },
   components: {
@@ -117,7 +108,7 @@ export default {
 
   firestore() {
     return {
-      profil: db.collection("profiles")
+      profile: db.collection("profiles")
     };
   },
   methods: {
