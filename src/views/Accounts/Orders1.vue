@@ -1,40 +1,56 @@
 <template>
   <div class="dashboard mx-5">
-    <h1 class="subheading grey--text">Dashboard</h1>
+    <div class="intro h-100">
+      <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-md-6">
+          <h3>Orders</h3>
+
+          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Unde, ducimus.</p>
+        </div>
+        <div class="col-md-6">
+          <img src="/img/svg/orders.svg" alt class="img-fluid" />
+        </div>
+      </div>
+    </div>
+    <h1 class="subheading grey--text">Your Orders</h1>
 
     <v-container class="my-5">
       <v-layout row justify-start class="mb-3">
         <v-tooltip top>
-          <v-btn small flat color="grey" @click="sortBy('title')" slot="activator">
+          <v-btn small flat color="grey" @click="sortBy('time')" slot="activator">
             <v-icon small left>folder</v-icon>
-            <span class="caption text-lowercase">By project name</span>
+            <span class="caption text-lowercase">By Date</span>
           </v-btn>
-          <span>Sort by project name</span>
+          <span>Sort by Date you Ordered</span>
         </v-tooltip>
         <v-tooltip top>
-          <v-btn small flat color="grey" @click="sortBy('person')" slot="activator">
+          <v-btn small flat color="grey" @click="sortBy('bookName')" slot="activator">
             <v-icon small left>person</v-icon>
-            <span class="caption text-lowercase">By Person</span>
+            <span class="caption text-lowercase">By Title</span>
           </v-btn>
-          <span>Sort by project author</span>
+          <span>Sort by author</span>
         </v-tooltip>
       </v-layout>
 
       <v-card flat v-for="(order,index) in orders" :key="order.id">
         <v-layout row wrap :class="`pa-3 project ${order.status}`">
-          <v-flex xs12 md6>
-            <div class="caption grey--text">Project title</div>
-            <div>{{ order.id }}</div>
+          <v-flex xs6 md2>
+            <div class="caption grey--text">Book Image</div>
+            <img :src="order.orderImage" width="80px" class="align-self-center mr-3" alt />
+          </v-flex>
+          <v-flex xs6 sm3 md2>
+            <div class="caption grey--text">Book Title</div>
+            <div>{{ order.bookName }}</div>
           </v-flex>
           <v-flex xs6 sm4 md2>
-            <div class="caption grey--text">Person</div>
-            <div>{{ order.buyer }}</div>
+            <div class="caption grey--text">Order Time</div>
+            <div>{{ order.time }}</div>
           </v-flex>
           <v-flex xs6 sm4 md2>
-            <div class="caption grey--text">Due by</div>
-            <div>{{ order.date }}</div>
+            <div class="caption grey--text">Price</div>
+            <div>{{ order.price }}</div>
           </v-flex>
-          <v-flex xs2 sm4 md2>
+          <v-flex xs4 sm4 md2>
             <div class="right">
               <v-chip small :class="`${order.status} white--text  caption`">{{ order.status }}</v-chip>
             </div>
@@ -49,27 +65,38 @@
 <script>
 import firebase1 from "@firebase/app";
 import { fb, db } from "../../firebase";
+import moment from "moment";
 export default {
   data() {
     return {
       orders: []
     };
   },
+
   created() {
     var user = firebase1.auth().currentUser;
-    db.collection("sellorders")
+    let ref = db
+      .collection("sellorders")
 
       .where("buyer", "==", user.uid)
+
       .get()
+
       .then(snapshot => {
         snapshot.forEach(doc => {
-          this.orders.push(doc.data());
+          this.orders.push({
+            orderImage: doc.data().orderImage,
+            bookName: doc.data().bookName,
+            status: doc.data().status,
+            time: moment(doc.data().date).format("LT"),
+            price: doc.data().price
+          });
         });
       });
   },
   methods: {
     sortBy(prop) {
-      this.projects.sort((a, b) => (a[prop] < b[prop] ? -1 : 1));
+      this.orders.sort((a, b) => (a[prop] > b[prop] ? -1 : 1));
     }
   }
 };

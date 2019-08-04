@@ -4,9 +4,9 @@
       <div class="intro h-100">
         <div class="row h-100 align-items-center">
           <div class="col-md-6 ml-3">
-            <h3>Profile settings</h3>
+            <h3>Your Profile</h3>
 
-            <p>Change your profile settings here</p>
+            <p>Please complete your Profile</p>
           </div>
           <div class="col-md-5">
             <img src="/img/svg/profile.svg" width="300" alt class="img-fluid" />
@@ -48,6 +48,9 @@
             role="tabpanel"
             aria-labelledby="profile-tab"
           >
+            <div
+              class="alert alert-info"
+            >Please Enter your Whatsapp Number,this will help us to contact you easly.</div>
             <div class="container">
               <div class="row">
                 <div class="col-md-6">
@@ -83,7 +86,7 @@
                     />
                   </div>
                 </div>
-                <v-btn @click="confirmmail()">Confirm mail</v-btn>
+                <v-btn v-if="this.reroute!=1" @click="confirmmail()">Confirm mail</v-btn>
                 <div class="col-md-4">
                   <div class="form-group">
                     <input
@@ -167,11 +170,10 @@ export default {
   },
   data() {
     return {
+      reroute: null,
       profile: {
         name: null,
-        phone: null,
-        address: null,
-        postcode: null
+        phone: null
       },
       account: {
         name: null,
@@ -184,11 +186,28 @@ export default {
       }
     };
   },
-  firestore() {
+  mounted() {
     const user = firebase1.auth().currentUser;
-    return {
-      profile: db.collection("profiles").doc(user.uid)
-    };
+    if (user.email == null) {
+      db.collection("profiles")
+        .add({
+          aui: user.uid
+        })
+        .then(() => {
+          this.profile.phone = user.displayName;
+          this.reroute = 2;
+        });
+    } else {
+      db.collection("profiles")
+        .add({
+          aui: user.uid
+        })
+        .then(() => {
+          this.profile.email = user.email;
+          this.profile.name = user.displayName;
+          this.reroute = 1;
+        });
+    }
   },
   methods: {
     confirmmail() {
@@ -218,7 +237,29 @@ export default {
         });
     },
     updateProfile() {
-      this.$firestore.profile.update(this.profile);
+      var user = firebase1.auth().currentUser;
+      db.collection("profiles")
+        .where("aui", "==", user.uid)
+        .get()
+        .then(snapshot => {
+          snapshot.forEach(doc => {
+            db.collection("profiles")
+              .doc(doc.id)
+              .update({
+                name: this.profile.name,
+                email: this.profile.email,
+                phone: this.profile.phone,
+                photo: user.photoURL
+              });
+          });
+        })
+        .then(() => {
+          if (this.reroute == 1) {
+            this.$router.go(-1);
+          } else {
+            this.$router.go(-2);
+          }
+        });
     },
     uploadImage() {}
   },

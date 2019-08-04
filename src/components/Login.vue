@@ -14,19 +14,47 @@
           <div class="modal-body">
             <article>
               <div class="form-collection">
-                <div class="card elevation-3 limit-width log-in-card below turned">
+                <div class="card elevation-2 limit-width log-in-card below turned">
                   <div class="card-body">
+                    <div class="input-group fullname">
+                      <i class="fa fa-user" aria-hidden="true"></i>
+                      <input type="text" v-model="name" class="togetinline" placeholder="Full Name" />
+                    </div>
                     <div class="input-group email">
-                      <input type="text" v-model="email" placeholder="Email" />
+                      <i class="fa fa-envelope" aria-hidden="true"></i>
+                      <input type="email" v-model="email" class="togetinline" placeholder="Email" />
                     </div>
                     <div class="input-group password">
+                      <i class="fa fa-lock" aria-hidden="true"></i>
                       <input
                         type="password"
-                        class="login_password"
+                        class="togetinline"
                         v-model="password"
                         placeholder="Password"
                       />
-                      <a href @click="forgotPassword()">forgot</a>
+                    </div>
+                    <p class="red--text">{{feedback}}</p>
+                  </div>
+                  <div class="card-footer">
+                    <button type="submit" @click="register()" class="signup-btn">Sign Up</button>
+                  </div>
+                </div>
+
+                <div class="card elevation-3 limit-width sign-up-card above">
+                  <div class="card-body">
+                    <div class="input-group email">
+                      <i class="fa fa-envelope" aria-hidden="true"></i>
+                      <input type="text" v-model="email" class="togetinline" placeholder="Email" />
+                    </div>
+                    <div class="input-group password">
+                      <i class="fa fa-lock" aria-hidden="true"></i>
+                      <input
+                        type="password"
+                        class="loginpassword"
+                        v-model="password"
+                        placeholder="Password"
+                      />
+                      <a href class="forgotpassword" @click="forgotPassword()">forgot ?</a>
                     </div>
                     <div class="btn white darken-4 col s10 m4" id="extra">
                       <v-btn id="extra" @click=" signInWithGoogle()" style="text-transform:none">
@@ -37,31 +65,16 @@
                             alt="Google  Logo"
                             src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"
                           />
-                        </div>Login with Google
+                        </div>Google
                       </v-btn>
-                      <v-btn @click="changerouter()" class="zocial call icon">phone auth</v-btn>
+
+                      <v-btn @click="changerouter()" class>
+                        <i class="fa fa-phone" aria-hidden="true"></i>Phone
+                      </v-btn>
                     </div>
                   </div>
                   <div class="card-footer">
                     <button type="submit" @click="login()" class="login-btn">Log in</button>
-                  </div>
-                </div>
-
-                <div class="card elevation-2 limit-width sign-up-card above">
-                  <div class="card-body">
-                    <div class="input-group fullname">
-                      <input type="text" v-model="name" placeholder="Full Name" />
-                    </div>
-                    <div class="input-group email">
-                      <input type="email" v-model="email" placeholder="Email" />
-                    </div>
-                    <div class="input-group password">
-                      <input type="password" v-model="password" placeholder="Password" />
-                    </div>
-                    <p class="red--text">{{feedback}}</p>
-                  </div>
-                  <div class="card-footer">
-                    <button type="submit" @click="register()" class="signup-btn">Sign Up</button>
                   </div>
                 </div>
               </div>
@@ -110,32 +123,31 @@ export default {
           .signInWithEmailAndPassword(this.email, this.password)
           .then(() => {
             $("#login").modal("hide");
-            if (
-              this.email == "nikimiki007@admin.com" ||
-              this.email == "kruthikajos007@admin.com"
-            ) {
-              this.$router.replace("admin");
-            } else {
-              this.$router.replace("accounts");
-            }
+
+            this.$router.replace("accounts/profile1");
           })
-          .catch(function(error) {
+          .catch(error => {
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
             if (errorCode === "auth/wrong-password") {
               alert("Wrong password.");
             } else {
-              alert(errorMessage);
+              alert(errorMessage + "Please try again");
             }
-            console.log(error);
           });
       }
     },
     signInWithGoogle() {
       const provider = new firebase1.auth.GoogleAuthProvider();
 
-      firebase1.auth().signInWithPopup(provider);
+      firebase1
+        .auth()
+        .signInWithPopup(provider)
+        .then(() => {
+          $("#login").modal("hide");
+          this.$router.push({ name: "profile1" });
+        });
     },
     register() {
       if (this.name) {
@@ -187,8 +199,17 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.login_password {
-  display: inline;
+.togetinline {
+  position: absolute;
+  left: 30px;
+}
+.loginpassword {
+  position: absolute;
+  left: 30px;
+}
+.forgotpassword {
+  position: absolute;
+  right: 0;
 }
 .modal-content {
   margin: 0;

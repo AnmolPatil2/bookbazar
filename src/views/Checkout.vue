@@ -97,7 +97,7 @@
           </label>
         </div>
         <p class="red--text">{{feedback}}</p>
-        <a href="#" @click="buy(product)" class="primary-btn order-submit">Place order</a>
+        <a href="#" @click="buy()" class="primary-btn order-submit">Place order</a>
       </div>
     </v-container>
   </div>
@@ -107,6 +107,7 @@
 import Navbar from "@/components/Navbar.vue";
 import firebase1 from "@firebase/app";
 import { fb, db } from "../firebase";
+
 export default {
   data() {
     return {
@@ -117,9 +118,21 @@ export default {
   },
   components: { Navbar },
   methods: {
-    buy(product) {
+    buy() {
       if (document.getElementById("terms").checked) {
         // it is checked. Do something
+        var user = firebase1.auth().currentUser;
+        this.$store.state.cart.forEach(order => {
+          db.collection("sellorders").add({
+            bookName: order.productName,
+            price: order.productPrice,
+            status: "ongoing",
+            buyer: user.uid,
+            date: Date.now(),
+            orderQuantity: order.productQuantity,
+            orderImage: order.productImage
+          });
+        });
 
         Swal.fire({
           title: "Confirm Order",
@@ -129,32 +142,23 @@ export default {
           confirmButtonColor: "#3085d6",
           cancelButtonColor: "#d33",
           confirmButtonText: "Yes, Confirm"
-        }).then(result => {
-          if (result.value) {
-            Toast.fire({
-              type: "success",
-              title: "Order Placed"
-            });
+        })
+          .then(result => {
+            if (result.value) {
+              Toast.fire({
+                type: "success",
+                title: "Order Placed"
+              });
+            }
+          })
+          .then(() => {
             this.$router.push({
               name: "orders1"
             });
-          }
-        });
+          });
       } else {
         // it isn't checked. Do something else
-        var user = firebase1.auth().currentUser;
 
-        db.collection("sellorders").add({
-          bookid: product.id,
-          price: product.price,
-          status: "ongoing",
-          buyer: user.uid,
-          date: Date.now()
-        });
-        Toast.fire({
-          type: "success",
-          title: "Order Placed"
-        });
         this.feedback = "Please select all the Boxes";
       }
     }

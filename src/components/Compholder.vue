@@ -17,7 +17,7 @@
 import Hero from "@/components/Hero.vue";
 import combo from "@/components/combooffers.vue";
 import iconmenu from "@/components/iconmenu.vue";
-import footer1 from "@/components/footer.vue";
+import footer1 from "@/components/footer1.vue";
 import Products from "@/sections/Products.vue";
 import { AtomSpinner } from "epic-spinners";
 import Login from "@/components/Login.vue";

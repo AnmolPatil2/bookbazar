@@ -16,6 +16,7 @@
     "epic-spinners": "^1.1.0",
     "firebase": "^5.10.1",
     "jquery": "^3.4.1",
+    "moment": "^2.24.0",
     "nouislider": "^14.0.2",
     "popper.js": "^1.15.0",
     "slick-carousel": "^1.8.1",

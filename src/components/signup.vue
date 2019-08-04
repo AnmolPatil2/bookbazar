@@ -132,7 +132,7 @@ export default {
         let phoneNumber = countryCode + this.phNo;
         //
         let appVerifier = this.appVerifier;
-        console.log("ho");
+
         firebase1
           .auth()
           .signInWithPhoneNumber(phoneNumber, appVerifier)
@@ -174,7 +174,11 @@ export default {
             var user = result.user;
             // ...
             //route to set password !
-            vm.$router.push({ name: "accounts" });
+
+            vm.$router.push({
+              name: "profile1"
+            });
+            // Update successful.
           })
           .catch(function(error) {
             // User couldn't sign in (bad verification code?)
@@ -285,7 +289,8 @@ export default {
 
 <style scoped>
 .phoneauth {
-  max-height: 500px;
+  height: 100vh;
+  background: #ddccdd;
 }
 #wrapper {
   font-family: Lato;

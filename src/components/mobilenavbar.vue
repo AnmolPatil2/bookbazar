@@ -1,9 +1,6 @@
 <template>
   <div class="admin">
-    <div class="page-wrapper default-theme sidebar-bg bg1 toggled">
-      <a id="show-sidebar" @click="closeMenu" class="btn btn-sm btn-dark" href="#">
-        <i class="fas fa-bars"></i>
-      </a>
+    <div class="page-wrapper default-theme toggled">
       <nav id="sidebar" class="sidebar-wrapper">
         <div class="sidebar-content">
           <!-- sidebar-brand  -->
@@ -86,7 +83,7 @@
 <script>
 // @ is an alias to /src
 import Hero from "@/components/Hero.vue";
-import { fb, db } from "../../firebase";
+import { fb, db } from "../firebase";
 import firebase from "@firebase/app";
 export default {
   name: "admin",
@@ -117,7 +114,7 @@ export default {
   },
   methods: {
     closeMenu() {
-      $(".page-wrapper").toggleClass("toggled");
+      //$(".page-wrapper").toggleClass("toggled");
     },
 
     logout() {

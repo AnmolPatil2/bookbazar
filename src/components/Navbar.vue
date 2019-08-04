@@ -65,12 +65,12 @@
       v-model="drawer"
       class="hidden-sm-and-up"
       temporary
-      width="300"
+      width="270"
       id="drawer"
     >
       <v-list>
         <v-flex class></v-flex>
-        <navmenu />
+        <mobilenavbar />
       </v-list>
     </v-navigation-drawer>
   </nav>
@@ -80,7 +80,7 @@
 import Popup from "./Popup";
 import iconmenu from "@/components/iconmenu.vue";
 import firebase1 from "@firebase/app";
-import navmenu from "./navmenu";
+import mobilenavbar from "./mobilenavbar";
 export default {
   name: "Navbar",
   props: {},
@@ -98,7 +98,7 @@ export default {
     };
   },
 
-  components: { Popup, navmenu, iconmenu },
+  components: { Popup, mobilenavbar, iconmenu },
   methods: {
     routersearch() {
       this.$router.push({
