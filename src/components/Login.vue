@@ -179,8 +179,20 @@ export default {
                   .catch(error => {
                     // An error happened.
                   });
+
+                user
+                  .updateProfile({
+                    displayName: this.name,
+                    photoURL: "/img/svg/man.svg"
+                  })
+                  .then(function() {
+                    // Update successful.
+                  })
+                  .catch(function(error) {
+                    // An error happened.
+                  });
                 $("#login").modal("hide");
-                this.$router.push({ name: "accounts/profiles1" });
+                this.$router.push({ name: "profile1" });
               })
               .catch(error => {
                 // Handle Errors here.

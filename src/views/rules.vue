@@ -169,12 +169,23 @@ body {
 @media screen and (max-width: 600px) {
   .skw-pages {
     overflow: hidden;
-    position: relative;
-    min-height: 100vh;
-    width: 400px;
+
+    height: 100vh;
+    width: auto + 200px;
     padding: 0;
     margin: 0px;
+    left: 0;
   }
+  .skw-page {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  .skw-page-1 .skw-page__half--left .skw-page__content {
+  }
+}
+.rules {
+  margin: 0 -10px;
 }
 .skw-pages {
   overflow: hidden;
@@ -218,11 +229,11 @@ body {
   overflow: hidden;
   position: absolute;
   top: 0;
+
   width: 140%;
   height: 100%;
   -webkit-transform: skewX(-18deg);
   transform: skewX(-18deg);
-  background: #000;
 }
 .skw-page__half--left .skw-page__skewed {
   left: -40%;

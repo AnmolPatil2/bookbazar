@@ -38,7 +38,7 @@ const router = new Router({
       component: Home
     },
     {
-      path: "/searchresults",
+      path: "/searchresults/:searchresult",
       name: "searchresults",
       component: searchresults
     },

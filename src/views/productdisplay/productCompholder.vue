@@ -17,9 +17,7 @@ export default {
     psection,
     section2
   },
-  mounted() {
-    console.log(this.$route.params.id);
-  }
+  mounted() {}
 };
 </script>
 <style>

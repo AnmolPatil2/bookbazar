@@ -65,7 +65,7 @@
       v-model="drawer"
       class="hidden-sm-and-up"
       temporary
-      width="270"
+      width="260"
       id="drawer"
     >
       <v-list>

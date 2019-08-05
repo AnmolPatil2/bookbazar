@@ -1,8 +1,9 @@
 <template>
-  <div class="search">
-    <iconmenu />
+  <div class="searchresult">
+    <Navbar />
     <div class="container">
-      <input type="text" v-model="searchString" placeholder="Search..." />
+      <!--<p class="something">Search Other Books</p>-->
+      <input type="text" v-model="searchString" placeholder="Subject...." />
       <div class="search"></div>
     </div>
     <div class="space"></div>
@@ -22,29 +23,19 @@
 <script>
 import { fb, db } from "../firebase";
 import iconmenu from "@/components/iconmenu.vue";
+import Navbar from "@/components/Navbar.vue";
 import ProductCard from "@/components/product.grid.vue";
 export default {
   name: "searchresult",
   components: {
     ProductCard,
-    iconmenu
+    iconmenu,
+    Navbar
   },
   data() {
     return {
       searchString: null,
-      swiperOption: {
-        slidesPerView: 5,
-        centeredSlides: false,
-        spaceBetween: 2,
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true
-        },
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev"
-        }
-      },
+
       mapping: {
         id: "_id",
         name: "name",
@@ -117,15 +108,17 @@ export default {
       ];
       // your logic ...
       console.log("favorite product=>", this.items[index], "status=>", status);
-    },
-    clicked_slot(slot) {
-      console.log("clicked slot=>", slot);
     }
+  },
+  mounted() {
+    this.searchString = this.$route.params.searchresult;
   },
   computed: {
     results: function() {
       return this.searchresult.filter(product => {
-        return product.name.match(this.searchString);
+        var name = product.name.toLowerCase();
+
+        return name.match(this.searchString);
       });
     }
   },
@@ -144,17 +137,11 @@ export default {
   padding: 0;
   box-sizing: border-box;
 }
-
-html,
-body {
-  width: 100%;
-  height: 100%;
+.something {
+  position: relative;
+  top: 20px;
+  left: -20px;
 }
-
-body {
-  background: #252525;
-}
-
 .container {
   position: absolute;
 
@@ -172,8 +159,8 @@ body {
   right: 0;
   bottom: 0;
   left: 0;
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   background: crimson;
   border-radius: 50%;
   transition: all 1s;
@@ -274,5 +261,9 @@ body {
 .space {
   height: 50px;
   position: relative;
+}
+.searchresult {
+  position: relative;
+  top: 80px;
 }
 </style>

@@ -14,11 +14,12 @@
             <img src="/img/svg/books1.jpeg" />
             <h1 class="white--text">P-Cycle</h1>
             <div class="pricing text-center">
-              <v-btn
-                @click="ComboOrder()"
-                color="black"
-                class="px-5 py-2 mb-5 white--text"
-              >Purchase Now</v-btn>
+              <v-btn @click="ComboOrder()" color="black" class="px-2 py-2 mb-5 white--text">
+                <i class="fa fa-shopping-bag px-1" aria-hidden="true"></i>Order
+              </v-btn>
+              <v-btn color="black" class="px-2 py-2 mb-5 white--text">
+                <i class="fas fa-eye px-1"></i>Viwe
+              </v-btn>
             </div>
           </div>
           <!--
@@ -35,11 +36,13 @@
             <img src="/img/svg/books2.jpeg" />
             <h1 class="white--text">C-Cycle</h1>
             <div class="pricing text-center">
-              <v-btn
-                @click="ComboOrder()"
-                color="black"
-                class="px-5 py-2 mb-5 white--text"
-              >Purchase Now</v-btn>
+              <v-btn @click="ComboOrder()" color="black" class="px-2 py-2 mb-5 white--text">
+                <i class="fa fa-shopping-bag px-1" aria-hidden="true"></i>Order
+              </v-btn>
+
+              <v-btn color="black" class="px-2 py-2 mb-5 white--text">
+                <i class="fas fa-eye px-1"></i>Viwe
+              </v-btn>
             </div>
           </div>
           <!--
@@ -326,19 +329,16 @@ body {
 .somelines {
   color: #2e2c2caf;
   font-size: 3vmin;
-  padding-bottom: 10vmin;
+  padding-bottom: 3vmin;
 }
 
 p {
   line-height: 1.5;
 }
 .writting {
-  padding-top: 5vmin;
-  padding-bottom: 0.1em;
   font-family: "lobster", cursive;
 }
 .container {
-  max-width: 1000px;
   margin: 0 auto;
 }
 .pricing {
@@ -436,7 +436,7 @@ p {
   position: relative;
   width: 90%;
   margin-left: 3%;
-  margin-top: 20px;
+  margin-top: -20%;
   z-index: 5;
   max-height: 650px;
 }
@@ -461,7 +461,7 @@ p {
   display: block;
   position: absolute;
   right: 12px;
-  top: 12px;
+  top: -30%;
   width: 30px;
   height: 30px;
 }
@@ -549,13 +549,25 @@ p {
   .cardsoffer-column {
     width: 90%;
   }
+  .close-content {
+    display: block;
+    position: absolute;
+    right: 12px;
+    top: -95%;
+    width: 30px;
+    height: 30px;
+  }
+  .open-content img {
+    position: relative;
+    width: 90%;
+    margin-left: 3%;
+    margin-top: -90%;
+    z-index: 5;
+    max-height: 650px;
+  }
 
   .column-1 {
     padding-top: 0px;
-  }
-
-  .open-content img {
-    margin-top: 40px;
   }
 }
 </style>

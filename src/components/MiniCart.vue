@@ -58,9 +58,6 @@ export default {
       $("#miniCart").modal("hide");
       this.$router.push("/checkout");
     }
-  },
-  created() {
-    console.log(this.$store.state.cart);
   }
 };
 </script>

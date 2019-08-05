@@ -1,13 +1,22 @@
 <template>
   <div class="products white" id="products">
+    <div v-if="products==null" class="loader_space">
+      <atom-spinner class="loader" :animation-duration="1000" :size="200" color="#ff1d5e" />
+      <h2 class="red--text loader">loading....</h2>
+    </div>
     <!--best seller-->
-    <md-card class>
+
+    <div v-if="products!=null">
       <h1 class="writting text-left">Best Seller so Far</h1>
 
       <!-- swiper  -->
       <swiper :options="swiperOption" class>
-        <swiper-slide v-for="(product,index) in products" :key="index">
-          <v-responsive class @click="product_select(product)">
+        <swiper-slide v-for="(product,index) in products" :key="index" id="itemdisplay">
+          <v-responsive
+            class
+            v-scroll-reveal.reset="{ delay: 150+ (index*400)}"
+            @click="product_select(product)"
+          >
             <v-container hide-delimiters class>
               <img :src="product.images" class="card-img-top imagesD" alt="...." />
             </v-container>
@@ -17,56 +26,59 @@
         <div class="swiper-button-prev" slot="button-prev"></div>
         <div class="swiper-button-next" slot="button-next"></div>
       </swiper>
-    </md-card>
-    <!--folds-->
-    <cardsdisplay />
-    <numbers />
-    <div id="itemdisplay">
-      <product-card
-        :items="items"
-        :options="options"
-        :mapping="mapping"
-        @widgetClick="product_select"
-        @widgetCart="product_to_cart"
-        @widgetRating="product_rating"
-        @widgetFavorite="product_favorite"
-      />
+
+      <!--folds-->
+      <cardsdisplay />
+      <numbers />
+      <div id="itemdisplay" v-scroll-reveal="{ delay: 250 }">
+        <product-card
+          :items="items"
+          :options="options"
+          :mapping="mapping"
+          @widgetClick="product_select"
+          @widgetCart="product_to_cart"
+          @widgetRating="product_rating"
+          @widgetFavorite="product_favorite"
+        />
+      </div>
+      <v-container class>
+        <v-layout row wrap>
+          <v-flex xs6 sm6 md4 lg3 v-for="(product,index) in products" :key="index">
+            <v-card flat class="text-xs-center mx-3">
+              <v-responsive class @click="product_select(product)">
+                <v-container hide-delimiters class="ma-0 pa-0">
+                  <carousel :perPage="1">
+                    <slide v-for="(img,index) in product.images " :key="index">
+                      <img :src="img" class="card-img-top" alt="...." />
+                    </slide>
+                  </carousel>
+                </v-container>
+              </v-responsive>
+              <v-card-text>
+                <div class="subheading">{{product.name}}</div>
+                <div class="grey--text">{{product.price}}</div>
+              </v-card-text>
+              <v-card-actions>
+                <v-btn flat color="grey">
+                  <add-to-cart
+                    :image="getImage(product.images)"
+                    :p-id="product.id"
+                    :price="priceconvet(product.sale)"
+                    :name="product.name"
+                  ></add-to-cart>
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-flex>
+        </v-layout>
+      </v-container>
     </div>
-    <v-container class>
-      <v-layout row wrap>
-        <v-flex xs6 sm6 md4 lg3 v-for="(product,index) in products" :key="index">
-          <v-card flat class="text-xs-center mx-3">
-            <v-responsive class @click="product_select(product)">
-              <v-container hide-delimiters class="ma-0 pa-0">
-                <carousel :perPage="1">
-                  <slide v-for="(img,index) in product.images " :key="index">
-                    <img :src="img" class="card-img-top" alt="...." />
-                  </slide>
-                </carousel>
-              </v-container>
-            </v-responsive>
-            <v-card-text>
-              <div class="subheading">{{product.name}}</div>
-              <div class="grey--text">{{product.price}}</div>
-            </v-card-text>
-            <v-card-actions>
-              <v-btn flat color="grey">
-                <add-to-cart
-                  :image="getImage(product.images)"
-                  :p-id="product.id"
-                  :price="priceconvet(product.sale)"
-                  :name="product.name"
-                ></add-to-cart>
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-flex>
-      </v-layout>
-    </v-container>
   </div>
 </template>
 
 <script>
+import { BreedingRhombusSpinner } from "epic-spinners";
+import { AtomSpinner } from "epic-spinners";
 import { fb, db } from "../firebase";
 import "swiper/dist/css/swiper.css";
 import numbers from "@/components/numbershow.vue";
@@ -79,6 +91,7 @@ export default {
   props: {},
   components: {
     Carousel,
+    AtomSpinner,
     Slide,
     numbers,
     swiper,
@@ -89,12 +102,13 @@ export default {
   data() {
     return {
       loading: true,
-      products: [],
+      products: null,
       offers: [],
       items: [],
       activeItem: null,
       numberofslides: 11,
       modal: null,
+      dd: this.numberofslides,
       swiperOption: {
         slidesPerView: 5,
         centeredSlides: false,
@@ -102,6 +116,18 @@ export default {
         pagination: {
           el: ".swiper-pagination",
           clickable: true
+        },
+        breakpoints: {
+          640: {
+            freemode: true,
+            slidesPerView: 2,
+            spaceBetween: 20
+          },
+          320: {
+            freemode: true,
+            slidesPerView: 2,
+            spaceBetween: 20
+          }
         },
         navigation: {
           nextEl: ".swiper-button-next",
@@ -144,29 +170,14 @@ export default {
   },
   mounted() {
     this.loading = false;
-
-    var x = window.matchMedia("(max-width: 700px)");
-
-    if (x) {
-      // If media query matches
-      this.numberofslides = 2;
-    } else {
-      this.numberofslides = 5;
-    }
   },
   methods: {
-    product_select(product) {
-      this.$router.push({
-        name: "productCompholder",
-        params: { id: product.id }
-      });
-    },
     getImage(images) {
       return images[0];
     },
     priceconvet(productsale) {
       let sale = productsale.toString();
-      console.log(this.sale);
+
       return productsale.toString();
     },
 
@@ -178,6 +189,7 @@ export default {
     },
     product_to_cart(product) {
       // your logic ...
+
       console.log("add_to_cart product=>", product);
     },
     product_rating(rating, product) {
@@ -228,6 +240,16 @@ export default {
   padding-top: 5vmin;
   padding-bottom: 0.1em;
   font-family: "lobster", cursive;
+}
+.loader_space {
+  position: relative;
+  height: 300px;
+}
+.loader {
+  position: absolute;
+
+  left: 50%;
+  margin-left: -50px;
 }
 .append-buttons {
   text-align: center;

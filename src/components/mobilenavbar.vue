@@ -9,11 +9,33 @@
 
             <a href="/">Bookoo</a>
             <div id="close-sidebar" @click="closeMenu">
-              <i class="fas fa-times"></i>
+              <i class></i>
             </div>
           </div>
-          <!-- sidebar-header  -->
-          <div class="sidebar-item sidebar-header">
+          <!-- sidebar-header -->
+          <div class="navhead" v-if="!user">
+            <div class="sidebar-item sidebar-header">
+              <div class="user-pic">
+                <img
+                  data-toggle="modal"
+                  data-target="#login"
+                  v-if="!user"
+                  src="/img/svg/login1.svg"
+                  width="50px"
+                  height="30px"
+                />
+              </div>
+
+              <div class="user-info">
+                <span class="user-name p-4">
+                  <strong>Login</strong>
+                </span>
+                <span class="user-role"></span>
+              </div>
+            </div>
+          </div>
+
+          <div v-if="user" class="sidebar-item sidebar-header">
             <div class="user-pic">
               <img class="img-responsive img-rounded" :src="user.photo" alt="User picture" />
             </div>
@@ -28,38 +50,85 @@
               </span>
             </div>
           </div>
-          <!-- sidebar-search  -->
+
+          <!-- sidebar-search-->
           <div class="sidebar-item sidebar-search">
-            <div></div>
+            <div>
+              <div class="input-group">
+                <input
+                  type="text"
+                  class="form-control search-menu"
+                  v-model="searchresult"
+                  placeholder="Subject..."
+                />
+                <div class="input-group-append">
+                  <span class="input-group-text">
+                    <i class="fa fa-search" @click="search()" aria-hidden="true"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
-          <!-- sidebar-menu  -->
+          <!-- sidebar-menu-->
           <div class="sidebar-item sidebar-menu">
             <ul>
               <li class="header-menu">
                 <span>Menu</span>
               </li>
 
-              <li>
-                <router-link to="/accounts/overview1">
-                  <i class="fa fa-chart-line"></i>
-                  <span>Overview</span>
+              <li class="mx-3">
+                <router-link to="/rules">
+                  <i class="fas fa-dollar-sign"></i>
+                  <span>Sell</span>
                 </router-link>
               </li>
 
-              <li>
+              <li class="mx-3">
+                <router-link to="/rules">
+                  <i class="fa fa-shopping-bag"></i>
+                  <span>Buy</span>
+                </router-link>
+              </li>
+
+              <li class="mx-3">
+                <router-link to="/rules">
+                  <i class="fa fa-user"></i>
+                  <span>Donate</span>
+                </router-link>
+              </li>
+              <li class="mx-3">
+                <a href="#">
+                  <i class="fas fa-question"></i>
+                  <span>Help</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <!-- sidebar-menu  -->
+
+          <!-- sidebar-search-->
+
+          <!-- sidebar-menu  -->
+          <div v-if="user" class="sidebar-item sidebar-menu">
+            <ul>
+              <li class="header-menu">
+                <span>Accounts</span>
+              </li>
+
+              <li class="mx-3">
                 <router-link to="/accounts/orders1">
                   <i class="fa fa-shopping-cart"></i>
                   <span>Orders</span>
                 </router-link>
               </li>
 
-              <li>
+              <li class="mx-3">
                 <router-link to="/accounts/profile1">
                   <i class="fa fa-user"></i>
                   <span>Profile</span>
                 </router-link>
               </li>
-              <li>
+              <li class="mx-3">
                 <a href="#" @click="logout()">
                   <i class="fa fa-power-off"></i>
                   <span>Logout</span>
@@ -91,6 +160,7 @@ export default {
     return {
       name: null,
       email: null,
+      searchresult: null,
       user: []
     };
   },
@@ -100,21 +170,32 @@ export default {
 
   created() {
     let user = fb.auth().currentUser;
-    this.email = user.email;
-    let ref = db.collection("profiles");
+    if (user == null) {
+      this.user = null;
+    } else {
+      this.email = user.email;
+      let ref = db.collection("profiles");
 
-    ref
-      .where("aui", "==", firebase.auth().currentUser.uid)
-      .get()
-      .then(snapshot => {
-        snapshot.forEach(user => {
-          this.user = user.data();
+      ref
+        .where("aui", "==", firebase.auth().currentUser.uid)
+        .get()
+        .then(snapshot => {
+          snapshot.forEach(user => {
+            this.user = user.data();
+          });
         });
-      });
+    }
   },
   methods: {
     closeMenu() {
       //$(".page-wrapper").toggleClass("toggled");
+    },
+    search() {
+      this.$router.push({
+        name: "searchresults",
+        params: { searchresult: this.searchresult }
+      });
+      this.searchresult;
     },
 
     logout() {
@@ -140,5 +221,7 @@ export default {
 .user-info {
   position: absolute;
   left: 80px;
+}
+.admin {
 }
 </style>

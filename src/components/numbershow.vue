@@ -34,41 +34,39 @@
 export default {
   name: "numbers",
   mounted() {
-    if (null) {
-      let nCount = selector => {
-        $(selector).each(function() {
-          $(this).animate(
-            {
-              Counter: $(this).text()
-            },
-            {
-              // A string or number determining how long the animation will run.
-              duration: 4000,
-              // A string indicating which easing function to use for the transition.
-              easing: "swing",
-              /**
-               * A function to be called for each animated property of each animated element.
-               * This function provides an opportunity to
-               *  modify the Tween object to change the value of the property before it is set.
-               */
-              step: function(value) {
-                $(this).text(Math.ceil(value));
-              }
+    let nCount = selector => {
+      $(selector).each(function() {
+        $(this).animate(
+          {
+            Counter: $(this).text()
+          },
+          {
+            // A string or number determining how long the animation will run.
+            duration: 4000,
+            // A string indicating which easing function to use for the transition.
+            easing: "swing",
+            /**
+             * A function to be called for each animated property of each animated element.
+             * This function provides an opportunity to
+             *  modify the Tween object to change the value of the property before it is set.
+             */
+            step: function(value) {
+              $(this).text(Math.ceil(value));
             }
-          );
-        });
-      };
-
-      let a = 0;
-      $(window).scroll(function() {
-        // The .offset() method allows us to retrieve the current position of an element  relative to the document
-        let oTop = $(".numbers").offset().top - window.innerHeight;
-        if (a == 0 && $(window).scrollTop() >= oTop) {
-          a++;
-          nCount(".rect > h1");
-        }
+          }
+        );
       });
-    }
+    };
+
+    let a = 0;
+    $(window).scroll(function() {
+      // The .offset() method allows us to retrieve the current position of an element  relative to the document
+      let oTop = $(".numbers").offset().top - window.innerHeight;
+      if (a == 0 && $(window).scrollTop() >= oTop) {
+        a++;
+        nCount(".rect > h1");
+      }
+    });
   }
 };
 </script>
@@ -76,11 +74,45 @@ export default {
 * {
   box-sizing: border-box;
 }
-@media only screen and (max-width: 768px) {
+
+@media screen and (max-width: 600px) {
   .section-2 .cover {
     background-position: -25vmin -10vmin;
   }
+  .numbers .rect {
+    position: relative;
+    z-index: 1;
+    background: white;
+    width: 4rem;
+    height: 8rem;
+    padding-top: 3.5vmin;
+    margin: 1rem;
+    border-radius: 0.5em;
+    box-shadow: 1px 2px 50px 0px rgba(255, 0, 0, 0.349);
+  }
+  .numbers .rect h1 {
+    font-size: 2rem;
+  }
 }
+@media screen and (min-width: 600px) {
+  .numbers .rect {
+    position: relative;
+    z-index: 1;
+    background: white;
+    width: 17rem;
+    height: 12rem;
+    padding-top: 3.5vmin;
+    margin: 1rem;
+    border-radius: 0.5em;
+    box-shadow: 1px 2px 50px 0px rgba(255, 0, 0, 0.349);
+  }
+
+  .numbers .rect h1 {
+    font-size: 7rem;
+    color: tomato;
+  }
+}
+
 header,
 section {
   overflow-x: hidden;
@@ -126,27 +158,6 @@ section {
   font-family: "Rubik", sans-serif;
   font-size: 2vmin;
   color: #e5e5e5;
-}
-
-.numbers .rect {
-  position: relative;
-  z-index: 1;
-  background: white;
-  width: 17rem;
-  height: 12rem;
-  padding-top: 3.5vmin;
-  margin: 1rem;
-  border-radius: 0.5em;
-  box-shadow: 1px 2px 50px 0px rgba(255, 0, 0, 0.349);
-}
-
-.numbers {
-  margin-top: -15vmin;
-}
-
-.numbers .rect h1 {
-  font-size: 7rem;
-  color: tomato;
 }
 
 .numbers .rect > p {

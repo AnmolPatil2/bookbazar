@@ -72,13 +72,14 @@
             </v-card-text>
             <v-card-actions>
               <v-btn flat color="grey">
-                <i class="fa fa-shopping-cart"></i> add to cart
                 <add-to-cart
                   :image="getImage(product.images)"
                   :p-id="product.id"
                   :price="priceconvet(product.sale)"
                   :name="product.name"
-                ></add-to-cart>
+                >
+                  <i class="fa fa-shopping-cart"></i>
+                </add-to-cart>
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -368,6 +369,7 @@ export default {
 .Title-what-to-do {
   text-align: center;
 }
+
 .loaders {
   align-content: center;
   margin: 250px 50%;
@@ -376,6 +378,7 @@ export default {
   height: 167px;
   width: 157px;
 }
+
 .card-body {
 }
 section {

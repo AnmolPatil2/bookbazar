@@ -1,11 +1,47 @@
 <template>
   <div>
+    <section class="section-3 container-fluid p-0 text-center">
+      <div class="row">
+        <div class="col-md-12 col-sm-12">
+          <h1>About our Community</h1>
+          <p v-scroll-reveal.reset="{ delay: 250}">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum exercitationem alias perspiciatis omnis quod possimus odit
+            voluptatum! Sunt ea quasi praesentium, tenetur doloribus animi obcaecati, sint nemo quae laudantium iusto unde
+            eaque nostrum nobis voluptatum
+          </p>
+        </div>
+      </div>
+      <div class="platform row" v-scroll-reveal.reset="{ delay: 550 }">
+        <div class="col-md-6 col-sm-12 text-right">
+          <div class="desktop shadow-lg">
+            <div class="d-flex flex-row justify-content-center">
+              <i class="fa fa-whatsapp-alt fa-3x py-2 pr-3"></i>
+              <div class="text text-left">
+                <h3 class="pt-1 m-0">Telegram</h3>
+                <p class="p-0 m-0">On whatsapp</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-12 text-left">
+          <div class="desktop shadow-lg">
+            <div class="d-flex flex-row justify-content-center">
+              <i class="fas fa-mobile-alt fa-3x py-2 pr-3"></i>
+              <div class="text text-left">
+                <h3 class="pt-1 m-0">Join Now</h3>
+                <p class="p-0 m-0">On whatsapp</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
     <!--test-->
     <h1 class="writting text-left">Best Seller so Far</h1>
     <v-container>
       <v-layout row wrap class>
         <v-flex xs6 sm6 md4 lg3 v-for="(product,index) in products" :key="index">
-          <v-card class="cardh">
+          <v-card v-scroll-reveal.reset="{ delay: 150+ (index*400)}" class="cardh">
             <div class="imageh">
               <img :src="product.images" class="card-img-top imagesD" alt="...." />
             </div>
@@ -33,42 +69,7 @@
       </v-layout>
     </v-container>
     <!--community-->
-    <section class="section-3 container-fluid p-0 text-center">
-      <div class="row">
-        <div class="col-md-12 col-sm-12">
-          <h1>About our Community</h1>
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum exercitationem alias perspiciatis omnis quod possimus odit
-            voluptatum! Sunt ea quasi praesentium, tenetur doloribus animi obcaecati, sint nemo quae laudantium iusto unde
-            eaque nostrum nobis voluptatum
-          </p>
-        </div>
-      </div>
-      <div class="platform row">
-        <div class="col-md-6 col-sm-12 text-right">
-          <div class="desktop shadow-lg">
-            <div class="d-flex flex-row justify-content-center">
-              <i class="fa fa-whatsapp-alt fa-3x py-2 pr-3"></i>
-              <div class="text text-left">
-                <h3 class="pt-1 m-0">Telegram</h3>
-                <p class="p-0 m-0">On whatsapp</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-sm-12 text-left">
-          <div class="desktop shadow-lg">
-            <div class="d-flex flex-row justify-content-center">
-              <i class="fas fa-mobile-alt fa-3x py-2 pr-3"></i>
-              <div class="text text-left">
-                <h3 class="pt-1 m-0">Join Now</h3>
-                <p class="p-0 m-0">On whatsapp</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+
     <!-- swiper  
     <swiper :options="swiperOption" class="swipers">
       <swiper-slide>
@@ -99,7 +100,7 @@
       <div class="swiper-button-prev" slot="button-prev"></div>
       <div class="swiper-button-next" slot="button-next"></div>
     </swiper>
-    -->
+   
     <h1 class="writting text-left mx-3">Best Seller so Far</h1>
     <v-container>
       <v-layout class="wrapper">
@@ -115,6 +116,7 @@
         </v-flex>
       </v-layout>
     </v-container>
+    -->
   </div>
 </template>
 <script>
