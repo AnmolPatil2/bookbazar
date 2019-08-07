@@ -93,7 +93,7 @@ const router = new Router({
       component: tp
     },
     {
-      path: "/admin",
+      path: "/YoYoadminokaymaEJSCJEWNSCJOSNAJDECMSIH",
       name: "admin",
       component: Admin,
       meta: { requiresAuth: true },
@@ -178,7 +178,8 @@ router.beforeEach((to, from, next) => {
     next('/')
   } else if (requiresAuth && currentUser) {
     next()
-  } else {
+  }
+  else {
     next()
   }
 })

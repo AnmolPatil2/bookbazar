@@ -4,7 +4,7 @@
       <div class="intro h-100">
         <div class="row h-100 justify-content-center align-items-center">
           <div class="col-md-6">
-            <h3>Overview Page</h3>
+            <h3>Overview</h3>
             <p>Coming Soon !!!</p>
           </div>
           <div class="col-md-6">

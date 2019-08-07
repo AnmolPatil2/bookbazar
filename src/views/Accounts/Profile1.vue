@@ -186,27 +186,15 @@ export default {
       }
     };
   },
-  mounted() {
+  created() {
     const user = firebase1.auth().currentUser;
     if (user.email == null) {
-      db.collection("profiles")
-        .add({
-          aui: user.uid
-        })
-        .then(() => {
-          this.profile.phone = user.displayName;
-          this.reroute = 2;
-        });
     } else {
-      db.collection("profiles")
-        .add({
-          aui: user.uid
-        })
-        .then(() => {
-          this.profile.email = user.email;
-          this.profile.name = user.displayName;
-          this.reroute = 1;
-        });
+      console.log("s");
+
+      this.profile.email = user.email;
+      this.profile.name = user.displayName;
+      this.reroute = 1;
     }
   },
   methods: {
@@ -262,8 +250,7 @@ export default {
         });
     },
     uploadImage() {}
-  },
-  created() {}
+  }
 };
 </script>
 

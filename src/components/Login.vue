@@ -145,6 +145,10 @@ export default {
         .auth()
         .signInWithPopup(provider)
         .then(() => {
+          const user = firebase1.auth().currentUser;
+          db.collection("profiles").add({
+            aui: user.uid
+          });
           $("#login").modal("hide");
           this.$router.push({ name: "profile1" });
         });

@@ -56,32 +56,32 @@
               </li>
 
               <li>
-                <router-link to="/admin/overview">
+                <router-link to="/YoYoadminokaymaEJSCJEWNSCJOSNAJDECMSIH/overview">
                   <i class="fa fa-chart-line"></i>
                   <span>Overview</span>
                 </router-link>
               </li>
               <li>
-                <router-link to="/admin/products">
+                <router-link to="/YoYoadminokaymaEJSCJEWNSCJOSNAJDECMSIH/products">
                   <i class="fab fa-amazon"></i>
                   <span>Products</span>
                 </router-link>
               </li>
               <li>
-                <router-link to="/admin/orders">
+                <router-link to="/YoYoadminokaymaEJSCJEWNSCJOSNAJDECMSIH/orders">
                   <i class="fa fa-shopping-cart"></i>
                   <span>Orders</span>
                 </router-link>
               </li>
               <li>
-                <router-link to="/admin/ordersbuy">
+                <router-link to="/YoYoadminokaymaEJSCJEWNSCJOSNAJDECMSIH/ordersbuy">
                   <i class="fa fa-shopping-cart"></i>
                   <span>Ordersbuy</span>
                 </router-link>
               </li>
 
               <li>
-                <router-link to="/admin/profile">
+                <router-link to="/YoYoadminokaymaEJSCJEWNSCJOSNAJDECMSIH/profile">
                   <i class="fa fa-user"></i>
                   <span>Profile</span>
                 </router-link>
