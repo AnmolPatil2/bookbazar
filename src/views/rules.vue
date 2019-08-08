@@ -130,7 +130,9 @@ export default {
         curPage++;
         pagination();
       }
-
+      //$(document).on("touchmove", function(e) {
+      // $(document).trigger("mousewheel");
+      // });
       $(document).on("mousewheel DOMMouseScroll", function(e) {
         if (scrolling) return;
         if (e.originalEvent.wheelDelta > 0 || e.originalEvent.detail < 0) {
@@ -138,6 +140,20 @@ export default {
         } else {
           navigateDown();
         }
+      });
+      $(document).on("touchstart", function(e) {
+        var startingY = e.originalEvent.touches[0].pageY;
+
+        $(document).on("touchmove", function(e) {
+          currentY = e.originalEvent.touches[0].pageY;
+          var delta = currentY - startingY;
+          if (scrolling) return;
+          if (delta > 0) {
+            navigateUp();
+          } else if (delta < 0) {
+            navigateDown();
+          }
+        });
       });
 
       $(document).on("keydown", function(e) {
@@ -185,7 +201,6 @@ body {
   }
 }
 .rules {
-  margin: 0 -10px;
 }
 .skw-pages {
   overflow: hidden;
@@ -261,14 +276,10 @@ body {
   background-size: cover;
 }
 .skw-page__half--left .skw-page__content {
-  padding-left: 30%;
-  padding-right: 30%;
   -webkit-transform-origin: 100% 0;
   transform-origin: 100% 0;
 }
 .skw-page__half--right .skw-page__content {
-  padding-left: 30%;
-  padding-right: 30%;
   -webkit-transform-origin: 0 100%;
   transform-origin: 0 100%;
 }

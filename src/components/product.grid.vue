@@ -45,14 +45,14 @@
         <div class="widget-button">
           <button
             class="widget-button-icon"
-            :style="{ color: options.icons_color }"
+            :style="{ color: 'blue' }"
             v-if="!item[mapping.isfavorite]"
             v-html="options.btn_1"
             @click="product_favorite(index,!item.isfavorite)"
           ></button>
           <button
             class="widget-button-icon"
-            :style="{ color: options.icons_color }"
+            :style="{ color: 'blue' }"
             v-if="item[mapping.isfavorite]"
             v-html="options.btn_1_on"
             @click="product_favorite(index,!item.isfavorite)"
@@ -73,7 +73,7 @@
         <div class="widget-button">
           <button
             class="widget-button-icon"
-            :style="{ color: options.icons_color }"
+            :style="{ color: 'blue' }"
             v-html="options.btn_2"
             @click="product_cart(item);"
           ></button>

@@ -189,8 +189,15 @@ export default {
     },
     product_to_cart(product) {
       // your logic ...
-
-      console.log("add_to_cart product=>", product);
+      var item = {
+        productName: product.name,
+        productImage: product.images,
+        productPrice: product.price,
+        productId: product.id,
+        productQuantity: 1
+      };
+      $("#miniCart").modal("show");
+      this.$store.commit("addToCart", item);
     },
     product_rating(rating, product) {
       // your logic ...

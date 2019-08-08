@@ -18,7 +18,7 @@
           <!-- sidebar-header  -->
           <div class="sidebar-item sidebar-header">
             <div class="user-pic">
-              <img class="img-responsive img-rounded" :src="user.photo" alt="User picture" />
+              <img class="img-responsive img-rounded" :src="user.photoURL" alt="User picture" />
             </div>
             <div class="user-info">
               <span class="user-name">
@@ -94,16 +94,17 @@ export default {
     return {
       name: null,
       email: null,
-      user: []
+      user: [],
+      photo: []
     };
   },
-  components: {
-    Hero
-  },
+  components: {},
 
   created() {
     let user = fb.auth().currentUser;
+    this.photo = user.photoURL;
     this.email = user.email;
+    this.name = user.displayName;
     let ref = db.collection("profiles");
 
     ref
@@ -113,7 +114,8 @@ export default {
         snapshot.forEach(user => {
           this.user = user.data();
         });
-      });
+      })
+      .then(() => {});
   },
   methods: {
     closeMenu() {

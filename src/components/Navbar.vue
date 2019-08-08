@@ -51,12 +51,17 @@
           v-if="!user"
         >Get Start</a>
         {{this.name }}
-        <i
-          data-toggle="modal"
-          data-target="#miniCart"
-          class="fa fa-shopping-cart px-3"
-          aria-hidden="true"
-        ></i>
+        <div id="ex4">
+          <span class="p1 fa-stack fa-2x has-badge" :data-count="`${count}`">
+            <i
+              data-toggle="modal"
+              data-target="#miniCart"
+              aria-hidden="true"
+              class="p3 fa fa-shopping-cart fa-stack-1x xfa-inverse"
+              data-count="4b"
+            ></i>
+          </span>
+        </div>
       </form>
     </v-toolbar>
 
@@ -87,7 +92,7 @@ export default {
   data() {
     return {
       drawer: null,
-
+      count: 5,
       user: null,
       name: null,
       links: [
@@ -132,5 +137,20 @@ export default {
 }
 .logo {
   padding-left: 50px;
+}
+#ex4 .p1[data-count]:after {
+  position: absolute;
+  right: 10%;
+  top: 8%;
+  content: attr(data-count);
+  font-size: 40%;
+  padding: 0.2em;
+  border-radius: 50%;
+  line-height: 1em;
+  color: white;
+  background: rgba(255, 0, 0, 0.85);
+  text-align: center;
+  min-width: 1em;
+  //font-weight:bold;
 }
 </style>

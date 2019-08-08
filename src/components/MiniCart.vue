@@ -22,15 +22,16 @@
               <li v-for="item in this.$store.state.cart" class="media">
                 <img :src="item.productImage" width="80px" class="align-self-center mr-3" alt />
                 <div class="media-body">
-                  <h5 class="mt-0">
-                    {{item.productName}}
-                    <v-chip
-                      close
-                      color="red float-right"
-                      text-color="white"
-                      @click="$store.commit('removeFromCart',item)"
-                    >Remove</v-chip>
-                  </h5>
+                  <h5 class="mt-0">{{item.productName}}</h5>
+                  <v-chip
+                    class="ma-2"
+                    @click="$store.commit('removeFromCart',item)"
+                    color="red right"
+                    text-color="white"
+                  >
+                    <i class="fa fa-trash px-2" aria-hidden="true "></i>Remove
+                  </v-chip>
+
                   <p class="mt-0">RS: {{item.productPrice }}</p>
                   <p class="mt-0">Quantity : {{item.productQuantity }}</p>
                 </div>

@@ -146,11 +146,32 @@ export default {
         .signInWithPopup(provider)
         .then(() => {
           const user = firebase1.auth().currentUser;
-          db.collection("profiles").add({
-            aui: user.uid
+          this.slug = slugify(user.displayName, {
+            replacement: "-",
+            remove: /[!@#$%^&*()]/g,
+            lower: true
           });
-          $("#login").modal("hide");
-          this.$router.push({ name: "profile1" });
+          let ref = db.collection("profiles").doc(this.slug);
+          ref.get().then(doc => {
+            if (doc.exists) {
+              $("#login").modal("hide");
+              this.$router.push({ name: "profile1" });
+            } else {
+              fb.auth()
+
+                .then(cred => {
+                  ref.set({
+                    name: this.name,
+                    aui: cred.user.uid,
+                    photo: "/img/svg/man.svg"
+                  });
+                })
+                .then(() => {
+                  $("#login").modal("hide");
+                  this.$router.push({ name: "profile1" });
+                });
+            }
+          });
         });
     },
     register() {
@@ -170,34 +191,40 @@ export default {
               .then(cred => {
                 ref.set({
                   name: this.name,
-
-                  user_id: cred.user.uid
+                  aui: cred.user.uid,
+                  photo: "/img/svg/man.svg"
                 });
               })
               .then(() => {
                 var user = firebase1.auth().currentUser;
-
-                user
-                  .sendEmailVerification()
-                  .then(() => {})
-                  .catch(error => {
-                    // An error happened.
-                  });
-
                 user
                   .updateProfile({
-                    displayName: this.name,
-                    photoURL: "/img/svg/man.svg"
+                    displayName: this.name
                   })
                   .then(function() {
                     // Update successful.
                   })
                   .catch(function(error) {
                     // An error happened.
+                    console.log(errorMessage);
                   });
+                user
+                  .sendEmailVerification()
+                  .then(() => {
+                    Toast.fire({
+                      type: "success",
+                      title: "Email Confermation sent"
+                    });
+                  })
+
+                  .catch(error => {
+                    // An error happened.
+                  });
+
                 $("#login").modal("hide");
                 this.$router.push({ name: "profile1" });
               })
+
               .catch(error => {
                 // Handle Errors here.
                 this.feedback = null;

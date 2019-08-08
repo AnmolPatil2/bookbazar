@@ -175,6 +175,7 @@ export default {
         name: null,
         phone: null
       },
+      user: [],
       account: {
         name: null,
         email: null,
@@ -187,11 +188,19 @@ export default {
     };
   },
   created() {
+    let ref = db.collection("profiles");
+
+    ref
+      .where("aui", "==", firebase1.auth().currentUser.uid)
+      .get()
+      .then(snapshot => {
+        snapshot.forEach(user => {
+          this.profile.name = user.data().name;
+        });
+      });
     const user = firebase1.auth().currentUser;
     if (user.email == null) {
     } else {
-      console.log("s");
-
       this.profile.email = user.email;
       this.profile.name = user.displayName;
       this.reroute = 1;
@@ -203,8 +212,11 @@ export default {
 
       user
         .sendEmailVerification()
-        .then(function() {
-          // Email sent.
+        .then(() => {
+          Toast.fire({
+            type: "info",
+            title: "Email Confermation sent"
+          });
         })
         .catch(function(error) {
           // An error happened.
@@ -226,6 +238,7 @@ export default {
     },
     updateProfile() {
       var user = firebase1.auth().currentUser;
+      console.log(user.uid);
       db.collection("profiles")
         .where("aui", "==", user.uid)
         .get()
@@ -234,11 +247,10 @@ export default {
             db.collection("profiles")
               .doc(doc.id)
               .update({
-                name: this.profile.name,
                 email: this.profile.email,
-                phone: this.profile.phone,
-                photo: user.photoURL
-              });
+                phone: this.profile.phone
+              })
+              .then(() => {});
           });
         })
         .then(() => {

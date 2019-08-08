@@ -34,7 +34,7 @@
 export default {
   name: "numbers",
   mounted() {
-    if ((this.$route = "/")) {
+    if ((this.$router.path = "/")) {
       let nCount = selector => {
         $(selector).each(function() {
           $(this).animate(

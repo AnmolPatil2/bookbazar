@@ -164,15 +164,14 @@ export default {
       user: []
     };
   },
-  components: {
-    Hero
-  },
+  components: {},
 
   created() {
     let user = fb.auth().currentUser;
     if (user == null) {
       this.user = null;
     } else {
+      this.email = user.email;
       this.email = user.email;
       let ref = db.collection("profiles");
 
