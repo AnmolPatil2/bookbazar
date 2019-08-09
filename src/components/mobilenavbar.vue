@@ -60,6 +60,7 @@
                   class="form-control search-menu"
                   v-model="searchresult"
                   placeholder="Subject..."
+                  @keyup.enter="search()"
                 />
                 <div class="input-group-append">
                   <span class="input-group-text">

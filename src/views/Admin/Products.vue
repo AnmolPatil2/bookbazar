@@ -9,12 +9,12 @@
             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Unde, ducimus.</p>
           </div>
           <div class="col-md-6">
-            <img src="/img/svg/products.svg" alt class="img-fluid">
+            <img src="/img/svg/products.svg" alt class="img-fluid" />
           </div>
         </div>
       </div>
 
-      <hr>
+      <hr />
 
       <div class="product-test">
         <h3 class="d-inline-block">Products list</h3>
@@ -74,7 +74,7 @@
                     placeholder="Product Name"
                     v-model="product.name"
                     class="form-control"
-                  >
+                  />
                 </div>
 
                 <div class="form-group">
@@ -84,7 +84,7 @@
               <!-- product sidebar -->
               <div class="col-md-4">
                 <h4 class="display-6">Product Details</h4>
-                <hr>
+                <hr />
 
                 <div class="form-group">
                   <input
@@ -92,7 +92,7 @@
                     placeholder="Product price"
                     v-model="product.price"
                     class="form-control"
-                  >
+                  />
                 </div>
 
                 <div class="form-group">
@@ -102,7 +102,7 @@
                     placeholder="Product tags"
                     v-model="tag"
                     class="form-control"
-                  >
+                  />
 
                   <div class="d-flex">
                     <p v-for="tag in product.tags">
@@ -113,13 +113,13 @@
 
                 <div class="form-group">
                   <label for="product_image">Product Images</label>
-                  <input type="file" @change="uploadImage" class="form-control">
+                  <input type="file" @change="uploadImage" class="form-control" />
                 </div>
 
                 <div class="form-group d-flex">
                   <div class="p-1" v-for="(image, index) in product.images">
                     <div class="img-wrapp">
-                      <img :src="image" alt width="80px">
+                      <img :src="image" alt width="80px" />
                       <span class="delete-img" @click="deleteImage(image,index)">X</span>
                     </div>
                   </div>
@@ -185,12 +185,9 @@ export default {
       this.product.images.splice(index, 1);
       image
         .delete()
-        .then(function() {
-          console.log("image deleted");
-        })
+        .then(function() {})
         .catch(function(error) {
           // Uh-oh, an error occurred!
-          console.log("an error occurred");
         });
     },
     addTag() {

@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <v-toolbar flat app color="white" class="black--text">
+    <v-toolbar app flat color="#557A95" class="black--text">
       <v-toolbar-side-icon
         @click="drawer = !drawer"
         class="grey--text hidden-sm-and-up"
@@ -9,7 +9,7 @@
 
       <v-toolbar-title class="text-uppercase black--text">
         <iconmenu />
-        <span class="font-weight-light logo">Bookoo</span>
+        <span color style="color: white" class="font-weight-light logo">Bookoo</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
 
@@ -129,11 +129,11 @@ export default {
   .navbar.custom-nav {
     padding-top: 16px;
     padding-bottom: 16px;
-    background-color: #9652ff;
+    background-color: black;
   }
 }
 #drawer {
-  background-color: #9652ff;
+  background-color: black;
 }
 .logo {
   padding-left: 50px;

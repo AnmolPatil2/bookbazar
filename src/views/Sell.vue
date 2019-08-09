@@ -71,16 +71,16 @@
               <div class="grey--text">{{product.price}}</div>
             </v-card-text>
             <v-card-actions>
-              <v-btn flat color="grey">
-                <add-to-cart
-                  :image="getImage(product.images)"
-                  :p-id="product.id"
-                  :price="priceconvet(product.sale)"
-                  :name="product.name"
-                >
-                  <i class="fa fa-shopping-cart"></i>
-                </add-to-cart>
-              </v-btn>
+              <v-btn flat color="grey" @click=" addNew(index, product) 
+               ">sell</v-btn>
+              <add-to-cart
+                :image="getImage(product.images)"
+                :p-id="product.id"
+                :price="priceconvet(product.sale)"
+                :name="product.name"
+              >
+                <i class="fa fa-shopping-cart"></i>
+              </add-to-cart>
             </v-card-actions>
           </v-card>
         </v-flex>
@@ -138,12 +138,18 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" v-if="modal == 'new'">Save changes</button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              v-if="modal == 'new'"
+              @click=" addProduct(product)"
+            >Save changes</button>
           </div>
         </div>
       </div>
     </div>
     <MiniCart />
+    <login />
   </div>
 </template>
 
@@ -238,17 +244,6 @@ export default {
           this.display = "displaybooks";
         });
     },
-    buy(product) {
-      var user = firebase1.auth().currentUser;
-
-      db.collection("sellorders").add({
-        bookid: product.id,
-        price: product.price,
-        status: "ongoing",
-        buyer: user.uid,
-        date: Date.now()
-      });
-    },
 
     //new functions
     deleteImage(img, index) {
@@ -300,32 +295,32 @@ export default {
       };
     },
     addNew(index, product) {
-      this.modal = "new";
-      this.reset(index);
-      $("#product").modal("show");
       var user = firebase1.auth().currentUser;
-
-      db.collection("buyorders").add({
-        bookid: product.id,
-        price: product.price,
-        status: "ongoing",
-        buyer: user.uid,
-        date: Date.now()
-      });
-
-      Toast.fire({
-        type: "success",
-        title: "Product created successfully"
-      });
-      $("#product").modal("hide");
+      if (user == null) {
+        Swal.fire({
+          title: "You must SignUp",
+          text: "Click on Navigation for a fun SignUp",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, SignUp"
+        }).then(result => {
+          if (result.value) {
+          }
+        });
+      } else {
+        this.modal = "new";
+        this.reset(index);
+        $("#product").modal("show");
+      }
     },
 
-    addProduct() {
+    addProduct(product) {
       var user = firebase1.auth().currentUser;
-
       db.collection("buyorders").add({
-        bookid: product.id,
-        price: product.price,
+        bookid: product.name,
+        price: product.sale,
         status: "ongoing",
         buyer: user.uid,
         date: Date.now()

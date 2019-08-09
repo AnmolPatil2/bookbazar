@@ -18,18 +18,21 @@
         @widgetFavorite="product_favorite"
       />
     </div>
+    <login></login>
   </div>
 </template>
 <script>
 import { fb, db } from "../firebase";
 import iconmenu from "@/components/iconmenu.vue";
 import Navbar from "@/components/Navbar.vue";
+import login from "@/components/Login.vue";
 import ProductCard from "@/components/product.grid.vue";
 export default {
   name: "searchresult",
   components: {
     ProductCard,
     iconmenu,
+    login,
     Navbar
   },
   data() {

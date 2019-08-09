@@ -37,7 +37,7 @@ window.Toast = Toast;
 Vue.component("Products-list", require("./sections/Products-list").default);
 Vue.component('add-to-cart', require('./components/AddToCart.vue').default);
 Vue.component('mini-cart', require('./components/MiniCart.vue').default);
-Vue.component('Popup', require('./components/Popup.vue').default);
+Vue.component('login', require('./components/Login.vue').default);
 
 import VueCarousel from 'vue-carousel';
 import VueAwesomeSwiper from 'vue-awesome-swiper';

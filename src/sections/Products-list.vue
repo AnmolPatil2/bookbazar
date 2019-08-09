@@ -30,7 +30,10 @@
       <!--folds-->
       <cardsdisplay />
       <numbers />
-      <div id="itemdisplay" v-scroll-reveal="{ delay: 250 }">
+      <div id="itemdisplay" class="mt-4" v-scroll-reveal="{ delay: 250 }">
+        <div>
+          <h2 class="mb-4">Must buy</h2>
+        </div>
         <product-card
           :items="items"
           :options="options"
@@ -80,6 +83,7 @@
 import { BreedingRhombusSpinner } from "epic-spinners";
 import { AtomSpinner } from "epic-spinners";
 import { fb, db } from "../firebase";
+import login from "@/components/Login.vue";
 import "swiper/dist/css/swiper.css";
 import numbers from "@/components/numbershow.vue";
 import ProductCard from "@/components/product.grid.vue";
@@ -94,6 +98,7 @@ export default {
     AtomSpinner,
     Slide,
     numbers,
+    login,
     swiper,
     swiperSlide,
     cardsdisplay,
@@ -210,6 +215,10 @@ export default {
       ];
       // your logic ...
       console.log("favorite product=>", this.items[index], "status=>", status);
+      Toast.fire({
+        type: "success",
+        title: "Added to favoutite"
+      });
     },
     clicked_slot(slot) {
       console.log("clicked slot=>", slot);
@@ -244,9 +253,11 @@ export default {
   margin: 0;
 }
 .writting {
-  padding-top: 5vmin;
+  padding-top: 6vmin;
+  padding-left: 2vmin;
   padding-bottom: 0.1em;
   font-family: "lobster", cursive;
+  display: block;
 }
 .loader_space {
   position: relative;
@@ -300,7 +311,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 
 body {

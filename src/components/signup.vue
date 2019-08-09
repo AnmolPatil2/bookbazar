@@ -5,7 +5,7 @@
     <div id="wrapper" class="auth1">
       <div id="dialog">
         <div v-if="otpsent">
-          <button class="close">×</button>
+          <button @click="back()" class="close">×</button>
           <h2>
             SignUp Using Phone
             Number
@@ -20,7 +20,8 @@
         </div>
         <div v-if="otpsent===false">
           <h3>Please enter the 6-digit verification code we sent via SMS:</h3>
-          <span>(we want to make sure it's you before we contact our movers)</span>
+          <span class="red--text" v-if="!sent">(randomly move your mouse or your sereen to get otp)</span>
+          <span class="red--text" v-if="sent">(check your phone to see otp)</span>
           <div id="form" class="input1">
             <input
               class="input1"
@@ -82,6 +83,7 @@
               max="9"
               pattern="[0-9]{1}"
             />
+
             <button @click="verifyOtp()" class="btn btn-primary btn-embossed">Verify</button>
           </div>
 
@@ -92,6 +94,8 @@
             <span id="timer"></span>
             <br />
             <a href="#" @click="otpsent=true">Change phone number</a>
+            <br />
+            <a href="#" @click="otpsent=true">Unable to get OTP ?</a>
           </div>
           <img
             src="http://jira.moovooz.com/secure/attachment/10424/VmVyaWZpY2F0aW9uLnN2Zw=="
@@ -104,6 +108,7 @@
 </template>
 
 <script>
+import { fb, db } from "../firebase";
 import firebase1 from "@firebase/app";
 export default {
   name: "signup",
@@ -119,7 +124,8 @@ export default {
       number3: "",
       number4: "",
       number5: "",
-      number6: ""
+      number6: "",
+      sent: false
     };
   },
   methods: {
@@ -140,7 +146,7 @@ export default {
             // SMS sent. Prompt user to type the code from the message, then sign the
             // user in with confirmationResult.confirm(code).
             window.confirmationResult = confirmationResult;
-
+            this.sent = true;
             alert("SMS sent");
           })
           .catch(function(error) {
@@ -150,6 +156,10 @@ export default {
         this.otpsent = false;
       }
     },
+    back() {
+      this.$router.go(-1);
+    },
+
     //
     verifyOtp() {
       this.otp =
@@ -174,7 +184,26 @@ export default {
             var user = result.user;
             // ...
             //route to set password !
+            let ref = db.collection("profiles").where("phone", "==", this.phNo);
+            ref.get().then(doc => {
+              if (doc.exists) {
+                this.$router.push({ name: "profile1" });
+              } else {
+                fb.auth()
 
+                  .then(cred => {
+                    ref.set({
+                      phone: this.phNo,
+                      aui: cred.user.uid,
+                      photo: "/img/svg/man.svg"
+                    });
+                  })
+                  .then(() => {
+                    $("#login").modal("hide");
+                    this.$router.push({ name: "profile1" });
+                  });
+              }
+            });
             vm.$router.push({
               name: "profile1"
             });

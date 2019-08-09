@@ -52,7 +52,7 @@
           ></button>
           <button
             class="widget-button-icon"
-            :style="{ color: 'blue' }"
+            :style="{ color: this.colorheart }"
             v-if="item[mapping.isfavorite]"
             v-html="options.btn_1_on"
             @click="product_favorite(index,!item.isfavorite)"
@@ -115,6 +115,11 @@ export default {
   components: {
     StarRating
   },
+  data() {
+    return {
+      colorheart: "blue"
+    };
+  },
 
   props: {
     items: { type: Array, required: true },
@@ -168,6 +173,7 @@ export default {
       this.$emit("widgetRating", rating, id);
     },
     product_favorite(i, status) {
+      this.colorheart = "red";
       this.$emit("widgetFavorite", i, status);
     },
     setIcon() {
