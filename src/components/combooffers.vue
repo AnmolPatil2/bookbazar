@@ -6,7 +6,10 @@
       -->
 
       <div class="container">
-        <h1 class="writting text-center">Purchase The Most recomended at the Cheapest Price</h1>
+        <h1
+          style="color: #026670"
+          class="writting text-center"
+        >Purchase The Most recomended at the Cheapest Price</h1>
         <p class="somelines text-center">All are most prefered books</p>
         <div class="cardsoffer-column column-0">
           <div class="cardsoffer cardsoffer-color-0">
@@ -18,7 +21,7 @@
                 <i class="fa fa-shopping-bag px-1" aria-hidden="true"></i>Order
               </v-btn>
               <v-btn color="black" class="px-2 py-2 mb-5 white--text">
-                <i class="fas fa-eye px-1"></i>Viwe
+                <i class="fas fa-eye px-1"></i>View
               </v-btn>
             </div>
           </div>
@@ -41,7 +44,7 @@
               </v-btn>
 
               <v-btn color="black" class="px-2 py-2 mb-5 white--text">
-                <i class="fas fa-eye px-1"></i>Viwe
+                <i class="fas fa-eye px-1"></i>View
               </v-btn>
             </div>
           </div>
@@ -336,7 +339,7 @@ p {
   line-height: 1.5;
 }
 .writting {
-  font-family: "lobster", cursive;
+  font-family: "Roboto", cursive;
 }
 .container {
   margin: 0 auto;
@@ -400,11 +403,11 @@ p {
 }
 
 .cardsoffer-color-0 {
-  background-color: #eb5160;
+  background-color: #99ced3;
 }
 
 .cardsoffer-color-1 {
-  background-color: #8f3985;
+  background-color: #65ccb8;
 }
 
 .cardsoffer-color-2 {

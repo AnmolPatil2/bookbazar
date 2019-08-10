@@ -7,7 +7,7 @@
     <!--best seller-->
 
     <div v-if="products!=null">
-      <h1 class="writting text-left">Best Seller so Far</h1>
+      <h1 style="color: #026670" class="writting text-left">Best Seller so Far</h1>
 
       <!-- swiper  -->
       <swiper :options="swiperOption" class>
@@ -256,7 +256,7 @@ export default {
   padding-top: 6vmin;
   padding-left: 2vmin;
   padding-bottom: 0.1em;
-  font-family: "lobster", cursive;
+  font-family: "Roboto", cursive;
   display: block;
 }
 .loader_space {

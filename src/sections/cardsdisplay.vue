@@ -37,7 +37,7 @@
       </div>
     </section>
     <!--test-->
-    <h1 class="writting text-left">Best Seller so Far</h1>
+    <h1 style="color: #026670" class="writting text-left">Best Seller so Far</h1>
     <v-container>
       <v-layout row wrap class>
         <v-flex xs6 sm6 md4 lg3 v-for="(product,index) in products" :key="index">
@@ -201,7 +201,7 @@ export default {
   left: 0;
   width: 70%; /*100%*/
   height: 100%;
-  background: #ffc107;
+  background: linear-gradient(to bottom, #2e9cca, #123c69);
   transition: 0.5s;
   transform-origin: left;
   transform: perspective(2000px) rotateY(-90deg);
@@ -357,7 +357,7 @@ export default {
 .section-3 {
   height: 70vmin;
   margin-top: 15vmin;
-  background: linear-gradient(to bottom, #dd2476, #ff512f);
+  background: linear-gradient(to bottom, #2e9cca, #123c69);
 }
 
 .section-3 .col-md-12 > h1 {

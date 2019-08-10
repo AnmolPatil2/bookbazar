@@ -1,6 +1,13 @@
 <template>
   <div class="iconmenu">
-    <quick-menu :menu-count="4" :icon-class="icons" :menu-url-list="list" :position="position"></quick-menu>
+    <quick-menu
+      :menu-count="3"
+      :icon-class="icons"
+      :menu-url-list="list"
+      :position="position"
+      :backgroundColor="backgroundColor"
+      :color="color"
+    ></quick-menu>
   </div>
 </template>
 <script>
@@ -27,7 +34,9 @@ export default {
         { isLink: false },
         { isLink: false }
       ],
-      position: "top-left"
+      position: "top-left",
+      backgroundColor: " #2e9cca",
+      color: "#123c69"
     };
   },
   components: { quickMenu }

@@ -198,6 +198,7 @@ body {
     top: 0;
   }
   .skw-page-1 .skw-page__half--left .skw-page__content {
+    background-position: 0vmin 0vmin;
   }
 }
 .rules {
@@ -302,7 +303,8 @@ body {
   color: #ffa0a0;
 }
 .skw-page-1 .skw-page__half--left .skw-page__content {
-  background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/mousover-img-1.jpg");
+  background-image: url("/img/svg/com.jpeg");
+  background-position: 0vmin -30vmin;
 }
 .skw-page-1 .skw-page__half--right .skw-page__content {
   background: #292929;

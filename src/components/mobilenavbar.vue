@@ -195,7 +195,6 @@ export default {
         name: "searchresults",
         params: { searchresult: this.searchresult }
       });
-      this.searchresult;
     },
 
     logout() {

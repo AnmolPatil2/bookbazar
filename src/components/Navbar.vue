@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <v-toolbar app flat color="#557A95" class="black--text">
+    <v-toolbar app flat color="#123c69" class="black--text">
       <v-toolbar-side-icon
         @click="drawer = !drawer"
         class="grey--text hidden-sm-and-up"
@@ -9,7 +9,13 @@
 
       <v-toolbar-title class="text-uppercase black--text">
         <iconmenu />
-        <span color style="color: white" class="font-weight-light logo">Bookoo</span>
+        <img class="logo" src="/img/svg/check.jpg" />
+        <span
+          color
+          style="color: #eee2dc"
+          @click="returnhome()"
+          class="font-weight-light logo"
+        >Bookoo</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
 
@@ -20,10 +26,10 @@
         router
         :to="link.route"
       >
-        <v-list-tile-title>{{ link.text }}</v-list-tile-title>
+        <v-list-tile-title style="color: #eee2dc">{{ link.text }}</v-list-tile-title>
       </v-list-tile>
 
-      <!-- dropdown menu -->
+      <!-- dropdown menu 
       <v-menu offset-y class="hidden-sm-and-down">
         <v-btn flat slot="activator" color="grey">
           <v-icon left>expand_more</v-icon>
@@ -35,28 +41,43 @@
           </v-list-tile>
         </v-list>
       </v-menu>
+      -->
 
       <form class="form-inline my-2 my-lg-0 hidden-sm-and-down">
-        <input
-          class="form-control mr-sm-2"
-          @click="routersearch()"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-        />
+        <div class="sidebar-item sidebar-search">
+          <div>
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control search-menu"
+                v-model="searchresult"
+                placeholder="Subject..."
+                @keyup.enter="search()"
+              />
+              <div class="input-group-append">
+                <span class="input-group-text">
+                  <i class="fa fa-search" @click="search()" aria-hidden="true"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
         <a
-          class="btn btn-outline-success my-2 my-sm-0"
+          class="btn btn-outline-success my-2 my-sm-0 mx-3"
           data-toggle="modal"
           data-target="#login"
           v-if="!user"
+          style="color: #eee2dc"
         >Get Start</a>
         {{this.name }}
         <div id="ex4">
           <span class="p1 fa-stack fa-2x has-badge" :data-count="`${count}`">
             <i
+              style="color: #eee2dc"
               data-toggle="modal"
               data-target="#miniCart"
               aria-hidden="true"
+              id="cart"
               class="p3 fa fa-shopping-cart fa-stack-1x xfa-inverse"
               data-count="4b"
             ></i>
@@ -94,6 +115,7 @@ export default {
       drawer: null,
       count: 5,
       user: null,
+      searchresult: null,
       name: null,
       links: [
         { icon: "dashboard", text: "Buy", route: "/rules" },
@@ -108,6 +130,17 @@ export default {
     routersearch() {
       this.$router.push({
         name: "searchresults"
+      });
+    },
+    returnhome() {
+      this.$router.push({
+        to: "/"
+      });
+    },
+    search() {
+      this.$router.push({
+        name: "searchresults",
+        params: { searchresult: this.searchresult }
       });
     }
   },
@@ -152,5 +185,12 @@ export default {
   text-align: center;
   min-width: 1em;
   //font-weight:bold;
+}
+.logo {
+  min-width: 20px;
+  max-height: 30px;
+}
+#cart {
+  color: blue;
 }
 </style>

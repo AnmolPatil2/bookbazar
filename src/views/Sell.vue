@@ -16,8 +16,8 @@
               <img :src="year.img" class="card-img-top" alt="...." />
             </v-responsive>
             <v-card-text>
-              <v-btn @click="yearselected(index)">
-                <div class="subheading">{{year.name}}</div>
+              <v-btn class="subheading" @click="yearselected(index)">
+                <div>{{year.name}}</div>
               </v-btn>
             </v-card-text>
           </v-card>
@@ -39,7 +39,7 @@
             </v-responsive>
             <v-card-text>
               <v-btn @click="departmentselected(index)">
-                <div class="subheading">{{department.name}}</div>
+                <div>{{department.name}}</div>
               </v-btn>
             </v-card-text>
           </v-card>
@@ -71,8 +71,7 @@
               <div class="grey--text">{{product.price}}</div>
             </v-card-text>
             <v-card-actions>
-              <v-btn flat color="grey" @click=" addNew(index, product) 
-               ">sell</v-btn>
+              <v-btn flat color="grey" @click=" addNew(index, product) ">sell</v-btn>
               <add-to-cart
                 :image="getImage(product.images)"
                 :p-id="product.id"
@@ -338,6 +337,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+.subheading {
+  background: #88bdbc;
+}
 .products {
   max-height: 300px;
   margin-top: 0rem;
@@ -353,7 +355,7 @@ export default {
   height: 10px;
 }
 .YD {
-  border: 1px solid red;
+  border: 0.5px solid #3085d6;
 }
 .whole-cont {
   margin-top: 50px;
