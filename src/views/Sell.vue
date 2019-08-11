@@ -230,6 +230,7 @@ export default {
       this.year = dep;
       this.sum = this.sum + dep;
       this.display = "books";
+      console.log(this.sum);
 
       db.collection("products")
         .where("idd", "==", this.sum)
@@ -372,7 +373,7 @@ export default {
   margin: 250px 50%;
 }
 .bookimages {
-  height: 167px;
+  min-height: 167px;
   width: 157px;
 }
 

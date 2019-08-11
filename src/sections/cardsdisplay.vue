@@ -40,7 +40,7 @@
     <h1 style="color: #026670" class="writting text-left">Best Seller so Far</h1>
     <v-container>
       <v-layout row wrap class>
-        <v-flex xs6 sm6 md4 lg3 v-for="(product,index) in products" :key="index">
+        <v-flex xs6 sm6 md4 lg3 v-for="(product,index) in mostbought2" :key="index">
           <v-card v-scroll-reveal.reset="{ delay: 150+ (index*400)}" class="cardh">
             <div class="imageh">
               <img :src="product.images" class="card-img-top imagesD" alt="...." />
@@ -48,11 +48,12 @@
             <div class="detailsh">
               <div class="centerh">
                 <h1>{{product.name}}</h1>
-
-                <v-chip>
-                  <v-icon left color="red">mdi-account</v-icon>
-                  {{product.author}}
-                </v-chip>
+                <div class="author">
+                  <p>
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    {{product.author}}
+                  </p>
+                </div>
                 <div class="flipbut pt-3">
                   <button class="quick-view left px-2">
                     <i class="fa fa-eye"></i>
@@ -151,6 +152,15 @@ export default {
     return {
       products: db.collection("products")
     };
+  },
+  computed: {
+    mostbought2: function() {
+      return this.products.filter(product => {
+        var name = String(product.importance);
+
+        return name.match("1");
+      });
+    }
   }
 };
 </script>
@@ -160,6 +170,9 @@ export default {
   padding-top: 5vmin;
   padding-bottom: 0.1em;
   font-family: "lobster", cursive;
+}
+.author {
+  max-width: 100px;
 }
 .imagesD {
   height: auto;

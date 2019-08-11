@@ -25,8 +25,7 @@
             </div>
             <div class="user-info">
               <span class="user-name">
-                Anmol
-                <strong>Patil</strong>
+                <strong>Admin</strong>
               </span>
               <span class="user-role">{{email}}</span>
               <span class="user-status">

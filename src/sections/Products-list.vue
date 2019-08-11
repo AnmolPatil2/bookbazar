@@ -9,14 +9,10 @@
     <div v-if="products!=null">
       <h1 style="color: #026670" class="writting text-left">Best Seller so Far</h1>
 
-      <!-- swiper 
+      <!-- swiper -->
       <swiper :options="swiperOption" class>
         <swiper-slide v-for="(product,index) in mostbought" :key="index" id="itemdisplay">
-          <v-responsive
-            class
-            v-scroll-reveal.reset="{ delay: 150+ (index*400)}"
-            @click="product_select(product)"
-          >
+          <v-responsive class @click="product_select(product)">
             <v-container hide-delimiters class>
               <img :src="product.images" class="card-img-top imagesD" alt="...." />
             </v-container>
@@ -26,7 +22,7 @@
         <div class="swiper-button-prev" slot="button-prev"></div>
         <div class="swiper-button-next" slot="button-next"></div>
       </swiper>
-      -->
+
       <!--folds-->
       <cardsdisplay />
       <numbers />
@@ -35,7 +31,7 @@
           <h2 class="mb-4">Must buy</h2>
         </div>
         <product-card
-          :items="items"
+          :items="mostbought3"
           :options="options"
           :mapping="mapping"
           @widgetClick="product_select"
@@ -46,7 +42,7 @@
       </div>
       <v-container class>
         <v-layout row wrap>
-          <v-flex xs6 sm6 md4 lg3 v-for="(product,index) in products" :key="index">
+          <v-flex xs6 sm6 md4 lg3 v-for="(product,index) in mostbought4" :key="index">
             <v-card flat class="text-xs-center mx-3">
               <v-responsive class @click="product_select(product)">
                 <v-container hide-delimiters class="ma-0 pa-0">
@@ -198,7 +194,7 @@ export default {
       var item = {
         productName: product.name,
         productImage: product.images,
-        productPrice: product.price,
+        productPrice: product.sale,
         productId: product.id,
         productQuantity: 1
       };
@@ -228,7 +224,23 @@ export default {
   computed: {
     mostbought: function() {
       return this.products.filter(product => {
-        return product.importance.match(this.mostboughtimpnumber);
+        var name = String(product.importance);
+
+        return name.match("1");
+      });
+    },
+    mostbought3: function() {
+      return this.products.filter(product => {
+        var name = String(product.importance);
+
+        return name.match("3");
+      });
+    },
+    mostbought4: function() {
+      return this.products.filter(product => {
+        var name = String(product.importance);
+
+        return name.match("4");
       });
     }
   },

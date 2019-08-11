@@ -20,10 +20,14 @@
         :style="'border-bottom: 1px solid ' + options.icons_color"
         @click="product_select(item)"
       >
-        <div :style="{ color: options.text_color }" v-html="item[mapping.label]"></div>
+        <div
+          :style="{ color: options.text_color }"
+          v-html="item[mapping.label]"
+          class="author right"
+        ></div>
         <div
           :style="{ color: options.title_color }"
-          class="product-title"
+          class="product-title right"
           v-html="item[mapping.name]"
         ></div>
         <div
@@ -329,6 +333,7 @@ export default {
 
 .product-title {
   font-size: 1.2rem;
+  max-width: 180px;
 }
 
 .product-abstract {
@@ -349,5 +354,8 @@ export default {
   text-decoration: line-through;
   font-size: 0.8rem;
   margin-top: -1rem;
+}
+.author {
+  max-width: 180px;
 }
 </style>

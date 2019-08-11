@@ -19,7 +19,23 @@
       <div class="product-test">
         <h3 class="d-inline-block">Products list</h3>
         <button @click="addNew" class="btn btn-primary float-right">Add Product</button>
+        <div class="table-responsive">
+          <table class="table">
+            <tbody>
+              <tr>
+                <td @click="changeidd(24)">eee 5th sem</td>
 
+                <td @click="changeidd(23)">civil 5th sem</td>
+                <td @click="changeidd(25)">tc 5th sem</td>
+              </tr>
+              <tr>
+                <td @click="changeidd(13)">civil 3th sem</td>
+                <td @click="changeidd(15)">tc 3th sem</td>
+                <td @click="changeidd(14)">eee 3th sem</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
         <div class="table-responsive">
           <table class="table">
             <thead>
@@ -31,7 +47,7 @@
             </thead>
 
             <tbody>
-              <tr v-for="product in products">
+              <tr v-for="product in whichbookstodisplay">
                 <td>{{product.name}}</td>
 
                 <td>{{product.sale}}</td>
@@ -108,9 +124,21 @@
                     class="form-control"
                   />
                 </div>
-
                 <div class="form-group">
-                  <vue-editor v-model="product.review"></vue-editor>
+                  <input
+                    type="text"
+                    placeholder="publication"
+                    v-model="product.publication"
+                    class="form-control"
+                  />
+                </div>
+                <div class="form-group">
+                  <input
+                    type="text"
+                    placeholder="edition"
+                    v-model="product.edition"
+                    class="form-control"
+                  />
                 </div>
               </div>
               <!-- product sidebar -->
@@ -209,13 +237,16 @@ export default {
     return {
       products: [],
       uploaded: true,
+      idddisplay: 23,
       product: {
         name: null,
         type: null,
         rating: 0,
         year: null,
         branch: null,
-        review: null,
+        edition: null,
+        publication: null,
+
         fullprice: 0,
         review: null,
         images: [],
@@ -244,6 +275,10 @@ export default {
         .catch(function(error) {
           // Uh-oh, an error occurred!
         });
+    },
+    changeidd(id) {
+      this.idddisplay = id;
+      console.log(this.idddisplay);
     },
     addTag() {
       this.product.tags.push(this.tag);
@@ -289,7 +324,9 @@ export default {
         rating: null,
         year: null,
         branch: null,
-        review: null,
+        edition: null,
+        publication: null,
+
         fullprice: null,
         review: null,
         images: [],
@@ -341,7 +378,7 @@ export default {
       this.product.fullprice = parseInt(this.product.fullprice, 10);
       this.product.sale = parseInt(this.product.sale, 10);
       this.product.idd = parseInt(this.product.idd, 10);
-      this.product.importance = parseInt(this.product.importance, 10);
+
       this.product.rating = parseInt(this.product.rating, 10);
       this.$firestore.products.add(this.product);
 
@@ -350,6 +387,15 @@ export default {
         title: "Product created successfully"
       });
       $("#product").modal("hide");
+    }
+  },
+  computed: {
+    whichbookstodisplay: function() {
+      return this.products.filter(product => {
+        var name = String(product.idd);
+
+        return name.match(this.idddisplay);
+      });
     }
   }
 };

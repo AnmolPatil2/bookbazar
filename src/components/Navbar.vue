@@ -9,13 +9,14 @@
 
       <v-toolbar-title class="text-uppercase black--text">
         <iconmenu />
-        <img class="logo" src="/img/svg/check.jpg" />
+
         <span
           color
           style="color: #eee2dc"
           @click="returnhome()"
           class="font-weight-light logo"
         >Bookoo</span>
+        <img @click="returnhome()" class="logoimg" src="/img/svg/check1.jpg" />
       </v-toolbar-title>
       <v-spacer></v-spacer>
 
@@ -51,7 +52,7 @@
                 type="text"
                 class="form-control search-menu"
                 v-model="searchresult"
-                placeholder="Subject..."
+                placeholder="Book Name.."
                 @keyup.enter="search()"
               />
               <div class="input-group-append">
@@ -68,10 +69,17 @@
           data-target="#login"
           v-if="!user"
           style="color: #eee2dc"
-        >Get Start</a>
-        {{this.name }}
+        >Login</a>
+        <div class="accounts" v-if="user">
+          <i class="fa fa-user" aria-hidden="true"></i>
+          {{this.name }}
+        </div>
+
         <div id="ex4">
-          <span class="p1 fa-stack fa-2x has-badge" :data-count="`${count}`">
+          <span
+            class="p1 fa-stack fa-2x has-badge"
+            :data-count="`${this.$store.state.cart.length}`"
+          >
             <i
               style="color: #eee2dc"
               data-toggle="modal"
@@ -113,8 +121,9 @@ export default {
   data() {
     return {
       drawer: null,
-      count: 5,
+
       user: null,
+
       searchresult: null,
       name: null,
       links: [
@@ -150,7 +159,6 @@ export default {
       this.name = this.user.displayName;
     }
     if (this.drawer != null) {
-      console.log("ddd");
     }
   }
 };
@@ -186,11 +194,12 @@ export default {
   min-width: 1em;
   //font-weight:bold;
 }
-.logo {
-  min-width: 20px;
-  max-height: 30px;
+@media only screen and (max-width: 768px) {
+  .logoimg {
+    max-height: 45px;
+  }
 }
-#cart {
-  color: blue;
+.logoimg {
+  max-height: 58px;
 }
 </style>
