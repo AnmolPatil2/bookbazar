@@ -7,15 +7,16 @@ import 'firebase/storage';
 
 
 // Initialize Firebase
-var config = {
-  apiKey: "AIzaSyAw60hbpGZppOOt0_TNcTPgNdOTvfzhNtc",
-  authDomain: "startuptry1-fddd7.firebaseapp.com",
-  databaseURL: "https://startuptry1-fddd7.firebaseio.com",
-  projectId: "startuptry1-fddd7",
-  storageBucket: "startuptry1-fddd7.appspot.com",
-  messagingSenderId: "600706739987"
+const firebaseConfig = {
+  apiKey: "AIzaSyD2ZK7dc2I1FcHVky92H2tqMiZpDj6pQLQ",
+  authDomain: "bookooo.firebaseapp.com",
+  databaseURL: "https://bookooo.firebaseio.com",
+  projectId: "bookooo",
+  storageBucket: "bookooo.appspot.com",
+  messagingSenderId: "254742781543",
+  appId: "1:254742781543:web:609d3fd8f547ab4f"
 };
-const fb = firebase.initializeApp(config);
+const fb = firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
 

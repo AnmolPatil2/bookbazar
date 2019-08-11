@@ -9,9 +9,9 @@
     <div v-if="products!=null">
       <h1 style="color: #026670" class="writting text-left">Best Seller so Far</h1>
 
-      <!-- swiper  -->
+      <!-- swiper 
       <swiper :options="swiperOption" class>
-        <swiper-slide v-for="(product,index) in products" :key="index" id="itemdisplay">
+        <swiper-slide v-for="(product,index) in mostbought" :key="index" id="itemdisplay">
           <v-responsive
             class
             v-scroll-reveal.reset="{ delay: 150+ (index*400)}"
@@ -26,7 +26,7 @@
         <div class="swiper-button-prev" slot="button-prev"></div>
         <div class="swiper-button-next" slot="button-next"></div>
       </swiper>
-
+      -->
       <!--folds-->
       <cardsdisplay />
       <numbers />
@@ -110,6 +110,7 @@ export default {
       products: null,
       offers: [],
       items: [],
+      mostboughtimpnumber: 2,
       activeItem: null,
       numberofslides: 11,
       modal: null,
@@ -222,6 +223,13 @@ export default {
     },
     clicked_slot(slot) {
       console.log("clicked slot=>", slot);
+    }
+  },
+  computed: {
+    mostbought: function() {
+      return this.products.filter(product => {
+        return product.importance.match(this.mostboughtimpnumber);
+      });
     }
   },
 

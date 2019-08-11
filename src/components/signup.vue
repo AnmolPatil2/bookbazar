@@ -189,24 +189,20 @@ export default {
               if (doc.exists) {
                 this.$router.push({ name: "profile1" });
               } else {
-                fb.auth()
+                db.collection("profiles")
+                  .doc(this.phNo)
+                  .set({
+                    phone: this.phNo,
 
-                  .then(cred => {
-                    ref.set({
-                      phone: this.phNo,
-                      aui: cred.user.uid,
-                      photo: "/img/svg/man.svg"
-                    });
-                  })
-                  .then(() => {
-                    $("#login").modal("hide");
-                    this.$router.push({ name: "profile1" });
+                    photo: "/img/svg/man.svg"
                   });
+
+                vm.$router.push({
+                  name: "profile1"
+                });
               }
             });
-            vm.$router.push({
-              name: "profile1"
-            });
+
             // Update successful.
           })
           .catch(function(error) {

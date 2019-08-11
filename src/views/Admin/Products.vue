@@ -34,7 +34,7 @@
               <tr v-for="product in products">
                 <td>{{product.name}}</td>
 
-                <td>{{product.price}}</td>
+                <td>{{product.sale}}</td>
 
                 <td>
                   <button class="btn btn-primary" @click="editProduct(product)">Edit</button>
@@ -78,7 +78,39 @@
                 </div>
 
                 <div class="form-group">
-                  <vue-editor v-model="product.description"></vue-editor>
+                  <input
+                    type="text"
+                    placeholder="Importance"
+                    v-model="product.importance"
+                    class="form-control"
+                  />
+                </div>
+                <div class="form-group">
+                  <input type="text" placeholder="Type" v-model="product.type" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                  <input
+                    type="text"
+                    placeholder="Branch"
+                    v-model="product.branch"
+                    class="form-control"
+                  />
+                </div>
+                <div class="form-group">
+                  <input type="text" placeholder="Year" v-model="product.year" class="form-control" />
+                </div>
+                <div class="form-group">
+                  <input
+                    type="text"
+                    placeholder="Rating"
+                    v-model="product.rating"
+                    class="form-control"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <vue-editor v-model="product.review"></vue-editor>
                 </div>
               </div>
               <!-- product sidebar -->
@@ -87,10 +119,21 @@
                 <hr />
 
                 <div class="form-group">
+                  <input type="text" placeholder="idd" v-model="product.idd" class="form-control" />
+                </div>
+                <div class="form-group">
                   <input
                     type="text"
-                    placeholder="Product price"
-                    v-model="product.price"
+                    placeholder="mrp"
+                    v-model="product.fullprice"
+                    class="form-control"
+                  />
+                </div>
+                <div class="form-group">
+                  <input
+                    type="text"
+                    placeholder="our price"
+                    v-model="product.sale"
                     class="form-control"
                   />
                 </div>
@@ -98,18 +141,13 @@
                 <div class="form-group">
                   <input
                     type="text"
-                    @keyup.188="addTag"
-                    placeholder="Product tags"
-                    v-model="tag"
+                    placeholder="author"
+                    v-model="product.author"
                     class="form-control"
                   />
-
-                  <div class="d-flex">
-                    <p v-for="tag in product.tags">
-                      <span class="p-1">{{tag}}</span>
-                    </p>
-                  </div>
                 </div>
+
+                <div class="form-group"></div>
 
                 <div class="form-group">
                   <label for="product_image">Product Images</label>
@@ -124,6 +162,14 @@
                     </div>
                   </div>
                 </div>
+                <v-progress-circular
+                  :size="70"
+                  :width="7"
+                  color="purple"
+                  indeterminate
+                  v-if="!uploaded"
+                  class="loaders"
+                ></v-progress-circular>
               </div>
             </div>
           </div>
@@ -162,12 +208,21 @@ export default {
   data() {
     return {
       products: [],
+      uploaded: true,
       product: {
         name: null,
-        description: null,
-        price: null,
-        tags: [],
-        images: []
+        type: null,
+        rating: 0,
+        year: null,
+        branch: null,
+        review: null,
+        fullprice: 0,
+        review: null,
+        images: [],
+        author: null,
+        idd: 0,
+        sale: 0,
+        importance: 0
       },
       activeItem: null,
       modal: null,
@@ -196,6 +251,7 @@ export default {
     },
     uploadImage(e) {
       if (e.target.files[0]) {
+        this.uploaded = false;
         let file = e.target.files[0];
 
         var storageRef = fb
@@ -214,9 +270,14 @@ export default {
             // Handle successful uploads on complete
             // For instance, get the download URL: https://firebasestorage.googleapis.com/...
 
-            uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
-              this.product.images.push(downloadURL);
-            });
+            uploadTask.snapshot.ref
+              .getDownloadURL()
+              .then(downloadURL => {
+                this.product.images.push(downloadURL);
+              })
+              .then(() => {
+                this.uploaded = true;
+              });
           }
         );
       }
@@ -224,10 +285,18 @@ export default {
     reset() {
       this.product = {
         name: null,
-        description: null,
-        price: null,
-        tags: [],
-        images: []
+        type: null,
+        rating: null,
+        year: null,
+        branch: null,
+        review: null,
+        fullprice: null,
+        review: null,
+        images: [],
+        author: null,
+        idd: null,
+        sale: null,
+        importance: null
       };
     },
     addNew() {
@@ -269,6 +338,11 @@ export default {
     },
     readData() {},
     addProduct() {
+      this.product.fullprice = parseInt(this.product.fullprice, 10);
+      this.product.sale = parseInt(this.product.sale, 10);
+      this.product.idd = parseInt(this.product.idd, 10);
+      this.product.importance = parseInt(this.product.importance, 10);
+      this.product.rating = parseInt(this.product.rating, 10);
       this.$firestore.products.add(this.product);
 
       Toast.fire({
@@ -277,8 +351,7 @@ export default {
       });
       $("#product").modal("hide");
     }
-  },
-  created() {}
+  }
 };
 </script>
 

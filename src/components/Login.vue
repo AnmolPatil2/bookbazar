@@ -145,6 +145,7 @@ export default {
         .auth()
         .signInWithPopup(provider)
         .then(() => {
+          $("#login").modal("hide");
           const user = firebase1.auth().currentUser;
           this.slug = slugify(user.displayName, {
             replacement: "-",
@@ -157,14 +158,14 @@ export default {
               $("#login").modal("hide");
               this.$router.push({ name: "profile1" });
             } else {
-              fb.auth()
-
-                .then(cred => {
-                  ref.set({
-                    name: this.name,
-                    aui: cred.user.uid,
-                    photo: "/img/svg/man.svg"
-                  });
+              $("#login").modal("hide");
+              db.collection("profiles")
+                .doc(this.slug)
+                .set({
+                  name: user.displayName,
+                  aui: user.uid,
+                  photo: user.photoURL,
+                  email: user.email
                 })
                 .then(() => {
                   $("#login").modal("hide");
@@ -192,22 +193,13 @@ export default {
                 ref.set({
                   name: this.name,
                   aui: cred.user.uid,
+                  email: user.email,
                   photo: "/img/svg/man.svg"
                 });
               })
               .then(() => {
                 var user = firebase1.auth().currentUser;
-                user
-                  .updateProfile({
-                    displayName: this.name
-                  })
-                  .then(function() {
-                    // Update successful.
-                  })
-                  .catch(function(error) {
-                    // An error happened.
-                    console.log(errorMessage);
-                  });
+
                 user
                   .sendEmailVerification()
                   .then(() => {
@@ -219,6 +211,7 @@ export default {
 
                   .catch(error => {
                     // An error happened.
+                    alert("Refresh and Try Again !");
                   });
 
                 $("#login").modal("hide");

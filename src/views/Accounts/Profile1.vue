@@ -152,6 +152,7 @@
         </div>
       </div>
     </div>
+    <login />
   </div>
 </template>
 
@@ -187,6 +188,9 @@ export default {
       }
     };
   },
+  mounted() {
+    $("#login").modal("hide");
+  },
   created() {
     let ref = db.collection("profiles");
 
@@ -200,9 +204,8 @@ export default {
       });
     const user = firebase1.auth().currentUser;
     if (user.email == null) {
+      this.reroute = 2;
     } else {
-      this.profile.email = user.email;
-      this.profile.name = user.displayName;
       this.reroute = 1;
     }
   },
