@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <v-toolbar app flat color="#123c69" class="black--text">
+    <v-toolbar class="black--text navbar2" app flat color="#123c69">
       <v-toolbar-side-icon
         @click="drawer = !drawer"
         class="grey--text hidden-sm-and-up"
@@ -10,13 +10,8 @@
       <v-toolbar-title class="text-uppercase black--text">
         <iconmenu />
 
-        <span
-          color
-          style="color: #eee2dc"
-          @click="returnhome()"
-          class="font-weight-light logo"
-        >Bookoo</span>
-        <img @click="returnhome()" class="logoimg" src="/img/svg/check1.jpg" />
+        <span color style="color: #eee2dc" @click="returnhome()" class="font-weight-light logo"></span>
+        <img @click="returnhome()" class="logoimg" src="/img/svg/TitleLogo.jpg" />
       </v-toolbar-title>
       <v-spacer></v-spacer>
 
@@ -201,11 +196,11 @@ export default {
 }
 @media only screen and (max-width: 768px) {
   .logoimg {
-    max-height: 45px;
   }
 }
 .logoimg {
-  max-height: 58px;
+  max-height: 63px;
+  margin-left: -20px;
 }
 .qty {
   position: absolute;
@@ -219,5 +214,8 @@ export default {
   font-size: 10px;
   color: #fff;
   background-color: #d10024;
+}
+.navbar2 {
+  height: 68px;
 }
 </style>

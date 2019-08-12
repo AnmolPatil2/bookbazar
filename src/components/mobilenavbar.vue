@@ -5,9 +5,8 @@
         <div class="sidebar-content">
           <!-- sidebar-brand  -->
           <div class="sidebar-item sidebar-brand">
-            <img src="/img/svg/logo.jpeg" alt width="30" />
+            <img src="/img/svg/TitleLogo.jpg" alt width="200" max-height="30px" />
 
-            <a href="/">Bookoo</a>
             <div id="close-sidebar" @click="closeMenu">
               <i class></i>
             </div>

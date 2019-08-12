@@ -873,6 +873,7 @@ textarea.input {
 
 .product .product-img>img {
   width: 100%;
+  height:280px
 }
 
 .product .product-img .product-label {
@@ -901,10 +902,10 @@ textarea.input {
 
 .product .product-body {
   position: relative;
-  padding: 15px;
+  padding: 3px;
   background-color: #FFF;
   text-align: center;
-  z-index: 20;
+  z-index: 0;
 }
 
 .product .product-body .product-category {
@@ -1028,7 +1029,8 @@ textarea.input {
   transform: translateY(0%);
   -webkit-transition: 0.2s all;
   transition: 0.2s all;
-  z-index: 2;
+  z-index: 0;
+  margin-top:120px
 }
 
 .product:hover .add-to-cart {

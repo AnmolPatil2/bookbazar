@@ -57,7 +57,7 @@
           ></button>
           <button
             class="widget-button-icon"
-            :style="{ color: this.colorheart }"
+            :style="{ color: 'red' }"
             v-if="item[mapping.isfavorite]"
             v-html="options.btn_1_on"
             @click="product_favorite(index,!item.isfavorite)"
@@ -122,7 +122,7 @@ export default {
   },
   data() {
     return {
-      colorheart: "blue"
+      colorheart: "red"
     };
   },
 

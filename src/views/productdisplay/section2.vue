@@ -8,7 +8,7 @@
         <div class="row">
           <div class="col-md-12">
             <div class="section-title text-center">
-              <h3 class="title">Related Products</h3>
+              <h2 class="title writting">Related Products</h2>
             </div>
           </div>
 
@@ -67,15 +67,14 @@
 import { fb, db } from "../../firebase";
 export default {
   name: "section2",
+  props: ["idd"],
   data() {
     return {
-      books: null
+      books: []
     };
   },
   firestore() {
-    return {
-      books: db.collection("products")
-    };
+    return {};
   },
   methods: {
     product_select(product) {
@@ -86,6 +85,28 @@ export default {
       });
     }
   },
-  created() {}
+  created() {
+    if (this.idd) {
+      console.log(this.idd);
+      db.collection("products")
+        .where("idd", "==", this.idd)
+        .get()
+        .then(snapshot => {
+          snapshot.forEach(user => {
+            this.books.push({
+              images: user.data().images,
+              name: user.data().name,
+              sale: user.data().sale,
+              fullprice: user.data().fullprice
+            });
+          });
+        });
+    }
+  }
 };
 </script>
+<style>
+.writting {
+  font-family: "Rubik", cursive;
+}
+</style>

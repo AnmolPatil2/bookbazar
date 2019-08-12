@@ -34,38 +34,49 @@
             <!-- Product details -->
             <div class="col-md-5">
               <div class="product-details">
-                <h2 class="product-name">{{book.name}}</h2>
+                <h5 class="red--text product-name">
+                  <i class="fa fa-user" aria-hidden="true"></i>
+                  {{book.author}}
+                </h5>
+                <h1 class>{{book.name}}</h1>
+                <p class="teal--text">{{book.edition}} {{book.publication}}</p>
+
                 <div>
                   <div class="product-rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
+                    <i v-for="times in book.rating" class="fa fa-star red--text rating_stars"></i>
+
                     <i class="fa fa-star-o"></i>
                   </div>
-                  <a class="review-link" href="#">10 Review(s) | Add your review</a>
                 </div>
                 <div>
                   <h3 class="product-price">
-                    Rs{{book.sale}}
-                    <del class="product-old-price">RS{{book.fullprice}}</del>
+                    <i class="fa fa-inr" aria-hidden="true"></i>
+                    {{book.sale}}
+                    <del class="product-old-price">
+                      <i class="fa fa-inr" aria-hidden="true"></i>
+                      {{book.fullprice}}
+                    </del>
                   </h3>
                   <span class="product-available">In Stock</span>
                 </div>
-                <h2>{{book.condition}}</h2>
-                <p>{{book.discription}}</p>
+                <v-chip class="ma-2" color="teal" text-color="white">
+                  <v-avatar left>
+                    <v-icon>check_circle</v-icon>
+                  </v-avatar>
+                  {{book.type}} Prescribed
+                </v-chip>
+                <br />
+                <v-chip class="ma-2" color="green" text-color="white">
+                  <v-avatar left class="green darken-4">{{book.year}}nd</v-avatar>Year
+                </v-chip>
+                <v-chip class="ma-2" color="pink" label text-color="white">
+                  <v-icon left>label</v-icon>
+                  {{book.branch}}
+                </v-chip>
 
                 <div class="product-options"></div>
 
                 <div class="add-to-cart">
-                  <div class="qty-label">
-                    Qty
-                    <div class="input-number">
-                      <input type="number" />
-                      <span class="qty-up">+</span>
-                      <span class="qty-down">-</span>
-                    </div>
-                  </div>
                   <button class="add-to-cart-btn">
                     <i class="fa fa-shopping-cart"></i> add to cart
                   </button>
@@ -106,13 +117,11 @@
                 <!-- product tab nav -->
                 <ul class="tab-nav">
                   <li>
-                    <a @click="change(1)">Description</a>
+                    <a @click="change2()">Description</a>
                   </li>
+
                   <li>
-                    <a @click="change(2)">Details</a>
-                  </li>
-                  <li>
-                    <a @click="change(3)">Reviews</a>
+                    <a @click="change()">Reviews</a>
                   </li>
                 </ul>
                 <!-- /product tab nav -->
@@ -120,22 +129,16 @@
                 <!-- product tab content -->
                 <div class="tab-content">
                   <!-- tab1  -->
-                  <div v-if="display==1">
+                  <div v-if="!display">
                     <div class="row">
                       <div class="col-md-12">
-                        <p>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                          labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                          nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-                          esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
-                          in culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
+                        <p>No discription Yet</p>
                       </div>
                     </div>
                   </div>
                   <!-- /tab1  -->
 
-                  <!-- tab2  -->
+                  <!-- tab2  
                   <div v-if="display==2">
                     <div class="row">
                       <div class="col-md-12">
@@ -149,16 +152,16 @@
                       </div>
                     </div>
                   </div>
-                  <!-- /tab2  -->
+                  <!-- /tab2-->
 
                   <!-- tab3  -->
-                  <div v-if="display==3">
+                  <div v-if="display">
                     <div class="row">
                       <!-- Rating -->
                       <div class="col-md-3">
                         <div id="rating">
                           <div class="rating-avg">
-                            <span>4.5</span>
+                            <span>{{book.rating}}</span>
                             <div class="rating-stars">
                               <i class="fa fa-star"></i>
                               <i class="fa fa-star"></i>
@@ -177,9 +180,9 @@
                                 <i class="fa fa-star"></i>
                               </div>
                               <div class="rating-progress">
-                                <div style="width: 80%;"></div>
+                                <div style="width: 30%;"></div>
                               </div>
-                              <span class="sum">3</span>
+                              <span class="sum">1</span>
                             </li>
                             <li>
                               <div class="rating-stars">
@@ -244,46 +247,8 @@
                           <ul class="reviews">
                             <li>
                               <div class="review-heading">
-                                <h5 class="name">{{book.reveiw.name}}</h5>
-                                <p class="date">27 DEC 2018, 8:0 PM</p>
-                                <div class="review-rating">
-                                  <i class="fa fa-star"></i>
-                                  <i class="fa fa-star"></i>
-                                  <i class="fa fa-star"></i>
-                                  <i class="fa fa-star"></i>
-                                  <i class="fa fa-star-o empty"></i>
-                                </div>
-                              </div>
-                              <div class="review-body">
-                                <p>
-                                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                  incididunt ut labore et dolore magna aliqua
-                                </p>
-                              </div>
-                            </li>
-                            <li>
-                              <div class="review-heading">
-                                <h5 class="name">John</h5>
-                                <p class="date">27 DEC 2018, 8:0 PM</p>
-                                <div class="review-rating">
-                                  <i class="fa fa-star"></i>
-                                  <i class="fa fa-star"></i>
-                                  <i class="fa fa-star"></i>
-                                  <i class="fa fa-star"></i>
-                                  <i class="fa fa-star-o empty"></i>
-                                </div>
-                              </div>
-                              <div class="review-body">
-                                <p>
-                                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                  incididunt ut labore et dolore magna aliqua
-                                </p>
-                              </div>
-                            </li>
-                            <li>
-                              <div class="review-heading">
-                                <h5 class="name">John</h5>
-                                <p class="date">27 DEC 2018, 8:0 PM</p>
+                                <h5 class="name">Kruthika</h5>
+                                <p class="date">12 Aug 2019, 06.24 PM</p>
                                 <div class="review-rating">
                                   <i class="fa fa-star"></i>
                                   <i class="fa fa-star"></i>
@@ -346,6 +311,73 @@
       </div>
       <!-- /SECTION -->
     </div>
+    <div class="section2">
+      <!-- Section -->
+      <div class="section">
+        <!-- container -->
+        <div class="container">
+          <!-- row -->
+          <div class="row">
+            <div class="col-md-12">
+              <div class="section-title text-center">
+                <h2 class="title writting">Related Products</h2>
+              </div>
+            </div>
+
+            <!-- product -->
+            <div
+              class="col-md-3 col-xs-6 col-sm-6"
+              v-for="(book,index) in relatedbooks"
+              :key="index"
+            >
+              <div class="product">
+                <div class="product-img" v-for="(img,index) in book.images " :key="index">
+                  <img :src="img" alt />
+                  <div class="product-label">
+                    <span class="sale">-30%</span>
+                  </div>
+                </div>
+                <div class="product-body">
+                  <h3 class="product-name">
+                    <a href="#">{{book.name}}</a>
+                  </h3>
+                  <h4 class="product-price">
+                    Rs{{book.sale}}
+                    <del class="product-old-price">Rs{{book.fullprice}}</del>
+                  </h4>
+                  <div class="product-rating">
+                    <i v-for="rating in book.rating" class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                  </div>
+                </div>
+                <div class="py-4 my-4"></div>
+                <div class="add-to-cart">
+                  <button class="add-to-cart-btn">
+                    <i class="fa fa-shopping-cart"></i> add to cart
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- /product -->
+
+            <!-- product -->
+
+            <!-- /product -->
+          </div>
+          <!-- /row -->
+        </div>
+        <!-- /container -->
+      </div>
+      <!-- /Section -->
+
+      <!-- NEWSLETTER -->
+
+      <!-- /NEWSLETTER -->
+    </div>
   </div>
 </template>
 <script>
@@ -353,16 +385,35 @@ import { fb, db } from "../../firebase";
 import { Carousel, Slide } from "vue-carousel";
 import { BreedingRhombusSpinner } from "epic-spinners";
 import { AtomSpinner } from "epic-spinners";
+import section2 from "./section2";
 export default {
   name: "psection",
   data() {
     return {
       book: null,
       loading: true,
-      display: 1
+      display: false,
+      idd: null,
+      relatedbooks: []
     };
   },
-  components: { AtomSpinner },
+  components: { AtomSpinner, section2 },
+  mounted() {
+    console.log(this.idd);
+    db.collection("products")
+      .where("idd", "==", this.idd)
+      .get()
+      .then(snapshot => {
+        snapshot.forEach(user => {
+          this.relatedbooks.push({
+            images: user.data().images,
+            name: user.data().name,
+            sale: user.data().sale,
+            fullprice: user.data().fullprice
+          });
+        });
+      });
+  },
   created() {
     let ref = db.collection("products");
 
@@ -374,12 +425,37 @@ export default {
       })
       .then(() => {
         this.loading = false;
+        this.idd = this.book.idd;
+        console.log(this.idd);
+        db.collection("products")
+          .where("idd", "==", this.idd)
+          .get()
+          .then(snapshot => {
+            snapshot.forEach(user => {
+              this.relatedbooks.push({
+                images: user.data().images,
+                name: user.data().name,
+                sale: user.data().sale,
+                fullprice: user.data().fullprice,
+                
+              });
+            });
+          });
       });
   },
   methods: {
+    product_select(product) {
+      console.log(product.id);
+      this.$router.push({
+        name: "productCompholder",
+        params: { id: product.id }
+      });
+    },
     change(i) {
-      this.display = i;
-      console.log(this.book);
+      this.display = true;
+    },
+    change2() {
+      this.display = false;
     }
   }
 };
@@ -401,14 +477,20 @@ export default {
     margin-left: 50px;
   }
 }
+.rating_stars {
+  display: inline;
+}
 .product-name {
   padding-top: 5vmin;
   padding-bottom: 0.1em;
-  font-family: "lobster", cursive;
+  font-family: "Rubik", cursive;
 }
 .loader_space {
   position: relative;
   height: 300px;
+}
+.section_display {
+  margin-top: 60px;
 }
 .loader {
   position: absolute;

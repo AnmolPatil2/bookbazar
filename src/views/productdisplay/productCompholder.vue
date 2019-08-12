@@ -1,21 +1,18 @@
 <template>
   <div class="productCompholder">
-    <pheader />
+    <Nabar />
     <psection />
-    <section2 />
   </div>
 </template>
 <script>
-import pheader from "./pheader";
+import Nabar from "@/components/Navbar";
 import psection from "./psection";
-import section2 from "./section2";
 
 export default {
   name: "productCompholder",
   components: {
-    pheader,
-    psection,
-    section2
+    Nabar,
+    psection
   },
   mounted() {}
 };
