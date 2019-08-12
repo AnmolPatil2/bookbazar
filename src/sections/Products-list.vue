@@ -15,6 +15,7 @@
           <v-responsive class @click="product_select(product)">
             <v-container hide-delimiters class>
               <img :src="product.images" class="card-img-top imagesD" alt="...." />
+              <p>{{product.sale}}</p>
             </v-container>
           </v-responsive>
         </swiper-slide>
@@ -108,11 +109,11 @@ export default {
       items: [],
       mostboughtimpnumber: 2,
       activeItem: null,
-      numberofslides: 11,
+
       modal: null,
       dd: this.numberofslides,
       swiperOption: {
-        slidesPerView: 5,
+        slidesPerView: 7,
         centeredSlides: false,
         spaceBetween: 2,
         pagination: {

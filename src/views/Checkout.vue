@@ -124,6 +124,7 @@ export default {
         var user = firebase1.auth().currentUser;
         this.$store.state.cart.forEach(order => {
           db.collection("sellorders").add({
+            bookid: order.productId,
             bookName: order.productName,
             price: order.productPrice,
             status: "ongoing",

@@ -25,6 +25,7 @@
           v-html="item[mapping.label]"
           class="author right"
         ></div>
+        <br />
         <div
           :style="{ color: options.title_color }"
           class="product-title right"
@@ -334,6 +335,7 @@ export default {
 .product-title {
   font-size: 1.2rem;
   max-width: 180px;
+  display: block;
 }
 
 .product-abstract {
@@ -357,5 +359,6 @@ export default {
 }
 .author {
   max-width: 180px;
+  display: block;
 }
 </style>

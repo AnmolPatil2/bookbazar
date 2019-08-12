@@ -50,7 +50,7 @@
             <div class="input-group">
               <input
                 type="text"
-                class="form-control search-menu"
+                class="form-control"
                 v-model="searchresult"
                 placeholder="Book Name.."
                 @keyup.enter="search()"
@@ -70,8 +70,8 @@
           v-if="!user"
           style="color: #eee2dc"
         >Login</a>
-        <div class="accounts" v-if="user">
-          <i class="fa fa-user" aria-hidden="true"></i>
+        <div @click="rerouteaccount()" style="color: #eee2dc " class="accounts" v-if="user">
+          <i class="fa fa-user pl-3" aria-hidden="true"></i>
           {{this.name }}
         </div>
 
@@ -136,6 +136,11 @@ export default {
 
   components: { Popup, mobilenavbar, iconmenu },
   methods: {
+    rerouteaccount() {
+      this.$router.push({
+        name: "profile1"
+      });
+    },
     routersearch() {
       this.$router.push({
         name: "searchresults"
@@ -201,5 +206,18 @@ export default {
 }
 .logoimg {
   max-height: 58px;
+}
+.qty {
+  position: absolute;
+  right: 15px;
+  top: -10px;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 10px;
+  color: #fff;
+  background-color: #d10024;
 }
 </style>

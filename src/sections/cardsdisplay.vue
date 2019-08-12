@@ -47,12 +47,19 @@
             </div>
             <div class="detailsh">
               <div class="centerh">
-                <h1>{{product.name}}</h1>
+                <h1 class="bookname">{{product.name}}</h1>
                 <div class="author">
-                  <p>
-                    <i class="fa fa-user" aria-hidden="true"></i>
-                    {{product.author}}
-                  </p>
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <td class="authoricon">
+                          <i class="fa fa-user" aria-hidden="true"></i>
+                        </td>
+
+                        <td class="authorname">{{product.author}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
                 <div class="flipbut pt-3">
                   <button class="quick-view left px-2">
@@ -170,6 +177,9 @@ export default {
   padding-top: 5vmin;
   padding-bottom: 0.1em;
   font-family: "lobster", cursive;
+}
+.bookname {
+  min-width: 100px;
 }
 .author {
   max-width: 100px;

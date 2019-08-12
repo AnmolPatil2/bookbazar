@@ -23,10 +23,21 @@
           <table class="table">
             <tbody>
               <tr>
+                <td @click="changeidd(20)">cs 5th sem</td>
+
+                <td @click="changeidd(22)">mec 5th sem</td>
+                <td @click="changeidd(21)">ec 5th sem</td>
+              </tr>
+              <tr>
                 <td @click="changeidd(24)">eee 5th sem</td>
 
                 <td @click="changeidd(23)">civil 5th sem</td>
                 <td @click="changeidd(25)">tc 5th sem</td>
+              </tr>
+              <tr>
+                <td @click="changeidd(10)">cs 3th sem</td>
+                <td @click="changeidd(11)">ec 3th sem</td>
+                <td @click="changeidd(12)">mech 3th sem</td>
               </tr>
               <tr>
                 <td @click="changeidd(13)">civil 3th sem</td>

@@ -34,23 +34,23 @@
 
       <v-card flat v-for="(order,index) in orders" :key="order.id">
         <v-layout row wrap :class="`pa-3 project ${order.status}`">
-          <v-flex xs6 md2>
+          <v-flex xs6 md1 lg1>
             <div class="caption grey--text">Book Image</div>
             <img :src="order.orderImage" width="80px" class="align-self-center mr-3" alt />
           </v-flex>
-          <v-flex xs6 sm3 md2>
+          <v-flex xs6 sm3 md2 lg2>
             <div class="caption grey--text">Book Title</div>
             <div>{{ order.bookName }}</div>
           </v-flex>
-          <v-flex xs6 sm4 md2>
+          <v-flex xs6 sm5 md3 lg2>
             <div class="caption grey--text">Order Time</div>
             <div>{{ order.time }}</div>
           </v-flex>
-          <v-flex xs6 sm4 md2>
+          <v-flex xs6 sm4 md2 lg2>
             <div class="caption grey--text">Price</div>
             <div>{{ order.price }}</div>
           </v-flex>
-          <v-flex xs4 sm4 md2>
+          <v-flex xs4 sm4 md2 lg2>
             <div class="right">
               <v-chip small :class="`${order.status} white--text  caption`">{{ order.status }}</v-chip>
             </div>
@@ -88,7 +88,7 @@ export default {
             orderImage: doc.data().orderImage,
             bookName: doc.data().bookName,
             status: doc.data().status,
-            time: moment(doc.data().date).format("LT"),
+            time: moment(doc.data().date).format("llll"),
             price: doc.data().price
           });
         });
@@ -103,22 +103,22 @@ export default {
 </script>
 
 <style scoped>
-.project.complete {
+.project.orderplaced {
   border-left: 4px solid #3cd1c2;
 }
 .project.ongoing {
   border-left: 4px solid #ffaa2c;
 }
-.project.overdue {
+.project.contacted {
   border-left: 4px solid #f83e70;
 }
-.v-chip.complete {
+.v-chip.orderplaced {
   background: #3cd1c2;
 }
 .v-chip.ongoing {
   background: #ffaa2c;
 }
-.v-chip.overdue {
+.v-chip.contacted {
   background: #f83e70;
 }
 </style>
