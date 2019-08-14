@@ -8,8 +8,8 @@
         <div class="sidebar-content">
           <!-- sidebar-brand  -->
           <div class="sidebar-item sidebar-brand">
-            <img src="/img/svg/TitleLogo.jpg" alt width="30" />
-            <a href="/">BookBazar</a>
+            <img src="/img/svg/logo.jpg" alt width="30" />
+            <a href="/">BooKoo</a>
             <div id="close-sidebar" @click="closeMenu">
               <i class="fas fa-times"></i>
             </div>

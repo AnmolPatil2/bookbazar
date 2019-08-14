@@ -123,7 +123,7 @@ export default {
       name: null,
       links: [
         { icon: "dashboard", text: "Buy", route: "/rules" },
-        { icon: "folder", text: "Sell", route: "/rules" },
+        { icon: "folder", text: "Sell", route: "/rulestosell" },
         { icon: "person", text: "Donate", route: "/rules" }
       ]
     };
@@ -174,7 +174,7 @@ export default {
   }
 }
 #drawer {
-  background-color: black;
+  background-color: #123c69;
 }
 .logo {
   padding-left: 50px;

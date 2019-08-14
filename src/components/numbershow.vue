@@ -73,7 +73,9 @@ export default {
     }
   },
   mounted() {
-    this.numbers();
+    if (null) {
+      this.numbers();
+    }
   }
 };
 </script>

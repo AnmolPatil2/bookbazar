@@ -8,9 +8,10 @@
         <div class="sidebar-content">
           <!-- sidebar-brand  -->
           <div class="sidebar-item sidebar-brand">
-            <img src="/img/svg/TitleLogo.jpg" alt width="30" />
+            <img src="/img/svg/logo.png" @click="gohome()" alt width="30" />
 
-            <a href="/">Bookoo</a>
+            <h2 style="color: #eee2dc" @click="gohome()" class="px-3">BooKoo</h2>
+            <a></a>
             <div id="close-sidebar" @click="closeMenu">
               <i class="fas fa-times"></i>
             </div>
@@ -18,9 +19,9 @@
           <!-- sidebar-header  -->
           <div class="sidebar-item sidebar-header">
             <div class="user-pic">
-              <img class="img-responsive img-rounded" :src="user.photoURL" alt="User picture" />
+              <img class="img-responsive img-rounded" :src="user.photo" alt="User picture" />
             </div>
-            <div class="user-info">
+            <div class="user-info mx-2">
               <span class="user-name">
                 <strong>{{user.name}}</strong>
               </span>
@@ -120,6 +121,11 @@ export default {
   methods: {
     closeMenu() {
       $(".page-wrapper").toggleClass("toggled");
+    },
+    gohome() {
+      this.$router.push({
+        name: "home"
+      });
     },
 
     logout() {

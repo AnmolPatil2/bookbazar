@@ -120,10 +120,10 @@ export default {
       activeItem: null,
       modal: null,
       years: [
-        { img: "/img/svg/1st.jpg", name: "first" },
-        { img: "/img/svg/2nd.jpg", name: "Secound" },
+        { img: "/img/svg/1st.jpg", name: "First" },
+        { img: "/img/svg/2nd.jpg", name: "Second" },
         { img: "/img/svg/3rd.jpg", name: "Third" },
-        { img: "/img/svg/4th.jpg", name: "Fouth" }
+        { img: "/img/svg/4th.jpg", name: "Fourth" }
       ],
       departments: [
         { img: "/img/svg/cs.jpg", name: "cs" },

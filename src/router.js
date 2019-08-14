@@ -20,6 +20,7 @@ import forgotPassword from "@/components/forgotPassword.vue";
 import Select from "./views/Select.vue";
 
 import rules from "./views/rules.vue";
+import RulesToSell from "./views/RulesToSell.vue";
 import testing from "./views/allsinglepagetesting.vue";
 import ProductDisplay from "./views/ProductDisplay.vue";
 import productCompholder from "./views/productdisplay/productCompholder.vue"
@@ -31,11 +32,19 @@ Vue.use(Router);
 const router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
+  scrollBehavior() {
+    return { x: 0, y: 0 };
+  },
   routes: [
     {
       path: "/",
       name: "home",
       component: Home
+    },
+    {
+      path: "/rulestosell",
+      name: "rulestosell",
+      component: RulesToSell
     },
     {
       path: "/searchresults/:searchresult",

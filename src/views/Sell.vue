@@ -25,6 +25,28 @@
       </v-layout>
     </v-container>
 
+    <v-container class="whole-cont" v-if="display=='firstyear'">
+      <v-layout>
+        <v-flex>
+          <h2 class="Title-what-to-do">Select year</h2>
+        </v-flex>
+      </v-layout>
+      <v-layout row wrap>
+        <v-flex xs6 sm6 md4 lg3 v-for="(year,index) in firstyears" :key="index">
+          <v-card flat class="text-xs-center p-0 YD">
+            <v-responsive class="p-2">
+              <img :src="year.img" class="card-img-top" alt="...." />
+            </v-responsive>
+            <v-card-text>
+              <v-btn class="subheading" @click="cycleselected(index)">
+                <div>{{year.name}}</div>
+              </v-btn>
+            </v-card-text>
+          </v-card>
+        </v-flex>
+      </v-layout>
+    </v-container>
+
     <v-container class="twhole-cont" v-if="display==true">
       <v-layout>
         <v-flex>
@@ -35,7 +57,7 @@
         <v-flex xs6 sm6 md4 lg3 v-for="(department,index) in departments" :key="index">
           <v-card flat class="text-xs-center YD p-0">
             <v-responsive class="p-2">
-              <img :src="department.img" class="card-img-top bookimages" alt="...." />
+              <img :src="department.img" class="card-img-top phychem" alt="...." />
             </v-responsive>
             <v-card-text>
               <v-btn @click="departmentselected(index)">
@@ -67,7 +89,7 @@
               <img :src="product.images" class="card-img-top bookimages" alt="...." />
             </v-responsive>
             <v-card-text>
-              <div class="subheading">{{product.name}}</div>
+              <div class="subheading name">{{product.name}}</div>
               <div class="grey--text">{{product.price}}</div>
             </v-card-text>
             <v-card-actions>
@@ -184,10 +206,10 @@ export default {
       activeItem: null,
       modal: null,
       years: [
-        { img: "/img/svg/1st.jpg", name: "first" },
-        { img: "/img/svg/2nd.jpg", name: "Secound" },
+        { img: "/img/svg/1st.jpg", name: "First" },
+        { img: "/img/svg/2nd.jpg", name: "Second" },
         { img: "/img/svg/3rd.jpg", name: "Third" },
-        { img: "/img/svg/4th.jpg", name: "Fouth" }
+        { img: "/img/svg/4th.jpg", name: "Fourth" }
       ],
       departments: [
         { img: "/img/svg/cs.jpg", name: "cs" },
@@ -195,6 +217,11 @@ export default {
         { img: "/img/svg/me.jpg", name: "me" },
         { img: "/img/svg/civil.jpg", name: "civil" }
       ],
+      firstyears: [
+        { img: "/img/svg/phy.jpeg", name: "P-Cycle" },
+        { img: "/img/svg/chem.jpeg", name: "C-Cycle" }
+      ],
+
       year: 0,
       display: null,
       department: null,
@@ -221,10 +248,17 @@ export default {
     getImage(images) {
       return images[0];
     },
+    cycleselected(cycle) {
+      this.sum = cycle + 1;
+    },
     yearselected(year) {
-      this.year = year;
-      this.sum = year * 10;
-      this.display = true;
+      if (year == 0) {
+        this.display = "firstyear";
+      } else {
+        this.year = year;
+        this.sum = year * 10;
+        this.display = true;
+      }
     },
     departmentselected(dep) {
       this.year = dep;
@@ -373,13 +407,19 @@ export default {
   margin: 250px 50%;
 }
 .bookimages {
-  min-height: 167px;
+  height: 167px;
   width: 157px;
 }
 
 .card-body {
 }
 section {
+}
+.name {
+  height: 50px;
+}
+.phychem {
+  height: 170px;
 }
 </style>
 

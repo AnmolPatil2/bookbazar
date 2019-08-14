@@ -17,7 +17,12 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
+
           <div class="modal-body">
+            <div v-if="this.$store.state.cart.length==0">
+              <img src="/img/svg/empty-cart.svg" class="empty-cart" />
+              <h5 class="text-center mt-4">Your Cart is Empty</h5>
+            </div>
             <ul>
               <li v-for="item in this.$store.state.cart" class="media">
                 <img :src="item.productImage" width="80px" class="align-self-center mr-3" alt />
@@ -65,4 +70,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+.empty-cart {
+  max-height: 100px;
+}
 </style>

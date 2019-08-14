@@ -27,13 +27,13 @@
 
                     <h5 class="mt-0 right">{{item.productPrice }}</h5>
                     <v-chip
-                      small
-                      close
-                      class="chips"
-                      color="red float-right"
+                      class="ma-2"
+                      @click="$store.commit('removeFromCart',item);updatesum()"
+                      color="red right"
                       text-color="white"
-                      @click="$store.commit('removeFromCart',item)"
-                    >delete</v-chip>
+                    >
+                      <i class="fa fa-trash px-2" aria-hidden="true "></i>Remove
+                    </v-chip>
 
                     <p class="mt-0">Quantity : {{item.productQuantity }}</p>
                   </div>
@@ -62,26 +62,6 @@
             <label for="payment-1">
               <span></span>
               Contact through Whatsapp
-            </label>
-            <div class="caption">
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            </div>
-          </div>
-          <div class="input-radio">
-            <input type="radio" name="payment" id="payment-2" />
-            <label for="payment-2">
-              <span></span>
-              Cheque Payment
-            </label>
-            <div class="caption">
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            </div>
-          </div>
-          <div class="input-radio">
-            <input type="radio" name="payment" id="payment-3" />
-            <label for="payment-3">
-              <span></span>
-              Paypal System
             </label>
             <div class="caption">
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
@@ -118,6 +98,14 @@ export default {
   },
   components: { Navbar },
   methods: {
+    updatesum() {
+      this.sum = 0;
+      this.$store.state.cart.forEach(element => {
+        element.productPrice = parseInt(element.productPrice);
+
+        this.sum = element.productPrice * element.productQuantity + this.sum;
+      });
+    },
     buy() {
       if (document.getElementById("terms").checked) {
         // it is checked. Do something
@@ -153,6 +141,10 @@ export default {
             }
           })
           .then(() => {
+            this.$store.state.cart.forEach(element => {
+              console.log(element);
+              this.$store.commit("removeFromCart", element);
+            });
             this.$router.push({
               name: "orders1"
             });
@@ -165,10 +157,11 @@ export default {
     }
   },
   created() {
+    this.sum = 0;
     this.$store.state.cart.forEach(element => {
       element.productPrice = parseInt(element.productPrice);
 
-      this.sum = element.productPrice + this.sum;
+      this.sum = element.productPrice * element.productQuantity + this.sum;
     });
   }
 };

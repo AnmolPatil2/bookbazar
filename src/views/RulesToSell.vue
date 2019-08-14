@@ -1,6 +1,6 @@
 <template>
   <div class="rules">
-    <div v-if="!isphone" class="skw-pages">
+    <div class="skw-pages">
       <div class="skw-page skw-page-1 active">
         <div class="skw-page__half skw-page__half--left">
           <div class="skw-page__skewed">
@@ -10,8 +10,8 @@
         <div class="skw-page__half skw-page__half--right">
           <div class="skw-page__skewed">
             <div class="skw-page__content">
-              <h3 class="skw-page__heading">Buying made easier</h3>
-              <p class="skw-page__description">Where convenience meets Education</p>
+              <h3 class="skw-page__heading">When knowledge gets old, its meant to be sold.</h3>
+              <p class="skw-page__description">---Experince selling at its best with (us at) Bookoo</p>
             </div>
           </div>
         </div>
@@ -20,8 +20,10 @@
         <div class="skw-page__half skw-page__half--left">
           <div class="skw-page__skewed">
             <div class="skw-page__content">
-              <h2 class="skw-page__heading">Best prices</h2>
-              <p class="skw-page__description">Bookoo gives you best offers for all the books</p>
+              <h2 class="skw-page__heading">Prices</h2>
+              <p
+                class="skw-page__description"
+              >Do justice to your old books. Make it worth by Selling them at reasonable prices.</p>
             </div>
           </div>
         </div>
@@ -40,10 +42,8 @@
         <div class="skw-page__half skw-page__half--right">
           <div class="skw-page__skewed">
             <div class="skw-page__content">
-              <h2 class="skw-page__heading">Delivery</h2>
-              <p
-                class="skw-page__description"
-              >All your orders delivered right at your college in a few days</p>
+              <h2 class="skw-page__heading">Pickup services</h2>
+              <p class="skw-page__description">Get your old books picked by us at your college.</p>
             </div>
           </div>
         </div>
@@ -52,11 +52,10 @@
         <div class="skw-page__half skw-page__half--left">
           <div class="skw-page__skewed">
             <div class="skw-page__content">
-              <h2 class="skw-page__heading">Verified Books</h2>
-              <p class="skw-page__description">
-                Verified Books
-                Every book is individually checked. 15 days return if not satisfied.
-              </p>
+              <h2 class="skw-page__heading">Exchange Books</h2>
+              <p
+                class="skw-page__description"
+              >Directly Swap your old books for your new semester books.</p>
             </div>
           </div>
         </div>
@@ -75,71 +74,26 @@
         <div class="skw-page__half skw-page__half--right">
           <div class="skw-page__skewed">
             <div class="skw-page__content">
-              <h2 class="skw-page__heading">Community</h2>
+              <h2 class="skw-page__heading">Keep your old books safe so you can</h2>
               <p class="skw-page__description">
-                Join our Bookoo commmunity
-                <v-btn @click="changetosell()">BUY FROM BOOKOO</v-btn>
+                <v-btn @click="changetosell()" color="black" class="white--text">SELL THEM ON BOOKOO</v-btn>
               </p>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div v-if="isphone">
-      <v-carousel class="mobileslides">
-        <v-carousel-item v-for="(item,i) in items" :key="i" :src="item.src">
-          <div class="dataa"></div>
-          <h2>gadiaks</h2>
-        </v-carousel-item>
-      </v-carousel>
-    </div>
   </div>
 </template>
 <script>
 export default {
   name: "rules",
-  data() {
-    return {
-      isphone: false,
-      items: [
-        {
-          src: "/img/buysell/1b.jpg"
-        },
-        {
-          src: "/img/buysell/2b.jpg"
-        },
-        {
-          src: "/img/buysell/3b.jpg"
-        },
-        {
-          src: "/img/buysell/4b.jpg"
-        },
-        {
-          src: "/img/buysell/s5.jpg"
-        }
-      ]
-    };
-  },
   methods: {
     changetosell() {
       this.$router.push({ name: "sell" });
     }
   },
   mounted() {
-    var check = false;
-    (function(a) {
-      if (
-        /(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i.test(
-          a
-        ) ||
-        /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(
-          a.substr(0, 4)
-        )
-      )
-        check = true;
-    })(navigator.userAgent || navigator.vendor || window.opera);
-    this.isphone = check;
-
     $(document).ready(function() {
       var curPage = 1;
       var numOfPages = $(".skw-page").length;
@@ -219,9 +173,6 @@ export default {
   margin: 0;
   padding: 0;
 }
-.mobileslides {
-  min-height: 100vh;
-}
 
 body {
   background: #15181a;
@@ -263,9 +214,6 @@ body {
   top: 0;
   width: 100%;
 }
-.dataa {
-  height: 90vh;
-}
 .skw-page__half {
   position: absolute;
   top: 0;
@@ -299,9 +247,6 @@ body {
   -webkit-transform: skewX(-18deg);
   transform: skewX(-18deg);
   background: #000;
-}
-.imagesmobile {
-  min-height: 80vh;
 }
 .skw-page__half--left .skw-page__skewed {
   left: -40%;
@@ -356,7 +301,7 @@ body {
   color: #ffa0a0;
 }
 .skw-page-1 .skw-page__half--left .skw-page__content {
-  background-image: url("/img/buysell/1b.jpg");
+  background-image: url("/img/buysell/s1.jpg");
 }
 .skw-page-1 .skw-page__half--right .skw-page__content {
   background: #292929;
@@ -365,10 +310,10 @@ body {
   background: #292929;
 }
 .skw-page-2 .skw-page__half--right .skw-page__content {
-  background-image: url("/img/buysell/2b.jpg");
+  background-image: url("/img/buysell/s2.jpg");
 }
 .skw-page-3 .skw-page__half--left .skw-page__content {
-  background-image: url("/img/buysell/3b.jpg");
+  background-image: url("/img/buysell/s3.jpg");
 }
 .skw-page-3 .skw-page__half--right .skw-page__content {
   background: #292929;
@@ -377,10 +322,10 @@ body {
   background: #292929;
 }
 .skw-page-4 .skw-page__half--right .skw-page__content {
-  background-image: url("/img/buysell/4b.jpg");
+  background-image: url("/img/buysell/s4.jpg");
 }
 .skw-page-5 .skw-page__half--left .skw-page__content {
-  background-image: url("/img/buysell/1b.jpg");
+  background-image: url("/img/buysell/s5.jpg");
 }
 .skw-page-5 .skw-page__half--right .skw-page__content {
   background: #292929;

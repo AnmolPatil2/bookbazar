@@ -26,8 +26,8 @@ export default {
   },
   data() {
     return {
-      count: 4,
-      icons: ["fa fa-home", "fa fa-search", "fa fa-code", "fa fa-envelope"],
+      count: 3,
+      icons: ["fa fa-home", "fa fa-search", "fas fa-question"],
       list: [
         { isLink: true, url: "/" },
         { isLink: true, url: "/searchresults" },

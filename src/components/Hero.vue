@@ -5,7 +5,7 @@
         <div class="row h-100 justify-content-center align-items-center">
           <div class="col">
             <div class="hero-content">
-              <h1 class="hero-title pt-5">BookBazar</h1>
+              <h1 class="hero-title pt-5">BooKoo</h1>
               <p>Best place to buy and sel books</p>
               <div class="hero-btn mt-5">
                 <button class="btn custom-btn btn-info mr-4">Buy</button>

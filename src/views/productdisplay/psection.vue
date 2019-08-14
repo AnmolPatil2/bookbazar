@@ -34,12 +34,12 @@
             <!-- Product details -->
             <div class="col-md-5">
               <div class="product-details">
-                <h5 class="red--text product-name">
+                <h5 class="red--text product-name1">
                   <i class="fa fa-user" aria-hidden="true"></i>
                   {{book.author}}
                 </h5>
                 <h1 class>{{book.name}}</h1>
-                <p class="teal--text">{{book.edition}} {{book.publication}}</p>
+                <p class="teal--text">{{book.edition}}, {{book.publication}}</p>
 
                 <div>
                   <div class="product-rating">
@@ -76,7 +76,7 @@
 
                 <div class="product-options"></div>
 
-                <div class="add-to-cart">
+                <div @click="addtocart(book)" class="add-to-cart">
                   <button class="add-to-cart-btn">
                     <i class="fa fa-shopping-cart"></i> add to cart
                   </button>
@@ -320,47 +320,51 @@
           <div class="row">
             <div class="col-md-12">
               <div class="section-title text-center">
-                <h2 class="title writting">Related Products</h2>
+                <h2 class="title writting">Related Books</h2>
               </div>
             </div>
 
             <!-- product -->
-            <div
-              class="col-md-3 col-xs-6 col-sm-6"
-              v-for="(book,index) in relatedbooks"
-              :key="index"
-            >
-              <div class="product">
-                <div class="product-img" v-for="(img,index) in book.images " :key="index">
-                  <img :src="img" alt />
-                  <div class="product-label">
-                    <span class="sale">-30%</span>
+            <v-container>
+              <v-layout row wrap class>
+                <v-flex xs6 sm6 md4 lg3 v-for="(book,index) in relatedbooks" :key="index">
+                  <div class="product" @click="product_select(book)">
+                    <div class="product-img" v-for="(img,index) in book.images " :key="index">
+                      <img :src="img" alt />
+                      <div class="product-label">
+                        <span class="sale">-30%</span>
+                      </div>
+                    </div>
+                    <div class="product-body">
+                      <h3 class="product-name">
+                        <a href="#">{{book.name}}</a>
+                      </h3>
+                      <h4 class="product-price">
+                        <i class="fa fa-inr" aria-hidden="true"></i>
+                        {{book.sale}}
+                        <del class="product-old-price">
+                          <i class="fa fa-inr" aria-hidden="true"></i>
+                          {{book.fullprice}}
+                        </del>
+                      </h4>
+                      <div class="product-rating">
+                        <i v-for="rating in book.rating" class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                      </div>
+                    </div>
+                    <div class="py-4 my-4"></div>
+                    <div class="add-to-cart" @click="addtocart(book)">
+                      <button class="add-to-cart-btn">
+                        <i class="fa fa-shopping-cart"></i> add to cart
+                      </button>
+                    </div>
                   </div>
-                </div>
-                <div class="product-body">
-                  <h3 class="product-name">
-                    <a href="#">{{book.name}}</a>
-                  </h3>
-                  <h4 class="product-price">
-                    Rs{{book.sale}}
-                    <del class="product-old-price">Rs{{book.fullprice}}</del>
-                  </h4>
-                  <div class="product-rating">
-                    <i v-for="rating in book.rating" class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                  </div>
-                </div>
-                <div class="py-4 my-4"></div>
-                <div class="add-to-cart">
-                  <button class="add-to-cart-btn">
-                    <i class="fa fa-shopping-cart"></i> add to cart
-                  </button>
-                </div>
-              </div>
-            </div>
+                </v-flex>
+              </v-layout>
+            </v-container>
 
             <!-- /product -->
 
@@ -378,6 +382,7 @@
 
       <!-- /NEWSLETTER -->
     </div>
+    <MiniCart />
   </div>
 </template>
 <script>
@@ -385,7 +390,8 @@ import { fb, db } from "../../firebase";
 import { Carousel, Slide } from "vue-carousel";
 import { BreedingRhombusSpinner } from "epic-spinners";
 import { AtomSpinner } from "epic-spinners";
-import section2 from "./section2";
+import MiniCart from "@/components/MiniCart.vue";
+
 export default {
   name: "psection",
   data() {
@@ -397,7 +403,7 @@ export default {
       relatedbooks: []
     };
   },
-  components: { AtomSpinner, section2 },
+  components: { AtomSpinner, MiniCart },
   mounted() {
     console.log(this.idd);
     db.collection("products")
@@ -437,7 +443,7 @@ export default {
                 name: user.data().name,
                 sale: user.data().sale,
                 fullprice: user.data().fullprice,
-                
+                pId: user.id
               });
             });
           });
@@ -445,12 +451,24 @@ export default {
   },
   methods: {
     product_select(product) {
-      console.log(product.id);
-      this.$router.push({
+      this.$router.replace({
         name: "productCompholder",
-        params: { id: product.id }
+        params: { id: product.pId }
       });
+      document.location.reload(true);
     },
+    addtocart(book) {
+      var item = {
+        productName: book.name,
+        productImage: book.images,
+        productPrice: book.sale,
+        productId: book.pId,
+        productQuantity: 1
+      };
+      $("#miniCart").modal("show");
+      this.$store.commit("addToCart", item);
+    },
+
     change(i) {
       this.display = true;
     },
@@ -462,11 +480,6 @@ export default {
 </script>
 
 <style scoped>
-@media screen and (max-width: 600px) {
-  .product-details {
-    margin-bottom: 50px;
-  }
-}
 .zoom:hover {
   -ms-transform: scale(1.3); /* IE 9 */
   -webkit-transform: scale(1.3); /* Safari 3-8 */
@@ -476,11 +489,27 @@ export default {
   .product-details {
     margin-left: 50px;
   }
+  .product {
+    margin-top: 5px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .product-details {
+  }
+  .product {
+  }
 }
 .rating_stars {
   display: inline;
 }
 .product-name {
+  padding-top: 5vmin;
+  padding-bottom: 0.1em;
+  font-family: "Rubik", cursive;
+  height: 60px;
+}
+.product-name1 {
   padding-top: 5vmin;
   padding-bottom: 0.1em;
   font-family: "Rubik", cursive;
@@ -497,5 +526,10 @@ export default {
 
   left: 50%;
   margin-left: -50px;
+}
+@media screen and (min-width: 600px) {
+  .product {
+    margin: 10px 20px;
+  }
 }
 </style>

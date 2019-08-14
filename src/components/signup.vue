@@ -184,26 +184,18 @@ export default {
             var user = result.user;
             // ...
             //route to set password !
-            let ref = db.collection("profiles").where("phone", "==", this.phNo);
+
             ref.get().then(doc => {
-              if (doc.exists) {
-                this.$router.push({ name: "profile1" });
-              } else {
-                db.collection("profiles")
-                  .doc(this.phNo)
-                  .set({
-                    phone: this.phNo,
-
-                    photo: "/img/svg/man.svg"
-                  });
-
-                vm.$router.push({
-                  name: "profile1"
-                });
+              if (1) {
+                vm.$router.push({ name: "profile1" });
               }
+            });
+            vm.$router.push({
+              name: "profile1"
             });
 
             // Update successful.
+            console.log("Ssss");
           })
           .catch(function(error) {
             // User couldn't sign in (bad verification code?)
