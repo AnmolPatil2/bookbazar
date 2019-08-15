@@ -88,10 +88,22 @@
     </div>
     <div v-if="isphone">
       <v-carousel class="mobileslides">
-        <v-carousel-item class="mobileslides" v-for="(item,i) in items" :key="i" :src="item.src">
-          <h2 class="content_mobile">gadiaks</h2>
+        <v-carousel-item class="mobileslides" v-for="(item,i) in items" :key="i">
+          <img class="imagesmobile" :src="item.src" alt />
+
+          <div class="dataa center">
+            <h2 class="heading white--text">{{item.heading}}</h2>
+            <p class="content">{{item.contentmobile}}</p>
+          </div>
         </v-carousel-item>
       </v-carousel>
+      <!--
+      <v-carousel flat dark class="slider" transition="fade" cycle>
+        <v-carousel-item v-for="(item,i) in items" :key="i">
+         
+        </v-carousel-item>
+      </v-carousel>
+      -->
     </div>
   </div>
 </template>
@@ -103,18 +115,30 @@ export default {
       isphone: false,
       items: [
         {
+          heading: "Buying made easier",
+          contentmobile: "Where convenience meets Education",
           src: "/img/buysell/1b.jpg"
         },
         {
+          heading: "Best prices",
+          contentmobile: "Bookoo gives you best offers for all the books",
           src: "/img/buysell/2b.jpg"
         },
         {
+          heading: "Delivery",
+          contentmobile:
+            "All your orders delivered right at your college in a few days",
           src: "/img/buysell/3b.jpg"
         },
         {
+          heading: "Verified Books",
+          contentmobile:
+            " Verified Books Every book is individually checked. 3 days return if not satisfied.",
           src: "/img/buysell/4b.jpg"
         },
         {
+          heading: "Community",
+          contentmobile: " Join our Bookoo commmunity",
           src: "/img/buysell/s5.jpg"
         }
       ]
@@ -222,7 +246,10 @@ export default {
 .mobileslides {
   min-height: 100vh;
 }
-
+.dataa {
+  height: 40vh;
+  background: #292929;
+}
 body {
   background: #15181a;
   font-family: "Open Sans", Helvetica, Arial, sans-serif;
@@ -246,6 +273,9 @@ body {
     background-position: 0vmin 0vmin;
   }
 }
+.imagesmobile {
+  height: 60vh;
+}
 .rules {
 }
 .skw-pages {
@@ -263,9 +293,11 @@ body {
   top: 0;
   width: 100%;
 }
-.content_mobile {
-  padding-top: 480px;
+
+.content {
+  color: #fff;
 }
+
 .skw-page__half {
   position: absolute;
   top: 0;
@@ -300,9 +332,7 @@ body {
   transform: skewX(-18deg);
   background: #000;
 }
-.imagesmobile {
-  min-height: 80vh;
-}
+
 .skw-page__half--left .skw-page__skewed {
   left: -40%;
 }

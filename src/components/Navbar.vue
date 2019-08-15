@@ -124,7 +124,7 @@ export default {
       links: [
         { icon: "dashboard", text: "Buy", route: "/rules" },
         { icon: "folder", text: "Sell", route: "/rulestosell" },
-        { icon: "person", text: "Donate", route: "/rules" }
+        { icon: "person", text: "Donate", route: "/donate" }
       ]
     };
   },
@@ -174,7 +174,7 @@ export default {
   }
 }
 #drawer {
-  background-color: #123c69;
+  background-color: #2e333c;
 }
 .logo {
   padding-left: 50px;

@@ -250,6 +250,7 @@ export default {
   },
 
   firestore() {
+    console.log("2");
     return {
       products: db.collection("products")
     };

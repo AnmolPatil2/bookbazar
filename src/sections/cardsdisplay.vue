@@ -8,7 +8,7 @@
             At Bookoo,
             we are a small community of engineering students striving to make a small change for the better. Students often struggle to get hold of text books, are tricked with high prices and in most cases are required to put in a lot of time and effort. Our mission at Bookoo is to make the purchase of textbooks a simple, convenient and student friendly process. We achieve this through the constant hardwork and perseverance of our team in working together to deliver only the best to you.
             We look forward to working with our users and expanding our community
-            -Team bookoo
+            <br />-Team bookoo
           </p>
         </div>
       </div>
@@ -16,9 +16,9 @@
         <div class="col-md-6 col-sm-12 text-right">
           <div class="desktop shadow-lg">
             <div class="d-flex flex-row justify-content-center">
-              <i class="fa fa-whatsapp fa-3x py-2 pr-3"></i>
+              <i class="fab fa-whatsapp fa-3x py-2 pr-3"></i>
               <div class="text text-left">
-                <h3 class="pt-1 m-0">Telegram</h3>
+                <h3 class="pt-1 m-0">Join Now</h3>
                 <p class="p-0 m-0">On whatsapp</p>
               </div>
             </div>
@@ -27,11 +27,11 @@
         <div class="col-md-6 col-sm-12 text-left">
           <div class="desktop shadow-lg">
             <div class="d-flex flex-row justify-content-center">
-              <i class="fa fa-whatsapp fa-3x py-2 pr-3"></i>
+              <i class="fab fa-instagram fa-3x py-2 pr-3"></i>
 
               <div class="text text-left">
                 <h3 class="pt-1 m-0">Join Now</h3>
-                <p class="p-0 m-0">On whatsapp</p>
+                <p class="p-0 m-0">On Instagram</p>
               </div>
             </div>
           </div>
@@ -65,11 +65,11 @@
                 </div>
                 <div class="flipbut pt-3">
                   <button class="quick-view left px-2">
-                    <i class="fa fa-eye"></i>
+                    <i @click=" product_select(product)" class="fa fa-eye"></i>
                     <span class="tooltipp"></span>
                   </button>
                   <button class="add-to-cart-btn right px-2 cartb">
-                    <i class="fa fa-shopping-cart"></i>
+                    <i @click="addcart(product)" class="fa fa-shopping-cart"></i>
                   </button>
                 </div>
               </div>
@@ -131,10 +131,7 @@
 </template>
 <script>
 import { fb, db } from "../firebase";
-import "swiper/dist/css/swiper.css";
-import ProductCard from "@/components/product.grid.vue";
 
-import { swiper, swiperSlide } from "vue-awesome-swiper";
 export default {
   name: "cardsdisplay",
   data() {
@@ -155,8 +152,26 @@ export default {
       }
     };
   },
-  components: { swiper, swiperSlide },
-  methods: {},
+  components: {},
+  methods: {
+    product_select(product) {
+      this.$router.push({
+        name: "productCompholder",
+        params: { id: product.id }
+      });
+    },
+    addcart(product) {
+      var item = {
+        productName: product.name,
+        productImage: product.images,
+        productPrice: product.sale,
+        productId: product.id,
+        productQuantity: 1
+      };
+      $("#miniCart").modal("show");
+      this.$store.commit("addToCart", item);
+    }
+  },
   firestore() {
     return {
       products: db.collection("products")

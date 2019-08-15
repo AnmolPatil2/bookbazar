@@ -159,12 +159,14 @@
 <script>
 import { VueEditor } from "vue2-editor";
 import { fb, db } from "../../firebase";
+import slugify from "slugify";
 import firebase1 from "@firebase/app";
 
 export default {
   name: "profile",
   components: {
-    VueEditor
+    VueEditor,
+    slugify
   },
   props: {
     msg: String
@@ -184,7 +186,8 @@ export default {
         emailVerified: null,
         password: null,
         confirmPassword: null,
-        uid: null
+        uid: null,
+        slug: null
       }
     };
   },
@@ -242,29 +245,78 @@ export default {
         });
     },
     updateProfile() {
-      var user = firebase1.auth().currentUser;
-      console.log(user.uid);
-      db.collection("profiles")
-        .where("aui", "==", user.uid)
-        .get()
-        .then(snapshot => {
-          snapshot.forEach(doc => {
+      if (this.reroute == 2) {
+        this.slug = slugify(this.profile.name, {
+          replacement: "-",
+          remove: /[!@#$%^&*()]/g,
+          lower: true
+        });
+        let ref = db.collection("profiles").doc(this.slug);
+        ref.get().then(doc => {
+          if (doc.exists) {
+          } else {
+            var user = firebase1.auth().currentUser;
             db.collection("profiles")
-              .doc(doc.id)
-              .update({
+              .doc(this.slug)
+              .set({
+                name: this.profile.name,
+                aui: user.uid,
                 email: this.profile.email,
+                photo: "/img/svg/man.svg",
                 phone: this.profile.phone
               })
-              .then(() => {});
-          });
-        })
-        .then(() => {
-          if (this.reroute == 1) {
-            this.$router.go(-1);
-          } else {
-            this.$router.go(-2);
+
+              .then(() => {
+                var user = firebase1.auth().currentUser;
+
+                user
+                  .sendEmailVerification()
+                  .then(() => {
+                    Toast.fire({
+                      type: "success",
+                      title: "Email Confermation sent"
+                    });
+                  })
+
+                  .catch(error => {
+                    // An error happened.
+                    alert("Refresh and Try Again !");
+                  });
+
+                this.$router.push({ name: "home" });
+              })
+
+              .catch(error => {
+                // Handle Errors here.
+                // ...
+              });
           }
         });
+      } else {
+        var user = firebase1.auth().currentUser;
+        console.log(user.uid);
+        db.collection("profiles")
+          .where("aui", "==", user.uid)
+          .get()
+          .then(snapshot => {
+            snapshot.forEach(doc => {
+              db.collection("profiles")
+                .doc(doc.id)
+                .update({
+                  email: this.profile.email,
+                  phone: this.profile.phone
+                })
+                .then(() => {});
+            });
+          })
+          .then(() => {
+            if (this.reroute == 1) {
+              this.$router.go(-1);
+            } else {
+              this.$router.go(-2);
+            }
+          });
+      }
     },
     uploadImage() {}
   }
