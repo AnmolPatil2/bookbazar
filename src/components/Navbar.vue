@@ -99,7 +99,7 @@
     >
       <v-list>
         <v-flex class></v-flex>
-        <mobilenavbar />
+        <mobilenavbar class="icons" />
       </v-list>
     </v-navigation-drawer>
   </nav>

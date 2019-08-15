@@ -5,7 +5,9 @@
         <div class="sidebar-content">
           <!-- sidebar-brand  -->
           <div class="sidebar-item sidebar-brand">
-            <img src="/img/svg/TitleLogo.jpg" alt width="200" max-height="30px" />
+            <img src="/img/svg/logo.png" @click="gohome()" alt width="40" />
+
+            <h2 style="color: #eee2dc" @click="gohome()" class="px-4">BooKoo</h2>
 
             <div id="close-sidebar" @click="closeMenu">
               <i class></i>
@@ -26,7 +28,7 @@
               </div>
 
               <div class="user-info">
-                <span class="user-name p-4">
+                <span class="user-name p-4" data-toggle="modal" data-target="#login">
                   <strong>Login</strong>
                 </span>
                 <span class="user-role"></span>
@@ -100,6 +102,12 @@
                 <a href="#">
                   <i class="fas fa-question"></i>
                   <span>Help</span>
+                </a>
+              </li>
+              <li class="mx-3">
+                <a href="#" data-toggle="modal" data-target="#miniCart">
+                  <i class="fas fa-shopping-cart fa-shopping-cart"></i>
+                  <span>Cart</span>
                 </a>
               </li>
             </ul>

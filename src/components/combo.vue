@@ -70,10 +70,12 @@
         <div class="text" id="open-content-text"></div>
       </div>
     </div>
+    <login />
   </header>
 </template>
 <script>
 import { fb, db } from "../firebase";
+import login from "@/components/login";
 export default {
   name: "combo",
   data() {
@@ -81,6 +83,7 @@ export default {
       offers: []
     };
   },
+  components: { login },
   firestore() {
     return {
       offers: db.collection("offers")
@@ -298,7 +301,6 @@ export default {
     }
     var paragraphText =
       "<ul><li>1) Breeze through your first year with our physics cycle collection hand picked Textbooks for every subject </li><l1>2) Afraid of the quality? Don't worry we cross check the quality before we deliver it to you, but hey.you can pay for it once you verify it!</li><li>3) not happy with our collection? Customize your choice by placing an order with us.</li><l1>4) get the highest offers on bulk orders, click or order now</li></ul>";
-   
   }
 };
 </script>
@@ -315,7 +317,7 @@ body {
   color: #2e2c2caf;
   font-size: 3vmin;
   padding-bottom: 3vmin;
-  backgroung:#fff
+  backgroung: #fff;
 }
 p {
   line-height: 1.5;

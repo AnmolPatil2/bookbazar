@@ -185,17 +185,13 @@ export default {
             // ...
             //route to set password !
 
+            let ref = db.collection("profiles");
             ref.get().then(doc => {
-              if (1) {
-                vm.$router.push({ name: "profile1" });
-              }
+              console.log(this.phNo);
             });
             vm.$router.push({
               name: "profile1"
             });
-
-            // Update successful.
-            console.log("Ssss");
           })
           .catch(function(error) {
             // User couldn't sign in (bad verification code?)
@@ -307,7 +303,7 @@ export default {
 <style scoped>
 .phoneauth {
   height: 100vh;
-  background: #ddccdd;
+  background: #2e9cca;
 }
 #wrapper {
   font-family: Lato;
@@ -352,8 +348,8 @@ export default {
   border-radius: 3px;
 }
 #wrapper #dialog #form input:focus {
-  border-color: purple;
-  box-shadow: 0 0 5px purple inset;
+  border-color: #123c69;
+  box-shadow: 0 0 5px #123c69;
 }
 #wrapper #dialog #form input::-moz-selection {
   background: transparent;
@@ -365,7 +361,7 @@ export default {
   margin: 30px 0 50px;
   width: 100%;
   padding: 6px;
-  background-color: #b85fc6;
+  background-color: #123c69;
   border: none;
   text-transform: uppercase;
 }

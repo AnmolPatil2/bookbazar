@@ -137,6 +137,7 @@ export default {
           prevEl: ".swiper-button-prev"
         }
       },
+      count: 0,
       mapping: {
         id: "_id",
         name: "name",
@@ -173,6 +174,7 @@ export default {
   },
   mounted() {
     this.loading = false;
+    console.log(this.count + 1);
   },
   methods: {
     getImage(images) {
@@ -248,9 +250,7 @@ export default {
 
   firestore() {
     return {
-      products: db.collection("products"),
-      offers: db.collection("offers"),
-      items: db.collection("products")
+      products: db.collection("products")
     };
   }
 };

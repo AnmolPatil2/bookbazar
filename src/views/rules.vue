@@ -87,9 +87,8 @@
     </div>
     <div v-if="isphone">
       <v-carousel class="mobileslides">
-        <v-carousel-item v-for="(item,i) in items" :key="i" :src="item.src">
-          <div class="dataa"></div>
-          <h2>gadiaks</h2>
+        <v-carousel-item class="mobileslides" v-for="(item,i) in items" :key="i" :src="item.src">
+          <h2 class="content_mobile">gadiaks</h2>
         </v-carousel-item>
       </v-carousel>
     </div>
@@ -263,8 +262,8 @@ body {
   top: 0;
   width: 100%;
 }
-.dataa {
-  height: 90vh;
+.content_mobile {
+  padding-top: 480px;
 }
 .skw-page__half {
   position: absolute;
