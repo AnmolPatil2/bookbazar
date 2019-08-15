@@ -9,9 +9,10 @@
 
       <v-toolbar-title class="text-uppercase black--text">
         <iconmenu />
-
-        <span color style="color: #eee2dc" @click="returnhome()" class="font-weight-light logo"></span>
-        <img @click="returnhome()" class="logoimg" src="/img/svg/TitleLogo.jpg" />
+        <div @click="returnhome()" class="logo">
+          <span color style="color: #eee2dc" class="font-weight-light logo"></span>
+          <img @click="returnhome()" class="logoimg" src="/img/svg/TitleLogo.jpg" />
+        </div>
       </v-toolbar-title>
       <v-spacer></v-spacer>
 
@@ -143,7 +144,7 @@ export default {
     },
     returnhome() {
       this.$router.push({
-        to: "/"
+        name: "home"
       });
     },
     search() {

@@ -94,16 +94,16 @@
         <v-carousel-item class="mobileslides" v-for="(item,i) in items" :key="i">
           <img class="imagesmobile" :src="item.src" alt />
 
-          <div class="dataa center">
+          <div class="dataa center pa-4">
             <h2 class="heading white--text">{{item.heading}}</h2>
             <v-btn
               @click="changetosell()"
-              class="red--text m-4"
+              class="white--text sellbtn"
               v-if="item.contentmobile=='SELL THEM ON BOOKOO'"
             >{{item.contentmobile}}</v-btn>
             <p
               v-if="item.contentmobile!='SELL THEM ON BOOKOO'"
-              class="content"
+              class="content ma-2"
             >{{item.contentmobile}}</p>
           </div>
         </v-carousel-item>
@@ -279,6 +279,12 @@ body {
   left: 0;
   top: 0;
   width: 100%;
+}
+.sellbtn {
+  position: absolute;
+  left: 25%;
+  top: 75%;
+  border: 0.5px solid #3085d6;
 }
 .skw-page__half {
   position: absolute;

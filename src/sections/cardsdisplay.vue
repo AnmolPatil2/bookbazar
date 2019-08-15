@@ -39,7 +39,7 @@
       </div>
     </section>
     <!--test-->
-    <h1 style="color: #026670" class="writting text-left">Best Seller so Far</h1>
+    <h1 style="color: #026670" class="writting text-left">Offers</h1>
     <v-container>
       <v-layout row wrap class>
         <v-flex xs6 sm6 md4 lg3 v-for="(product,index) in mostbought2" :key="index">
@@ -47,9 +47,12 @@
             <div class="imageh">
               <img :src="product.images" class="card-img-top imagesD" alt="...." />
             </div>
+            <div class="product-label">
+              <span class="sale">{{Discount(product.fullprice,product.sale)}}% OFF</span>
+            </div>
             <div class="detailsh">
               <div class="centerh">
-                <h1 class="bookname">{{product.name}}</h1>
+                <h5 class="bookname red--text">{{product.name}}</h5>
                 <div class="author">
                   <table class="table">
                     <tbody>
@@ -170,6 +173,9 @@ export default {
       };
       $("#miniCart").modal("show");
       this.$store.commit("addToCart", item);
+    },
+    Discount(price, sale_price) {
+      return parseInt(((price - sale_price) * 100) / price);
     }
   },
   firestore() {
@@ -182,7 +188,7 @@ export default {
       return this.products.filter(product => {
         var name = String(product.importance);
 
-        return name.match("1");
+        return name.match("2");
       });
     }
   }
@@ -195,27 +201,32 @@ export default {
   padding-bottom: 0.1em;
   font-family: "lobster", cursive;
 }
-.bookname {
-  min-width: 100px;
-}
+
 .author {
   max-width: 100px;
 }
 .imagesD {
   height: auto;
   width: auto;
-  max-width: 270px;
-  max-height: 270px;
+  width: 270px;
+  height: 270px;
   margin: 0;
 }
 @media only screen and (max-width: 600px) {
   .cardh {
     margin: 5px;
   }
+  .bookname {
+    width: 124px;
+  }
 }
 @media only screen and (min-width: 600px) {
   .cardh {
-    margin-right: 30px;
+    margin-right: 15px;
+    margin-bottom: 10px;
+  }
+  .bookname {
+    min-width: 190px;
   }
 }
 .cartb {
@@ -315,85 +326,8 @@ export default {
   }
 }
 @media only screen and (min-width: 600px) {
-  .card {
-    width: 270px;
-    height: 270px;
-    border-radius: 15px;
-    padding: 0;
-    background: white;
-    position: relative;
-    display: block;
-    align-items: flex-end;
-    transition: 0.4s ease-out;
-    box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.5);
-  }
 }
 
-.card:hover {
-  -webkit-transform: translateY(20px);
-  transform: translateY(20px);
-}
-.card:hover:before {
-  opacity: 1;
-}
-.card:hover .info {
-  opacity: 1;
-  -webkit-transform: translateY(0px);
-  transform: translateY(0px);
-}
-.card:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: block;
-
-  border-radius: 15px;
-  background: rgba(0, 0, 0, 0.6);
-  z-index: 2;
-  transition: 0.5s;
-  opacity: 0;
-}
-.card img {
-  width: 100%;
-  height: 100%;
-
-  position: absolute;
-  top: 0;
-  left: 0;
-  border-radius: 15px;
-}
-.card .info {
-  position: relative;
-  z-index: 3;
-  color: white;
-  opacity: 0;
-
-  transition: 0.5s;
-}
-.card .info h1 {
-  margin: 0px;
-}
-.card .info p {
-  letter-spacing: 1px;
-  font-size: 15px;
-  margin-top: 8px;
-}
-.card .info button {
-  padding: 0.6rem;
-  outline: none;
-  border: none;
-  border-radius: 3px;
-  background: white;
-  color: black;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.4s ease;
-}
-.card .info button:hover {
-  background: dodgerblue;
-  color: white;
-}
 .section-3 {
   height: 70vmin;
   margin-top: 15vmin;
@@ -442,5 +376,29 @@ export default {
   .section-3 .desktop i {
     font-size: 8vmin;
   }
+}
+
+.product-label {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+.product-label > span {
+  border: 2px solid;
+  padding: 2px 10px;
+  font-size: 12px;
+}
+
+.product-label > span.sale {
+  background-color: #d10024;
+  border-color: #d10024;
+  color: #fff;
+}
+
+.product-label > span.new {
+  background-color: #d10024;
+  border-color: #d10024;
+  color: #fff;
 }
 </style>

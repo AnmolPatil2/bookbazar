@@ -7,7 +7,7 @@
     <!--best seller-->
 
     <div v-if="products!=null">
-      <h1 style="color: #026670" class="writting text-left">Best Seller so Far</h1>
+      <h1 style="color: #026670" class="writting text-left">Top Searches</h1>
 
       <!-- swiper -->
       <swiper :options="swiperOption" class>
@@ -15,7 +15,10 @@
           <v-responsive class @click="product_select(product)">
             <v-container hide-delimiters class>
               <img :src="product.images" class="card-img-top imagesD" alt="...." />
-              <p>{{product.sale}}</p>
+              <h5 class="red--text my-3">
+                <i class="fa fa-inr" aria-hidden="true"></i>
+                {{product.sale}}
+              </h5>
             </v-container>
           </v-responsive>
         </swiper-slide>
