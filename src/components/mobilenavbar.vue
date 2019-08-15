@@ -174,7 +174,7 @@ export default {
   },
   components: {},
 
-  created() {
+  mounted() {
     let user = fb.auth().currentUser;
     if (user == null) {
       this.user = null;

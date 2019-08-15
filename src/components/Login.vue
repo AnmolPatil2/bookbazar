@@ -156,7 +156,7 @@ export default {
           ref.get().then(doc => {
             if (doc.exists) {
               $("#login").modal("hide");
-              this.$router.push({ name: "profile1" });
+              this.$router.push({ name: "accounts" });
             } else {
               $("#login").modal("hide");
               db.collection("profiles")

@@ -83,7 +83,7 @@
 import { BreedingRhombusSpinner } from "epic-spinners";
 import { AtomSpinner } from "epic-spinners";
 import { fb, db } from "../firebase";
-import login from "@/components/Login.vue";
+
 import "swiper/dist/css/swiper.css";
 import numbers from "@/components/numbershow.vue";
 import ProductCard from "@/components/product.grid.vue";
@@ -98,7 +98,7 @@ export default {
     AtomSpinner,
     Slide,
     numbers,
-    login,
+
     swiper,
     swiperSlide,
     cardsdisplay,

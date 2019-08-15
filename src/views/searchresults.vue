@@ -167,13 +167,13 @@ export default {
   background: crimson;
   border-radius: 50%;
   transition: all 1s;
-  z-index: 4;
+  z-index: 1;
   box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.4);
 }
 .search2 {
   position: fixed;
   top: 12%;
-  z-index: 22;
+  z-index: 2;
 }
 .container .search:hover {
   cursor: pointer;
