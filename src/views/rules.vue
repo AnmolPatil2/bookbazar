@@ -139,7 +139,7 @@ export default {
         {
           heading: "Community",
           contentmobile: " Join our Bookoo commmunity",
-          src: "/img/buysell/s5.jpg"
+          src: "/img/buysell/b5.jpg"
         }
       ]
     };
@@ -410,7 +410,8 @@ body {
   background-image: url("/img/buysell/4b.jpg");
 }
 .skw-page-5 .skw-page__half--left .skw-page__content {
-  background-image: url("/img/buysell/1b.jpg");
+  background-image: url("/img/buysell/5b.jpg");
+  background-position: 0vmin -25vmin;
 }
 .skw-page-5 .skw-page__half--right .skw-page__content {
   background: #292929;

@@ -1,7 +1,7 @@
 <template>
   <div id="hero">
     <v-carousel flat dark class="slider" transition="fade" cycle>
-      <v-carousel-item v-for="(item,i) in slides" :key="i">
+      <v-carousel-item router :to="item.route" v-for="(item,i) in slides" :key="i">
         <img class="images" :src="item.src" alt />
       </v-carousel-item>
     </v-carousel>
@@ -20,13 +20,16 @@ export default {
       ],
       slides: [
         {
-          src: "/images/Buy.png"
+          src: "/images/Buy.png",
+          route: "rules"
         },
         {
-          src: "/images/Offer.png"
+          src: "/images/donate.jpeg",
+          route: "donate"
         },
         {
-          src: "/images/Sell.png"
+          src: "/images/Sell.png",
+          route: "RulesToSell"
         },
         {
           src: "/images/offers.jpeg"
@@ -37,6 +40,9 @@ export default {
 };
 </script>
 <style scoped>
+.hero {
+  margin-top: 50px;
+}
 @media only screen and (max-width: 600px) {
   #hero {
     height: 300px;
@@ -44,6 +50,9 @@ export default {
   .images {
     height: 300px;
     width: 100%;
+  }
+  #hero {
+    margin-top: 68px;
   }
   .slider {
     max-height: 300px;
@@ -57,6 +66,9 @@ export default {
   .images {
     height: 450px;
     width: 100%;
+  }
+  #hero {
+    margin-top: 68px;
   }
   .slider {
     max-height: 450px;

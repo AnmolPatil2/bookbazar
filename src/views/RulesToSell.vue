@@ -11,7 +11,7 @@
           <div class="skw-page__skewed">
             <div class="skw-page__content">
               <h3 class="skw-page__heading">When knowledge gets old, its meant to be sold.</h3>
-              <p class="skw-page__description">---Experince selling at its best with Bookoo</p>
+              <p class="skw-page__description">Experince selling at its best with Bookoo</p>
               <p class="skw-page__description red--text">Scroll Down</p>
             </div>
           </div>
@@ -127,7 +127,7 @@ export default {
       items: [
         {
           heading: "When knowledge gets old, its meant to be sold.",
-          contentmobile: "---Experince selling at its best with Bookoo",
+          contentmobile: "Experince selling at its best with Bookoo",
           src: "/img/buysell/s1.jpg"
         },
         {
