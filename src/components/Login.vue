@@ -189,17 +189,21 @@ export default {
           } else {
             fb.auth()
               .createUserWithEmailAndPassword(this.email, this.password)
-              .then(cred => {
-                ref.set({
-                  name: this.name,
-                  aui: cred.user.uid,
-                  email: user.email,
-                  photo: "/img/svg/man.svg"
-                });
-              })
               .then(() => {
                 var user = firebase1.auth().currentUser;
+                db.collection("profiles")
+                  .doc(this.slug)
+                  .set({
+                    name: this.name,
+                    aui: user.uid,
+                    email: user.email,
+                    photo: "/img/svg/man.svg"
+                  });
+              })
 
+              .then(() => {
+                var user = firebase1.auth().currentUser;
+                console.log("Sss");
                 user
                   .sendEmailVerification()
                   .then(() => {

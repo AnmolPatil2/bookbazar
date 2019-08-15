@@ -200,6 +200,8 @@ export default {
       .then(snapshot => {
         snapshot.forEach(user => {
           this.profile.name = user.data().name;
+          this.profile.email = user.data().email;
+          this.profile.phone = user.data().phone;
         });
       });
     const user = firebase1.auth().currentUser;

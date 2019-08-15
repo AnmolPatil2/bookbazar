@@ -12,6 +12,7 @@
             <div class="skw-page__content">
               <h3 class="skw-page__heading">Buying made easier</h3>
               <p class="skw-page__description">Where convenience meets Education</p>
+              <p class="skw-page__description red--text">Scroll Down</p>
             </div>
           </div>
         </div>

@@ -93,15 +93,9 @@
               <div class="grey--text">{{product.price}}</div>
             </v-card-text>
             <v-card-actions>
-              <v-btn flat color="grey" @click=" addNew(index, product) ">sell</v-btn>
-              <add-to-cart
-                :image="getImage(product.images)"
-                :p-id="product.id"
-                :price="priceconvet(product.sale)"
-                :name="product.name"
-              >
-                <i class="fa fa-shopping-cart"></i>
-              </add-to-cart>
+              <v-btn flat color="sellbtn" @click=" addNew(index, product) ">
+                <i class="fas fa-wallet"></i>Sell Now
+              </v-btn>
             </v-card-actions>
           </v-card>
         </v-flex>
@@ -119,7 +113,7 @@
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="editLabel">Add Product</h5>
+            <h5 class="modal-title" id="editLabel">You want to sell</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -129,21 +123,22 @@
               <!-- main product -->
               <div class="col-md-8">
                 <div class="form-group">
-                  <input
-                    type="text"
-                    placeholder="Product Name"
-                    v-model="product.name"
-                    class="form-control"
-                  />
+                  <p>Name: {{product.name}}</p>
+
+                  <p class="red--text">
+                    For:
+                    <i class="fa fa-inr" aria-hidden="true"></i>
+                    {{product.price}}
+                  </p>
                 </div>
               </div>
               <!-- product sidebar -->
               <div class="col-md-4">
-                <h4 class="display-6">Product Details</h4>
+                <h5 class="display-6">Click a pic of the book</h5>
 
                 <div class="form-group">
-                  <label for="product_image">Product Images</label>
-                  <input type="file" @change="uploadImage()" class="form-control" />
+                  <label for="product_image">and Upload</label>
+                  <input type="file" @change="uploadImage" class="form-control" />
                 </div>
 
                 <div class="form-group d-flex">
@@ -154,17 +149,25 @@
                     </div>
                   </div>
                 </div>
+                <v-progress-circular
+                  :size="70"
+                  :width="7"
+                  color="purple"
+                  indeterminate
+                  v-if="!uploaded"
+                  class
+                ></v-progress-circular>
               </div>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary red" data-dismiss="modal">Cancel</button>
             <button
               type="button"
               class="btn btn-primary"
               v-if="modal == 'new'"
-              @click=" addProduct(product)"
-            >Save changes</button>
+              @click=" addProductsell(product)"
+            >Sell Your Book</button>
           </div>
         </div>
       </div>
@@ -196,13 +199,14 @@ export default {
     MiniCart,
     AtomSpinner,
     PopUp,
+
     VueEditor
   },
   data() {
     return {
       displayl: [],
       loading: true,
-
+      uploaded: true,
       activeItem: null,
       modal: null,
       years: [
@@ -226,7 +230,7 @@ export default {
       display: null,
       department: null,
       sum: 0,
-      product: { name: null, images: [] },
+      product: { name: null, images: [], sale: null },
       activeItem: null,
       modal: null,
       tag: null
@@ -291,17 +295,15 @@ export default {
           console.log("an error occurred");
         });
     },
-    addTag() {
-      this.product.tags.push(this.tag);
-      this.tag = "";
-    },
+
     uploadImage(e) {
+      this.uploaded = false;
       if (e.target.files[0]) {
         let file = e.target.files[0];
 
         var storageRef = fb
           .storage()
-          .ref("products/" + Math.random() + "_" + file.name);
+          .ref("sell/" + Math.random() + "_" + file.name);
 
         let uploadTask = storageRef.put(file);
 
@@ -312,12 +314,18 @@ export default {
             // Handle unsuccessful uploads
           },
           () => {
+            console.log(this.product.images);
             // Handle successful uploads on complete
             // For instance, get the download URL: https://firebasestorage.googleapis.com/...
 
-            uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
-              this.product.images.push(downloadURL);
-            });
+            uploadTask.snapshot.ref
+              .getDownloadURL()
+              .then(downloadURL => {
+                this.product.images.push(downloadURL);
+              })
+              .then(() => {
+                this.uploaded = true;
+              });
           }
         );
       }
@@ -325,7 +333,8 @@ export default {
     reset(index) {
       this.product = {
         name: this.displayl[index].name,
-        images: []
+        images: [],
+        price: this.displayl[index].sale
       };
     },
     addNew(index, product) {
@@ -341,6 +350,7 @@ export default {
           confirmButtonText: "Yes, SignUp"
         }).then(result => {
           if (result.value) {
+            $("#login").modal("show");
           }
         });
       } else {
@@ -350,21 +360,38 @@ export default {
       }
     },
 
-    addProduct(product) {
-      var user = firebase1.auth().currentUser;
-      db.collection("buyorders").add({
-        bookid: product.name,
-        price: product.sale,
-        status: "ongoing",
-        buyer: user.uid,
-        date: Date.now()
-      });
-
-      Toast.fire({
+    addProductsell(product) {
+      Swal.fire({
+        title: "Sell your book",
+        text: "Confirm and we will take care of the rest",
         type: "success",
-        title: "Product created successfully"
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Confirm"
+      }).then(result => {
+        if (result.value) {
+          var user = firebase1.auth().currentUser;
+          console.log(product.name);
+          db.collection("buyorders")
+            .add({
+              bookid: product.name,
+              price: product.price,
+              status: "ongoing",
+              buyer: user.uid,
+              date: Date.now(),
+              image: product.images
+            })
+
+            .then(() => {
+              Toast.fire({
+                type: "success",
+                title: "Product created successfully"
+              });
+              $("#product").modal("hide");
+            });
+        }
       });
-      $("#product").modal("hide");
     }
   }
 };
