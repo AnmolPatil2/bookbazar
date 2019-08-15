@@ -72,7 +72,7 @@
             </v-responsive>
             <v-card-text>
               <div class="subheading">{{product.name}}</div>
-              <div class="grey--text">{{product.price}}</div>
+              <div class="grey--text">{{product.sale}}</div>
             </v-card-text>
             <v-card-actions>
               <v-btn flat color="grey">
@@ -81,7 +81,7 @@
                 <add-to-cart
                   :image="getImage(product.images)"
                   :p-id="product.id"
-                  :price="product.price"
+                  :price="product.sale"
                   :name="product.name"
                 ></add-to-cart>
               </v-btn>

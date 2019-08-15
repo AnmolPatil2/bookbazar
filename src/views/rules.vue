@@ -93,7 +93,12 @@
 
           <div class="dataa center">
             <h2 class="heading white--text">{{item.heading}}</h2>
-            <p class="content">{{item.contentmobile}}</p>
+            <v-btn
+              @click="changetosell()"
+              class="white--text sellbtn"
+              v-if="item.heading=='Community'"
+            >{{item.contentmobile}}</v-btn>
+            <p class="content" v-if="item.heading!='Community'">{{item.contentmobile}}</p>
           </div>
         </v-carousel-item>
       </v-carousel>
@@ -110,6 +115,7 @@
 <script>
 export default {
   name: "rules",
+
   data() {
     return {
       isphone: false,
@@ -139,14 +145,14 @@ export default {
         {
           heading: "Community",
           contentmobile: " Join our Bookoo commmunity",
-          src: "/img/buysell/b5.jpg"
+          src: "/img/buysell/5b.jpg"
         }
       ]
     };
   },
   methods: {
     changetosell() {
-      this.$router.push({ name: "sell" });
+      this.$router.push({ name: "select" });
     }
   },
   mounted() {

@@ -168,7 +168,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 @media (min-width: 992px) {
-  .navbar.custom-nav {
+  .navbar2.custom-nav {
     padding-top: 16px;
     padding-bottom: 16px;
     background-color: black;

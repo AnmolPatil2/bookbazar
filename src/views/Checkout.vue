@@ -42,7 +42,7 @@
             </div>
           </div>
           <div class="order-col">
-            <div>Shiping</div>
+            <div>Shipping</div>
             <div>
               <strong>FREE</strong>
             </div>
@@ -64,7 +64,7 @@
               Contact through Whatsapp
             </label>
             <div class="caption">
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <p>A bookoo community member will get in touch with you and keep you informed on your order status.</p>
             </div>
           </div>
         </div>
@@ -107,52 +107,56 @@ export default {
       });
     },
     buy() {
-      if (document.getElementById("terms").checked) {
-        // it is checked. Do something
-        var user = firebase1.auth().currentUser;
-        this.$store.state.cart.forEach(order => {
-          db.collection("sellorders").add({
-            bookid: order.productId,
-            bookName: order.productName,
-            price: order.productPrice,
-            status: "ongoing",
-            buyer: user.uid,
-            date: Date.now(),
-            orderQuantity: order.productQuantity,
-            orderImage: order.productImage
+      if (this.$store.state.cart.length != 0) {
+        if (document.getElementById("terms").checked) {
+          // it is checked. Do something
+          var user = firebase1.auth().currentUser;
+          this.$store.state.cart.forEach(order => {
+            db.collection("sellorders").add({
+              bookid: order.productId,
+              bookName: order.productName,
+              price: order.productPrice,
+              status: "ongoing",
+              buyer: user.uid,
+              date: Date.now(),
+              orderQuantity: order.productQuantity,
+              orderImage: order.productImage
+            });
           });
-        });
 
-        Swal.fire({
-          title: "Confirm Order",
-          text: "You are one Click away",
-          type: "success",
-          showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Yes, Confirm"
-        })
-          .then(result => {
-            if (result.value) {
-              Toast.fire({
-                type: "success",
-                title: "Order Placed"
-              });
-            }
+          Swal.fire({
+            title: "Confirm Order",
+            text: "You are one Click away",
+            type: "success",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Confirm"
           })
-          .then(() => {
-            this.$store.state.cart.forEach(element => {
-              console.log(element);
-              this.$store.commit("removeFromCart", element);
+            .then(result => {
+              if (result.value) {
+                Toast.fire({
+                  type: "success",
+                  title: "Order Placed"
+                });
+              }
+            })
+            .then(() => {
+              this.$store.state.cart.forEach(element => {
+                console.log(element);
+                this.$store.commit("removeFromCart", element);
+              });
+              this.$router.push({
+                name: "orders1"
+              });
             });
-            this.$router.push({
-              name: "orders1"
-            });
-          });
-      } else {
-        // it isn't checked. Do something else
+        } else {
+          // it isn't checked. Do something else
 
-        this.feedback = "Please select all the Boxes";
+          this.feedback = "Please select all the Boxes";
+        }
+      } else {
+        this.feedback = "Your cart is empty";
       }
     }
   },

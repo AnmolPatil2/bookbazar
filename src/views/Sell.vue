@@ -361,37 +361,41 @@ export default {
     },
 
     addProductsell(product) {
-      Swal.fire({
-        title: "Sell your book",
-        text: "Confirm and we will take care of the rest",
-        type: "success",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, Confirm"
-      }).then(result => {
-        if (result.value) {
-          var user = firebase1.auth().currentUser;
-          console.log(product.name);
-          db.collection("buyorders")
-            .add({
-              bookid: product.name,
-              price: product.price,
-              status: "ongoing",
-              buyer: user.uid,
-              date: Date.now(),
-              image: product.images
-            })
+      if (product.images.length == 0) {
+        alert("upload image");
+      } else {
+        Swal.fire({
+          title: "Sell your book",
+          text: "Confirm and we will take care of the rest",
+          type: "success",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, Confirm"
+        }).then(result => {
+          if (result.value) {
+            var user = firebase1.auth().currentUser;
+            console.log(product.name);
+            db.collection("buyorders")
+              .add({
+                bookid: product.name,
+                price: product.price,
+                status: "ongoing",
+                buyer: user.uid,
+                date: Date.now(),
+                image: product.images
+              })
 
-            .then(() => {
-              Toast.fire({
-                type: "success",
-                title: "Product created successfully"
+              .then(() => {
+                Toast.fire({
+                  type: "success",
+                  title: "Product created successfully"
+                });
+                $("#product").modal("hide");
               });
-              $("#product").modal("hide");
-            });
-        }
-      });
+          }
+        });
+      }
     }
   }
 };

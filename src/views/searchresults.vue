@@ -1,7 +1,7 @@
 <template>
   <div class="searchresult">
     <Navbar />
-    <div class="container">
+    <div class="container search2">
       <!--<p class="something">Search Other Books</p>-->
       <input type="text" v-model="searchString" placeholder="Subject...." />
       <div class="search"></div>
@@ -169,6 +169,11 @@ export default {
   transition: all 1s;
   z-index: 4;
   box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.4);
+}
+.search2 {
+  position: fixed;
+  top: 12%;
+  z-index: 22;
 }
 .container .search:hover {
   cursor: pointer;

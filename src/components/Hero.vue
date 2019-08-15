@@ -32,7 +32,7 @@ export default {
           route: "RulesToSell"
         },
         {
-          src: "/images/offers.jpeg"
+          src: "/images/offer1.png"
         }
       ]
     };

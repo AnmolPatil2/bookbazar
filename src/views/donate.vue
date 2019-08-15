@@ -7,9 +7,7 @@
 <script>
 export default {
   name: "donate",
-  mounted() {
-    console.log("SSx");
-  },
+  mounted() {},
   methods: {
     goback() {
       this.$router.go(-1);

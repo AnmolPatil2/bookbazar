@@ -79,7 +79,7 @@
               </li>
 
               <li class="mx-3">
-                <router-link to="/rules">
+                <router-link to="/rulestosell">
                   <i class="fas fa-dollar-sign"></i>
                   <span>Sell</span>
                 </router-link>
@@ -93,16 +93,16 @@
               </li>
 
               <li class="mx-3">
-                <router-link to="/rules">
+                <router-link to="/donate">
                   <i class="fa fa-user"></i>
                   <span>Donate</span>
                 </router-link>
               </li>
               <li class="mx-3">
-                <a href="#">
+                <router-link to="/donate">
                   <i class="fas fa-question"></i>
                   <span>Help</span>
-                </a>
+                </router-link>
               </li>
               <li class="mx-3">
                 <a href="#" data-toggle="modal" data-target="#miniCart">

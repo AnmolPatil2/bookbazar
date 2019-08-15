@@ -63,11 +63,11 @@
                   <v-avatar left>
                     <v-icon>check_circle</v-icon>
                   </v-avatar>
-                  {{book.type}} Prescribed
+                  {{book.type}}
                 </v-chip>
                 <br />
                 <v-chip class="ma-2" color="green" text-color="white">
-                  <v-avatar left class="green darken-4">{{book.year}}nd</v-avatar>Year
+                  <v-avatar left class="green darken-4">{{book.year}}</v-avatar>Year
                 </v-chip>
                 <v-chip class="ma-2" color="pink" label text-color="white">
                   <v-icon left>label</v-icon>
@@ -356,7 +356,7 @@
                       </div>
                     </div>
                     <div class="py-4 my-4"></div>
-                    <div class="add-to-cart" @click="addtocart(book)">
+                    <div class="add-to-cart" @click="addtocartrelated(book)">
                       <button class="add-to-cart-btn">
                         <i class="fa fa-shopping-cart"></i> add to cart
                       </button>
@@ -457,12 +457,24 @@ export default {
       });
       document.location.reload(true);
     },
-    addtocart(book) {
+    addtocartrelated(book) {
       var item = {
         productName: book.name,
         productImage: book.images,
         productPrice: book.sale,
         productId: book.pId,
+        productQuantity: 1
+      };
+      $("#miniCart").modal("show");
+      this.$store.commit("addToCart", item);
+    },
+    addtocart(book1) {
+      console.log(book1.pId);
+      var item = {
+        productName: book1.name,
+        productImage: book1.images,
+        productPrice: book1.sale,
+        productId: book1.pId,
         productQuantity: 1
       };
       $("#miniCart").modal("show");

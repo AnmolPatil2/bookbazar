@@ -27,6 +27,7 @@ import productCompholder from "./views/productdisplay/productCompholder.vue"
 
 import tp from "./views/testingproduct.vue";
 import Sell from "./views/Sell.vue";
+import help from "./views/help.vue";
 import donate from "./views/donate.vue";
 Vue.use(Router);
 
@@ -51,6 +52,11 @@ const router = new Router({
       path: "/donate",
       name: "donate",
       component: donate
+    },
+    {
+      path: "/help",
+      name: "help",
+      component: help
     },
     {
       path: "/searchresults/:searchresult",

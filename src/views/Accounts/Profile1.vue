@@ -246,6 +246,7 @@ export default {
     },
     updateProfile() {
       if (this.reroute == 2) {
+        console.log(this.profile.name);
         this.slug = slugify(this.profile.name, {
           replacement: "-",
           remove: /[!@#$%^&*()]/g,
@@ -254,6 +255,7 @@ export default {
         let ref = db.collection("profiles").doc(this.slug);
         ref.get().then(doc => {
           if (doc.exists) {
+            this.$router.go(-2);
           } else {
             var user = firebase1.auth().currentUser;
             db.collection("profiles")
