@@ -155,6 +155,7 @@ export default {
           let ref = db.collection("profiles").doc(this.slug);
           ref.get().then(doc => {
             if (doc.exists) {
+              document.location.reload(true);
               $("#login").modal("hide");
               this.$router.push({ name: "accounts" });
             } else {
@@ -170,6 +171,7 @@ export default {
                 .then(() => {
                   $("#login").modal("hide");
                   this.$router.push({ name: "profile1" });
+                  document.location.reload(true);
                 });
             }
           });
@@ -219,6 +221,7 @@ export default {
                   });
 
                 $("#login").modal("hide");
+                document.location.reload(true);
                 this.$router.push({ name: "profile1" });
               })
 

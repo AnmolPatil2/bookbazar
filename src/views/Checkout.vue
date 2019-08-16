@@ -132,16 +132,14 @@ export default {
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, Confirm"
-          })
-            .then(result => {
-              if (result.value) {
-                Toast.fire({
-                  type: "success",
-                  title: "Order Placed"
-                });
-              }
-            })
-            .then(() => {
+          }).then(result => {
+            console.log("result.value" + result.value);
+            if (result.value == true) {
+              Toast.fire({
+                type: "success",
+                title: "Order Placed"
+              });
+
               this.$store.state.cart.forEach(element => {
                 console.log(element);
                 this.$store.commit("removeFromCart", element);
@@ -149,7 +147,8 @@ export default {
               this.$router.push({
                 name: "orders1"
               });
-            });
+            }
+          });
         } else {
           // it isn't checked. Do something else
 

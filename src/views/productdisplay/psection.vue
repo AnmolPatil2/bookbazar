@@ -405,6 +405,7 @@ export default {
   },
   components: { AtomSpinner, MiniCart },
   mounted() {
+    console.log("testing1");
     console.log(this.idd);
     db.collection("products")
       .where("idd", "==", this.idd)
@@ -421,6 +422,7 @@ export default {
       });
   },
   created() {
+    console.log("testing2");
     let ref = db.collection("products");
 
     ref
