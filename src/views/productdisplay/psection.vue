@@ -44,8 +44,6 @@
                 <div>
                   <div class="product-rating">
                     <i v-for="times in book.rating" class="fa fa-star red--text rating_stars"></i>
-
-                    <i class="fa fa-star-o"></i>
                   </div>
                 </div>
                 <div>
@@ -180,9 +178,9 @@
                                 <i class="fa fa-star"></i>
                               </div>
                               <div class="rating-progress">
-                                <div style="width: 30%;"></div>
+                                <div style="width: 2%;"></div>
                               </div>
-                              <span class="sum">1</span>
+                              <span class="sum">0</span>
                             </li>
                             <li>
                               <div class="rating-stars">
@@ -193,9 +191,9 @@
                                 <i class="fa fa-star-o"></i>
                               </div>
                               <div class="rating-progress">
-                                <div style="width: 60%;"></div>
+                                <div style="width: 90%;"></div>
                               </div>
-                              <span class="sum">2</span>
+                              <span class="sum">1</span>
                             </li>
                             <li>
                               <div class="rating-stars">
@@ -396,7 +394,7 @@ export default {
   name: "psection",
   data() {
     return {
-      book: null,
+      book: [],
       loading: true,
       display: false,
       idd: null,
@@ -404,23 +402,7 @@ export default {
     };
   },
   components: { AtomSpinner, MiniCart },
-  mounted() {
-    console.log("testing1");
-    console.log(this.idd);
-    db.collection("products")
-      .where("idd", "==", this.idd)
-      .get()
-      .then(snapshot => {
-        snapshot.forEach(user => {
-          this.relatedbooks.push({
-            images: user.data().images,
-            name: user.data().name,
-            sale: user.data().sale,
-            fullprice: user.data().fullprice
-          });
-        });
-      });
-  },
+  mounted() {},
   created() {
     console.log("testing2");
     let ref = db.collection("products");
@@ -430,11 +412,12 @@ export default {
       .get()
       .then(user => {
         this.book = user.data();
+        this.book.pId = user.id;
       })
       .then(() => {
         this.loading = false;
         this.idd = this.book.idd;
-        console.log(this.idd);
+
         db.collection("products")
           .where("idd", "==", this.idd)
           .get()

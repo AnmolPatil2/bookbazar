@@ -25,7 +25,10 @@
                   <div class="media-body">
                     <h5 class="mt-0">{{item.productName}}</h5>
 
-                    <h5 class="mt-0 right">{{item.productPrice }}</h5>
+                    <h5 class="mt-0 right">
+                      <i class="fa fa-inr" aria-hidden="true"></i>
+                      {{item.productPrice }}
+                    </h5>
                     <v-chip
                       class="ma-2"
                       @click="$store.commit('removeFromCart',item);updatesum()"
@@ -52,7 +55,10 @@
               <strong>TOTAL</strong>
             </div>
             <div>
-              <strong class="order-total">Rs: {{this.sum}}</strong>
+              <strong class="order-total">
+                <i class="fa fa-inr" aria-hidden="true"></i>
+                {{this.sum}}
+              </strong>
             </div>
           </div>
         </div>

@@ -12,6 +12,7 @@
 </template>
 <script>
 import quickMenu from "vue-quick-menu";
+
 export default {
   name: "iconmenu",
   mounted() {
@@ -27,11 +28,11 @@ export default {
   data() {
     return {
       count: 3,
-      icons: ["fa fa-home", "fa fa-shopping-cart", "fas fa-question"],
+      icons: ["fa fa-home", " fa fa-users", "fas fa-question"],
       list: [
         { isLink: true, url: "/" },
-        { isLink: true, url: "/searchresults" },
-        { isLink: false },
+        { isLink: true, url: "/community" },
+        { isLink: true, url: "/help" },
         { isLink: false }
       ],
       position: "top-left",
@@ -42,6 +43,7 @@ export default {
   components: { quickMenu }
 };
 </script>
+
 <style scoped>
 .iconmenu {
 }

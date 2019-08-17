@@ -97,7 +97,8 @@ export default {
 </script>
 <style scoped>
 .help {
-  background: #292929;
+  background: url("/images/faqs.jpg");
+
   font-family: Roboto;
 }
 .back {

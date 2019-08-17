@@ -53,7 +53,7 @@
             >Please Enter your Whatsapp Number,this will help us to contact you easly.</div>
             <div class="container">
               <div class="row">
-                <div class="col-md-6">
+                <div v-if="edit" class="col-md-6">
                   <div class="form-group">
                     <input
                       type="text"
@@ -64,8 +64,13 @@
                     />
                   </div>
                 </div>
+                <div v-if="!edit" class="col-md-6">
+                  <div class="form-group">
+                    <h4>{{profile.name}}</h4>
+                  </div>
+                </div>
 
-                <div class="col-md-6">
+                <div v-if="edit" class="col-md-6">
                   <div class="form-group">
                     <input
                       type="text"
@@ -75,8 +80,13 @@
                     />
                   </div>
                 </div>
+                <div v-if="!edit" class="col-md-6">
+                  <div class="form-group">
+                    <h4>{{profile.phone}}</h4>
+                  </div>
+                </div>
 
-                <div class="col-md-6">
+                <div v-if="edit" class="col-md-6">
                   <div class="form-group">
                     <input
                       type="text"
@@ -86,8 +96,23 @@
                     />
                   </div>
                 </div>
+                <div v-if="!edit" class="col-md-6">
+                  <div class="form-group">
+                    <h4>{{profile.email}}</h4>
+                  </div>
+                </div>
                 <v-btn v-if="this.reroute!=1" @click="confirmmail()">Confirm mail</v-btn>
                 <div class="col-md-4">
+                  <div v-if="!edit" class="form-group">
+                    <input
+                      type="submit"
+                      @click="changeedit()"
+                      value="Edit"
+                      class="btn btn-primary w-100"
+                    />
+                  </div>
+                </div>
+                <div v-if="edit" class="col-md-4">
                   <div class="form-group">
                     <input
                       type="submit"
@@ -174,6 +199,7 @@ export default {
   data() {
     return {
       reroute: null,
+      edit: false,
       profile: {
         name: null,
         phone: null
@@ -191,8 +217,15 @@ export default {
       }
     };
   },
-  mounted() {
+  beforeUpdate() {
     $("#login").modal("hide");
+    if (
+      this.profile.name == null ||
+      this.profile.email == null ||
+      this.profile.phone == null
+    ) {
+      this.edit = true;
+    }
   },
   created() {
     let ref = db.collection("profiles");
@@ -229,6 +262,9 @@ export default {
         .catch(function(error) {
           // An error happened.
         });
+    },
+    changeedit() {
+      this.edit = true;
     },
     resetPassword() {
       const auth = firebase1.auth();
@@ -296,7 +332,7 @@ export default {
         });
       } else {
         var user = firebase1.auth().currentUser;
-        console.log(user.uid);
+
         db.collection("profiles")
           .where("aui", "==", user.uid)
           .get()
@@ -305,7 +341,6 @@ export default {
               db.collection("profiles")
                 .doc(doc.id)
                 .update({
-                  email: this.profile.email,
                   phone: this.profile.phone
                 })
                 .then(() => {});
@@ -319,6 +354,7 @@ export default {
             }
           });
       }
+      this.edit = false;
     },
     uploadImage() {}
   }

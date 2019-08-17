@@ -3,8 +3,8 @@
     <div class="cover">
       <div class="overlay"></div>
       <div class="content text-center">
-        <h1>Some Features That Made Us Unique</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, eum?</p>
+        <h1></h1>
+        <p></p>
       </div>
     </div>
     <div class="container-fluid text-center">
@@ -73,7 +73,7 @@ export default {
     }
   },
   mounted() {
-    if (this.$router == "/") {
+    if (this.$router == "/home") {
       this.numbers();
     }
   }
@@ -115,7 +115,9 @@ export default {
     border-radius: 0.5em;
     box-shadow: 1px 2px 50px 0px rgba(255, 0, 0, 0.349);
   }
-
+  .section-2 .cover {
+    background-position: -25vmin -25vmin;
+  }
   .numbers .rect h1 {
     font-size: 7rem;
     color: tomato;

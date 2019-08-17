@@ -211,7 +211,7 @@ export default {
                   .then(() => {
                     Toast.fire({
                       type: "success",
-                      title: "Email Confermation sent"
+                      title: "Email Confirmation sent"
                     });
                   })
 

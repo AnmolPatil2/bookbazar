@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="community">
     <img class="image1" src="/images/comingsoon.jpg" alt />
     <v-btn flat @click="goback()" class="back white--text">Back</v-btn>
     <iconmenu />
@@ -7,9 +7,8 @@
 </template>
 <script>
 import iconmenu from "@/components/iconmenu.vue";
-
 export default {
-  name: "donate",
+  name: "community",
   components: { iconmenu },
   mounted() {},
   methods: {
