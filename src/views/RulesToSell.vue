@@ -10,8 +10,8 @@
         <div class="skw-page__half skw-page__half--right">
           <div class="skw-page__skewed">
             <div class="skw-page__content">
-              <h3 class="skw-page__heading">When knowledge gets old, its meant to be sold.</h3>
-              <p class="skw-page__description">Experince selling at its best with Bookoo</p>
+              <h3 class="skw-page__heading">Experince selling at its best with Bookoo</h3>
+              <p class="skw-page__description">When knowledge gets old, its meant to be sold.</p>
               <p class="skw-page__description red--text">Scroll Down</p>
             </div>
           </div>

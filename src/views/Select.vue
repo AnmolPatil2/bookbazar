@@ -46,6 +46,7 @@
           </v-card>
         </v-flex>
       </v-layout>
+      <v-btn flat @click="goback()" class="back white--text">Back</v-btn>
     </v-container>
 
     <v-container class="twhole-cont" v-if="display==true">
@@ -70,6 +71,7 @@
           </v-card>
         </v-flex>
       </v-layout>
+      <v-btn flat @click="goback()" class="back white--text">Back</v-btn>
     </v-container>
     <v-progress-circular
       :size="70"
@@ -82,13 +84,13 @@
     <v-container class="twhole-cont" v-if="display=='displaybooks'">
       <v-layout>
         <v-flex>
-          <h2 class="Title-what-to-do">Books Avalable</h2>
+          <h2 class="Title-what-to-do">Books Available</h2>
         </v-flex>
       </v-layout>
       <v-layout row wrap>
         <v-flex xs6 sm6 md4 lg3 v-for="(product,index) in displayl" :key="index">
-          <v-card flat class="text-xs-center p-0 YD">
-            <v-responsive class @click="product_select(product)">
+          <v-card @click="product_select(product)" flat class="text-xs-center p-0 YD">
+            <v-responsive class>
               <img :src="product.images" class="card-img-top bookimages" alt="...." />
             </v-responsive>
             <v-card-text>
@@ -96,9 +98,16 @@
               <div class="grey--text">{{product.price}}</div>
             </v-card-text>
             <v-card-actions>
-              <div class="pricing text-xs-center">
-                <v-btn @click="ComboOrder()" color="black" class="px-2 white--text">
-                  <i class="fa fa-shopping-bag px-1" aria-hidden="true"></i>Add to cart
+              <div class="pricing">
+                <v-btn color="black" class="px-1 white--text">
+                  <i class="fa fa-eye px-1" aria-hidden="true"></i>View
+                </v-btn>
+                <v-btn color="black" class="px-1 white--text">
+                  <i
+                    @click.prevent="addtocart(product)"
+                    class="fa fa-shopping-bag px-1"
+                    aria-hidden="true"
+                  ></i>Cart
                 </v-btn>
               </div>
             </v-card-actions>
@@ -107,12 +116,13 @@
       </v-layout>
     </v-container>
     <mini-cart />
+    <login />
   </div>
 </template>
 
 <script>
 import { fb, db } from "../firebase";
-import { Carousel, Slide } from "vue-carousel";
+
 import firebase1 from "@firebase/app";
 import MiniCart from "@/components/MiniCart.vue";
 import Navbar from "@/components/Navbar.vue";
@@ -122,10 +132,8 @@ export default {
     msg: String
   },
   components: {
-    Carousel,
     Navbar,
-    MiniCart,
-    Slide
+    MiniCart
   },
   data() {
     return {
@@ -141,10 +149,11 @@ export default {
         { img: "/img/svg/4th.jpg", name: "Fourth" }
       ],
       departments: [
-        { img: "/img/svg/cs.jpg", name: "cs" },
-        { img: "/img/svg/ec.jpg", name: "ec" },
-        { img: "/img/svg/me.jpg", name: "me" },
-        { img: "/img/svg/civil.jpg", name: "civil" }
+        { img: "/img/department/CSE.jpg", name: "CSE/ISE" },
+        { img: "/img/department/ECE.jpg", name: "ECE/TC" },
+        { img: "/img/department/Mech.jpg", name: "MECH" },
+        { img: "/img/department/Civil.jpg", name: "Civil" },
+        { img: "/img/department/EEE.jpg", name: "EEE" }
       ],
       year: 0,
       display: null,
@@ -156,8 +165,27 @@ export default {
     getImage(images) {
       return images[0];
     },
+    goback() {},
+    addtocart(book1) {
+      console.log(book1.pId);
+      var item = {
+        productName: book1.name,
+        productImage: book1.images,
+        productPrice: book1.sale,
+        productId: book1.pId,
+        productQuantity: 1
+      };
+      $("#miniCart").modal("show");
+      this.$store.commit("addToCart", item);
+    },
     cycleselected(cycle) {
       this.sum = cycle + 1;
+    },
+    product_select(product) {
+      this.$router.push({
+        name: "productCompholder",
+        params: { id: product.id }
+      });
     },
     yearselected(year) {
       this.year = year;
@@ -247,7 +275,7 @@ section {
     height: 60px;
   }
   .pricing {
-    margin-left: 10px;
+    margin-left: 0px;
   }
 }
 @media screen and (min-width: 600px) {
@@ -255,7 +283,7 @@ section {
     height: 30px;
   }
   .pricing {
-    margin-left: 60px;
+    margin-left: 20px;
   }
 }
 .phychem {

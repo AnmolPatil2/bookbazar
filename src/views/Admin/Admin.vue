@@ -8,8 +8,9 @@
         <div class="sidebar-content">
           <!-- sidebar-brand  -->
           <div class="sidebar-item sidebar-brand">
-            <img src="/img/svg/logo.jpg" alt width="30" />
-            <a href="/">BooKoo</a>
+            <img src="/img/svg/logo.png" @click="gohome()" alt width="30" />
+            <h2 style="color: #eee2dc" @click="gohome()" class="px-3">BooKoo</h2>
+            <a></a>
             <div id="close-sidebar" @click="closeMenu">
               <i class="fas fa-times"></i>
             </div>
@@ -135,6 +136,7 @@ export default {
       fb.auth()
         .signOut()
         .then(() => {
+          document.location.reload(true);
           this.$router.replace("/");
         })
         .catch(err => {

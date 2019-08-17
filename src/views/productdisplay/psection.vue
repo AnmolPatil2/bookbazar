@@ -130,7 +130,7 @@
                   <div v-if="!display">
                     <div class="row">
                       <div class="col-md-12">
-                        <p>No discription Yet</p>
+                        <p>No description Yet</p>
                       </div>
                     </div>
                   </div>
@@ -245,8 +245,8 @@
                           <ul class="reviews">
                             <li>
                               <div class="review-heading">
-                                <h5 class="name">Kruthika</h5>
-                                <p class="date">12 Aug 2019, 06.24 PM</p>
+                                <h5 class="name">Team BooKoo</h5>
+                                <p class="date">17 Aug 2019, 06.24 PM</p>
                                 <div class="review-rating">
                                   <i class="fa fa-star"></i>
                                   <i class="fa fa-star"></i>
@@ -256,10 +256,7 @@
                                 </div>
                               </div>
                               <div class="review-body">
-                                <p>
-                                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                  incididunt ut labore et dolore magna aliqua
-                                </p>
+                                <p></p>
                               </div>
                             </li>
                           </ul>

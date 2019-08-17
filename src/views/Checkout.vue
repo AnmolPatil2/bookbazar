@@ -76,16 +76,18 @@
         </div>
         <div class="input-checkbox">
           <input type="checkbox" id="terms" />
+
           <label for="terms">
             <span></span>
             I've read and accept the
-            <a href="#">terms & conditions</a>
+            <router-link :to="{ name: 'tandc'}" target="_blank">terms & conditions</router-link>
           </label>
         </div>
         <p class="red--text">{{feedback}}</p>
         <a href="#" @click="buy()" class="primary-btn order-submit">Place order</a>
       </div>
     </v-container>
+    <login />
   </div>
 </template>
 
@@ -99,7 +101,8 @@ export default {
     return {
       complete: false,
       feedback: null,
-      sum: 0
+      sum: 0,
+      phone: null
     };
   },
   components: { Navbar },
@@ -113,55 +116,100 @@ export default {
       });
     },
     buy() {
-      if (this.$store.state.cart.length != 0) {
-        if (document.getElementById("terms").checked) {
-          // it is checked. Do something
-          var user = firebase1.auth().currentUser;
-          this.$store.state.cart.forEach(order => {
-            db.collection("sellorders").add({
-              bookid: order.productId,
-              bookName: order.productName,
-              price: order.productPrice,
-              status: "ongoing",
-              buyer: user.uid,
-              date: Date.now(),
-              orderQuantity: order.productQuantity,
-              orderImage: order.productImage
+      var user = firebase1.auth().currentUser;
+      if (user == null) {
+        Swal.fire({
+          title: "You must SignUp",
+          text: "Click on Navigation for a fun SignUp",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, SignUp"
+        }).then(result => {
+          if (result.value) {
+            $("#login").modal("show");
+          }
+        });
+      } else {
+        let ref = db.collection("profiles");
+        ref
+          .where("aui", "==", firebase1.auth().currentUser.uid)
+          .get()
+          .then(snapshot => {
+            snapshot.forEach(user => {
+              this.phone = user.data().phone;
             });
+            console.log(this.phone);
           });
-
+        if (this.phone != null) {
           Swal.fire({
-            title: "Confirm Order",
-            text: "You are one Click away",
-            type: "success",
+            title: "Phone number not available",
+            text: "Please add phone number to checkout",
+            type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, Confirm"
+            confirmButtonText: "Enter number here"
           }).then(result => {
-            console.log("result.value" + result.value);
-            if (result.value == true) {
-              Toast.fire({
-                type: "success",
-                title: "Order Placed"
-              });
-
-              this.$store.state.cart.forEach(element => {
-                console.log(element);
-                this.$store.commit("removeFromCart", element);
-              });
+            if (result.value) {
               this.$router.push({
-                name: "orders1"
+                name: "profile1"
               });
             }
           });
         } else {
-          // it isn't checked. Do something else
+          if (this.$store.state.cart.length != 0) {
+            if (document.getElementById("terms").checked) {
+              // it is checked. Do something
 
-          this.feedback = "Please select all the Boxes";
+              this.$store.state.cart.forEach(order => {
+                db.collection("sellorders").add({
+                  bookid: order.productId,
+                  bookName: order.productName,
+                  price: order.productPrice,
+                  status: "ongoing",
+                  buyer: user.uid,
+                  date: Date.now(),
+                  orderQuantity: order.productQuantity,
+                  orderImage: order.productImage
+                });
+              });
+
+              Swal.fire({
+                title: "Confirm Order",
+                text: "You are one Click away",
+                type: "success",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, Confirm"
+              }).then(result => {
+                console.log("result.value" + result.value);
+                if (result.value == true) {
+                  Toast.fire({
+                    type: "success",
+                    title: "Order Placed"
+                  });
+
+                  this.$store.state.cart.forEach(element => {
+                    console.log(element);
+                    this.$store.commit("removeFromCart", element);
+                  });
+                  this.$router.push({
+                    name: "orders1"
+                  });
+                }
+              });
+            } else {
+              // it isn't checked. Do something else
+
+              this.feedback = "Please select all the Boxes";
+            }
+          } else {
+            this.feedback = "Your cart is empty";
+          }
         }
-      } else {
-        this.feedback = "Your cart is empty";
       }
     }
   },

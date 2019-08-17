@@ -73,9 +73,7 @@ export default {
     }
   },
   mounted() {
-    if (this.$router == "/home") {
-      this.numbers();
-    }
+    this.numbers();
   }
 };
 </script>

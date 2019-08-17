@@ -1,5 +1,6 @@
 <template>
   <div class="community">
+    <h2>Welcome to Our Community Page</h2>
     <img class="image1" src="/images/comingsoon.jpg" alt />
     <v-btn flat @click="goback()" class="back white--text">Back</v-btn>
     <iconmenu />

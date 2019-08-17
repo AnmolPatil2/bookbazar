@@ -175,6 +175,7 @@ export default {
   components: {},
 
   mounted() {
+    console.log(1);
     let user = fb.auth().currentUser;
     if (user == null) {
       this.user = null;
@@ -205,9 +206,11 @@ export default {
     },
 
     logout() {
+      console.log(1);
       fb.auth()
         .signOut()
         .then(() => {
+          document.location.reload(true);
           this.$router.replace("/");
         })
         .catch(err => {

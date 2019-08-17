@@ -9,7 +9,9 @@
         </li>
       </ul>
       <h2 class="p-2 white--text">Still not Able to sovle your problem</h2>
-      <p class="p-4 red--text">Contact us On whats app</p>
+      <p class="p-4 red--text">
+        <a href="https://wa.me/918088363293">Contact us On whats app</a>
+      </p>
       <v-btn flat @click="goback()" class="back white--text">Back</v-btn>
     </div>
   </div>
@@ -33,12 +35,12 @@ export default {
         {
           head: "What does this site do?",
           text:
-            "Bookoo is an online platoform to provide students with various services ranging from buying and selling tetbooks to community development at our college by connecting you to various clubs of our college."
+            "Bookoo is an online platform to provide students with various services ranging from buying and selling textbooks to community development at our college by connecting you to various clubs of our college."
         },
         {
           head: "How to Login/signup?",
           text:
-            "Click the login option at the navigation bar. Proceed with the login/signup via your preffered method."
+            "Click the login option at the navigation bar. Proceed with the login/signup via your preferred method."
         },
         {
           head: "How to sell books?",
@@ -66,7 +68,7 @@ export default {
           head: "When will my book be delivered?",
 
           text:
-            "As your order is verified, we will provide you witha delivery date.The deliver date includes the date and a time slot in which we can deliver your book. You wil be contacted by a delivery executive prior to the delivery."
+            "As your order is verified, we will provide you with a delivery date.The deliver date includes the date and a time slot in which we can deliver your book. You wil be contacted by a delivery executive prior to the delivery."
         },
         {
           head: "How is my book delivered/picked up?",

@@ -8,6 +8,9 @@
     </div>
     <div class="space"></div>
     <div id="itemdisplay">
+      <div v-if="results.length==0">
+        <h3>Book not found</h3>
+      </div>
       <product-card
         :items="results"
         :options="options"

@@ -4,13 +4,12 @@
       <div class="row text-left">
         <div class="col-md-5 col-sm-5">
           <h4 class="text-light">About us</h4>
-          <p
-            class="text-muted"
-          >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum maxime ea similique illum corrupti</p>
+          <p class="text-muted"></p>
           <p class="pt-4 text-muted">
-            <span>Anmol Patil</span>
+            <span>Team BooKoo</span>
           </p>
         </div>
+        <!--
         <div class="col-md-5 col-sm-12">
           <h4 class="text-light">Newsletter</h4>
           <p class="text-muted">Stay Updated</p>
@@ -32,12 +31,17 @@
             </div>
           </form>
         </div>
+        -->
         <div class="col-md-2 col-sm-12">
           <h4 class="text-light">Follow Us</h4>
           <p class="text-muted">Let us be social</p>
           <div class="column text-light">
-            <i class="fab fa-facebook-f"></i>
-            <i class="fab fa-instagram"></i>
+            <a href="https://instagram.com/_.bookoo._?igshid=g7jwl267bmjh">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://chat.whatsapp.com/Ceb4NsIZbVe5tnBMjy1RAq">
+              <i class="fab fa-whatsapp mx-2"></i>
+            </a>
           </div>
         </div>
       </div>

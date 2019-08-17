@@ -300,7 +300,7 @@ export default {
       windowHeight = window.innerHeight;
     }
     var paragraphText =
-      "<ul><li>1) Breeze through your first year with our physics cycle collection hand picked Textbooks for every subject </li><l1>2) Afraid of the quality? Don't worry we cross check the quality before we deliver it to you, but hey.you can pay for it once you verify it!</li><li>3) not happy with our collection? Customize your choice by placing an order with us.</li><l1>4) get the highest offers on bulk orders, click or order now</li></ul>";
+      "<ul><li>1) Breeze through your first year with our physics cycle collection hand picked Textbooks for every subject </li><l1>2) Afraid of the quality? Don't worry we cross check the quality before we deliver it to you, but hey you can pay for it once you verify it!</li><li>3) Not happy with our collection? Customize your choice by placing an order with us.</li><l1>4) Get the highest offers on bulk orders, click or order now</li></ul>";
   }
 };
 </script>

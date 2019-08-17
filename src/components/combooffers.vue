@@ -298,7 +298,6 @@ export default {
     }
     var paragraphText =
       "<ul><li>1) Breeze through your first year with our physics cycle collection hand picked Textbooks for every subject </li><l1>2) Afraid of the quality? Don't worry we cross check the quality before we deliver it to you, but hey.you can pay for it once you verify it!</li><li>3) not happy with our collection? Customize your choice by placing an order with us.</li><l1>4) get the highest offers on bulk orders, click or order now</li></ul>";
-   
   }
 };
 </script>
@@ -315,7 +314,7 @@ body {
   color: #2e2c2caf;
   font-size: 3vmin;
   padding-bottom: 3vmin;
-  backgroung:#fff
+  backgroung: #fff;
 }
 p {
   line-height: 1.5;
@@ -372,10 +371,10 @@ p {
   width: 90%;
 }
 .cardsoffer > img {
-  max-height: 200px;
+  max-height: 230px;
   width: 90%;
   position: absolute;
-  top: -6%;
+  top: -10%;
   left: -6%;
 }
 .cardsoffer-color-0 {
@@ -462,6 +461,7 @@ p {
   transition: opacity 200ms linear 0ms, transform 200ms ease-in 0ms;
 }
 .cardsoffer h1 {
+  margin-top: 1px;
   transform: translate3d(20%, 0px, 0px);
   transition: opacity 200ms linear 120ms, transform 200ms ease-in 120ms;
 }

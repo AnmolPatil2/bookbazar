@@ -224,7 +224,6 @@ export default {
       this.profile.email == null ||
       this.profile.phone == null
     ) {
-      this.edit = true;
     }
   },
   created() {

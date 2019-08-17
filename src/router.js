@@ -17,6 +17,7 @@ import Orders1 from "./views/Accounts/Orders1.vue";
 import signup from "@/components/signup.vue";
 import searchresults from "./views/searchresults.vue";
 import forgotPassword from "@/components/forgotPassword.vue";
+import tandc from "@/components/tandc.vue";
 import Select from "./views/Select.vue";
 
 import rules from "./views/rules.vue";
@@ -43,6 +44,11 @@ const router = new Router({
       path: "/",
       name: "home",
       component: Home
+    },
+    {
+      path: "/tandc",
+      name: "tandc",
+      component: tandc
     },
     {
       path: "/community",

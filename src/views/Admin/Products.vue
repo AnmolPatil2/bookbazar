@@ -23,6 +23,10 @@
           <table class="table">
             <tbody>
               <tr>
+                <td @click="changeidd(52)">c-cycle</td>
+                <td @click="changeidd(51)">p-cycle</td>
+              </tr>
+              <tr>
                 <td @click="changeidd(20)">cs 5th sem</td>
 
                 <td @click="changeidd(22)">mec 5th sem</td>
@@ -41,7 +45,7 @@
               </tr>
               <tr>
                 <td @click="changeidd(13)">civil 3th sem</td>
-                <td @click="changeidd(15)">tc 3th sem</td>
+                <td @click="changeidd(11)">tc 3th sem</td>
                 <td @click="changeidd(14)">eee 3th sem</td>
               </tr>
             </tbody>

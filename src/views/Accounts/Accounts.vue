@@ -132,6 +132,7 @@ export default {
       fb.auth()
         .signOut()
         .then(() => {
+          document.location.reload(true);
           this.$router.replace("/");
         })
         .catch(err => {

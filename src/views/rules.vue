@@ -79,7 +79,7 @@
               <h2 class="skw-page__heading">Community</h2>
               <p class="skw-page__description">
                 Join our Bookoo commmunity
-                <v-btn @click="changetosell()">BUY FROM BOOKOO</v-btn>
+                <v-btn @click="changetosell()" color="white" class="red--text">BUY FROM BOOKOO</v-btn>
               </p>
             </div>
           </div>

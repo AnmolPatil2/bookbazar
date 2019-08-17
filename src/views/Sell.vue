@@ -83,7 +83,7 @@
     <v-container class="twhole-cont" v-if="display=='displaybooks'">
       <v-layout>
         <v-flex>
-          <h2 class="Title-what-to-do">Books Avalable</h2>
+          <h2 class="Title-what-to-do">Books Available</h2>
         </v-flex>
       </v-layout>
       <v-layout row wrap>
@@ -186,10 +186,10 @@ import { BreedingRhombusSpinner } from "epic-spinners";
 import { AtomSpinner } from "epic-spinners";
 import { fb, db } from "../firebase";
 import { VueEditor } from "vue2-editor";
-import { Carousel, Slide } from "vue-carousel";
+
 import Navbar from "@/components/Navbar.vue";
 import MiniCart from "@/components/MiniCart.vue";
-import PopUp from "@/components/Popup.vue";
+
 import firebase1 from "@firebase/app";
 export default {
   name: "Sell",
@@ -197,12 +197,9 @@ export default {
     msg: String
   },
   components: {
-    Carousel,
-    Slide,
     Navbar,
     MiniCart,
     AtomSpinner,
-    PopUp,
 
     VueEditor
   },
@@ -220,10 +217,11 @@ export default {
         { img: "/img/svg/4th.jpg", name: "Fourth" }
       ],
       departments: [
-        { img: "/img/svg/cs.jpg", name: "cs" },
-        { img: "/img/svg/ec.jpg", name: "ec" },
-        { img: "/img/svg/me.jpg", name: "me" },
-        { img: "/img/svg/civil.jpg", name: "civil" }
+        { img: "/img/department/CSE.jpg", name: "CSE/ISE" },
+        { img: "/img/department/ECE.jpg", name: "ECE/TC" },
+        { img: "/img/department/Mech.jpg", name: "MECH" },
+        { img: "/img/department/Civil.jpg", name: "Civil" },
+        { img: "/img/department/EEE.jpg", name: "EEE" }
       ],
       firstyears: [
         { img: "/img/svg/phy.jpeg", name: "P-Cycle" },

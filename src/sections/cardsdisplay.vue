@@ -18,8 +18,10 @@
             <div class="d-flex flex-row justify-content-center">
               <i class="fab fa-whatsapp fa-3x py-2 pr-3"></i>
               <div class="text text-left">
-                <h3 class="pt-1 m-0">Join Now</h3>
-                <p class="p-0 m-0">On whatsapp</p>
+                <a href="  https://chat.whatsapp.com/Ceb4NsIZbVe5tnBMjy1RAq">
+                  <h3 class="pt-1 m-0">Join Now</h3>
+                  <p class="p-0 m-0">On whatsapp</p>
+                </a>
               </div>
             </div>
           </div>
@@ -30,8 +32,10 @@
               <i class="fab fa-instagram fa-3x py-2 pr-3"></i>
 
               <div class="text text-left">
-                <h3 class="pt-1 m-0">Join Now</h3>
-                <p class="p-0 m-0">On Instagram</p>
+                <a href="https://instagram.com/_.bookoo._?igshid=g7jwl267bmjh">
+                  <h3 class="pt-1 m-0">Join Now</h3>
+                  <p class="p-0 m-0">On Instagram</p>
+                </a>
               </div>
             </div>
           </div>

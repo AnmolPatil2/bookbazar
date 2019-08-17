@@ -118,6 +118,7 @@ export default {
       this.$router.replace("signup");
     },
     login() {
+      console.log(1);
       if (this.email != null) {
         fb.auth()
           .signInWithEmailAndPassword(this.email, this.password)
@@ -139,6 +140,7 @@ export default {
       }
     },
     signInWithGoogle() {
+      console.log(1);
       const provider = new firebase1.auth.GoogleAuthProvider();
 
       firebase1
@@ -170,14 +172,15 @@ export default {
                 })
                 .then(() => {
                   $("#login").modal("hide");
-                  this.$router.push({ name: "profile1" });
                   document.location.reload(true);
+                  this.$router.push({ name: "profile1" });
                 });
             }
           });
         });
     },
     register() {
+      console.log(1);
       if (this.name) {
         this.slug = slugify(this.name, {
           replacement: "-",
@@ -186,6 +189,7 @@ export default {
         });
         let ref = db.collection("profiles").doc(this.slug);
         ref.get().then(doc => {
+          console.log(44);
           if (doc.exists) {
             this.feedback = "This name is already taken";
           } else {
@@ -201,6 +205,11 @@ export default {
                     email: user.email,
                     photo: "/img/svg/man.svg"
                   });
+              })
+              .then(() => {
+                $("#login").modal("hide");
+                this.$router.push({ name: "profile1" });
+                document.location.reload(true);
               })
 
               .then(() => {
@@ -219,10 +228,6 @@ export default {
                     // An error happened.
                     alert("Refresh and Try Again !");
                   });
-
-                $("#login").modal("hide");
-                document.location.reload(true);
-                this.$router.push({ name: "profile1" });
               })
 
               .catch(error => {
