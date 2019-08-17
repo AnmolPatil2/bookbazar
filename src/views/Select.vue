@@ -2,7 +2,6 @@
   <div class="products white" id="products">
     <!-- Element-specific configuration options can be passed like this -->
     <Navbar />
-
     <v-container class="whole-cont" v-if="display==null">
       <v-layout>
         <v-flex>
@@ -13,11 +12,35 @@
         <v-flex xs6 sm6 md4 lg3 v-for="(year,index) in years" :key="index">
           <v-card flat class="text-xs-center p-0 YD">
             <v-responsive class="p-2">
-              <img :src="year.img" class="card-img-top bookimages" alt="...." />
+              <img :src="year.img" class="card-img-top" alt="...." />
             </v-responsive>
             <v-card-text>
-              <v-btn @click="yearselected(index)">
-                <div class="subheading">{{year.name}}</div>
+              <v-btn class="subheading" @click="yearselected(index)">
+                <div>{{year.name}}</div>
+              </v-btn>
+            </v-card-text>
+          </v-card>
+        </v-flex>
+      </v-layout>
+    </v-container>
+
+    <v-container class="whole-cont" v-if="display=='firstyear'">
+      <v-layout>
+        <v-flex>
+          <h2 class="Title-what-to-do">Select year</h2>
+        </v-flex>
+      </v-layout>
+      <v-layout row wrap>
+        <v-flex xs6 sm6 md4 lg3 v-for="(year,index) in firstyears" :key="index">
+          <v-card flat class="text-xs-center p-0 YD">
+            <v-responsive class="p-2">
+              <img :src="year.img" class="card-img-top" alt="...." />
+            </v-responsive>
+            <v-card-text>
+              <v-btn @click="cycleselected(index)">
+                <div>
+                  <h2>{{year.name}}</h2>
+                </div>
               </v-btn>
             </v-card-text>
           </v-card>
@@ -35,11 +58,13 @@
         <v-flex xs6 sm6 md4 lg3 v-for="(department,index) in departments" :key="index">
           <v-card flat class="text-xs-center YD p-0">
             <v-responsive class="p-2">
-              <img :src="department.img" class="card-img-top bookimages" alt="...." />
+              <img :src="department.img" class="card-img-top phychem" alt="...." />
             </v-responsive>
             <v-card-text>
               <v-btn @click="departmentselected(index)">
-                <div class="subheading">{{department.name}}</div>
+                <div>
+                  <h2>{{department.name}}</h2>
+                </div>
               </v-btn>
             </v-card-text>
           </v-card>
@@ -63,29 +88,19 @@
       <v-layout row wrap>
         <v-flex xs6 sm6 md4 lg3 v-for="(product,index) in displayl" :key="index">
           <v-card flat class="text-xs-center p-0 YD">
-            <v-responsive class>
-              <carousel :perPage="1">
-                <slide v-for="(img,index) in product.images" :key="index">
-                  <img :src="img" class="card-img-top bookimages" alt="...." />
-                </slide>
-              </carousel>
+            <v-responsive class @click="product_select(product)">
+              <img :src="product.images" class="card-img-top bookimages" alt="...." />
             </v-responsive>
             <v-card-text>
-              <div class="subheading">{{product.name}}</div>
-              <div class="grey--text">{{product.sale}}</div>
+              <div class="subheading name">{{product.name}}</div>
+              <div class="grey--text">{{product.price}}</div>
             </v-card-text>
             <v-card-actions>
-              <v-btn flat color="grey">
-                <i class="fa fa-shopping-cart"></i>
-
-                <add-to-cart
-                  :image="getImage(product.images)"
-                  :p-id="product.id"
-                  :price="product.sale"
-                  :name="product.name"
-                ></add-to-cart>
-              </v-btn>
-              <v-btn @click="buy(product)" class="success">sell</v-btn>
+              <div class="pricing text-xs-center">
+                <v-btn @click="ComboOrder()" color="black" class="px-2 white--text">
+                  <i class="fa fa-shopping-bag px-1" aria-hidden="true"></i>Add to cart
+                </v-btn>
+              </div>
             </v-card-actions>
           </v-card>
         </v-flex>
@@ -141,6 +156,9 @@ export default {
     getImage(images) {
       return images[0];
     },
+    cycleselected(cycle) {
+      this.sum = cycle + 1;
+    },
     yearselected(year) {
       this.year = year;
       this.sum = year * 10;
@@ -175,9 +193,19 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-#products {
+.pricing {
+  margin-left: 60px;
+}
+.sellbtn {
+  background: red;
+}
+.subheading {
+  color: #88bdbc;
+}
+.products {
+  max-height: 300px;
   margin-top: 0rem;
-  background: grey;
+  background: #f2f2f2;
 
   padding-bottom: 0rem;
 }
@@ -189,7 +217,7 @@ export default {
   height: 10px;
 }
 .YD {
-  border: 1px solid red;
+  border: 0.5px solid #3085d6;
 }
 .whole-cont {
   margin-top: 50px;
@@ -200,13 +228,38 @@ export default {
 .Title-what-to-do {
   text-align: center;
 }
+
 .loaders {
   align-content: center;
   margin: 250px 50%;
 }
 .bookimages {
-  height: 257px;
-  width: 247px;
+  height: 167px;
+  width: 157px;
+}
+
+.card-body {
+}
+section {
+}
+@media screen and (max-width: 600px) {
+  .name {
+    height: 60px;
+  }
+  .pricing {
+    margin-left: 10px;
+  }
+}
+@media screen and (min-width: 600px) {
+  .name {
+    height: 30px;
+  }
+  .pricing {
+    margin-left: 60px;
+  }
+}
+.phychem {
+  height: 170px;
 }
 </style>
 

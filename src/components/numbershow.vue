@@ -73,7 +73,7 @@ export default {
     }
   },
   mounted() {
-    if (null) {
+    if (this.$router == "/") {
       this.numbers();
     }
   }

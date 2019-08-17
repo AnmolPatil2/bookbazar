@@ -1,8 +1,8 @@
 <template>
   <div class="searchresult">
     <Navbar />
+    <h2 class="something pt-3">Use for this faster results</h2>
     <div class="container search2">
-      <!--<p class="something">Search Other Books</p>-->
       <input type="text" v-model="searchString" placeholder="Subject...." />
       <div class="search"></div>
     </div>
@@ -142,8 +142,10 @@ export default {
 }
 .something {
   position: relative;
-  top: 20px;
-  left: -20px;
+  top: -10px;
+  align-content: center;
+  width: 100%;
+  display: block;
 }
 .container {
   position: absolute;

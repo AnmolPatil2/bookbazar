@@ -40,8 +40,8 @@
       </v-menu>
       -->
 
-      <form class="form-inline my-2 my-lg-0 hidden-sm-and-down">
-        <div class="sidebar-item sidebar-search">
+      <form @submit.prevent="search()" class="form-inline my-2 my-lg-0 hidden-sm-and-down">
+        <div class>
           <div>
             <div class="input-group">
               <input
@@ -49,7 +49,6 @@
                 class="form-control"
                 v-model="searchresult"
                 placeholder="Book Name.."
-                @keyup.enter="search()"
               />
               <div class="input-group-append">
                 <span class="input-group-text">
@@ -174,12 +173,13 @@ export default {
     background-color: black;
   }
 }
+.logo {
+  margin-left: 50px;
+}
 #drawer {
   background-color: #2e333c;
 }
-.logo {
-  padding-left: 50px;
-}
+
 #ex4 .p1[data-count]:after {
   position: absolute;
   right: 10%;
@@ -196,7 +196,8 @@ export default {
   //font-weight:bold;
 }
 @media only screen and (max-width: 768px) {
-  .logoimg {
+  .logo {
+    margin-left: 20px;
   }
 }
 .logoimg {

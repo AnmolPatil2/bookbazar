@@ -38,8 +38,10 @@
               <img :src="year.img" class="card-img-top" alt="...." />
             </v-responsive>
             <v-card-text>
-              <v-btn class="subheading" @click="cycleselected(index)">
-                <div>{{year.name}}</div>
+              <v-btn @click="cycleselected(index)">
+                <div>
+                  <h2>{{year.name}}</h2>
+                </div>
               </v-btn>
             </v-card-text>
           </v-card>
@@ -61,7 +63,9 @@
             </v-responsive>
             <v-card-text>
               <v-btn @click="departmentselected(index)">
-                <div>{{department.name}}</div>
+                <div>
+                  <h2>{{department.name}}</h2>
+                </div>
               </v-btn>
             </v-card-text>
           </v-card>
@@ -407,7 +411,7 @@ export default {
   background: red;
 }
 .subheading {
-  background: #88bdbc;
+  color: #88bdbc;
 }
 .products {
   max-height: 300px;
@@ -450,7 +454,7 @@ export default {
 section {
 }
 .name {
-  height: 50px;
+  height: 60px;
 }
 .phychem {
   height: 170px;
