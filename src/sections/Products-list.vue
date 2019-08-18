@@ -1,15 +1,15 @@
 <template>
   <div class="products white" id="products">
-    <div v-if="products==null" class="loader_space">
+    <div v-if="loading==true" class="loader_space">
       <atom-spinner class="loader" :animation-duration="1000" :size="200" color="#ff1d5e" />
       <h2 class="red--text loader">loading....</h2>
     </div>
     <!--best seller-->
 
-    <div v-if="products!=null">
+    <div v-if="loading==false">
       <cardsdisplay />
-      <h1 style="color: #026670" class="writting text-left">Most Searched</h1>
-
+      <h1 style="color: #026670" class="writting text-center">Most Searched</h1>
+      <p class="somelines text-center">Inspired By Your Reading Trends</p>
       <!-- swiper -->
       <swiper :options="swiperOption" class>
         <swiper-slide v-for="(product,index) in mostbought" :key="index" id="itemdisplay">
@@ -27,11 +27,11 @@
         <div class="swiper-button-prev" slot="button-prev"></div>
         <div class="swiper-button-next" slot="button-next"></div>
       </swiper>
-      <h1 style="color: #026670" class="writting text-left">Best Sellers</h1>
+      <h1 style="color: #026670" class="writting text-center">Best Sellers</h1>
 
       <!-- swiper -->
       <swiper :options="swiperOption" class>
-        <swiper-slide v-for="(product,index) in mostbought" :key="index" id="itemdisplay">
+        <swiper-slide v-for="(product,index) in mostbought4" :key="index" id="itemdisplay">
           <v-responsive class @click="product_select(product)">
             <v-container hide-delimiters class>
               <img :src="product.images" class="card-img-top imagesD" alt="...." />
@@ -52,7 +52,8 @@
       <numbers />
       <div id="itemdisplay" class="mt-4" v-scroll-reveal="{ delay: 250 }">
         <div>
-          <h2 class="mb-4">Must buy</h2>
+          <h1 style="color: #026670" class="writting text-center">Explore More Items</h1>
+          <p class="somelines text-center">Quality|Prices|Convenience--Nobody does it better</p>
         </div>
         <product-card
           :items="mostbought3"
@@ -64,6 +65,7 @@
           @widgetFavorite="product_favorite"
         />
       </div>
+      <!--extra books
       <v-container class>
         <v-layout row wrap>
           <v-flex xs6 sm6 md4 lg3 v-for="(product,index) in mostbought4" :key="index">
@@ -95,6 +97,7 @@
           </v-flex>
         </v-layout>
       </v-container>
+      -->
     </div>
   </div>
 </template>
@@ -127,11 +130,15 @@ export default {
   data() {
     return {
       loading: true,
-      products: null,
       offers: [],
       items: [],
       mostboughtimpnumber: 2,
       activeItem: null,
+      mostbought: [],
+      mostbought3: [],
+      mostbought4: [],
+      mostbought5: [],
+      mostbought6: [],
 
       modal: null,
       dd: this.numberofslides,
@@ -198,10 +205,35 @@ export default {
   beforeUpdate() {
     this.products.sale = parseInt(this.products.sale, 10);
   },
-  created() {
+  mounted() {
+    db.collection("products")
+      .where("importance", "==", "1")
+      .get()
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          this.mostbought.push(doc.data());
+        });
+      })
+      .then(() => {});
+    db.collection("products")
+      .where("importance", "==", "3")
+      .get()
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          this.mostbought3.push(doc.data());
+        });
+      })
+      .then(() => {});
+    db.collection("products")
+      .where("importance", "==", "4")
+      .get()
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          this.mostbought4.push(doc.data());
+        });
+      });
+
     this.loading = false;
-    console.log(this.count);
-    console.log(this.count + 1);
   },
   methods: {
     getImage(images) {
@@ -251,29 +283,7 @@ export default {
       console.log("clicked slot=>", slot);
     }
   },
-  computed: {
-    mostbought: function() {
-      return this.products.filter(product => {
-        var name = String(product.importance);
-
-        return name.match("1");
-      });
-    },
-    mostbought3: function() {
-      return this.products.filter(product => {
-        var name = String(product.importance);
-
-        return name.match("3");
-      });
-    },
-    mostbought4: function() {
-      return this.products.filter(product => {
-        var name = String(product.importance);
-
-        return name.match("4");
-      });
-    }
-  },
+  computed: {},
 
   firestore() {
     console.log("2");

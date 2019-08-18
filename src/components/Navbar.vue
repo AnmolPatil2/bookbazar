@@ -9,7 +9,7 @@
 
       <v-toolbar-title class="text-uppercase black--text">
         <iconmenu />
-        <div @click="returnhome()" class="logo">
+        <div @click="returnhome()" style="cursor: pointer" class="logo">
           <span color style="color: #eee2dc" class="font-weight-light logo"></span>
           <img @click="returnhome()" class="logoimg" src="/img/svg/TitleLogo.jpg" />
         </div>
@@ -23,7 +23,7 @@
         router
         :to="link.route"
       >
-        <v-list-tile-title style="color: #eee2dc">{{ link.text }}</v-list-tile-title>
+        <v-list-tile-title style="color: #eee2dc;">{{ link.text }}</v-list-tile-title>
       </v-list-tile>
 
       <!-- dropdown menu 
@@ -63,10 +63,15 @@
           data-toggle="modal"
           data-target="#login"
           v-if="!user"
-          style="color: #eee2dc"
+          style="color: #eee2dc; cursor: pointer"
         >Login</a>
-        <div @click="rerouteaccount()" style="color: #eee2dc " class="accounts" v-if="user">
-          <i class="fa fa-user pl-3" aria-hidden="true"></i>
+        <div
+          @click="rerouteaccount()"
+          style="color: #eee2dc; cursor: pointer "
+          class="accounts"
+          v-if="user"
+        >
+          <i style="cursor: pointer" class="fa fa-user pl-3" aria-hidden="true"></i>
           {{this.name }}
         </div>
 
@@ -76,7 +81,7 @@
             :data-count="`${this.$store.state.cart.length}`"
           >
             <i
-              style="color: #eee2dc"
+              style="color: #eee2dc;cursor: pointer"
               data-toggle="modal"
               data-target="#miniCart"
               aria-hidden="true"

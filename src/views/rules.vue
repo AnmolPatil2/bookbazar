@@ -54,10 +54,9 @@
           <div class="skw-page__skewed">
             <div class="skw-page__content">
               <h2 class="skw-page__heading">Verified Books</h2>
-              <p class="skw-page__description">
-                Verified Books
-                Every book is individually checked. 15 days return if not satisfied.
-              </p>
+              <p
+                class="skw-page__description"
+              >Every book is individually checked. 3 days return if not satisfied.</p>
             </div>
           </div>
         </div>
@@ -139,7 +138,7 @@ export default {
         {
           heading: "Verified Books",
           contentmobile:
-            " Verified Books Every book is individually checked. 3 days return if not satisfied.",
+            " Every book is individually checked. 3 days return if not satisfied.",
           src: "/img/buysell/4b.jpg"
         },
         {

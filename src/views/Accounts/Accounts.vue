@@ -7,7 +7,7 @@
       <nav id="sidebar" class="sidebar-wrapper">
         <div class="sidebar-content">
           <!-- sidebar-brand  -->
-          <div class="sidebar-item sidebar-brand">
+          <div style="cursor: pointer" class="sidebar-item sidebar-brand">
             <img src="/img/svg/logo.png" @click="gohome()" alt width="30" />
 
             <h2 style="color: #eee2dc" @click="gohome()" class="px-3">BooKoo</h2>
@@ -54,6 +54,12 @@
                 <router-link to="/accounts/orders1">
                   <i class="fa fa-shopping-cart"></i>
                   <span>Orders</span>
+                </router-link>
+              </li>
+              <li>
+                <router-link to="/accounts/bookssold">
+                  <i class="fas fa-dollar-sign"></i>
+                  <span>Books Sold</span>
                 </router-link>
               </li>
 

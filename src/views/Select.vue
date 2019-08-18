@@ -27,7 +27,7 @@
     <v-container class="whole-cont" v-if="display=='firstyear'">
       <v-layout>
         <v-flex>
-          <h2 class="Title-what-to-do">Select year</h2>
+          <h2 class="Title-what-to-do">Select Course</h2>
         </v-flex>
       </v-layout>
       <v-layout row wrap>
@@ -37,7 +37,7 @@
               <img :src="year.img" class="card-img-top" alt="...." />
             </v-responsive>
             <v-card-text>
-              <v-btn @click="cycleselected(index)">
+              <v-btn @click="cycleselected(index+51)">
                 <div>
                   <h2>{{year.name}}</h2>
                 </div>
@@ -89,7 +89,7 @@
       </v-layout>
       <v-layout row wrap>
         <v-flex xs6 sm6 md4 lg3 v-for="(product,index) in displayl" :key="index">
-          <v-card @click="product_select(product)" flat class="text-xs-center p-0 YD">
+          <v-card flat class="text-xs-center p-0 YD">
             <v-responsive class>
               <img :src="product.images" class="card-img-top bookimages" alt="...." />
             </v-responsive>
@@ -99,15 +99,11 @@
             </v-card-text>
             <v-card-actions>
               <div class="pricing">
-                <v-btn color="black" class="px-1 white--text">
+                <v-btn @click="product_select(product)" color="black" class="px-1 white--text">
                   <i class="fa fa-eye px-1" aria-hidden="true"></i>View
                 </v-btn>
-                <v-btn color="black" class="px-1 white--text">
-                  <i
-                    @click.prevent="addtocart(product)"
-                    class="fa fa-shopping-bag px-1"
-                    aria-hidden="true"
-                  ></i>Cart
+                <v-btn @click="addtocart(product)" color="black" class="px-1 white--text">
+                  <i class="fa fa-shopping-bag px-1" aria-hidden="true"></i>Cart
                 </v-btn>
               </div>
             </v-card-actions>
@@ -126,6 +122,7 @@ import { fb, db } from "../firebase";
 import firebase1 from "@firebase/app";
 import MiniCart from "@/components/MiniCart.vue";
 import Navbar from "@/components/Navbar.vue";
+import { constants } from "crypto";
 export default {
   name: "Products-list",
   props: {
@@ -155,6 +152,10 @@ export default {
         { img: "/img/department/Civil.jpg", name: "Civil" },
         { img: "/img/department/EEE.jpg", name: "EEE" }
       ],
+      firstyears: [
+        { img: "/img/svg/phy.jpeg", name: "P-Cycle" },
+        { img: "/img/svg/chem.jpeg", name: "C-Cycle" }
+      ],
       year: 0,
       display: null,
       department: null,
@@ -167,36 +168,21 @@ export default {
     },
     goback() {},
     addtocart(book1) {
-      console.log(book1.pId);
       var item = {
         productName: book1.name,
         productImage: book1.images,
         productPrice: book1.sale,
-        productId: book1.pId,
+        productId: book1.id,
         productQuantity: 1
       };
       $("#miniCart").modal("show");
       this.$store.commit("addToCart", item);
     },
     cycleselected(cycle) {
-      this.sum = cycle + 1;
-    },
-    product_select(product) {
-      this.$router.push({
-        name: "productCompholder",
-        params: { id: product.id }
-      });
-    },
-    yearselected(year) {
-      this.year = year;
-      this.sum = year * 10;
-      this.display = true;
-    },
-    departmentselected(dep) {
-      this.year = dep;
-      this.sum = this.sum + dep;
-      this.display = "books";
+      this.sum = cycle;
 
+      this.sum = this.sum.toString();
+      console.log(this.sum);
       db.collection("products")
         .where("idd", "==", this.sum)
         .get()
@@ -207,6 +193,40 @@ export default {
         })
         .then(() => {
           this.display = "displaybooks";
+          console.log(this.displayl);
+        });
+    },
+    product_select(product) {
+      this.$router.push({
+        name: "productCompholder",
+        params: { id: product.id }
+      });
+    },
+    yearselected(year) {
+      if (year == 0) {
+        this.display = "firstyear";
+      } else {
+        this.year = year;
+        this.sum = year * 10;
+        this.display = true;
+      }
+    },
+    departmentselected(dep) {
+      this.year = dep;
+      this.sum = this.sum + dep;
+      this.display = "books";
+      console.log(this.sum);
+      db.collection("products")
+        .where("idd", "==", this.sum)
+        .get()
+        .then(snapshot => {
+          snapshot.forEach(doc => {
+            this.displayl.push(doc.data());
+          });
+        })
+        .then(() => {
+          this.display = "displaybooks";
+          console.log(this.displayl);
         });
     }
   },
@@ -233,7 +253,7 @@ export default {
 .products {
   max-height: 300px;
   margin-top: 0rem;
-  background: #f2f2f2;
+  background: #d3d3d3;
 
   padding-bottom: 0rem;
 }
@@ -244,9 +264,7 @@ export default {
   width: 10px;
   height: 10px;
 }
-.YD {
-  border: 0.5px solid #3085d6;
-}
+
 .whole-cont {
   margin-top: 50px;
 }
@@ -277,6 +295,10 @@ section {
   .pricing {
     margin-left: 0px;
   }
+  .YD {
+    border: 0.5px solid #3085d6;
+    margin: 5px;
+  }
 }
 @media screen and (min-width: 600px) {
   .name {
@@ -284,6 +306,10 @@ section {
   }
   .pricing {
     margin-left: 20px;
+  }
+  .YD {
+    border: 0.5px solid #3085d6;
+    margin: 20px;
   }
 }
 .phychem {

@@ -180,7 +180,6 @@ export default {
         });
     },
     register() {
-      console.log(1);
       if (this.name) {
         this.slug = slugify(this.name, {
           replacement: "-",
@@ -189,7 +188,6 @@ export default {
         });
         let ref = db.collection("profiles").doc(this.slug);
         ref.get().then(doc => {
-          console.log(44);
           if (doc.exists) {
             this.feedback = "This name is already taken";
           } else {
@@ -197,6 +195,7 @@ export default {
               .createUserWithEmailAndPassword(this.email, this.password)
               .then(() => {
                 var user = firebase1.auth().currentUser;
+                console.log(user);
                 db.collection("profiles")
                   .doc(this.slug)
                   .set({
@@ -209,8 +208,8 @@ export default {
               .then(() => {
                 $("#login").modal("hide");
                 this.$router.push({ name: "profile1" });
-                document.location.reload(true);
               })
+              .then(() => {})
 
               .then(() => {
                 var user = firebase1.auth().currentUser;

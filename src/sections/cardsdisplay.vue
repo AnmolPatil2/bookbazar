@@ -1,12 +1,16 @@
 <template>
   <div>
     <!--test-->
-    <h1 style="color: #026670" class="writting text-left">Offers</h1>
-
+    <h1 style="color: #026670" class="writting text-center">
+      <strong>Hot Offers</strong> - Buy it! else Regret it!
+    </h1>
+    <p
+      class="somelines text-center"
+    >We've done the bargaining for you. Get the best discounts in Bengaluru</p>
     <v-container>
       <v-layout row wrap class>
         <v-flex xs6 sm6 md4 lg3 v-for="(product,index) in mostbought2" :key="index">
-          <v-card v-scroll-reveal.reset="{ delay: 150+ (index*400)}" class="cardh">
+          <v-card v-scroll-reveal.reset="{ delay: 150+ (index*100)}" class="cardh">
             <div class="imageh">
               <img :src="product.images" class="card-img-top imagesD" alt="...." />
             </div>
@@ -63,7 +67,7 @@
             <div class="d-flex flex-row justify-content-center">
               <i class="fab fa-whatsapp fa-3x py-2 pr-3"></i>
               <div class="text text-left">
-                <a href="  https://chat.whatsapp.com/Ceb4NsIZbVe5tnBMjy1RAq">
+                <a href="  https://chat.whatsapp.com/Ceb4NsIZbVe5tnBMjy1RAq" target="_blank">
                   <h3 class="pt-1 m-0">Join Now</h3>
                   <p class="p-0 m-0">On whatsapp</p>
                 </a>
@@ -77,7 +81,7 @@
               <i class="fab fa-instagram fa-3x py-2 pr-3"></i>
 
               <div class="text text-left">
-                <a href="https://instagram.com/_.bookoo._?igshid=g7jwl267bmjh">
+                <a href="https://instagram.com/_.bookoo._?igshid=g7jwl267bmjh" target="_blank">
                   <h3 class="pt-1 m-0">Join Now</h3>
                   <p class="p-0 m-0">On Instagram</p>
                 </a>
@@ -144,6 +148,7 @@ export default {
   data() {
     return {
       products: [],
+      mostbought2: [],
       swiperOption: {
         slidesPerView: 5,
         centeredSlides: false,
@@ -187,15 +192,18 @@ export default {
       products: db.collection("products")
     };
   },
-  computed: {
-    mostbought2: function() {
-      return this.products.filter(product => {
-        var name = String(product.importance);
-
-        return name.match("2");
-      });
-    }
-  }
+  mounted() {
+    db.collection("products")
+      .where("importance", "==", "2")
+      .get()
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          this.mostbought2.push(doc.data());
+        });
+      })
+      .then(() => {});
+  },
+  computed: {}
 };
 </script>
 
@@ -218,12 +226,21 @@ export default {
   height: 270px;
   margin: 0;
 }
+.somelines {
+  color: #2e2c2caf;
+  font-size: 3vmin;
+  padding-bottom: 3vmin;
+  backgroung: #fff;
+}
 @media only screen and (max-width: 600px) {
   .cardh {
     margin: 5px;
   }
   .bookname {
     width: 124px;
+  }
+  .authorname {
+    margin-left: -50px;
   }
 }
 @media only screen and (min-width: 600px) {
@@ -233,6 +250,9 @@ export default {
   }
   .bookname {
     min-width: 190px;
+  }
+  .authorname {
+    margin-left: 0px;
   }
 }
 .cartb {

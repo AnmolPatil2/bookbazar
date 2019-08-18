@@ -40,6 +40,7 @@ export default new Vuex.Store({
         },
 
         saveData(state) {
+            
             window.localStorage.setItem('cart', JSON.stringify(state.cart));
         },
 

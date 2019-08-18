@@ -12,19 +12,19 @@
         <div class="rect">
           <h1>130</h1>
 
-          <p>Number of books</p>
+          <p>Books left in stock</p>
         </div>
         <div class="rect">
           <h1>20</h1>
           <p>Books sold</p>
         </div>
         <div class="rect">
-          <h1>90%</h1>
-          <p>Satisfied coustumers</p>
+          <h1>10</h1>
+          <p>Satisfied customers</p>
         </div>
         <div class="rect">
-          <h1>10</h1>
-          <p>Satisfied coustumers</p>
+          <h1>4</h1>
+          <p>Books Donated</p>
         </div>
       </div>
     </div>

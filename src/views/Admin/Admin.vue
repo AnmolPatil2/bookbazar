@@ -142,6 +142,11 @@ export default {
         .catch(err => {
           console.log(err);
         });
+    },
+    gohome() {
+      this.$router.push({
+        name: "home"
+      });
     }
   },
   created() {

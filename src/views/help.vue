@@ -4,7 +4,7 @@
       <h2 class="white--text faqs center">FAQs</h2>
       <ul>
         <li v-for="(item,i) in items" :key="i">
-          <h4 @click="display(i)" class="p-2 white--text">-> {{item.head}}</h4>
+          <h4 @click="display(i)" style="cursor: pointer" class="p-2 white--text">-> {{item.head}}</h4>
           <p v-if="pointdisplay==i" class="p-4 ans">{{item.text}}</p>
         </li>
       </ul>

@@ -77,12 +77,9 @@
             <div class="skw-page__content">
               <h2 class="skw-page__heading">Keep your old books safe so you can</h2>
               <p class="skw-page__description">
-                <v-btn
-                  flat
-                  @click="changetosell()"
-                  color="white"
-                  class="red--text"
-                >SELL THEM ON BOOKOO</v-btn>
+                <v-btn flat @click="changetosell()" color="white">
+                  <h3 class="red--text">SELL THEM ON BOOKOO</h3>
+                </v-btn>
               </p>
             </div>
           </div>

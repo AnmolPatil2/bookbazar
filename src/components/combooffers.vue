@@ -7,15 +7,15 @@
       -->
 
       <div class="container">
-        <h1 style="color: #026670" class="writting text-center">Purchase The Most recommended Books</h1>
-        <p class="somelines text-center">At cheaper price</p>
+        <h1 style="color: #026670" class="writting text-center">The Fresher Collection</h1>
+        <p class="somelines text-center"></p>
         <div class="cardsoffer-column column-0">
           <div class="cardsoffer cardsoffer-color-0">
             <div class="border"></div>
             <img src="/img/svg/books1.jpg" />
             <h1 class="white--text">P-Cycle</h1>
             <div class="pricing text-center">
-              <v-btn @click="ComboOrder()" color="black" class="px-2 py-2 mb-5 white--text">
+              <v-btn @click="ComboOrder(51)" color="black" class="px-2 py-2 mb-5 white--text">
                 <i class="fa fa-shopping-bag px-1" aria-hidden="true"></i>Order
               </v-btn>
               <v-btn color="black" class="px-2 py-2 mb-5 white--text">
@@ -37,7 +37,7 @@
             <img src="/img/svg/books2.jpg" />
             <h1 class="white--text">C-Cycle</h1>
             <div class="pricing text-center">
-              <v-btn @click="ComboOrder()" color="black" class="px-2 py-2 mb-5 white--text">
+              <v-btn @click="ComboOrder(52)" color="black" class="px-2 py-2 mb-5 white--text">
                 <i class="fa fa-shopping-bag px-1" aria-hidden="true"></i>Order
               </v-btn>
 
@@ -75,17 +75,51 @@ export default {
   name: "combo",
   data() {
     return {
-      offers: []
+      sum: 0,
+      combolist: []
     };
   },
-  firestore() {
-    return {
-      offers: db.collection("offers")
-    };
-  },
+
   methods: {
-    ComboOrder() {
-      this.$router.push({ name: "checkout" });
+    ComboOrder(dep) {
+      this.sum = 0;
+      this.combolist = [];
+      this.sum = this.sum + dep;
+      this.sum = this.sum.toString();
+
+      db.collection("products")
+        .where("idd", "==", this.sum)
+        .get()
+        .then(snapshot => {
+          snapshot.forEach(doc => {
+            this.combolist.push(doc.data());
+          });
+        })
+        .then(() => {
+          this.combolist.forEach(book1 => {
+            if (
+              book1.sale == 150 ||
+              book1.sale == 505 ||
+              book1.sale == 270 ||
+              book1.sale == 545 ||
+              book1.sale == 745 ||
+              book1.sale == 405 ||
+              book1.sale == 485
+            ) {
+              var item = {
+                productName: book1.name,
+                productImage: book1.images,
+                productPrice: book1.sale,
+                productId: book1.id,
+                productQuantity: 1
+              };
+              console.log(book1.id);
+              console.log(book1.idd);
+              $("#miniCart").modal("show");
+              this.$store.commit("addToCart", item);
+            }
+          });
+        });
     }
   },
   mounted() {
@@ -294,7 +328,7 @@ export default {
       windowHeight = window.innerHeight;
     }
     var paragraphText =
-      "<ul><li>1) Breeze through your first year with our physics cycle collection hand picked Textbooks for every subject </li><l1>2) Afraid of the quality? Don't worry we cross check the quality before we deliver it to you, but hey.you can pay for it once you verify it!</li><li>3) not happy with our collection? Customize your choice by placing an order with us.</li><l1>4) get the highest offers on bulk orders, click or order now</li></ul>";
+      "<ul><li>Get ready for the year  with our Physics/Chemistry-Cycle collection</li><li>Each book in this collection is the most preferred book for your syllabus</li><li> We've handpicked each book after consulting with our teachers and hence ensuring you're getting the best.</li><li> We also provide customization. You can swap out any book in this collection as per your need.</li><li> As an additional benefit, we've added question papers for every subject!</li><li>The Collection is available at the best discount in the market. All your books at one place at the best price. Get the Collection by Ordering now!</li></ul>";
   }
 };
 </script>
@@ -520,3 +554,8 @@ p {
   }
 }
 </style>
+
+
+
+
+

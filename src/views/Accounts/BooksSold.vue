@@ -31,7 +31,7 @@
             <v-icon small left>person</v-icon>
             <span class="caption text-lowercase">By Title</span>
           </v-btn>
-          <span>Sort by author</span>
+          <span>Sort by Name</span>
         </v-tooltip>
       </v-layout>
 
@@ -41,7 +41,7 @@
             <div class="caption grey--text">Book Image</div>
             <img :src="order.orderImage" width="80px" class="align-self-center mr-3" alt />
           </v-flex>
-          <v-flex xs6 sm3 md2 lg2>
+          <v-flex xs5 sm3 md2 lg2 class="pl-2">
             <div class="caption grey--text">Book Title</div>
             <div>{{ order.bookName }}</div>
           </v-flex>
@@ -50,7 +50,7 @@
             <div>{{ order.time }}</div>
           </v-flex>
           <v-flex xs6 sm4 md2 lg2>
-            <div class="caption grey--text">Price</div>
+            <div class="caption grey--text pl-2">Price</div>
             <div>{{ order.price }}</div>
           </v-flex>
           <v-flex xs4 sm4 md2 lg2>
@@ -79,7 +79,7 @@ export default {
   created() {
     var user = firebase1.auth().currentUser;
     let ref = db
-      .collection("sellorders")
+      .collection("buyorders")
 
       .where("buyer", "==", user.uid)
 
@@ -88,11 +88,12 @@ export default {
       .then(snapshot => {
         snapshot.forEach(doc => {
           this.orders.push({
-            orderImage: doc.data().orderImage,
+            orderImage: doc.data().image,
             bookName: doc.data().bookName,
             status: doc.data().status,
-            time: moment(doc.data().date).format("llll"),
+            time: moment(doc.data().date).format("ll"),
             price: doc.data().price
+            //id: doc.date().bookid
           });
         });
       });
@@ -110,7 +111,7 @@ export default {
 .project.orderplaced {
   border-left: 4px solid #3cd1c2;
 }
-.project.ongoing {
+.project.pending {
   border-left: 4px solid #ffaa2c;
 }
 .project.contacted {
@@ -122,7 +123,7 @@ export default {
 .v-chip.orderplaced {
   background: #3cd1c2;
 }
-.v-chip.ongoing {
+.v-chip.pending {
   background: #ffaa2c;
 }
 .v-chip.contacted {

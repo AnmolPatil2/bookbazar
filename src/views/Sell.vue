@@ -28,7 +28,7 @@
     <v-container class="whole-cont" v-if="display=='firstyear'">
       <v-layout>
         <v-flex>
-          <h2 class="Title-what-to-do">Select year</h2>
+          <h2 class="Title-what-to-do">Select Course</h2>
         </v-flex>
       </v-layout>
       <v-layout row wrap>
@@ -38,7 +38,7 @@
               <img :src="year.img" class="card-img-top" alt="...." />
             </v-responsive>
             <v-card-text>
-              <v-btn @click="cycleselected(index)">
+              <v-btn @click="cycleselected(index+51)">
                 <div>
                   <h2>{{year.name}}</h2>
                 </div>
@@ -132,8 +132,12 @@
                   <p class="red--text">
                     For:
                     <i class="fa fa-inr" aria-hidden="true"></i>
-                    {{product.price}}
+                    {{priceforsale(product.price)}}
                   </p>
+                  <p class="blue--text">From:</p>
+                  <p class="teal--text">{{product.edition}},{{ product.publication}}</p>
+                  <p class="blue--text">By:</p>
+                  <p class="teal--text">{{product.author}}</p>
                 </div>
               </div>
               <!-- product sidebar -->
@@ -224,8 +228,8 @@ export default {
         { img: "/img/department/EEE.jpg", name: "EEE" }
       ],
       firstyears: [
-        { img: "/img/svg/phy.jpeg", name: "P-Cycle" },
-        { img: "/img/svg/chem.jpeg", name: "C-Cycle" }
+        { img: "/img/svg/book2.jpg", name: "P-Cycle" },
+        { img: "/img/svg/book1.jpg", name: "C-Cycle" }
       ],
 
       year: 0,
@@ -240,6 +244,9 @@ export default {
   },
 
   methods: {
+    priceforsale(p) {
+      return p / 2;
+    },
     product_select(product) {
       this.$router.push({
         name: "productCompholder",
@@ -248,14 +255,29 @@ export default {
     },
     priceconvet(productsale) {
       let sale = productsale.toString();
-      console.log(this.sale);
+
       return productsale.toString();
     },
     getImage(images) {
       return images[0];
     },
     cycleselected(cycle) {
-      this.sum = cycle + 1;
+      this.sum = cycle;
+
+      this.sum = this.sum.toString();
+      console.log(this.sum);
+      db.collection("products")
+        .where("idd", "==", this.sum)
+        .get()
+        .then(snapshot => {
+          snapshot.forEach(doc => {
+            this.displayl.push(doc.data());
+          });
+        })
+        .then(() => {
+          this.display = "displaybooks";
+          console.log(this.displayl);
+        });
     },
     yearselected(year) {
       if (year == 0) {
@@ -282,6 +304,7 @@ export default {
         })
         .then(() => {
           this.display = "displaybooks";
+          console.log(this.displayl);
         });
     },
 
@@ -336,7 +359,11 @@ export default {
       this.product = {
         name: this.displayl[index].name,
         images: [],
-        price: this.displayl[index].sale
+        author: this.displayl[index].author,
+        edition: this.displayl[index].edition,
+        publication: this.displayl[index].publication,
+        price: this.displayl[index].sale,
+        id: this.displayl[index].id
       };
     },
     addNew(index, product) {
@@ -344,7 +371,7 @@ export default {
       if (user == null) {
         Swal.fire({
           title: "You must SignUp",
-          text: "Click on Navigation for a fun SignUp",
+          text: "SignUp to join our Community!",
           type: "warning",
           showCancelButton: true,
           confirmButtonColor: "#3085d6",
@@ -368,7 +395,8 @@ export default {
       } else {
         Swal.fire({
           title: "Sell your book",
-          text: "Confirm and we will take care of the rest",
+          text:
+            "Just make sure you have given your whatsapp number rest we will take care!",
           type: "success",
           showCancelButton: true,
           confirmButtonColor: "#3085d6",
@@ -377,21 +405,27 @@ export default {
         }).then(result => {
           if (result.value) {
             var user = firebase1.auth().currentUser;
-            console.log(product.name);
+            console.log();
+            console.log(product.id);
             db.collection("buyorders")
               .add({
-                bookid: product.name,
+                bookName: product.name,
                 price: product.price,
-                status: "ongoing",
+                status: "pending",
                 buyer: user.uid,
                 date: Date.now(),
-                image: product.images
+                image: product.images,
+
+                bookid: product.id
               })
 
               .then(() => {
                 Toast.fire({
                   type: "success",
-                  title: "Product created successfully"
+                  title: "Request posted"
+                });
+                this.$router.push({
+                  name: "BooksSold"
                 });
                 $("#product").modal("hide");
               });
@@ -427,6 +461,7 @@ export default {
 }
 .YD {
   border: 0.5px solid #3085d6;
+  margin: 20px;
 }
 .whole-cont {
   margin-top: 50px;
@@ -447,6 +482,30 @@ export default {
   width: 157px;
 }
 
+@media screen and (max-width: 600px) {
+  .name {
+    height: 60px;
+  }
+  .pricing {
+    margin-left: 0px;
+  }
+  .YD {
+    border: 0.5px solid #3085d6;
+    margin: 5px;
+  }
+}
+@media screen and (min-width: 600px) {
+  .name {
+    height: 30px;
+  }
+  .pricing {
+    margin-left: 20px;
+  }
+  .YD {
+    border: 0.5px solid #3085d6;
+    margin: 20px;
+  }
+}
 .card-body {
 }
 section {

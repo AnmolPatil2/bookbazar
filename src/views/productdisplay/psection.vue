@@ -130,7 +130,7 @@
                   <div v-if="!display">
                     <div class="row">
                       <div class="col-md-12">
-                        <p>No description Yet</p>
+                        <p>To be added</p>
                       </div>
                     </div>
                   </div>

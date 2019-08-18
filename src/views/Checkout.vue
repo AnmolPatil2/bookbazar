@@ -120,7 +120,7 @@ export default {
       if (user == null) {
         Swal.fire({
           title: "You must SignUp",
-          text: "Click on Navigation for a fun SignUp",
+          text: "SignUp to join our Community!",
           type: "warning",
           showCancelButton: true,
           confirmButtonColor: "#3085d6",
@@ -132,16 +132,6 @@ export default {
           }
         });
       } else {
-        let ref = db.collection("profiles");
-        ref
-          .where("aui", "==", firebase1.auth().currentUser.uid)
-          .get()
-          .then(snapshot => {
-            snapshot.forEach(user => {
-              this.phone = user.data().phone;
-            });
-            console.log(this.phone);
-          });
         if (this.phone != null) {
           Swal.fire({
             title: "Phone number not available",
@@ -163,19 +153,6 @@ export default {
             if (document.getElementById("terms").checked) {
               // it is checked. Do something
 
-              this.$store.state.cart.forEach(order => {
-                db.collection("sellorders").add({
-                  bookid: order.productId,
-                  bookName: order.productName,
-                  price: order.productPrice,
-                  status: "ongoing",
-                  buyer: user.uid,
-                  date: Date.now(),
-                  orderQuantity: order.productQuantity,
-                  orderImage: order.productImage
-                });
-              });
-
               Swal.fire({
                 title: "Confirm Order",
                 text: "You are one Click away",
@@ -190,6 +167,18 @@ export default {
                   Toast.fire({
                     type: "success",
                     title: "Order Placed"
+                  });
+                  this.$store.state.cart.forEach(order => {
+                    db.collection("sellorders").add({
+                      bookid: order.productId,
+                      bookName: order.productName,
+                      price: order.productPrice,
+                      status: "ongoing",
+                      buyer: user.uid,
+                      date: Date.now(),
+                      orderQuantity: order.productQuantity,
+                      orderImage: order.productImage
+                    });
                   });
 
                   this.$store.state.cart.forEach(element => {
@@ -214,6 +203,16 @@ export default {
     }
   },
   created() {
+    let ref = db.collection("profiles");
+    ref
+      .where("aui", "==", firebase1.auth().currentUser.uid)
+      .get()
+      .then(snapshot => {
+        snapshot.forEach(user => {
+          this.phone = user.data().phone;
+        });
+        console.log(this.phone);
+      });
     this.sum = 0;
     this.$store.state.cart.forEach(element => {
       element.productPrice = parseInt(element.productPrice);

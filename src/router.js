@@ -14,6 +14,7 @@ import Accounts from "./views/Accounts/Accounts.vue";
 import Overview1 from "./views/Accounts/Overview1.vue";
 import Profile1 from "./views/Accounts/Profile1.vue";
 import Orders1 from "./views/Accounts/Orders1.vue";
+import BooksSold from "./views/Accounts/BooksSold.vue";
 import signup from "@/components/signup.vue";
 import searchresults from "./views/searchresults.vue";
 import forgotPassword from "@/components/forgotPassword.vue";
@@ -172,6 +173,11 @@ const router = new Router({
           path: "profile1",
           name: "profile1",
           component: Profile1
+        },
+        {
+          path: "bookssold",
+          name: "BooksSold",
+          component: BooksSold
         },
 
         {

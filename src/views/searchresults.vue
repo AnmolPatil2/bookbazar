@@ -1,12 +1,14 @@
 <template>
   <div class="searchresult">
     <Navbar />
-    <h2 class="something pt-3">Use for this faster results</h2>
+
     <div class="container search2">
       <input type="text" v-model="searchString" placeholder="Subject...." />
       <div class="search"></div>
     </div>
+
     <div class="space"></div>
+    <h2 class="something text-center pt-4 mt-4">Click here for Further Searches</h2>
     <div id="itemdisplay">
       <div v-if="results.length==0">
         <h3>Book not found</h3>
@@ -163,7 +165,7 @@ export default {
 .container .search {
   position: absolute;
   margin: auto;
-  top: 0;
+  top: 0%;
   right: 0;
   bottom: 0;
   left: 0;

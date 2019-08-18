@@ -25,11 +25,23 @@
             </div>
             <ul>
               <li v-for="item in this.$store.state.cart" class="media">
-                <img :src="item.productImage" width="80px" class="align-self-center mr-3" alt />
+                <img
+                  :src="item.productImage"
+                  width="80px"
+                  style="cursor: pointer"
+                  @click="product_select(item)"
+                  class="align-self-center mr-3"
+                  alt
+                />
                 <div class="media-body">
-                  <h5 class="mt-0">{{item.productName}}</h5>
+                  <h5
+                    class="mt-0"
+                    style="cursor: pointer"
+                    @click="product_select(item)"
+                  >{{item.productName}}</h5>
                   <v-chip
                     class="ma-2"
+                    style="cursor: pointer"
                     @click="$store.commit('removeFromCart',item)"
                     color="red right"
                     text-color="white"
@@ -63,6 +75,13 @@ export default {
     checkout() {
       $("#miniCart").modal("hide");
       this.$router.push("/checkout");
+    },
+    product_select(product) {
+      $("#miniCart").modal("hide");
+      this.$router.push({
+        name: "productCompholder",
+        params: { id: product.productId }
+      });
     }
   }
 };

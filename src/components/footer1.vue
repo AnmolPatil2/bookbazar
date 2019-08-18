@@ -13,7 +13,7 @@
             class="text-muted"
           >Yes, We've got an App. Just Search on the play store/AppStore & install the bookoo app.</p>
           <p class="pt-4 text-muted">
-            <span>Team BooKoo</span>
+            <span>- Team BooKoo</span>
           </p>
         </div>
 
@@ -24,18 +24,26 @@
               <p class="text-muted">About Us</p>
             </li>
             <li>
-              <p class="text-muted">Terms of use & policy</p>
+              <router-link to="/tandc" target="_blank">
+                <p class="text-muted">Terms of use & policy</p>
+              </router-link>
             </li>
 
             <li>
-              <p class="text-muted">Contact Us</p>
+              <p class="text-muted">
+                <a href="https://wa.me/918088363293" target="_blank">Contact Us</a>
+              </p>
             </li>
 
             <li>
-              <p class="text-muted">Communities</p>
+              <router-link to="/community" target="_blank">
+                <p class="text-muted">Communities</p>
+              </router-link>
             </li>
             <li>
-              <p class="text-muted">Frequently Asked Questions</p>
+              <router-link to="/faqs" target="_blank">
+                <p class="text-muted">Frequently Asked Questions</p>
+              </router-link>
             </li>
           </ul>
 
@@ -58,10 +66,10 @@
           <h4 class="text-light">Follow Us</h4>
           <p class="text-muted">Let us be social</p>
           <div class="column text-light">
-            <a href="https://instagram.com/_.bookoo._?igshid=g7jwl267bmjh">
+            <a href="https://instagram.com/_.bookoo._?igshid=g7jwl267bmjh" target="_blank">
               <i class="fab fa-instagram"></i>
             </a>
-            <a href="https://chat.whatsapp.com/Ceb4NsIZbVe5tnBMjy1RAq">
+            <a href="https://chat.whatsapp.com/Ceb4NsIZbVe5tnBMjy1RAq" target="_blank">
               <i class="fab fa-whatsapp mx-2"></i>
             </a>
           </div>

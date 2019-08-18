@@ -5,7 +5,7 @@
         <div class="col-md-6">
           <h3>Orders</h3>
 
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Unde, ducimus.</p>
+          <p>Your Joy of books are on the way</p>
         </div>
         <div class="col-md-6">
           <img src="/img/svg/orders.svg" alt class="img-fluid" />
@@ -16,6 +16,10 @@
     <div class="table-responsive">
       <table class="table">
         <tbody>
+          <tr>
+            <td @click="changeidd(52)">c-cycle</td>
+            <td @click="changeidd(51)">p-cycle</td>
+          </tr>
           <tr>
             <td @click="changeidd(20)">cs 5th sem</td>
             <td @click="changeidd(21)">ec 5th sem</td>
@@ -66,11 +70,12 @@
           </v-flex>
           <v-flex xs6 sm4 md2>
             <div class="caption grey--text">Order Time</div>
-            <div>{{ order.time }}</div>
+            <div>{{ order.date }}</div>
           </v-flex>
           <v-flex xs6 sm4 md2>
             <div class="caption grey--text">contact</div>
             <v-btn @click="readData(order)">Get contact</v-btn>
+            <v-btn @click="completed(order)">Completed</v-btn>
           </v-flex>
           <v-flex xs6 sm4 md2>
             <div class="caption grey--text">Price</div>
@@ -99,10 +104,12 @@
 <script>
 import { VueEditor } from "vue2-editor";
 import { fb, db } from "../../firebase";
+import moment from "moment";
 export default {
   name: "Products",
   components: {
-    VueEditor
+    VueEditor,
+    moment
   },
   props: {},
   data() {
@@ -110,6 +117,7 @@ export default {
       orders: [],
       contact: null,
       buyerName: null,
+      idddisplay: null,
       email: null,
       namelist: [],
       sum: null,
@@ -118,6 +126,31 @@ export default {
   },
 
   methods: {
+    changeidd(idd) {
+      this.idddisplay = idd;
+    },
+    completed(order) {
+      Swal.fire({
+        title: "Are you sure",
+        text:
+          "make sure you will that guys has the list then only click confirm and it cant be undone",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Confirm"
+      }).then(result => {
+        if (result.value) {
+          if (order.status == "contacted") {
+            db.collection("sellorders")
+              .doc(order.id)
+              .update({
+                status: "Completed"
+              });
+          }
+        }
+      });
+    },
     orderlistsent() {
       Swal.fire({
         title: "Are you sure",
@@ -131,7 +164,7 @@ export default {
       }).then(result => {
         if (result.value) {
           this.orders.forEach(order => {
-            if (order.status == "ongoing") {
+            if (order.status == "Informed") {
               db.collection("sellorders")
                 .doc(order.id)
                 .update({
@@ -180,7 +213,7 @@ export default {
                 db.collection("sellorders")
                   .doc(order.id)
                   .update({
-                    status: "contacted"
+                    status: "Informed"
                   });
               }
             }
@@ -207,7 +240,15 @@ export default {
       $("#product").modal("hide");
     }
   },
-  mounted() {},
+  //computed: {
+  //   whichordertodisplay: function() {
+  //    return this.orders.filter(product => {
+  //    var name = String(product.idd);
+  //
+  //     return name.match(this.idddisplay);
+  //    });
+  //  }
+  // },
   created() {
     db.collection("sellorders")
       .orderBy("date")
@@ -219,7 +260,7 @@ export default {
               bookid: doc.data().bookid,
               id: doc.id,
               bookName: doc.data().bookName,
-              date: doc.data().date,
+              date: moment(doc.data().date).format("llll"),
               buyer: doc.data().buyer,
               status: doc.data().status,
               quantity: doc.data().orderQuantity,
@@ -254,6 +295,9 @@ export default {
 .project.contacted {
   border-left: 4px solid #f83e70;
 }
+.project.contacted {
+  border-left: 4px solid red;
+}
 .v-chip.orderplaced {
   background: #3cd1c2;
 }
@@ -262,5 +306,8 @@ export default {
 }
 .v-chip.contacted {
   background: #f83e70;
+}
+.v-chip.contacted {
+  background: red;
 }
 </style>

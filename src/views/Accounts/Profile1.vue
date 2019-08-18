@@ -199,7 +199,7 @@ export default {
   data() {
     return {
       reroute: null,
-      edit: false,
+      edit: true,
       profile: {
         name: null,
         phone: null
@@ -228,7 +228,7 @@ export default {
   },
   created() {
     let ref = db.collection("profiles");
-
+    console.log("ss");
     ref
       .where("aui", "==", firebase1.auth().currentUser.uid)
       .get()
@@ -238,7 +238,8 @@ export default {
           this.profile.email = user.data().email;
           this.profile.phone = user.data().phone;
         });
-      });
+      })
+      .then(() => {});
     const user = firebase1.auth().currentUser;
     if (user.email == null) {
       this.reroute = 2;
@@ -342,7 +343,9 @@ export default {
                 .update({
                   phone: this.profile.phone
                 })
-                .then(() => {});
+                .then(() => {
+                  document.location.reload(true);
+                });
             });
           })
           .then(() => {

@@ -20,7 +20,7 @@ export default {
       ],
       slides: [
         {
-          src: "/images/offer1.png",
+          src: "/images/offers.png",
 
           route: "rules"
         },
