@@ -18,7 +18,7 @@
 
         <div v-if="sent">
           <h2>Login to get going</h2>
-          <span>(use the new Password that you reset thought email)</span>
+          <span>(use the new Password that you reset through email)</span>
           <br />
           <br />
           <input type="email" v-model="email" placeholder="Email" />

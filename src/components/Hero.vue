@@ -20,11 +20,13 @@ export default {
       ],
       slides: [
         {
-          src: "/images/Buy.png",
+          src: "/images/offer1.png",
+
           route: "rules"
         },
         {
-          src: "/images/donate.jpeg",
+          src: "/images/Buy.png",
+
           route: "donate"
         },
         {
@@ -32,7 +34,7 @@ export default {
           route: "RulesToSell"
         },
         {
-          src: "/images/offer1.png"
+          src: "/images/donate.jpeg"
         }
       ]
     };
@@ -45,18 +47,18 @@ export default {
 }
 @media only screen and (max-width: 600px) {
   #hero {
-    height: 300px;
+    height: 250px;
   }
   .images {
-    height: 300px;
+    height: 250px;
     width: 100%;
   }
   #hero {
     margin-top: 68px;
   }
   .slider {
-    max-height: 300px;
-    min-height: 300px;
+    max-height: 250px;
+    min-height: 250px;
   }
 }
 @media only screen and (min-width: 600px) {

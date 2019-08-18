@@ -7,15 +7,12 @@
       -->
 
       <div class="container">
-        <h1
-          style="color: #026670"
-          class="writting text-center"
-        >Purchase The Most recomended at the Cheapest Price</h1>
-        <p class="somelines text-center">All are most prefered books</p>
+        <h1 style="color: #026670" class="writting text-center">Purchase The Most recommended Books</h1>
+        <p class="somelines text-center">At cheaper price</p>
         <div class="cardsoffer-column column-0">
           <div class="cardsoffer cardsoffer-color-0">
             <div class="border"></div>
-            <img src="/img/svg/books1.jpeg" />
+            <img src="/img/svg/books1.jpg" />
             <h1 class="white--text">P-Cycle</h1>
             <div class="pricing text-center">
               <v-btn @click="ComboOrder()" color="black" class="px-2 py-2 mb-5 white--text">
@@ -37,7 +34,7 @@
         <div class="cardsoffer-column column-1">
           <div class="cardsoffer cardsoffer-color-1">
             <div class="border"></div>
-            <img src="/img/svg/books2.jpeg" />
+            <img src="/img/svg/books2.jpg" />
             <h1 class="white--text">C-Cycle</h1>
             <div class="pricing text-center">
               <v-btn @click="ComboOrder()" color="black" class="px-2 py-2 mb-5 white--text">
@@ -374,7 +371,7 @@ p {
   max-height: 230px;
   width: 90%;
   position: absolute;
-  top: -10%;
+  top: -12%;
   left: -6%;
 }
 .cardsoffer-color-0 {

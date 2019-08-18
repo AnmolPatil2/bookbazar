@@ -5,11 +5,12 @@
       <ul>
         <li v-for="(item,i) in items" :key="i">
           <h4 @click="display(i)" class="p-2 white--text">-> {{item.head}}</h4>
-          <p v-if="pointdisplay==i" class="p-4 red--text">{{item.text}}</p>
+          <p v-if="pointdisplay==i" class="p-4 ans">{{item.text}}</p>
         </li>
       </ul>
       <h2 class="p-2 white--text">Still not Able to sovle your problem</h2>
-      <p class="p-4 red--text">
+      <p class="text-muted p-4">
+        >
         <a href="https://wa.me/918088363293">Contact us On whats app</a>
       </p>
       <v-btn flat @click="goback()" class="back white--text">Back</v-btn>
@@ -114,5 +115,8 @@ export default {
 }
 .faqs {
   text-align: center;
+}
+.ans {
+  color: #ff8300;
 }
 </style>

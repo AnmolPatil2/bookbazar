@@ -7,11 +7,8 @@
       -->
 
       <div class="container">
-        <h1
-          style="color: #026670"
-          class="writting text-center"
-        >Purchase The Most recomended at the Cheapest Price</h1>
-        <p class="somelines text-center">All are most prefered books</p>
+        <h1 style="color: #026670" class="writting text-center">Purchase The Most recomended</h1>
+        <p class="somelines text-center">At cheaper price</p>
         <div class="cardsoffer-column column-0">
           <div class="cardsoffer cardsoffer-color-0">
             <div class="border"></div>

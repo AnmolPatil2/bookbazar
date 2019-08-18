@@ -1,49 +1,8 @@
 <template>
   <div>
-    <section class="section-3 container-fluid p-0 text-center">
-      <div class="row">
-        <div class="col-md-12 col-sm-12">
-          <h1>About our Community</h1>
-          <p v-scroll-reveal.reset="{ delay: 250}">
-            At Bookoo,
-            we are a small community of engineering students striving to make a small change for the better. Students often struggle to get hold of text books, are tricked with high prices and in most cases are required to put in a lot of time and effort. Our mission at Bookoo is to make the purchase of textbooks a simple, convenient and student friendly process. We achieve this through the constant hardwork and perseverance of our team in working together to deliver only the best to you.
-            We look forward to working with our users and expanding our community
-            <br />-Team bookoo
-          </p>
-        </div>
-      </div>
-      <div class="platform row" v-scroll-reveal.reset="{ delay: 550 }">
-        <div class="col-md-6 col-sm-12 text-right">
-          <div class="desktop shadow-lg">
-            <div class="d-flex flex-row justify-content-center">
-              <i class="fab fa-whatsapp fa-3x py-2 pr-3"></i>
-              <div class="text text-left">
-                <a href="  https://chat.whatsapp.com/Ceb4NsIZbVe5tnBMjy1RAq">
-                  <h3 class="pt-1 m-0">Join Now</h3>
-                  <p class="p-0 m-0">On whatsapp</p>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-sm-12 text-left">
-          <div class="desktop shadow-lg">
-            <div class="d-flex flex-row justify-content-center">
-              <i class="fab fa-instagram fa-3x py-2 pr-3"></i>
-
-              <div class="text text-left">
-                <a href="https://instagram.com/_.bookoo._?igshid=g7jwl267bmjh">
-                  <h3 class="pt-1 m-0">Join Now</h3>
-                  <p class="p-0 m-0">On Instagram</p>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
     <!--test-->
     <h1 style="color: #026670" class="writting text-left">Offers</h1>
+
     <v-container>
       <v-layout row wrap class>
         <v-flex xs6 sm6 md4 lg3 v-for="(product,index) in mostbought2" :key="index">
@@ -86,7 +45,48 @@
       </v-layout>
     </v-container>
     <!--community-->
+    <section class="section-3 container-fluid p-0 text-center">
+      <div class="row">
+        <div class="col-md-12 col-sm-12">
+          <h1>About our Community</h1>
+          <p v-scroll-reveal.reset="{ delay: 250}">
+            At Bookoo,
+            we are a small community of engineering students striving to make a small change for the better. Students often struggle to get hold of text books, are tricked with high prices and in most cases are required to put in a lot of time and effort. Our mission at Bookoo is to make the purchase of textbooks a simple, convenient and student friendly process. We achieve this through the constant hardwork and perseverance of our team in working together to deliver only the best to you.
+            We look forward to working with our users and expanding our community
+            <br />-Team bookoo
+          </p>
+        </div>
+      </div>
+      <div class="platform row" v-scroll-reveal.reset="{ delay: 550 }">
+        <div class="col-md-6 col-sm-12 text-right">
+          <div class="desktop shadow-lg">
+            <div class="d-flex flex-row justify-content-center">
+              <i class="fab fa-whatsapp fa-3x py-2 pr-3"></i>
+              <div class="text text-left">
+                <a href="  https://chat.whatsapp.com/Ceb4NsIZbVe5tnBMjy1RAq">
+                  <h3 class="pt-1 m-0">Join Now</h3>
+                  <p class="p-0 m-0">On whatsapp</p>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-12 text-left">
+          <div class="desktop shadow-lg">
+            <div class="d-flex flex-row justify-content-center">
+              <i class="fab fa-instagram fa-3x py-2 pr-3"></i>
 
+              <div class="text text-left">
+                <a href="https://instagram.com/_.bookoo._?igshid=g7jwl267bmjh">
+                  <h3 class="pt-1 m-0">Join Now</h3>
+                  <p class="p-0 m-0">On Instagram</p>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
     <!-- swiper  
     <swiper :options="swiperOption" class="swipers">
       <swiper-slide>
@@ -201,9 +201,11 @@ export default {
 
 <style scoped >
 .writting {
-  padding-top: 5vmin;
+  padding-top: 6vmin;
+  padding-left: 2vmin;
   padding-bottom: 0.1em;
-  font-family: "lobster", cursive;
+  font-family: "Roboto", cursive;
+  display: block;
 }
 
 .author {
