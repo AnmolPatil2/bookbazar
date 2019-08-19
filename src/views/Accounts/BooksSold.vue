@@ -3,9 +3,9 @@
     <div class="intro h-100">
       <div class="row h-100 justify-content-center align-items-center">
         <div class="col-md-6">
-          <h3>Orders</h3>
+          <h3>Books Sold</h3>
 
-          <p>Your Joy of books are on the way</p>
+          <p>We will notify you when the book is sold.</p>
           <div class="alert alert-info">
             <a href="https://wa.me/918088363293" target="_blank">For cancellation Contact us.</a>
           </div>

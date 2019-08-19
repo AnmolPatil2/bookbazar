@@ -2,7 +2,7 @@
   <div>
     <!--test-->
     <h1 style="color: #026670" class="writting text-center">
-      <strong>Hot Offers</strong> - Buy it! else Regret it!
+      <strong>Hot Offers</strong> - Buy or Regret!
     </h1>
     <p
       class="somelines text-center"
@@ -49,9 +49,9 @@
       </v-layout>
     </v-container>
     <!--community-->
-    <section class="section-3 container-fluid p-0 text-center">
-      <div class="row">
-        <div class="col-md-12 col-sm-12">
+    <section class="section-3 p-0 text-center">
+      <div class>
+        <div class>
           <h1>About our Community</h1>
           <p v-scroll-reveal.reset="{ delay: 250}">
             At Bookoo,

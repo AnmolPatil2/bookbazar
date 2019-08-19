@@ -136,8 +136,8 @@ section {
   width: 100%;
   height: 55vmin;
   background: url("/images/numbers.jpeg");
-  background-position: -24rem -19rem;
-  background-size: 150%;
+  background-position: 0rem 0rem;
+  background-size: 116%;
   position: relative;
 }
 

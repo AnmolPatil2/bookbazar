@@ -12,7 +12,7 @@
         <div class="cardsoffer-column column-0">
           <div class="cardsoffer cardsoffer-color-0">
             <div class="border"></div>
-            <img src="/img/svg/books1.jpg" />
+            <img src="/img/svg/book2.jpg" />
             <h1 class="white--text">P-Cycle</h1>
             <div class="pricing text-center">
               <v-btn @click="ComboOrder(51)" color="black" class="px-2 py-2 mb-5 white--text">
@@ -34,7 +34,7 @@
         <div class="cardsoffer-column column-1">
           <div class="cardsoffer cardsoffer-color-1">
             <div class="border"></div>
-            <img src="/img/svg/books2.jpg" />
+            <img src="/img/svg/book1.jpg" />
             <h1 class="white--text">C-Cycle</h1>
             <div class="pricing text-center">
               <v-btn @click="ComboOrder(52)" color="black" class="px-2 py-2 mb-5 white--text">
@@ -402,10 +402,10 @@ p {
   width: 90%;
 }
 .cardsoffer > img {
-  max-height: 230px;
+  min-height: 200px;
   width: 90%;
   position: absolute;
-  top: -12%;
+  top: -6%;
   left: -6%;
 }
 .cardsoffer-color-0 {

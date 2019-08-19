@@ -50,6 +50,7 @@
               <strong>FREE</strong>
             </div>
           </div>
+
           <div class="order-col">
             <div>
               <strong>TOTAL</strong>
@@ -62,6 +63,18 @@
             </div>
           </div>
         </div>
+        <p class="blue--text">
+          Total savings compared to Avenue road prices is
+          
+          <div>
+              <strong class="order-total red--text" >
+                
+                  <i class="fa fa-inr" aria-hidden="true"></i>
+          {{saving((this.sum))}}
+              </strong>
+            </div>
+        
+        </p>
         <div class="payment-method">
           <div class="input-radio">
             <input type="radio" name="payment" id="payment-1" />
@@ -200,6 +213,9 @@ export default {
           }
         }
       }
+    },
+    saving(sum) {
+      return this.sum * 0.23;
     }
   },
   created() {

@@ -125,7 +125,7 @@ export default {
     results: function() {
       return this.searchresult.filter(product => {
         var name = product.name.toLowerCase();
-
+        this.searchString = this.searchString.toLowerCase();
         return name.match(this.searchString);
       });
     }

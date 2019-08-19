@@ -21,9 +21,6 @@
           <h4 class="text-light">Information</h4>
           <ul>
             <li>
-              <p class="text-muted">About Us</p>
-            </li>
-            <li>
               <router-link to="/tandc" target="_blank">
                 <p class="text-muted">Terms of use & policy</p>
               </router-link>
@@ -41,7 +38,7 @@
               </router-link>
             </li>
             <li>
-              <router-link to="/faqs" target="_blank">
+              <router-link to="/help" target="_blank">
                 <p class="text-muted">Frequently Asked Questions</p>
               </router-link>
             </li>

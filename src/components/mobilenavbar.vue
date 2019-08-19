@@ -99,7 +99,7 @@
                 </router-link>
               </li>
               <li class="mx-3">
-                <router-link to="/donate">
+                <router-link to="/help">
                   <i class="fas fa-question"></i>
                   <span>Help</span>
                 </router-link>
