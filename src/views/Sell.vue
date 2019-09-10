@@ -83,10 +83,14 @@
     <v-container class="twhole-cont" v-if="display=='displaybooks'">
       <v-layout>
         <v-flex>
-          <h2 class="Title-what-to-do">Books Available</h2>
+          <h1 class="Title-what-to-do">Books Available</h1>
         </v-flex>
       </v-layout>
       <v-layout row wrap>
+        <div v-if="displayl.length==0">
+          <h2 class="red--text center--text">The books are Currently Unavailable</h2>
+          <h3 class="red--text center--text">Please Contact Us For immediate orders</h3>
+        </div>
         <v-flex xs6 sm6 md4 lg3 v-for="(product,index) in displayl" :key="index">
           <v-card flat class="text-xs-center p-0 YD">
             <v-responsive class @click="product_select(product)">
@@ -245,7 +249,7 @@ export default {
 
   methods: {
     priceforsale(p) {
-      return p / 2;
+      return p / 4;
     },
     product_select(product) {
       this.$router.push({

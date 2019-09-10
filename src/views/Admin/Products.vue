@@ -140,6 +140,9 @@
                   />
                 </div>
                 <div class="form-group">
+                  <input type="text" placeholder="Hand" v-model="product.hand" class="form-control" />
+                </div>
+                <div class="form-group">
                   <input
                     type="text"
                     placeholder="publication"
@@ -257,6 +260,7 @@ export default {
         name: null,
         type: null,
         rating: 0,
+        hand: null,
         year: null,
         branch: null,
         edition: null,
@@ -341,6 +345,7 @@ export default {
         branch: null,
         edition: null,
         publication: null,
+        hand: null,
 
         fullprice: null,
         review: null,

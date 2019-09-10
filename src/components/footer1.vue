@@ -6,12 +6,12 @@
           <h4 class="text-light">About us</h4>
           <p
             class="text-muted"
-          >Facing problems in finding the right books at the right prices? Bookoo is here to help you get the books you like. Our team is working to bring all types of Enginnering books at the be best prices. We aim to bring all of us a lot closer as a community .</p>
+          >Facing problems in finding the right books at the right prices? BooKoo is here to help you get the books you like. Our team is working to bring all types of Engineering books at the be best prices. We aim to bring all of us a lot closer as a community .</p>
           <h4 class="text-light">Shop on app</h4>
 
           <p
             class="text-muted"
-          >Yes, We've got an App. Just Search on the play store/AppStore & install the bookoo app.</p>
+          >Yes, We've got an App. Just Search on the Play Store & install the BooKoo app.</p>
           <p class="pt-4 text-muted">
             <span>- Team BooKoo</span>
           </p>
@@ -25,13 +25,6 @@
                 <p class="text-muted">Terms of use & policy</p>
               </router-link>
             </li>
-
-            <li>
-              <p class="text-muted">
-                <a href="https://wa.me/918088363293" target="_blank">Contact Us</a>
-              </p>
-            </li>
-
             <li>
               <router-link to="/community" target="_blank">
                 <p class="text-muted">Communities</p>
@@ -41,6 +34,11 @@
               <router-link to="/help" target="_blank">
                 <p class="text-muted">Frequently Asked Questions</p>
               </router-link>
+            </li>
+            <li>
+              <p class="text-muted">
+                <a href="https://wa.me/918088363293" target="_blank">Contact Us</a>
+              </p>
             </li>
           </ul>
 

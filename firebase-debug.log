@@ -1,0 +1,106 @@
+[debug] [2019-09-10T10:09:52.185Z] ----------------------------------------------------------------------
+[debug] [2019-09-10T10:09:52.188Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2019-09-10T10:09:52.188Z] CLI Version:   7.2.2
+[debug] [2019-09-10T10:09:52.188Z] Platform:      darwin
+[debug] [2019-09-10T10:09:52.188Z] Node Version:  v10.15.3
+[debug] [2019-09-10T10:09:52.190Z] Time:          Tue Sep 10 2019 15:39:52 GMT+0530 (India Standard Time)
+[debug] [2019-09-10T10:09:52.190Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-09-10T10:09:52.208Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-09-10T10:09:52.209Z] > authorizing via signed-in user
+[debug] [2019-09-10T10:09:52.209Z] [iam] checking project bookooo for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasedatabase.instances.update","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]
+[debug] [2019-09-10T10:09:52.211Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-09-10T10:09:52.211Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-09-10T10:09:52.517Z] <<< HTTP RESPONSE 200
+[debug] [2019-09-10T10:09:52.529Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/bookooo:testIamPermissions  
+
+[debug] [2019-09-10T10:09:54.147Z] <<< HTTP RESPONSE 200
+[debug] [2019-09-10T10:09:54.149Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/bookooo  
+ 
+[debug] [2019-09-10T10:09:54.769Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'bookooo'...
+[info] 
+[info] i  deploying database, storage, firestore, functions, hosting
+[info] Running command: npm --prefix "$RESOURCE_DIR" run lint
+[info] ✔  functions: Finished running predeploy script.
+[info] i  database: checking rules syntax...
+[debug] [2019-09-10T10:09:58.915Z] >>> HTTP REQUEST PUT https://bookooo.firebaseio.com/.settings/rules.json?dryRun=true  
+ {
+  "rules": {
+    ".read": "auth != null",
+    ".write": "auth != null"
+  }
+}
+[debug] [2019-09-10T10:10:00.739Z] <<< HTTP RESPONSE 200
+[info] ✔  database: rules syntax for database bookooo is valid
+[debug] [2019-09-10T10:10:00.741Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/bookooo  
+ 
+[debug] [2019-09-10T10:10:02.658Z] <<< HTTP RESPONSE 200
+[info] i  storage: checking storage.rules for compilation errors...
+[debug] [2019-09-10T10:10:02.661Z] >>> HTTP REQUEST POST https://firebaserules.googleapis.com/v1/projects/bookooo:test  
+
+[debug] [2019-09-10T10:10:03.157Z] <<< HTTP RESPONSE 200
+[info] ✔  storage: rules file storage.rules compiled successfully
+[info] i  firestore: checking firestore.rules for compilation errors...
+[info] i  firestore: reading indexes from firestore.indexes.json...
+[debug] [2019-09-10T10:10:03.161Z] >>> HTTP REQUEST POST https://firebaserules.googleapis.com/v1/projects/bookooo:test  
+
+[debug] [2019-09-10T10:10:05.614Z] <<< HTTP RESPONSE 200
+[info] ✔  firestore: rules file firestore.rules compiled successfully
+[debug] [2019-09-10T10:10:05.616Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase serve --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "8"
+  },
+  "dependencies": {
+    "@sendgrid/mail": "^6.4.0",
+    "firebase-admin": "^8.0.0",
+    "firebase-functions": "^3.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.12.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "firebase-functions-test": "^0.1.6"
+  },
+  "private": true
+}
+[info] i  functions: ensuring necessary APIs are enabled...
+[debug] [2019-09-10T10:10:05.617Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/bookooo/services/cloudfunctions.googleapis.com  
+ 
+[debug] [2019-09-10T10:10:05.618Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/bookooo/services/runtimeconfig.googleapis.com  
+ 
+[debug] [2019-09-10T10:10:07.671Z] <<< HTTP RESPONSE 200
+[debug] [2019-09-10T10:10:07.704Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: all necessary APIs are enabled
+[debug] [2019-09-10T10:10:07.706Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/bookooo/adminSdkConfig  
+ 
+[debug] [2019-09-10T10:10:08.072Z] <<< HTTP RESPONSE 200
+[debug] [2019-09-10T10:10:08.074Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/bookooo/versions  
+
+[debug] [2019-09-10T10:10:10.571Z] <<< HTTP RESPONSE 200
+[info] i  storage: uploading rules storage.rules...
+[debug] [2019-09-10T10:10:10.573Z] >>> HTTP REQUEST POST https://firebaserules.googleapis.com/v1/projects/bookooo/rulesets  
+
+[debug] [2019-09-10T10:10:12.338Z] <<< HTTP RESPONSE 200
+[debug] [2019-09-10T10:10:12.339Z] [rules] created ruleset projects/bookooo/rulesets/0ca1b905-5480-4ef7-948d-305de088a2aa
+[info] i  firestore: uploading rules firestore.rules...
+[debug] [2019-09-10T10:10:12.341Z] >>> HTTP REQUEST POST https://firebaserules.googleapis.com/v1/projects/bookooo/rulesets  
+
+[debug] [2019-09-10T10:10:12.342Z] >>> HTTP REQUEST GET https://firestore.googleapis.com/v1beta2/projects/bookooo/databases/(default)/collectionGroups/-/indexes  
+ 
+[debug] [2019-09-10T10:10:13.708Z] <<< HTTP RESPONSE 200
+[debug] [2019-09-10T10:10:13.709Z] >>> HTTP REQUEST GET https://firestore.googleapis.com/v1beta2/projects/bookooo/databases/(default)/collectionGroups/-/fields?filter=indexConfig.usesAncestorConfig=false  
+ 
+[debug] [2019-09-10T10:10:13.805Z] <<< HTTP RESPONSE 200
+[debug] [2019-09-10T10:10:13.806Z] [rules] created ruleset projects/bookooo/rulesets/19410237-3453-46f7-9d19-77e8a36b82d6

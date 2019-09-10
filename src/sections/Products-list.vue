@@ -9,7 +9,7 @@
     <div v-if="loading==false">
       <cardsdisplay />
       <h1 style="color: #026670" class="writting text-center">Most Searched</h1>
-      <p class="somelines text-center">Inspired By Your Reading Trends</p>
+      <p style="color: #2e9cca" class="somelines text-center">Inspired By Your Reading Trends</p>
       <!-- swiper -->
       <swiper :options="swiperOption" class>
         <swiper-slide v-for="(product,index) in mostbought" :key="index" id="itemdisplay">
@@ -27,8 +27,8 @@
         <div class="swiper-button-prev" slot="button-prev"></div>
         <div class="swiper-button-next" slot="button-next"></div>
       </swiper>
-      <h1 style="color: #026670" class="writting text-center">Best Sellers</h1>
-
+      <h1 style="color: #026670" class="writting text-center">New Arrivals</h1>
+      <p style="color: #2e9cca" class="somelines text-center">Avalable on your request</p>
       <!-- swiper -->
       <swiper :options="swiperOption" class>
         <swiper-slide v-for="(product,index) in mostbought4" :key="index" id="itemdisplay">
@@ -203,7 +203,9 @@ export default {
     };
   },
   beforeUpdate() {
-    this.products.sale = parseInt(this.products.sale, 10);
+    this.mostbought.sale = parseInt(this.mostbought.sale, 10);
+    this.mostbought3.sale = parseInt(this.mostbought3.sale, 10);
+    this.mostbought4.sale = parseInt(this.mostbought4.sale, 10);
   },
   mounted() {
     db.collection("products")
@@ -283,14 +285,14 @@ export default {
       console.log("clicked slot=>", slot);
     }
   },
-  computed: {},
+  computed: {}
 
-  firestore() {
-    console.log("2");
-    return {
-      products: db.collection("products")
-    };
-  }
+  //firestore() {
+  // console.log("2");
+  // return {
+  // products: db.collection("products")
+  //  };
+  //}
 };
 </script>
 

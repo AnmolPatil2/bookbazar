@@ -56,8 +56,8 @@
             </ul>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn red" data-dismiss="modal">Continue Shopping</button>
-            <button type="button" class="btn btn-primary" @click="checkout">Checkout</button>
+            <button type="button" class="btn btn red" data-dismiss="modal">Back</button>
+            <button type="button" class="btn btn-primary" @click="checkout">Place Order</button>
           </div>
         </div>
       </div>

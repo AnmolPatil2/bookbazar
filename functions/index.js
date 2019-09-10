@@ -25,15 +25,14 @@ exports.firebaseEmail = functions.firestore.document('users/{userId}/followers/{
     //const db = admin.firestore();
     // return db.collection('users').doc(userId).get().then(doc => {
     //const user = doc.data();
-
+    
     const msg = {
-        to: 'anmol.patil004@gmail.com',
-        from: 'test@example.com',
-        subject: 'Sending with Twilio SendGrid is Fun',
-        text: 'and easy to do anywhere, even with Node.js',
-        html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+      to: 'test@example.com',
+      from: 'anmol.patil004@gmail.com',
+      subject: 'Sending with Twilio SendGrid is Fun',
+      text: 'and easy to do anywhere, even with Node.js',
+      html: '<strong>and easy to do anywhere, even with Node.js</strong>',
     };
-    console.log("sent")
     return sgMail.send(msg);
 
 

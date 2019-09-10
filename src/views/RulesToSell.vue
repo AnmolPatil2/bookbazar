@@ -12,7 +12,12 @@
             <div class="skw-page__content">
               <h3 class="skw-page__heading">Experince selling at its best with Bookoo</h3>
               <p class="skw-page__description">When knowledge gets old, its meant to be sold.</p>
-              <p class="skw-page__description red--text">Scroll Down</p>
+              <p class="skw-page__description red--text">Scroll Down to Know more about Sell</p>
+              <p
+                @click="changetosell()"
+                style="cursor: pointer"
+                class="skw-page__description red--text pt-2"
+              >Or Skip</p>
             </div>
           </div>
         </div>
@@ -77,8 +82,8 @@
             <div class="skw-page__content">
               <h2 class="skw-page__heading">Keep your old books safe so you can</h2>
               <p class="skw-page__description">
-                <v-btn flat @click="changetosell()" color="white">
-                  <h3 class="red--text">SELL THEM ON BOOKOO</h3>
+                <v-btn @click="changetosell()" color="white">
+                  <h3 class="red--text mt-2" color="white">SELL THEM ON BOOKOO</h3>
                 </v-btn>
               </p>
             </div>

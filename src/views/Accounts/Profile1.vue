@@ -103,6 +103,7 @@
                 </div>
                 <v-btn v-if="this.reroute!=1" @click="confirmmail()">Confirm mail</v-btn>
                 <div class="col-md-4">
+                  <p class="red--text">{{this.feedback}}</p>
                   <div v-if="!edit" class="form-group">
                     <input
                       type="submit"
@@ -198,6 +199,7 @@ export default {
   },
   data() {
     return {
+      feedback: null,
       reroute: null,
       edit: true,
       profile: {
@@ -219,12 +221,6 @@ export default {
   },
   beforeUpdate() {
     $("#login").modal("hide");
-    if (
-      this.profile.name == null ||
-      this.profile.email == null ||
-      this.profile.phone == null
-    ) {
-    }
   },
   created() {
     let ref = db.collection("profiles");
@@ -281,82 +277,91 @@ export default {
         });
     },
     updateProfile() {
-      if (this.reroute == 2) {
-        console.log(this.profile.name);
-        this.slug = slugify(this.profile.name, {
-          replacement: "-",
-          remove: /[!@#$%^&*()]/g,
-          lower: true
-        });
-        let ref = db.collection("profiles").doc(this.slug);
-        ref.get().then(doc => {
-          if (doc.exists) {
-            this.$router.go(-2);
-          } else {
-            var user = firebase1.auth().currentUser;
-            db.collection("profiles")
-              .doc(this.slug)
-              .set({
-                name: this.profile.name,
-                aui: user.uid,
-                email: this.profile.email,
-                photo: "/img/svg/man.svg",
-                phone: this.profile.phone
-              })
-
-              .then(() => {
-                var user = firebase1.auth().currentUser;
-
-                user
-                  .sendEmailVerification()
-                  .then(() => {
-                    Toast.fire({
-                      type: "success",
-                      title: "Email Confermation sent"
-                    });
-                  })
-
-                  .catch(error => {
-                    // An error happened.
-                    alert("Refresh and Try Again !");
-                  });
-
-                this.$router.push({ name: "home" });
-              })
-
-              .catch(error => {
-                // Handle Errors here.
-                // ...
-              });
-          }
-        });
+      if (
+        this.profile.name == null ||
+        this.profile.phone.length == 0 ||
+        this.profile.email == null ||
+        this.profile.phone == null
+      ) {
+        this.feedback = "Enter all fields";
       } else {
-        var user = firebase1.auth().currentUser;
-
-        db.collection("profiles")
-          .where("aui", "==", user.uid)
-          .get()
-          .then(snapshot => {
-            snapshot.forEach(doc => {
+        if (this.reroute == 2) {
+          console.log(this.profile.name);
+          this.slug = slugify(this.profile.name, {
+            replacement: "-",
+            remove: /[!@#$%^&*()]/g,
+            lower: true
+          });
+          let ref = db.collection("profiles").doc(this.slug);
+          ref.get().then(doc => {
+            if (doc.exists) {
+              this.$router.go(-2);
+            } else {
+              var user = firebase1.auth().currentUser;
               db.collection("profiles")
-                .doc(doc.id)
-                .update({
+                .doc(this.slug)
+                .set({
+                  name: this.profile.name,
+                  aui: user.uid,
+                  email: this.profile.email,
+                  photo: "/img/svg/man.svg",
                   phone: this.profile.phone
                 })
+
                 .then(() => {
-                  document.location.reload(true);
+                  var user = firebase1.auth().currentUser;
+
+                  user
+                    .sendEmailVerification()
+                    .then(() => {
+                      Toast.fire({
+                        type: "success",
+                        title: "Email Confermation sent"
+                      });
+                    })
+
+                    .catch(error => {
+                      // An error happened.
+                      alert("Refresh and Try Again !");
+                    });
+
+                  this.$router.push({ name: "home" });
+                })
+
+                .catch(error => {
+                  // Handle Errors here.
+                  // ...
                 });
-            });
-          })
-          .then(() => {
-            if (this.reroute == 1) {
-              this.$router.go(-1);
-            } else {
-              this.$router.go(-2);
             }
           });
+        } else {
+          var user = firebase1.auth().currentUser;
+
+          db.collection("profiles")
+            .where("aui", "==", user.uid)
+            .get()
+            .then(snapshot => {
+              snapshot.forEach(doc => {
+                db.collection("profiles")
+                  .doc(doc.id)
+                  .update({
+                    phone: this.profile.phone
+                  })
+                  .then(() => {
+                    document.location.reload(true);
+                  });
+              });
+            })
+            .then(() => {
+              if (this.reroute == 1) {
+                this.$router.go(-1);
+              } else {
+                this.$router.go(-2);
+              }
+            });
+        }
+        this.edit = false;
       }
-      this.edit = false;
     },
     uploadImage() {}
   }

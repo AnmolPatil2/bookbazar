@@ -12,7 +12,13 @@
             <div class="skw-page__content">
               <h3 class="skw-page__heading">Buying made easier</h3>
               <p class="skw-page__description">Where convenience meets Education</p>
-              <p class="skw-page__description red--text">Scroll Down</p>
+              <p class="skw-page__description red--text">Scroll Down to Know more about Buy</p>
+
+              <p
+                @click="changetosell()"
+                style="cursor: pointer"
+                class="skw-page__description red--text pt-2"
+              >Or Skip</p>
             </div>
           </div>
         </div>
@@ -78,7 +84,7 @@
               <h2 class="skw-page__heading">Community</h2>
               <p class="skw-page__description">
                 Join our Bookoo commmunity
-                <v-btn @click="changetosell()" color="white" class="red--text">BUY FROM BOOKOO</v-btn>
+                <v-btn @click="changetosell()" color="white" class="red--text mt-2">BUY FROM BOOKOO</v-btn>
               </p>
             </div>
           </div>

@@ -51,7 +51,12 @@
           </v-flex>
           <v-flex xs6 sm4 md2 lg2>
             <div class="caption grey--text">Price</div>
-            <div>{{ order.price }}</div>
+            <div>
+              <p class="red--text">
+                <i class="fa fa-inr" aria-hidden="true"></i>
+                {{ order.price }}
+              </p>
+            </div>
           </v-flex>
           <v-flex xs4 sm4 md2 lg2>
             <div class="right">
@@ -113,10 +118,10 @@ export default {
 .project.ongoing {
   border-left: 4px solid #ffaa2c;
 }
-.project.contacted {
+.project.Informed {
   border-left: 4px solid #f83e70;
 }
-.project.contacted {
+.project.completed {
   border-left: 4px solid red;
 }
 .v-chip.orderplaced {
@@ -125,10 +130,10 @@ export default {
 .v-chip.ongoing {
   background: #ffaa2c;
 }
-.v-chip.contacted {
+.v-chip.Informed {
   background: #f83e70;
 }
-.v-chip.contacted {
+.v-chip.completed {
   background: red;
 }
 </style>

@@ -114,7 +114,7 @@ export default {
     return {
       complete: false,
       feedback: null,
-      sum: 0,
+      sum: null,
       phone: null
     };
   },
@@ -145,7 +145,7 @@ export default {
           }
         });
       } else {
-        if (this.phone != null) {
+        if (this.phone == null) {
           Swal.fire({
             title: "Phone number not available",
             text: "Please add phone number to checkout",
@@ -190,7 +190,9 @@ export default {
                       buyer: user.uid,
                       date: Date.now(),
                       orderQuantity: order.productQuantity,
-                      orderImage: order.productImage
+                      orderImage: order.productImage,
+                      userphone:this.phone,
+                      username:this.username
                     });
                   });
 
@@ -215,19 +217,27 @@ export default {
       }
     },
     saving(sum) {
-      return this.sum * 0.23;
+      var saving =parseInt(this.sum * 0.23,10);
+      return saving
     }
   },
-  created() {
-    let ref = db.collection("profiles");
-    ref
-      .where("aui", "==", firebase1.auth().currentUser.uid)
+  mounted() {
+   
+
+    var user = firebase1.auth().currentUser;
+   
+    let ref = db.collection("profiles")
+   
+      .where("aui", "==", user.uid)
       .get()
       .then(snapshot => {
-        snapshot.forEach(user => {
-          this.phone = user.data().phone;
+       
+        snapshot.forEach(doc => {
+          
+          this.phone = doc.data().phone;
+          this.username=doc.id;
         });
-        console.log(this.phone);
+       
       });
     this.sum = 0;
     this.$store.state.cart.forEach(element => {

@@ -45,25 +45,12 @@
       </table>
     </div>
     <v-container class="my-5">
-      <v-layout row justify-start class="mb-3">
-        <v-tooltip top>
-          <v-btn small flat color="grey" @click="sortBy('time')" slot="activator">
-            <v-icon small left>folder</v-icon>
-            <span class="caption text-lowercase">By Date</span>
-          </v-btn>
-          <span>Sort by Date you Ordered</span>
-        </v-tooltip>
-        <v-tooltip top>
-          <v-btn small flat color="grey" @click="sortBy('bookName')" slot="activator">
-            <v-icon small left>person</v-icon>
-            <span class="caption text-lowercase">By Title</span>
-          </v-btn>
-          <span>Sort by author</span>
-        </v-tooltip>
-      </v-layout>
-
       <v-card flat v-for="(order,index) in orders" :key="order.id">
         <v-layout row wrap :class="`pa-3 project ${order.status}`">
+          <v-flex xs6 sm3 md2>
+            <div class="caption grey--text">Name</div>
+            <div>{{ order.buyername }}</div>
+          </v-flex>
           <v-flex xs6 sm3 md2>
             <div class="caption grey--text">Book Title</div>
             <div>{{ order.bookName }}</div>
@@ -73,15 +60,34 @@
             <div>{{ order.date }}</div>
           </v-flex>
           <v-flex xs6 sm4 md2>
-            <div class="caption grey--text">contact</div>
-            <v-btn @click="readData(order)">Get contact</v-btn>
-            <v-btn @click="completed(order)">Completed</v-btn>
-          </v-flex>
-          <v-flex xs6 sm4 md2>
             <div class="caption grey--text">Price</div>
             <div>{{order.price }}</div>
           </v-flex>
-          <v-flex xs4 sm4 md2>
+          <v-layout row wrap :class="`pa-3 project ${order.status}`">
+            <v-flex xs6 sm4 md4>
+              <div class="caption grey--text">contact</div>
+              <v-btn @click="readData(order)">Get contact</v-btn>
+              <v-btn @click="completed(order)">Completed</v-btn>
+            </v-flex>
+
+            <v-flex xs6 sm4 md4>
+              <div class="caption grey--text">delete</div>
+              <div>
+                <v-btn @click="deleteorder(order)">deleteorder</v-btn>
+              </div>
+            </v-flex>
+
+            <v-flex xs6 sm4 md4>
+              <div class="caption grey--text" @click="cancelorder(order)">
+                cancel
+                <div>
+                  <v-btn>cancel order</v-btn>
+                </div>
+              </div>
+            </v-flex>
+          </v-layout>
+
+          <v-flex xs4 sm4 md4>
             <div class="right">
               <v-chip small :class="`${order.status} white--text  caption`">{{ order.status }}</v-chip>
             </div>
@@ -92,10 +98,16 @@
     </v-container>
     <v-btn @click="getlist()">Get list</v-btn>
     <div v-for="(name,index) in namelist" :key="index">
-      <p>{{index}} {{name}}</p>
+      <p> <p v-if="index%2==0">{{index-index/2 +1}} </p>{{name}}</p>
+      <div class="bod"></div>
     </div>
-    <h1>total price for this batch is {{sum}}</h1>
+     <h1>total price for this batch is {{sum}}</h1>
     <h1>Number of books for this batch is {{count}}</h1>
+     <v-btn @click="forus()">For us</v-btn>
+    <div v-for="(name,index) in namelist1" :key="index">
+      <p > <p v-if="index%3==0" class="bod"> </p >{{name}}</p>
+    </div>
+   
     <v-btn v-if="namelist!=null" @click="orderlistsent()">Order sent</v-btn>
   </div>
 </template>
@@ -120,6 +132,7 @@ export default {
       idddisplay: null,
       email: null,
       namelist: [],
+       namelist1: [],
       sum: null,
       count: null
     };
@@ -164,14 +177,53 @@ export default {
       }).then(result => {
         if (result.value) {
           this.orders.forEach(order => {
-            if (order.status == "Informed") {
+            if (order.status == "ongoing" || order.status == "Informed") {
               db.collection("sellorders")
                 .doc(order.id)
                 .update({
+                
                   status: "orderplaced"
-                });
+                }).then(() =>{
+console.log(order.id)
+                })
             }
           });
+        }
+      });
+    },
+    cancelorder(order) {
+     
+      Swal.fire({
+        title: "Are you sure",
+        text:
+          "make sure you will that guys has the list then only click confirm and it cant be undone",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Confirm"
+      }).then(result => {
+        if (result.value) {
+          db.collection("sellorders")
+            .doc(order.id)
+            .update({
+              status: "cancelled"
+            });
+        }
+      });
+    },
+    forus() {
+      this.namelist1 = [];
+      this.sum = 0;
+      this.count = 0;
+      this.orders.forEach(order => {
+        if (order.status == "ongoing" || order.status == "Informed") {
+         
+            this.namelist1.push(order.buyername);
+              this.namelist1.push(order.bookName);
+               this.namelist1.push(order.price);
+          this.count += 1;
+          this.sum = order.price + this.sum;
         }
       });
     },
@@ -180,10 +232,41 @@ export default {
       this.sum = 0;
       this.count = 0;
       this.orders.forEach(order => {
-        if (order.status == "ongoing") {
+        if (order.status == "ongoing" || order.status == "Informed") {
+          db.collection("products")
+            .doc(order.bookid)
+            .get()
+            .then(snapshot => {
+              this.namelist.push(snapshot.data().name);
+              this.namelist.push(snapshot.data().author);
+              console.log(snapshot.data());
+            });
           this.count += 1;
           this.sum = order.price + this.sum;
-          this.namelist.push(order.bookName);
+        }
+      });
+    },
+    deleteorder(order) {
+     
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then(result => {
+        if (result.value) {
+          db.collection("sellorders")
+            .doc(order.id)
+            .delete()
+            .then(function() {
+              console.log("Document successfully deleted!");
+            })
+            .catch(function(error) {
+              console.error("Error removing document: ", error);
+            });
         }
       });
     },
@@ -209,7 +292,7 @@ export default {
             confirmButtonText: "Yes, Confirm"
           }).then(result => {
             if (result.value) {
-              if (order.status == "orderplaced") {
+              {
                 db.collection("sellorders")
                   .doc(order.id)
                   .update({
@@ -249,9 +332,10 @@ export default {
   //    });
   //  }
   // },
+  mounted() {},
   created() {
     db.collection("sellorders")
-      .orderBy("date")
+      .orderBy("username")
       .onSnapshot(snapshot => {
         snapshot.docChanges().forEach(change => {
           if (change.type == "added") {
@@ -264,7 +348,9 @@ export default {
               buyer: doc.data().buyer,
               status: doc.data().status,
               quantity: doc.data().orderQuantity,
-              price: doc.data().price
+              price: doc.data().price,
+              buyername: doc.data().username,
+              constact: doc.data().userphone
             });
           }
         });
@@ -292,10 +378,10 @@ export default {
 .project.ongoing {
   border-left: 4px solid #ffaa2c;
 }
-.project.contacted {
+.project.Informed {
   border-left: 4px solid #f83e70;
 }
-.project.contacted {
+.project.completed {
   border-left: 4px solid red;
 }
 .v-chip.orderplaced {
@@ -304,10 +390,14 @@ export default {
 .v-chip.ongoing {
   background: #ffaa2c;
 }
-.v-chip.contacted {
+.v-chip.Informed {
   background: #f83e70;
 }
-.v-chip.contacted {
+.v-chip.completed {
   background: red;
+}
+.bod{
+  border: 1px solid #ffaa2c;
+  
 }
 </style>

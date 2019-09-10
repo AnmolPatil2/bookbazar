@@ -93,7 +93,8 @@
             </div>
 
             <div class="m-4" v-if="isphone">
-              <input type="number" placeholder="Enter Otp Here" />
+              <input type="number" placeholder="Enter Otp Here" v-model="otp" />
+              <button @click="verifyOtp()" class="btn btn-primary btn-embossed">Verify</button>
             </div>
           </div>
           <div>
@@ -179,13 +180,15 @@ export default {
 
     //
     verifyOtp() {
-      this.otp =
-        this.number1 +
-        this.number2 +
-        this.number3 +
-        this.number4 +
-        this.number5 +
-        this.number6;
+      if (!this.isphone) {
+        this.otp =
+          this.number1 +
+          this.number2 +
+          this.number3 +
+          this.number4 +
+          this.number5 +
+          this.number6;
+      }
 
       if (this.phNo.length != 10 || this.otp.length != 6) {
         alert("Invalid Phone Number/OTP Format !");

@@ -256,7 +256,7 @@
                                 </div>
                               </div>
                               <div class="review-body">
-                                <p></p>
+                                <p>These books are the most recommended books, each one individually verified by us along with the respective teachers. We provide these books at the best prices across Bangalore. Each book is individually verified to ensure top quality books delivered to you.</p>
                               </div>
                             </li>
                           </ul>
@@ -286,7 +286,7 @@
                                 <label for="star1"></label>
                               </div>
                             </div>
-                            <button class="primary-btn">Submit</button>
+                            <button @click.prevent="review()" class="primary-btn">Submit</button>
                           </form>
                         </div>
                       </div>
@@ -327,7 +327,7 @@
                     <div class="product-img" v-for="(img,index) in book.images " :key="index">
                       <img :src="img" alt />
                       <div class="product-label">
-                        <span class="sale">-30%</span>
+                        <span class="sale">{{Discount(book.fullprice,book.sale)}}% OFF</span>
                       </div>
                     </div>
                     <div class="product-body">
@@ -432,6 +432,26 @@ export default {
       });
   },
   methods: {
+    review() {
+      Swal.fire({
+        title: "Done with the review?",
+        text:
+          "We'll post your review as soon as we check for inappropriate content.",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Confirm"
+      }).then(result => {
+        Toast.fire({
+          type: "",
+          title: ""
+        });
+      });
+    },
+    Discount(price, sale_price) {
+      return parseInt(((price - sale_price) * 100) / price);
+    },
     product_select(product) {
       this.$router.replace({
         name: "productCompholder",
@@ -494,6 +514,9 @@ export default {
   .product {
   }
 }
+.product {
+  margin-top: 20px;
+}
 .rating_stars {
   display: inline;
 }
@@ -523,7 +546,7 @@ export default {
 }
 @media screen and (min-width: 600px) {
   .product {
-    margin: 10px 20px;
+    margin: 30px 20px;
   }
 }
 </style>

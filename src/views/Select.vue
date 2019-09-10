@@ -99,10 +99,10 @@
             </v-card-text>
             <v-card-actions>
               <div class="pricing">
-                <v-btn @click="product_select(product)" color="black" class="px-1 white--text">
+                <v-btn @click="product_select(product)" color="black" class="px-1 my-1 white--text">
                   <i class="fa fa-eye px-1" aria-hidden="true"></i>View
                 </v-btn>
-                <v-btn @click="addtocart(product)" color="black" class="px-1 white--text">
+                <v-btn @click="addtocart(product)" color="black" class="px-1 my-1 white--text">
                   <i class="fa fa-shopping-bag px-1" aria-hidden="true"></i>Cart
                 </v-btn>
               </div>
@@ -110,6 +110,14 @@
           </v-card>
         </v-flex>
       </v-layout>
+      <div class="unabletofind Title-what-to-do teal mt-4">
+        <h2 class="center--text red--text">Unable to find the book you want?</h2>
+        <a href="  https://chat.whatsapp.com/Ceb4NsIZbVe5tnBMjy1RAq" target="_blank">
+          <h4 class="center--text">
+            <i class="fab fa-whatsapp"></i>Just tell us the name of the Book you want and we will get it.
+          </h4>
+        </a>
+      </div>
     </v-container>
     <mini-cart />
     <login />

@@ -1,6 +1,61 @@
 <template>
   <div>
     <!--test-->
+    <!--scanners-->
+    <h1 style="color: #026670" class="writting text-center">
+      <strong>Scanners</strong> - A Book You must have.
+    </h1>
+    <p
+      class="somelines text-center"
+      @click="changeurl()"
+      style="cursor: pointer"
+    >Unable to Find your Scanner ?</p>
+    <v-container>
+      <v-layout row wrap class>
+        <v-flex xs6 sm6 md4 lg3 v-for="(product,index) in scanners" :key="index">
+          <v-card v-scroll-reveal.reset="{ delay: 150+ (index*100)}" class="cardh">
+            <div class="imageh">
+              <img :src="product.images" class="card-img-top imagesD" alt="...." />
+            </div>
+            <div class="product-label">
+              <span class="sale">New</span>
+            </div>
+            <div class="detailsh">
+              <div class="centerh">
+                <h5 class="bookname">Now at:</h5>
+                <h5 class="bookname red--text">
+                  <i class="fa fa-inr" aria-hidden="true"></i>
+                  {{product.sale}}
+                </h5>
+                <div class="author">
+                  <table class="table">
+                    <td class="authorname">
+                      <v-chip class="ma-2" color="green" text-color="white">
+                        <v-avatar left class="green darken-4">{{product.year}}</v-avatar>Year
+                      </v-chip>
+                      <v-chip class="ma-2" color="pink" label text-color="white">
+                        <v-icon left>label</v-icon>
+                        {{product.branch}}
+                      </v-chip>
+                    </td>
+                  </table>
+                </div>
+                <div class="flipbut pt-3">
+                  <button class="quick-view left px-2">
+                    <i @click=" product_select(product)" class="fa fa-eye"></i>
+                    <span class="tooltipp"></span>
+                  </button>
+                  <button class="add-to-cart-btn right px-2 cartb">
+                    <i @click="addcart(product)" class="fa fa-shopping-cart"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </v-card>
+        </v-flex>
+      </v-layout>
+    </v-container>
+    <!--discout-->
     <h1 style="color: #026670" class="writting text-center">
       <strong>Hot Offers</strong> - Buy or Regret!
     </h1>
@@ -28,7 +83,7 @@
                           <i class="fa fa-user" aria-hidden="true"></i>
                         </td>
 
-                        <td class="authorname">{{product.author}}</td>
+                        <td class="authorname">{{product.sale}}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -49,15 +104,15 @@
       </v-layout>
     </v-container>
     <!--community-->
-    <section class="section-3 p-0 text-center">
-      <div class>
-        <div class>
+    <section class="section-3 container-fluid p-0 text-center">
+      <div class="row">
+        <div class="col-md-12 col-sm-12">
           <h1>About our Community</h1>
           <p v-scroll-reveal.reset="{ delay: 250}">
-            At Bookoo,
-            we are a small community of engineering students striving to make a small change for the better. Students often struggle to get hold of text books, are tricked with high prices and in most cases are required to put in a lot of time and effort. Our mission at Bookoo is to make the purchase of textbooks a simple, convenient and student friendly process. We achieve this through the constant hardwork and perseverance of our team in working together to deliver only the best to you.
+            At BooKoo,
+            we are a small community of engineering students striving to make a small change for the better. Students often struggle to get hold of text books, are tricked with high prices and in most cases are required to put in a lot of time and effort. Our mission at BooKoo is to make the purchase of textbooks a simple, convenient and student friendly process. We achieve this through the constant hardwork and perseverance of our team in working together to deliver only the best to you.
             We look forward to working with our users and expanding our community
-            <br />-Team bookoo
+            <br />-Team BooKoo
           </p>
         </div>
       </div>
@@ -69,7 +124,7 @@
               <div class="text text-left">
                 <a href="  https://chat.whatsapp.com/Ceb4NsIZbVe5tnBMjy1RAq" target="_blank">
                   <h3 class="pt-1 m-0">Join Now</h3>
-                  <p class="p-0 m-0">On whatsapp</p>
+                  <p class="p-0 m-0">On WhatsApp</p>
                 </a>
               </div>
             </div>
@@ -149,6 +204,7 @@ export default {
     return {
       products: [],
       mostbought2: [],
+      scanners: [],
       swiperOption: {
         slidesPerView: 5,
         centeredSlides: false,
@@ -185,13 +241,14 @@ export default {
     },
     Discount(price, sale_price) {
       return parseInt(((price - sale_price) * 100) / price);
+    },
+    changeurl() {
+      this.$router.push({
+        name: "select"
+      });
     }
   },
-  firestore() {
-    return {
-      products: db.collection("products")
-    };
-  },
+  //firestore() {},
   mounted() {
     db.collection("products")
       .where("importance", "==", "2")
@@ -199,6 +256,15 @@ export default {
       .then(snapshot => {
         snapshot.forEach(doc => {
           this.mostbought2.push(doc.data());
+        });
+      })
+      .then(() => {});
+    db.collection("products")
+      .where("importance", "==", "10")
+      .get()
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          this.scanners.push(doc.data());
         });
       })
       .then(() => {});

@@ -8,10 +8,12 @@
           <p v-if="pointdisplay==i" class="p-4 ans">{{item.text}}</p>
         </li>
       </ul>
-      <h2 class="p-2 white--text">Still not Able to sovle your problem</h2>
+      <h2 class="p-2 white--text">Still not Able to solve your problem</h2>
       <p class="text-muted p-4">
         >
-        <a href="https://wa.me/918088363293">Contact us On whats app</a>
+        <a href="https://wa.me/918088363293">
+          <i class="fab fa-whatsapp"></i> Contact us On WhatsApp
+        </a>
       </p>
       <v-btn flat @click="goback()" class="back white--text">Back</v-btn>
     </div>

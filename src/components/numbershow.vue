@@ -10,17 +10,17 @@
     <div class="container-fluid text-center">
       <div class="numbers d-flex flex-md-row flex-wrap justify-content-center">
         <div class="rect">
-          <h1>130</h1>
+          <h1>230</h1>
 
           <p>Books left in stock</p>
         </div>
         <div class="rect">
-          <h1>20</h1>
+          <h1>73</h1>
           <p>Books sold</p>
         </div>
         <div class="rect">
-          <h1>10</h1>
-          <p>Satisfied customers</p>
+          <h1>38</h1>
+          <p>Customers</p>
         </div>
         <div class="rect">
           <h1>4</h1>

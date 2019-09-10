@@ -16,10 +16,10 @@
             <h1 class="white--text">P-Cycle</h1>
             <div class="pricing text-center">
               <v-btn @click="ComboOrder(51)" color="black" class="px-2 py-2 mb-5 white--text">
-                <i class="fa fa-shopping-bag px-1" aria-hidden="true"></i>Order
+                <i class="fa fa-shopping-bag px-1" aria-hidden="true"></i>List
               </v-btn>
               <v-btn color="black" class="px-2 py-2 mb-5 white--text">
-                <i class="fas fa-eye px-1"></i>View
+                <i class="fas fa-eye px-1"></i>Details
               </v-btn>
             </div>
           </div>
@@ -38,11 +38,11 @@
             <h1 class="white--text">C-Cycle</h1>
             <div class="pricing text-center">
               <v-btn @click="ComboOrder(52)" color="black" class="px-2 py-2 mb-5 white--text">
-                <i class="fa fa-shopping-bag px-1" aria-hidden="true"></i>Order
+                <i class="fa fa-shopping-bag px-1" aria-hidden="true"></i>List
               </v-btn>
 
               <v-btn color="black" class="px-2 py-2 mb-5 white--text">
-                <i class="fas fa-eye px-1"></i>View
+                <i class="fas fa-eye px-1"></i>Details
               </v-btn>
             </div>
           </div>
@@ -113,8 +113,7 @@ export default {
                 productId: book1.id,
                 productQuantity: 1
               };
-              console.log(book1.id);
-              console.log(book1.idd);
+
               $("#miniCart").modal("show");
               this.$store.commit("addToCart", item);
             }
@@ -328,7 +327,7 @@ export default {
       windowHeight = window.innerHeight;
     }
     var paragraphText =
-      "<ul><li>Get ready for the year  with our Physics/Chemistry-Cycle collection</li><li>Each book in this collection is the most preferred book for your syllabus</li><li> We've handpicked each book after consulting with our teachers and hence ensuring you're getting the best.</li><li> We also provide customization. You can swap out any book in this collection as per your need.</li><li> As an additional benefit, we've added question papers for every subject!</li><li>The Collection is available at the best discount in the market. All your books at one place at the best price. Get the Collection by Ordering now!</li></ul>";
+      "<ul><li>Start off with your Physics/Chemistry cycle with bookoo’s textbook collection, which is hand-picked by consulting our lectures and as per the VTU syllabus.</li><li>Don’t like a book in the collection?</li><li> Don’t worry, bookoo offers special customization. Swap out any book of your choice with the one you prefer. As an added bonus the bookoo team offers VTU question papers with every subject book at no additional cost.</li><li>The collection is available at the lowest price in the market. Get all your books at one place by ordering now! </li></ul>";
   }
 };
 </script>

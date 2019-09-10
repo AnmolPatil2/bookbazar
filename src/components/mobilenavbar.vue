@@ -36,7 +36,7 @@
             </div>
           </div>
 
-          <div v-if="user" class="sidebar-item sidebar-header">
+          <div v-if="user" @click="changetoprofile()" class="sidebar-item sidebar-header">
             <div class="user-pic">
               <img class="img-responsive img-rounded" :src="user.photo" alt="User picture" />
             </div>
@@ -195,6 +195,11 @@ export default {
     }
   },
   methods: {
+    changetoprofile() {
+      this.$router.push({
+        name: "profile1"
+      });
+    },
     closeMenu() {
       //$(".page-wrapper").toggleClass("toggled");
     },
