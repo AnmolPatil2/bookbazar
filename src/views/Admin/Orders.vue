@@ -13,37 +13,7 @@
       </div>
     </div>
     <h1 class="subheading grey--text">Your Orders</h1>
-    <div class="table-responsive">
-      <table class="table">
-        <tbody>
-          <tr>
-            <td @click="changeidd(52)">c-cycle</td>
-            <td @click="changeidd(51)">p-cycle</td>
-          </tr>
-          <tr>
-            <td @click="changeidd(20)">cs 5th sem</td>
-            <td @click="changeidd(21)">ec 5th sem</td>
-            <td @click="changeidd(22)">mec 5th sem</td>
-          </tr>
-          <tr>
-            <td @click="changeidd(23)">civil 5th sem</td>
-            <td @click="changeidd(24)">eee 5th sem</td>
 
-            <td @click="changeidd(25)">tc 5th sem</td>
-          </tr>
-          <tr>
-            <td @click="changeidd(10)">cs 3th sem</td>
-            <td @click="changeidd(11)">ec 3th sem</td>
-            <td @click="changeidd(12)">mech 3th sem</td>
-          </tr>
-          <tr>
-            <td @click="changeidd(13)">civil 3th sem</td>
-            <td @click="changeidd(14)">eee 3th sem</td>
-            <td @click="changeidd(15)">tc 3th sem</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
     <v-container class="my-5">
       <v-card flat v-for="(order,index) in orders" :key="order.id">
         <v-layout row wrap :class="`pa-3 project ${order.status}`">
@@ -63,7 +33,7 @@
             <div class="caption grey--text">Price</div>
             <div>{{order.price }}</div>
           </v-flex>
-          <v-layout row wrap :class="`pa-3 project ${order.status}`">
+          <v-layout row wrap>
             <v-flex xs6 sm4 md4>
               <div class="caption grey--text">contact</div>
               <v-btn @click="readData(order)">Get contact</v-btn>
@@ -98,16 +68,18 @@
     </v-container>
     <v-btn @click="getlist()">Get list</v-btn>
     <div v-for="(name,index) in namelist" :key="index">
-      <p> <p v-if="index%2==0">{{index-index/2 +1}} </p>{{name}}</p>
+      <h2 v-if="index%2==0">{{index-index/2 +1}}</h2>
+      <p>{{name}}</p>
       <div class="bod"></div>
     </div>
-     <h1>total price for this batch is {{sum}}</h1>
+    <h1>total price for this batch is {{sum}}</h1>
     <h1>Number of books for this batch is {{count}}</h1>
-     <v-btn @click="forus()">For us</v-btn>
+    <v-btn @click="forus()">For us</v-btn>
     <div v-for="(name,index) in namelist1" :key="index">
-      <p > <p v-if="index%3==0" class="bod"> </p >{{name}}</p>
+      <p v-if="index%3==0" class="bod"></p>
+      <p>{{name}}</p>
     </div>
-   
+
     <v-btn v-if="namelist!=null" @click="orderlistsent()">Order sent</v-btn>
   </div>
 </template>
@@ -132,7 +104,7 @@ export default {
       idddisplay: null,
       email: null,
       namelist: [],
-       namelist1: [],
+      namelist1: [],
       sum: null,
       count: null
     };
@@ -181,18 +153,17 @@ export default {
               db.collection("sellorders")
                 .doc(order.id)
                 .update({
-                
                   status: "orderplaced"
-                }).then(() =>{
-console.log(order.id)
                 })
+                .then(() => {
+                  console.log(order.id);
+                });
             }
           });
         }
       });
     },
     cancelorder(order) {
-     
       Swal.fire({
         title: "Are you sure",
         text:
@@ -218,10 +189,9 @@ console.log(order.id)
       this.count = 0;
       this.orders.forEach(order => {
         if (order.status == "ongoing" || order.status == "Informed") {
-         
-            this.namelist1.push(order.buyername);
-              this.namelist1.push(order.bookName);
-               this.namelist1.push(order.price);
+          this.namelist1.push(order.buyername);
+          this.namelist1.push(order.bookName);
+          this.namelist1.push(order.price);
           this.count += 1;
           this.sum = order.price + this.sum;
         }
@@ -247,7 +217,6 @@ console.log(order.id)
       });
     },
     deleteorder(order) {
-     
       Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",
@@ -340,18 +309,23 @@ console.log(order.id)
         snapshot.docChanges().forEach(change => {
           if (change.type == "added") {
             let doc = change.doc;
-            this.orders.push({
-              bookid: doc.data().bookid,
-              id: doc.id,
-              bookName: doc.data().bookName,
-              date: moment(doc.data().date).format("llll"),
-              buyer: doc.data().buyer,
-              status: doc.data().status,
-              quantity: doc.data().orderQuantity,
-              price: doc.data().price,
-              buyername: doc.data().username,
-              constact: doc.data().userphone
-            });
+            if (
+              doc.data().status != "completed" &&
+              doc.data().status != "cancelled"
+            ) {
+              this.orders.push({
+                bookid: doc.data().bookid,
+                id: doc.id,
+                bookName: doc.data().bookName,
+                date: moment(doc.data().date).format("llll"),
+                buyer: doc.data().buyer,
+                status: doc.data().status,
+                quantity: doc.data().orderQuantity,
+                price: doc.data().price,
+                buyername: doc.data().username,
+                constact: doc.data().userphone
+              });
+            }
           }
         });
       });
@@ -396,8 +370,7 @@ console.log(order.id)
 .v-chip.completed {
   background: red;
 }
-.bod{
+.bod {
   border: 1px solid #ffaa2c;
-  
 }
 </style>

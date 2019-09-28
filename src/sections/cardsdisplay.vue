@@ -9,7 +9,7 @@
       class="somelines text-center"
       @click="changeurl()"
       style="cursor: pointer"
-    >Unable to Find your Scanner ?</p>
+    >Unable to find your book? Click here</p>
     <v-container>
       <v-layout row wrap class>
         <v-flex xs6 sm6 md4 lg3 v-for="(product,index) in scanners" :key="index">
@@ -30,10 +30,10 @@
                 <div class="author">
                   <table class="table">
                     <td class="authorname">
-                      <v-chip class="ma-2" color="green" text-color="white">
+                      <v-chip class color="green" text-color="white">
                         <v-avatar left class="green darken-4">{{product.year}}</v-avatar>Year
                       </v-chip>
-                      <v-chip class="ma-2" color="pink" label text-color="white">
+                      <v-chip class color="pink" label text-color="white">
                         <v-icon left>label</v-icon>
                         {{product.branch}}
                       </v-chip>
@@ -74,19 +74,13 @@
             </div>
             <div class="detailsh">
               <div class="centerh">
-                <h5 class="bookname red--text">{{product.name}}</h5>
+                <h5 class="bookname">{{product.name}}</h5>
                 <div class="author">
-                  <table class="table">
-                    <tbody>
-                      <tr>
-                        <td class="authoricon">
-                          <i class="fa fa-user" aria-hidden="true"></i>
-                        </td>
-
-                        <td class="authorname">{{product.sale}}</td>
-                      </tr>
-                    </tbody>
-                  </table>
+                  <p class="bookname">Now at:</p>
+                  <h5 class="bookname red--text">
+                    <i class="fa fa-inr" aria-hidden="true"></i>
+                    {{product.sale}}
+                  </h5>
                 </div>
                 <div class="flipbut pt-3">
                   <button class="quick-view left px-2">
