@@ -31,7 +31,7 @@ import tp from "./views/testingproduct.vue";
 import Sell from "./views/Sell.vue";
 import help from "./views/help.vue";
 import community from "./views/community.vue";
-import donate from "./views/donate.vue";
+import donate from "./views/donate/donate.vue";
 Vue.use(Router);
 
 const router = new Router({
