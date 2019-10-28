@@ -118,7 +118,6 @@ export default {
       this.$router.replace("signup");
     },
     login() {
-      console.log(1);
       if (this.email != null) {
         fb.auth()
           .signInWithEmailAndPassword(this.email, this.password)
