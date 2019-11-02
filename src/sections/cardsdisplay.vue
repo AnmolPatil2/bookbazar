@@ -9,11 +9,11 @@
       class="somelines text-center"
       @click="changeurl()"
       style="cursor: pointer"
-    >Unable to find your book? Click here</p>
+    >A Book with all the Previous year papers</p>
     <v-container>
       <v-layout row wrap class>
         <v-flex xs6 sm6 md4 lg3 v-for="(product,index) in scanners" :key="index">
-          <v-card v-scroll-reveal.reset="{ delay: 150+ (index*100)}" class="cardh">
+          <v-card class="cardh">
             <div class="imageh">
               <img :src="product.images" class="card-img-top imagesD" alt="...." />
             </div>
@@ -54,6 +54,11 @@
           </v-card>
         </v-flex>
       </v-layout>
+      <p
+        class="somelines text-center"
+        @click="showmore()"
+        style="cursor: pointer"
+      >Unable to find your scanner? Click here</p>
     </v-container>
     <!--discout-->
     <h1 style="color: #026670" class="writting text-center">
@@ -199,6 +204,8 @@ export default {
       products: [],
       mostbought2: [],
       scanners: [],
+      showmore: 1,
+
       swiperOption: {
         slidesPerView: 5,
         centeredSlides: false,
@@ -236,10 +243,32 @@ export default {
     Discount(price, sale_price) {
       return parseInt(((price - sale_price) * 100) / price);
     },
-    changeurl() {
-      this.$router.push({
-        name: "select"
-      });
+    showmore() {
+      if (this.showmore == 1) {
+        db.collection("products")
+          .where("importance", "==", "scanner_a")
+          .get()
+          .then(snapshot => {
+            snapshot.forEach(doc => {
+              this.scanners.push(doc.data());
+            });
+          })
+          .then(() => {
+            this.showmore = 0;
+          });
+      } else {
+        this.scanners = [];
+        this.showmore = 1;
+        db.collection("products")
+          .where("importance", "==", "scanner_i")
+          .get()
+          .then(snapshot => {
+            snapshot.forEach(doc => {
+              this.scanners.push(doc.data());
+            });
+          })
+          .then(() => {});
+      }
     }
   },
   //firestore() {},
@@ -254,7 +283,7 @@ export default {
       })
       .then(() => {});
     db.collection("products")
-      .where("importance", "==", "10")
+      .where("importance", "==", "scanner_i")
       .get()
       .then(snapshot => {
         snapshot.forEach(doc => {

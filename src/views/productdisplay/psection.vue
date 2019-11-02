@@ -382,7 +382,7 @@
 </template>
 <script>
 import { fb, db } from "../../firebase";
-import { Carousel, Slide } from "vue-carousel";
+
 import { BreedingRhombusSpinner } from "epic-spinners";
 import { AtomSpinner } from "epic-spinners";
 import MiniCart from "@/components/MiniCart.vue";

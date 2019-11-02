@@ -39,10 +39,10 @@ Vue.component('add-to-cart', require('./components/AddToCart.vue').default);
 Vue.component('mini-cart', require('./components/MiniCart.vue').default);
 Vue.component('login', require('./components/Login.vue').default);
 
-import VueCarousel from 'vue-carousel';
+
 import VueAwesomeSwiper from 'vue-awesome-swiper';
-import VueMaterial from 'vue-material';
-import 'vue-material/dist/vue-material.min.css'
+
+
 
 
 //import Buefy from 'buefy'
@@ -50,8 +50,7 @@ import 'vue-material/dist/vue-material.min.css'
 //for search bar
 //Vue.use(Buefy)
 Vue.use(VueAwesomeSwiper);
-Vue.use(VueCarousel);
-Vue.use(VueMaterial);
+
 
 Vue.config.productionTip = false;
 

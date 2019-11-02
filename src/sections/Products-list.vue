@@ -112,14 +112,13 @@ import numbers from "@/components/numbershow.vue";
 import ProductCard from "@/components/product.grid.vue";
 import cardsdisplay from "./cardsdisplay.vue";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
-import { Carousel, Slide } from "vue-carousel";
+
 export default {
   name: "Products-list",
   props: {},
   components: {
-    Carousel,
     AtomSpinner,
-    Slide,
+
     numbers,
 
     swiper,
